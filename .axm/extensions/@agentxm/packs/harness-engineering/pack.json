@@ -1,0 +1,42 @@
+{
+  "$schema": "https://axm.sh/schemas/pack.schema.json",
+  "owner": "@agentxm",
+  "version": "0.1.0",
+  "description": "Compatibility umbrella for agent-system harness foundations plus context, prompt, and evaluation engineering workflows",
+  "keywords": [
+    "harness",
+    "agent-systems",
+    "agent-platform",
+    "agent-runtime",
+    "tool-interfaces",
+    "authority",
+    "verification",
+    "context-gardening",
+    "context-engineering",
+    "workspace",
+    "coding-agents",
+    "repository-harness",
+    "agents.md",
+    "instructions",
+    "progressive-disclosure",
+    "prompt-engineering",
+    "eval-engineering"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentxm/agent-extensions",
+    "directory": ".axm/extensions/@agentxm/packs/harness-engineering"
+  },
+  "homepage": "https://github.com/agentxm/agent-extensions",
+  "license": "MIT",
+  "type": "pack",
+  "name": "harness-engineering",
+  "dependencies": {
+    "@agentxm/skills/improve-instructions": "^0.1.0",
+    "@agentxm/knowledge/harness-engineering": "^0.1.0",
+    "@agentxm/skills/garden-context": "^0.1.0",
+    "@agentxm/knowledge/context-engineering": "^0.1.0",
+    "@agentxm/knowledge/prompt-engineering": "^0.1.0",
+    "@agentxm/knowledge/eval-engineering": "^0.1.0"
+  }
+}

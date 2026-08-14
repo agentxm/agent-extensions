@@ -1,0 +1,38 @@
+name: Public safety
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+
+      - name: Install AXM
+        run: |
+          curl --fail --silent --show-error --location \
+            --proto '=https' --tlsv1.2 https://axm.sh/install.sh | sh
+          echo "$HOME/.axm/bin" >> "$GITHUB_PATH"
+
+      - name: Install safety dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ripgrep
+
+      - name: Test the Git-index safety gate
+        run: scripts/test-public-safety.sh
+
+      - name: Validate the proposed commit
+        run: scripts/check-public-safety.sh --view git-index

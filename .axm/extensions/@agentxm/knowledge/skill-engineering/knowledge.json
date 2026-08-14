@@ -1,0 +1,36 @@
+{
+  "$schema": "https://axm.sh/schemas/knowledge.schema.json",
+  "owner": "@agentxm",
+  "name": "skill-engineering",
+  "version": "0.1.0",
+  "type": "knowledge",
+  "format": {
+    "name": "okf",
+    "version": "0.2"
+  },
+  "bundleRoot": "src",
+  "description": "Agent Skill design, evaluation, trust, admission, ownership, capability governance, portability, and portfolio lifecycle practices",
+  "keywords": [
+    "agent-skills",
+    "skill-engineering",
+    "routing",
+    "evaluation",
+    "security",
+    "governance",
+    "admission",
+    "ownership",
+    "portability",
+    "lifecycle"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentxm/agent-extensions",
+    "directory": ".axm/extensions/@agentxm/knowledge/skill-engineering"
+  },
+  "homepage": "https://github.com/agentxm/agent-extensions",
+  "license": "CC-BY-SA-4.0",
+  "recommendedPacks": [
+    "@agentxm/packs/skill-engineering"
+  ],
+  "standalone": true
+}

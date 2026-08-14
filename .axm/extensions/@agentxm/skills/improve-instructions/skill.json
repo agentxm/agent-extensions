@@ -1,0 +1,27 @@
+{
+  "$schema": "https://axm.sh/schemas/skill.schema.json",
+  "owner": "@agentxm",
+  "type": "skill",
+  "name": "improve-instructions",
+  "version": "0.1.0",
+  "description": "Audits and trims agent instruction files while protecting discovery indexes",
+  "keywords": [
+    "harness",
+    "agents.md",
+    "instructions",
+    "trim",
+    "progressive-disclosure"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentxm/agent-extensions",
+    "directory": ".axm/extensions/@agentxm/skills/improve-instructions"
+  },
+  "homepage": "https://github.com/agentxm/agent-extensions",
+  "license": "MIT",
+  "recommendedPacks": [
+    "@agentxm/packs/context-engineering",
+    "@agentxm/packs/harness-engineering"
+  ],
+  "standalone": false
+}

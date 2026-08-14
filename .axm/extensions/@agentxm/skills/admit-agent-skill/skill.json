@@ -1,0 +1,26 @@
+{
+  "$schema": "https://axm.sh/schemas/skill.schema.json",
+  "owner": "@agentxm",
+  "type": "skill",
+  "name": "admit-agent-skill",
+  "version": "0.1.0",
+  "description": "Decides whether an exact new or revised Agent Skill should enter a governed library, extend or consolidate existing capabilities, be revised, or be rejected",
+  "keywords": [
+    "agent-skills",
+    "skill-admission",
+    "skill-governance",
+    "change-control",
+    "ownership"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentxm/agent-extensions",
+    "directory": ".axm/extensions/@agentxm/skills/admit-agent-skill"
+  },
+  "homepage": "https://github.com/agentxm/agent-extensions",
+  "license": "MIT",
+  "recommendedPacks": [
+    "@agentxm/packs/skill-engineering"
+  ],
+  "standalone": false
+}

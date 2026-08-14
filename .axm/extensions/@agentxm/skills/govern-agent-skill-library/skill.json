@@ -1,0 +1,26 @@
+{
+  "$schema": "https://axm.sh/schemas/skill.schema.json",
+  "owner": "@agentxm",
+  "type": "skill",
+  "name": "govern-agent-skill-library",
+  "version": "0.1.0",
+  "description": "Assesses and governs an Agent Skill library for admission controls, ownership, capability policy, lifecycle health, coherence, evidence freshness, and retirement needs",
+  "keywords": [
+    "agent-skills",
+    "skill-governance",
+    "skill-library",
+    "portfolio-health",
+    "catalog-coherence"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentxm/agent-extensions",
+    "directory": ".axm/extensions/@agentxm/skills/govern-agent-skill-library"
+  },
+  "homepage": "https://github.com/agentxm/agent-extensions",
+  "license": "MIT",
+  "recommendedPacks": [
+    "@agentxm/packs/skill-engineering"
+  ],
+  "standalone": false
+}

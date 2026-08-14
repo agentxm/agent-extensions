@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+if ! command -v axm >/dev/null 2>&1; then
+  echo "AXM is required for the public safety pre-commit hook." >&2
+  echo "Install the latest release from https://axm.sh, then retry the commit." >&2
+  exit 1
+fi
+
+repo_root="$(git rev-parse --show-toplevel)"
+exec "$repo_root/scripts/check-public-safety.sh" --view git-index

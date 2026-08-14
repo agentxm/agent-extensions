@@ -1,0 +1,37 @@
+{
+  "$schema": "https://axm.sh/schemas/pack.schema.json",
+  "owner": "@agentxm",
+  "version": "0.1.0",
+  "description": "Engineers and governs Agent Skills through authoring, evaluation, audit, admission, ownership, capability control, and portfolio lifecycle workflows",
+  "keywords": [
+    "agent-skills",
+    "skill-engineering",
+    "skill-authoring",
+    "skill-evaluation",
+    "eval-engineering",
+    "skill-security",
+    "skill-portability",
+    "skill-governance",
+    "skill-admission",
+    "skill-library"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentxm/agent-extensions",
+    "directory": ".axm/extensions/@agentxm/packs/skill-engineering"
+  },
+  "homepage": "https://github.com/agentxm/agent-extensions",
+  "license": "MIT",
+  "type": "pack",
+  "name": "skill-engineering",
+  "dependencies": {
+    "@agentxm/knowledge/skill-engineering": "^0.1.0",
+    "@agentxm/skills/author-agent-skill": "^0.1.0",
+    "@agentxm/skills/evaluate-agent-skill": "^0.1.0",
+    "@agentxm/skills/audit-agent-skill": "^0.1.0",
+    "@agentxm/skills/admit-agent-skill": "^0.1.0",
+    "@agentxm/skills/govern-agent-skill-library": "^0.1.0",
+    "@agentxm/knowledge/prompt-engineering": "^0.1.0",
+    "@agentxm/knowledge/eval-engineering": "^0.1.0"
+  }
+}
