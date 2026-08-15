@@ -1,20 +1,14 @@
 {
   "$schema": "https://axm.sh/schemas/pack.schema.json",
   "owner": "@craigsmitham",
-  "version": "0.4.0",
-  "description": "Portable craft for understanding, authoring, organizing, auditing, and improving documentation",
+  "version": "0.2.1",
+  "description": "Overall guidance for effective documentation (Diátaxis-inspired); not implementation details",
   "keywords": [
     "docs",
     "documentation",
     "diataxis",
     "guides",
-    "authoring",
-    "audit",
-    "quality",
-    "organization",
-    "remediation",
-    "principles",
-    "patterns"
+    "authoring"
   ],
   "repository": {
     "type": "git",
@@ -26,8 +20,7 @@
   "type": "pack",
   "name": "docs",
   "dependencies": {
-    "@craigsmitham/knowledge/docs": "^0.9.0",
-    "@craigsmitham/skills/author-docs": "^0.3.0",
-    "@craigsmitham/skills/audit-docs": "^0.1.0"
+    "@craigsmitham/knowledge/docs": "^0.6.0",
+    "@craigsmitham/skills/author-docs": "^0.1.0"
   }
 }

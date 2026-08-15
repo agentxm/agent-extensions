@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Playbook
 title: Explanation guide
 description: How to write understanding-oriented discussion — context, connections, perspectives, and bounded scope without absorbing runbooks or reference.
 tags: [docs, explanation, authoring, how-to, diataxis]
@@ -35,7 +35,7 @@ generated:
 
 Write so the reader **understands** a topic better — reflection, context, and
 connection, not a runbook or catalog. For what explanation is and is not, read
-[Explanation explainer](../explainers/explanation.md).
+[Explanation explainer](explanation-explainer.md).
 
 Canonical principles below follow Diátaxis explanation guidance (connections,
 context, *about* the subject, opinion and perspective, tightly bounded scope).
@@ -98,7 +98,7 @@ anxiety — not a longer checklist of steps or fields.
 ## Language that fits
 
 The characteristic language shapes live in the
-[Explanation explainer](../explainers/explanation.md#language-that-fits-explanation);
+[Explanation explainer](explanation-explainer.md#language-that-fits-explanation);
 use them as drafting checks rather than restating them here. One
 production-specific cue: title the piece as *About …* (explicit or implicit)
 to signal discussion of a topic, not a task.
@@ -117,7 +117,7 @@ to signal discussion of a topic, not a task.
 The diagnostic taxonomy of failure modes (scattered explanation, tutorial
 overload, absorbed runbook or reference, unscoped essay, neutral-only false
 discipline) is owned by the
-[Explanation explainer](../explainers/explanation.md#failure-modes-common);
+[Explanation explainer](explanation-explainer.md#failure-modes-common);
 review drafts against it. Two production-time pitfalls to catch while
 writing:
 
@@ -129,8 +129,8 @@ writing:
 
 ## Related
 
-- [Explanation explainer](../explainers/explanation.md)
-- [Documentation craft guide](documentation-craft.md)
-- [How-to guide](how-to.md)
-- [Reference guide](reference.md)
-- [Tutorial guide](tutorial.md)
+- [Explanation explainer](explanation-explainer.md)
+- [Documentation craft guide](../docs-guide.md)
+- [How-to guide](how-to-guide.md)
+- [Reference guide](reference-guide.md)
+- [Tutorial guide](tutorial-guide.md)

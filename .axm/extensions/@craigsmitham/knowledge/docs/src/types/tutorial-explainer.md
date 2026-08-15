@@ -1,5 +1,5 @@
 ---
-type: Explainer
+type: Explanation
 title: Tutorial explainer
 description: What a tutorial is — a learning-oriented lesson under tutor responsibility, with a safe success path, and what it deliberately leaves out.
 tags: [docs, tutorial, learning, diataxis, explanation]
@@ -45,7 +45,7 @@ Teaching a child to cook is a strong everyday model: success is what the
 child gains and whether they want to return to the kitchen — not culinary
 perfection or a complete dish every time.
 
-To write one, use [Tutorial guide](../guides/tutorial.md).
+To write one, use [Tutorial guide](tutorial-guide.md).
 
 ## Place on the map
 
@@ -176,8 +176,8 @@ rollback.”
 
 ## Related
 
-- [Tutorial guide](../guides/tutorial.md)
-- [Documentation craft](documentation-craft.md)
-- [How-to explainer](how-to.md)
-- [Reference explainer](reference.md)
-- [Explanation explainer](explanation.md)
+- [Tutorial guide](tutorial-guide.md)
+- [Documentation craft](../docs-explainer.md)
+- [How-to explainer](how-to-explainer.md)
+- [Reference explainer](reference-explainer.md)
+- [Explanation explainer](explanation-explainer.md)

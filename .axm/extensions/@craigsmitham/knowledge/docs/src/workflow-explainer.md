@@ -1,5 +1,5 @@
 ---
-type: Explainer
+type: Explanation
 title: Documentation workflow
 description: Why documentation craft improves best through small iterative remediation — guide not plan, inside-out structure, and complete-not-finished organic growth.
 tags: [docs, craft, workflow, remediation, diataxis, explanation]
@@ -21,8 +21,8 @@ sources:
     resource: https://diataxis.fr/application/
     title: Diátaxis — Applying Diátaxis
 generated:
-  by: codex/gpt-5.6
-  at: 2026-08-15T15:48:17Z
+  by: grok/grok-4.5
+  at: 2026-08-07T22:41:37Z
 ---
 
 # Documentation workflow
@@ -31,10 +31,10 @@ Portable **understanding** of how to *apply* documentation craft over time —
 especially when remediating or growing an existing body of docs — without
 imposing a top-down information-architecture project.
 
-The four reader-need forms, compass, and quality principles live in
-[Documentation craft](documentation-craft.md). How to run one remediation step is
-in [Documentation workflow guide](../guides/documentation-workflow.md). How to write a single
-document is in [Documentation craft guide](../guides/documentation-craft.md).
+The four types, compass, and quality principles live in
+[Documentation craft](docs-explainer.md). How to run one remediation step is
+in [Documentation workflow guide](workflow-guide.md). How to write a single
+document is in [Documentation craft guide](docs-guide.md).
 
 ## Guide, not plan
 
@@ -48,15 +48,15 @@ that must exist before the work is “done.”
 
 ## Structure emerges from the inside
 
-Structure matters, but **using form-aware craft does not mean spending energy on
+Structure matters, but **using type craft does not mean spending energy on
 correct top-level structure first**.
 
-Do **not** create empty shells named for the four reader-need forms with nothing in them.
+Do **not** create empty shells named for the four types with nothing in them.
 That freezes a folder tree without improving a single reader job.
 
-Instead, improve pages according to reader-need principles until the material
+Instead, improve pages according to type principles until the material
 *demands* clearer grouping. Top-level shape forms **from the inside**: many
-small, form-correct edits make structure obvious later — not the reverse.
+small, type-correct edits make structure obvious later — not the reverse.
 
 ## Iterate; publish the next step
 
@@ -94,7 +94,7 @@ keep changing. At every stage it can still be **complete**: useful at its
 current maturity, structurally healthy enough for the next step, and ready to
 grow again.
 
-Tear-down-and-rebuild is rarely required for form-aware craft. Prefer continuous
+Tear-down-and-rebuild is rarely required for type craft. Prefer continuous
 adaptation over waiting for a perfect greenfield restructure.
 
 ## What this does not prescribe
@@ -108,7 +108,7 @@ portable layout scheme in the name of workflow.
 
 ## Related
 
-- [Documentation workflow guide](../guides/documentation-workflow.md)
-- [Documentation craft](documentation-craft.md)
-- [Documentation craft guide](../guides/documentation-craft.md)
-- [Documentation quality](documentation-quality.md)
+- [Documentation workflow guide](workflow-guide.md)
+- [Documentation craft](docs-explainer.md)
+- [Documentation craft guide](docs-guide.md)
+- [Documentation quality](quality-explainer.md)

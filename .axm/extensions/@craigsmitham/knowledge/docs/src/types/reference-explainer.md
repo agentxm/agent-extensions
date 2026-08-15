@@ -1,5 +1,5 @@
 ---
-type: Explainer
+type: Explanation
 title: Reference explainer
 description: What reference documentation is — austere, authoritative technical description for lookup at work, not teaching, instructing, or discursive why.
 tags: [docs, reference, diataxis, explanation]
@@ -45,7 +45,7 @@ The nutrition and allergen panel on a food packet is a strong everyday model:
 standard shape, facts only, no recipes or marketing mixed into the labels
 (mixing those can be literally dangerous).
 
-To write it, use [Reference guide](../guides/reference.md).
+To write it, use [Reference guide](reference-guide.md).
 
 ## Place on the map
 
@@ -168,8 +168,8 @@ home.
 
 ## Related
 
-- [Reference guide](../guides/reference.md)
-- [Documentation craft](documentation-craft.md)
-- [Tutorial explainer](tutorial.md)
-- [How-to explainer](how-to.md)
-- [Explanation explainer](explanation.md)
+- [Reference guide](reference-guide.md)
+- [Documentation craft](../docs-explainer.md)
+- [Tutorial explainer](tutorial-explainer.md)
+- [How-to explainer](how-to-explainer.md)
+- [Explanation explainer](explanation-explainer.md)

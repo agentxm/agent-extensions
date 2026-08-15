@@ -3,18 +3,14 @@
   "owner": "@craigsmitham",
   "type": "skill",
   "name": "author-docs",
-  "version": "0.3.0",
-  "description": "Create, organize, review, and remediate documentation using portable craft, principles, and reusable patterns",
+  "version": "0.1.1",
+  "description": "Create, revise, review, and maintain documentation using Diátaxis-oriented documentation craft",
   "keywords": [
     "docs",
     "documentation",
     "authoring",
     "review",
-    "organization",
-    "remediation",
-    "diataxis",
-    "principles",
-    "patterns"
+    "diataxis"
   ],
   "recommendedPacks": [
     "@craigsmitham/packs/docs"

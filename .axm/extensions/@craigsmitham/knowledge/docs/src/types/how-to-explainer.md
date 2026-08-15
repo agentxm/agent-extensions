@@ -1,5 +1,5 @@
 ---
-type: Explainer
+type: Explanation
 title: How-to explainer
 description: What a how-to guide is — goal-oriented directions for real work, written from the user's problem not the machinery, without becoming a lesson or a catalog.
 tags: [docs, how-to, guide, diataxis, explanation]
@@ -30,8 +30,8 @@ sources:
     resource: https://www.mintlify.com/guides/content-types
     title: Mintlify — Content types (Diátaxis-aligned how-to notes)
 generated:
-  by: codex/gpt-5.6
-  at: 2026-08-15T15:48:17Z
+  by: claude/fable-5
+  at: 2026-08-08T00:03:18Z
 ---
 
 # How-to explainer
@@ -49,7 +49,7 @@ assumed, teaching and history left out while cooking — practical
 problem-solving steps for a competent user, not a lesson and not a concept
 essay.
 
-To write one, use [How-to guide](../guides/how-to.md).
+To write one, use [How-to guide](how-to-guide.md).
 
 ## Place on the map
 
@@ -176,7 +176,7 @@ rollback.”
 - **Tutorial/how-to conflation** — a lesson that pretends to be production
   guidance, or a runbook that tries to teach from zero
 - **Basic/advanced confusion** — treating all how-tos as “advanced only,” or
-  all tutorials as “simple only”; either form can be basic or specialized
+  all tutorials as “simple only”; either type can be basic or specialized
 - **Machinery-first guides** — organized by product surface instead of user
   goals; little meaning for someone with a job to finish
 - **Absorbed explanation or reference** — theory and full option lists
@@ -189,8 +189,8 @@ rollback.”
 
 ## Related
 
-- [How-to guide](../guides/how-to.md)
-- [Documentation craft](documentation-craft.md)
-- [Tutorial explainer](tutorial.md)
-- [Reference explainer](reference.md)
-- [Explanation explainer](explanation.md)
+- [How-to guide](how-to-guide.md)
+- [Documentation craft](../docs-explainer.md)
+- [Tutorial explainer](tutorial-explainer.md)
+- [Reference explainer](reference-explainer.md)
+- [Explanation explainer](explanation-explainer.md)

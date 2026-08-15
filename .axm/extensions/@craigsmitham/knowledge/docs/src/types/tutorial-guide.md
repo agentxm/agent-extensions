@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Playbook
 title: Tutorial guide
 description: How to write a learning-oriented tutorial with a bounded path and reliable first success.
 tags: [docs, tutorial, authoring, how-to, diataxis]
@@ -16,7 +16,7 @@ generated:
 # Tutorial guide
 
 Write a **lesson** someone can complete successfully. For what a tutorial is
-and is not, read [Tutorial explainer](../explainers/tutorial.md).
+and is not, read [Tutorial explainer](tutorial-explainer.md).
 
 ## Goal
 
@@ -44,7 +44,7 @@ and more confidence than when they started.
 ## Language that fits
 
 The characteristic language shapes live in the
-[Tutorial explainer](../explainers/tutorial.md#language-that-fits-tutorials); use
+[Tutorial explainer](tutorial-explainer.md#language-that-fits-tutorials); use
 them as drafting checks rather than restating them here.
 
 ## Preconditions
@@ -55,7 +55,7 @@ them as drafting checks rather than restating them here.
 ## Pitfalls
 
 The diagnostic taxonomy of failure modes is owned by the
-[Tutorial explainer](../explainers/tutorial.md#failure-modes-common); review
+[Tutorial explainer](tutorial-explainer.md#failure-modes-common); review
 drafts against it. Two production-time pitfalls to catch while writing:
 
 - **Promissory framing** — opening with *you will learn…* instead of showing
@@ -65,6 +65,6 @@ drafts against it. Two production-time pitfalls to catch while writing:
 
 ## Related
 
-- [Tutorial explainer](../explainers/tutorial.md)
-- [Documentation craft guide](documentation-craft.md)
-- [How-to guide](how-to.md)
+- [Tutorial explainer](tutorial-explainer.md)
+- [Documentation craft guide](../docs-guide.md)
+- [How-to guide](how-to-guide.md)

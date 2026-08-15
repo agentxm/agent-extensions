@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Playbook
 title: How-to guide
 description: How to write goal-oriented directions for real work — user-problem framing, logical flow, adaptable steps, and links out for depth.
 tags: [docs, how-to, guide, authoring, diataxis]
@@ -29,7 +29,7 @@ generated:
 
 Write **directions** that guide a competent reader through a problem or toward
 a result. For what a how-to is and is not — and the tutorial boundary — read
-[How-to explainer](../explainers/how-to.md).
+[How-to explainer](how-to-explainer.md).
 
 Canonical principles below follow Diátaxis how-to guidance (goal focus,
 real-world adaptability, omit the unnecessary, executable instructions,
@@ -95,7 +95,7 @@ the work.
 ## Language that fits
 
 The characteristic language shapes and the title-grades check live in the
-[How-to explainer](../explainers/how-to.md#language-that-fits-how-to); use them
+[How-to explainer](how-to-explainer.md#language-that-fits-how-to); use them
 as drafting checks rather than restating them here.
 
 ## Preconditions
@@ -108,7 +108,7 @@ as drafting checks rather than restating them here.
 ## Pitfalls
 
 The diagnostic taxonomy of failure modes is owned by the
-[How-to explainer](../explainers/how-to.md#failure-modes-common); review drafts
+[How-to explainer](how-to-explainer.md#failure-modes-common); review drafts
 against it. Two production-time pitfalls to catch while writing:
 
 - **Broken flow** — repeated context thrash, arbitrary order, or a rigid
@@ -117,8 +117,8 @@ against it. Two production-time pitfalls to catch while writing:
 
 ## Related
 
-- [How-to explainer](../explainers/how-to.md)
-- [Documentation craft guide](documentation-craft.md)
-- [Tutorial guide](tutorial.md)
-- [Reference guide](reference.md)
-- [Explanation guide](explanation.md)
+- [How-to explainer](how-to-explainer.md)
+- [Documentation craft guide](../docs-guide.md)
+- [Tutorial guide](tutorial-guide.md)
+- [Reference guide](reference-guide.md)
+- [Explanation guide](explanation-guide.md)

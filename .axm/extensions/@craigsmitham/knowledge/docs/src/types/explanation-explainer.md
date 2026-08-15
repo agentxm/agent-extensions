@@ -1,5 +1,5 @@
 ---
-type: Explainer
+type: Explanation
 title: Explanation explainer
 description: What explanation documentation is — discursive, understanding-oriented discussion that joins context, perspectives, and why, without becoming a runbook or reference.
 tags: [docs, explanation, understanding, diataxis]
@@ -30,8 +30,8 @@ sources:
     resource: https://www.mintlify.com/guides/content-types
     title: Mintlify — Content types (explanation notes)
 generated:
-  by: codex/gpt-5.6
-  at: 2026-08-15T15:48:17Z
+  by: claude/fable-5
+  at: 2026-08-07T23:59:41Z
 ---
 
 # Explanation explainer
@@ -43,7 +43,7 @@ questions like *why?* and *Can you tell me about …?*
 
 It is documentation one can usefully read **away from the product** — material
 for study and thought rather than for hands on the console. Of the four
-Diátaxis reader-need forms, it is the only one that might make sense to read “in the
+Diátaxis types, it is the only one that might make sense to read “in the
 bath.”
 
 Harold McGee’s *On Food and Cooking* is a strong everyday model: no recipes to
@@ -54,7 +54,7 @@ grounded.
 Other names hosts use for the same job: *Discussion*, *Background*,
 *Conceptual guides*, *Topics*.
 
-To write one, use [Explanation guide](../guides/explanation.md).
+To write one, use [Explanation guide](explanation-guide.md).
 
 ## Place on the map
 
@@ -71,7 +71,7 @@ So explanation is less *urgent* than a broken how-to or missing reference, but
 not less *important*: without it, knowledge of a craft stays loose and
 anxious.
 
-Its vantage is **higher and wider** than the other three forms. It is not the
+Its vantage is **higher and wider** than the other three types. It is not the
 user’s eye-level task view (how-to) or a close-up of the machinery
 (reference). Its unit is a **topic** — a bounded area of knowledge — and it
 may circle that topic from several directions.
@@ -114,7 +114,7 @@ understanding, not procedure.
 - The only copy of an operational **procedure** (how-to)
 - The authoritative exhaustive **inventory** of interfaces (reference)
 - Instruction or technical description absorbed “while covering the topic” —
-  explanation tends to swallow other forms if unbounded
+  explanation tends to swallow other types if unbounded
 - A topic with no spine — open-ended “everything about X” without a real or
   imagined *why* (or similar prompt) to bound the page
 
@@ -177,8 +177,8 @@ Expansive examples in reference that grow into *why* starve both jobs.
 
 ## Related
 
-- [Explanation guide](../guides/explanation.md)
-- [Documentation craft](documentation-craft.md)
-- [Tutorial explainer](tutorial.md)
-- [How-to explainer](how-to.md)
-- [Reference explainer](reference.md)
+- [Explanation guide](explanation-guide.md)
+- [Documentation craft](../docs-explainer.md)
+- [Tutorial explainer](tutorial-explainer.md)
+- [How-to explainer](how-to-explainer.md)
+- [Reference explainer](reference-explainer.md)

@@ -1,8 +1,8 @@
 ---
-type: Explainer
+type: Explanation
 title: Documentation quality
-description: What functional quality and deep quality mean in documentation craft — and how form-aware craft primarily serves deep quality while exposing functional gaps.
-tags: [docs, craft, quality, diataxis, explainer]
+description: What functional quality and deep quality mean in documentation craft — and how type-based craft primarily serves deep quality while exposing functional gaps.
+tags: [docs, craft, quality, diataxis, explanation]
 status: stable
 sources:
   - id: diataxis-quality
@@ -15,21 +15,21 @@ sources:
     resource: https://diataxis.fr/start-here/
     title: Diátaxis — Start here
 generated:
-  by: codex/gpt-5.6
-  at: 2026-08-15T17:08:26Z
+  by: grok/grok-4.5
+  at: 2026-08-07T22:41:37Z
 ---
 
 # Documentation quality
 
 Portable **understanding** of two layers of quality in documentation:
-**functional quality** and **deep quality**. Form-aware craft (the four jobs, form
+**functional quality** and **deep quality**. Type craft (the four jobs, form
 matching, and workflow) mainly conditions deep quality; it does not replace
 accuracy, completeness, or other functional obligations.
 
 Practical authoring principles (one job per document, match form to job, link
 rather than restate, stay accurate enough for the job, and so on) live in
-[Documentation craft](documentation-craft.md). Use this concept when judging
-*whether a problem is “wrong facts” or “wrong job/flow”* — and what form-aware craft
+[Documentation craft](docs-explainer.md). Use this concept when judging
+*whether a problem is “wrong facts” or “wrong job/flow”* — and what type craft
 can and cannot fix.
 
 ## Functional quality
@@ -50,7 +50,7 @@ checkable against the world the docs describe (the product, the API, the
 process).
 
 Attaining functional quality needs domain skill, attention, and ongoing
-maintenance. Form-aware craft **does not create** functional quality by itself.
+maintenance. Type craft **does not create** functional quality by itself.
 Every release can make yesterday’s correct page wrong again.
 
 ## Deep quality
@@ -81,9 +81,9 @@ tarnish the experience immediately.
 | A condition of deep quality | Conditional on functional quality |
 | Constraints the author must meet | Room for craft, taste, and design |
 
-## What form-aware craft does for quality
+## What type craft does for quality
 
-Reader-need forms (tutorial, how-to, reference, explanation), the compass, and
+Need-based types (tutorial, how-to, reference, explanation), the compass, and
 iterative workflow address **aspects of deep quality** more than functional
 checklists:
 
@@ -94,13 +94,13 @@ checklists:
 - They set **conditions of possibility** for excellence — not a formula that
   guarantees beauty or UX design skill.
 
-Form-aware craft is **not all** of deep quality. Interaction design, visual design,
-and domain writing skill still matter. Using the four forms well does not
+Type craft is **not all** of deep quality. Interaction design, visual design,
+and domain writing skill still matter. Using the four types well does not
 guarantee deep quality; it removes systematic ways of working against it.
 
 ## Exposing functional gaps
 
-Although form-aware craft does not *supply* functional quality, applying it often
+Although type craft does not *supply* functional quality, applying it often
 **exposes** functional lapses that mixed pages hid:
 
 - Aligning reference structure with the thing described makes **missing**
@@ -110,12 +110,12 @@ Although form-aware craft does not *supply* functional quality, applying it ofte
 - Separating how-to from reference can show that the “procedure” never listed
   real preconditions or failure branches.
 
-So: fix functional defects with domain truth and diligence; use form
+So: fix functional defects with domain truth and diligence; use type
 separation as an **analytical** aid that makes those defects easier to see.
 
 ## How this relates to craft principles
 
-The quality principles in [Documentation craft](documentation-craft.md) mix both
+The quality principles in [Documentation craft](docs-explainer.md) mix both
 layers on purpose:
 
 | Principle (examples) | Layer |
@@ -123,18 +123,17 @@ layers on purpose:
 | Stay accurate enough for the job; refresh stale how-tos and reference | Functional |
 | One primary job; match form to job; link rather than restate | Deep (need fit, flow) |
 | Prefer clarity of outcome near the top | Both (skip wrong page; serve the need) |
-| Resist feature-only IA without reader-need forms | Deep (portfolio consistency of jobs) |
+| Resist feature-only IA without need-based types | Deep (portfolio consistency of jobs) |
 
 When reviewing, ask both:
 
 1. **Functional** — Is this true, complete enough, and consistent?
-2. **Deep / form** — Is this the right job, voice, and flow for the reader’s
+2. **Deep / type** — Is this the right job, voice, and flow for the reader’s
    mode right now?
 
 ## Related
 
-- [Documentation audits](documentation-audits.md) · [Auditing documentation](../guides/auditing-documentation.md)
-- [Documentation craft](documentation-craft.md)
-- [Documentation craft guide](../guides/documentation-craft.md)
-- [Documentation workflow](documentation-workflow.md)
-- [Documentation workflow guide](../guides/documentation-workflow.md)
+- [Documentation craft](docs-explainer.md)
+- [Documentation craft guide](docs-guide.md)
+- [Documentation workflow](workflow-explainer.md)
+- [Documentation workflow guide](workflow-guide.md)

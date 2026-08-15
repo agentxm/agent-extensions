@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Playbook
 title: Reference guide
 description: How to write structured lookup material that stays consistent, scannable, and faithful to the shipped system.
 tags: [docs, reference, authoring, how-to, diataxis]
@@ -16,7 +16,7 @@ generated:
 # Reference guide
 
 Write material people **look up**, not walk through. For what reference is
-and is not, read [Reference explainer](../explainers/reference.md).
+and is not, read [Reference explainer](reference-explainer.md).
 
 ## Goal
 
@@ -44,7 +44,7 @@ it matches the system as shipped.
 ## Language that fits
 
 The characteristic language shapes live in the
-[Reference explainer](../explainers/reference.md#language-that-fits-reference);
+[Reference explainer](reference-explainer.md#language-that-fits-reference);
 use them as drafting checks rather than restating them here.
 
 ## Preconditions
@@ -55,7 +55,7 @@ use them as drafting checks rather than restating them here.
 ## Pitfalls
 
 The diagnostic taxonomy of failure modes is owned by the
-[Reference explainer](../explainers/reference.md#failure-modes-common); review
+[Reference explainer](reference-explainer.md#failure-modes-common); review
 drafts against it. Two production-time pitfalls to catch while writing:
 
 - **Silent gaps** — claiming a surface but omitting entries or marking
@@ -65,6 +65,6 @@ drafts against it. Two production-time pitfalls to catch while writing:
 
 ## Related
 
-- [Reference explainer](../explainers/reference.md)
-- [Documentation craft guide](documentation-craft.md)
-- [How-to guide](how-to.md)
+- [Reference explainer](reference-explainer.md)
+- [Documentation craft guide](../docs-guide.md)
+- [How-to guide](how-to-guide.md)
