@@ -15,7 +15,7 @@
     {
       "id": 2,
       "prompt": "Audit this pinned, local-only formatting skill for internal use.",
-      "expected_output": "An Accept recommendation bounded to the inspected digest and declared local-only use.",
+      "expected_output": "A Conformant disposition bounded to the inspected digest and declared local-only use.",
       "files": ["evals/files/portable-package.md"],
       "assertions": [
         "The audit inventories all files, provenance, license, permissions, and side effects.",
@@ -55,6 +55,30 @@
         "Requested, approved, intended effective, and observed capabilities are distinguished.",
         "The undeclared network write creates a risk and reapproval concern.",
         "The response does not run the script or infer host policy."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Audit this skill for conformity with the current skill-engineering guidance. Do not modify it.",
+      "expected_output": "A snapshot-bound Revise audit with an applicability matrix and evidence-backed design, routing, workflow, and evidence findings.",
+      "files": ["evals/files/guide-conformance.md"],
+      "assertions": [
+        "The audit binds both the target identity and the guidance baseline.",
+        "It distinguishes applicable, not-applicable, and unverified expectations.",
+        "The vague description, missing failure behavior, orphaned reference, and unsupported portability claim become separate findings.",
+        "The target remains unchanged."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Audit and remediate this skill against the supplied accepted findings, then verify the result.",
+      "expected_output": "A frozen pre-change audit, a bounded author-agent-skill revision, and a post-change closure matrix tied to the new identity.",
+      "files": ["evals/files/remediation-cycle.md"],
+      "assertions": [
+        "The pre-change target identity and findings are preserved before mutation.",
+        "The author-agent-skill workflow makes the smallest responsible changes and runs affected regressions.",
+        "The audit rebinds the revised identity before deciding closure.",
+        "The final result is labeled same-agent closure verification rather than independent approval."
       ]
     }
   ]

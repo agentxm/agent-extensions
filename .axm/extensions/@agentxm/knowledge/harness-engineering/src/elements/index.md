@@ -12,4 +12,8 @@ Domain profiles own assumptions that do not transfer across kinds of work.
 - [Agent skills](agent-skills.md) - How agent skills package reusable workflows
   behind a routing description and progressively disclose instructions,
   resources, and deterministic helpers.
-- [Instruction files as harness elements](instruction-files.md) - The boundary between persistent instruction surfaces and the surrounding agent harness.
+- [Instruction files as harness elements](instruction-files-as-harness-elements.md) - The boundary between persistent instruction surfaces and the surrounding agent harness.
+
+## Compatibility
+
+- [Instruction files as harness elements (former route)](instruction-files.md) - Deprecated route retained for callers that used the former concept ID.

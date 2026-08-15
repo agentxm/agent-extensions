@@ -1,26 +1,12 @@
 ---
-type: Explanation
-title: Instruction files as harness elements
-description: The boundary between persistent instruction surfaces and the surrounding agent harness.
-tags: [harness, instructions, context, boundary]
-status: stable
-generated:
-  by: codex/gpt-5.6
-  at: 2026-08-14T20:51:01Z
+type: Reference
+title: Instruction files as harness elements (former route)
+description: Deprecated compatibility route to Instruction files as harness elements.
+tags: [harness, instructions, context, compatibility, deprecated]
+status: deprecated
+generated: { by: "codex/gpt-5", at: 2026-08-15T20:41:05Z }
 ---
 
-# Instruction files as harness elements
+# Instruction files as harness elements (former route)
 
-An instruction file is a persistent context surface a harness loads for some
-scope. It can establish invariants, operating facts, collaboration agreements,
-and routes to deeper material.
-
-Harness engineering owns the mechanism: discovery, composition, precedence,
-scope enforcement, observability, and integration with executable controls.
-Context engineering owns what information belongs there, how it competes for
-attention, and how it stays current. Prompt engineering may inform the wording
-and structure when the file is rendered directly into a model-facing prompt.
-
-Do not treat an instruction file as the harness itself. It cannot enforce
-permissions, provision dependencies, preserve execution state, or establish
-that an action succeeded.
+This concept moved to [Instruction files as harness elements](instruction-files-as-harness-elements.md).

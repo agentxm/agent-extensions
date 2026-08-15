@@ -1,12 +1,11 @@
-# Harness engineering guides
+# Former harness guide routes
 
-Domain-independent, goal-oriented workflows for creating and maintaining
-harness elements. Guides whose steps depend on a particular kind of work live
-with that application domain.
+These deprecated concept IDs preserve former harness guide routes. Current
+guidance is organized by the subject that owns each workflow.
 
 ## Domain guides
 
-- [Software engineering guides](../domains/software-engineering/guides/) - Workflows whose prerequisites, scope, or verification depend on repositories and software delivery.
+- [Former software-engineering guide routes](../domains/software-engineering/guides/) - Deprecated software-engineering workflow IDs retained for compatibility.
 
 ## Compatibility
 

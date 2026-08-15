@@ -3,13 +3,14 @@
   "owner": "@agentxm",
   "type": "skill",
   "name": "author-agent-skill",
-  "version": "0.1.0",
-  "description": "Creates and revises portable Agent Skills from concrete workflows, including bounded contracts, governance claims, validation, and representative exercises",
+  "version": "0.2.0",
+  "description": "Creates or revises portable Agent Skills from workflow evidence, observed failures, changed requirements, or accepted audit findings",
   "keywords": [
     "agent-skills",
     "skill-authoring",
     "skill-creator",
-    "skill-design"
+    "skill-design",
+    "skill-remediation"
   ],
   "repository": {
     "type": "git",

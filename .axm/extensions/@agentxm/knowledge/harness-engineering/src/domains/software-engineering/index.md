@@ -19,6 +19,6 @@ Detailed ownership of repository context and specification authority belongs
 to context engineering. Former routes remain for compatibility:
 
 - [Repository instruction files (former harness route)](repository-instruction-files.md)
-- [Software engineering practices](practices/)
-- [Software engineering patterns](patterns/)
-- [Software engineering guides](guides/)
+- [Former software-engineering practice routes](practices/)
+- [Former specification pattern routes](patterns/)
+- [Former software-engineering guide routes](guides/)

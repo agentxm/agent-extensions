@@ -10,8 +10,13 @@ knowledge to a particular kind of work or choosing a concrete harness element.
   harnesses, environments, runtime substrates, orchestration, governance, and
   evaluation compose without becoming synonyms.
 - [Harness classification](harness-classification.md) - Independent implementation axes and applied profiles for classifying harnesses without absorbing agent behavior or product labels.
-- [Context engineering boundary](context-engineering.md) - Where context
+- [Context engineering boundary](context-engineering-boundary.md) - Where context
   engineering fits within the larger harness system.
 - [Agent legibility](agent-legibility.md) - How agent legibility makes
   task-relevant intent, state, capabilities, constraints, and feedback
   discoverable and usable by an agent.
+
+## Compatibility
+
+- [Context engineering boundary (former route)](context-engineering.md) -
+  Deprecated route retained for callers that used the former concept ID.

@@ -63,5 +63,4 @@ A repository study found context files could increase work and cost without a
 significant success improvement, reinforcing evaluation rather than
 accretion.[^context-files-evaluation]
 
-[^anthropic-context]: Anthropic — Effective context engineering for AI agents
 [^context-files-evaluation]: Evaluating AGENTS.md — Are Repository-Level Context Files Helpful for Coding Agents?

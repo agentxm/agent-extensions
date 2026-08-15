@@ -1,7 +1,7 @@
 {
   "$schema": "https://axm.sh/schemas/pack.schema.json",
   "owner": "@agentxm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agent behavior foundations with companion harness, context, prompt, and evaluation engineering knowledge",
   "keywords": [
     "agent-engineering",
@@ -24,7 +24,7 @@
   "dependencies": {
     "@agentxm/knowledge/agent-engineering": "^0.1.0",
     "@agentxm/knowledge/harness-engineering": "^0.1.0",
-    "@agentxm/knowledge/context-engineering": "^0.1.0",
+    "@agentxm/knowledge/context-engineering": "^0.2.0",
     "@agentxm/knowledge/prompt-engineering": "^0.1.0",
     "@agentxm/knowledge/eval-engineering": "^0.1.0"
   }

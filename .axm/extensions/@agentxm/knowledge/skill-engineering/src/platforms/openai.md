@@ -5,7 +5,7 @@ description: OpenAI-specific discovery, invocation, metadata, and distribution b
 tags: [agent-skills, openai, codex, compatibility]
 status: stable
 stale_after: 2027-02-14
-generated: { by: "codex/gpt-5.6", at: 2026-08-14T19:36:04Z }
+generated: { by: "codex/gpt-5", at: 2026-08-15T20:17:19Z }
 sources:
   - id: openai-build-skills
     resource: https://learn.chatgpt.com/docs/build-skills
@@ -25,14 +25,17 @@ Design implications:
   list is bounded by a context budget;
 - put all routing triggers and exclusions in the description, not only the body;
 - keep `SKILL.md` concise and load references, scripts, and assets on demand;
-- use `agents/openai.yaml` only for OpenAI-specific presentation or dependency
-  metadata; do not make it the sole source of the portable contract;
+- use `agents/openai.yaml` only for OpenAI-specific presentation, invocation
+  policy, or dependency metadata; do not make it the sole source of the
+  portable contract;
+- set `policy.allow_implicit_invocation` to `false` when a skill must require
+  explicit selection instead of natural-language routing;
 - distribute reusable collections through a supported plugin or package
   mechanism rather than assuming local installation state.
 
-Test both `$`/skill-picker invocation and natural-language routing in the actual
-Codex surface being claimed. Product behavior is versioned and this profile
-must be refreshed after its `stale_after` date.
+Test `@` selection in ChatGPT and `/skills` or `$` selection in Codex for every
+surface being claimed. Test natural-language routing only when implicit
+invocation is allowed. Product behavior is versioned and this profile must be
+refreshed after its `stale_after` date.
 
 [^openai-build-skills]: OpenAI — Build skills
-

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Improve Instructions"
-  short_description: "Audit and trim agent instruction files"
-  default_prompt: "Use $improve-instructions to audit this repository instruction surface without editing it."

@@ -1,5 +1,13 @@
 # Agent engineering update log
 
+## 2026-08-15
+
+- **Trust semantics**: Clarified that lifecycle status, machine provenance,
+  machine confirmation, and independent human review are distinct signals.
+- **Discovery naming**: Gave the active glossary a context-free concept ID,
+  preserved `glossary` as a deprecated route, and aligned root section labels
+  with their canonical titles.
+
 ## 2026-08-14
 
 - **Ownership**: Established `@agentxm/knowledge/agent-engineering` as the

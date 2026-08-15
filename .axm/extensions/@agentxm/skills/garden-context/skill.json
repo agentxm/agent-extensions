@@ -3,7 +3,7 @@
   "owner": "@agentxm",
   "type": "skill",
   "name": "garden-context",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Audits and improves project context by clarifying authority, discovery, scope, ownership, and lifecycle",
   "keywords": [
     "context-gardening",

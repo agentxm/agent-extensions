@@ -22,6 +22,16 @@ axm knowledge concepts get '@agentxm/knowledge/agent-engineering#foundations/age
 axm knowledge concepts get '@agentxm/knowledge/agent-engineering#design/agent-loop-feedback-and-termination'
 ```
 
+## Trust and freshness
+
+Concept frontmatter distinguishes lifecycle status from provenance. `stable`
+means the concept is intended for current use; it does not claim independent
+review. `generated` records the producing actor. A `verified` event applies to
+the current generated content only when its timestamp is at or after
+`generated.at`. A `codex/*` verification is machine confirmation, not human
+review. Unless a `human:*` verifier is recorded, confirm consequential claims
+against cited sources and current product documentation.
+
 ## License
 
 CC-BY-4.0.

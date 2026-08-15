@@ -36,6 +36,8 @@ the behavior and risks that matter for that target.
 
 ## Reference
 
-- [Evaluation engineering glossary](glossary.md) - Defines the bundle's core terms and disambiguates overloaded evaluation language.
+- [Evaluation engineering glossary](evaluation-engineering-glossary.md) - Defines the bundle's core terms and disambiguates overloaded evaluation language.
 
-<!-- Discovery map: describe this bundle's scope, then group and annotate links to its concepts. -->
+## Compatibility
+
+- [Evaluation engineering glossary (former route)](glossary.md) - Deprecated route retained for callers that used the original concept ID.

@@ -156,7 +156,7 @@ machine.
 
 - [Progressive disclosure](../patterns/progressive-disclosure.md)
 - [Context gardening](../practices/context-gardening.md)
-- [Instruction files](instruction-files.md)
+- [Instruction files as harness elements](instruction-files-as-harness-elements.md)
 
 [^agent-skills-spec]: Agent Skills specification
 [^openai-build-skills]: OpenAI — Build skills

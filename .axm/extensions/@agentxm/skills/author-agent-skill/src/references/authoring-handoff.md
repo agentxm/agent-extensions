@@ -27,18 +27,27 @@
 - Paraphrased exercise:
 - Adjacent-negative exercise:
 
-## Governance claims
+## Revision and remediation
+
+- Previous identity:
+- Motivating failures or finding IDs:
+- Preserved supported behavior:
+- Finding dispositions and remediation evidence:
+- Public-contract delta:
+- Authority or risk delta:
+- Version intent:
+- Migration and rollback:
+
+## Authored lifecycle claims
 
 - Requested capabilities and side effects:
 - Dependencies and supported environments:
-- Proposed operational owner and escalation:
-- Proposed lifecycle state:
 - Related, overlapping, or superseded skills:
-- Compatibility class and risk delta from previous version:
+- Evidence that must be refreshed:
 
 ## Remaining work
 
-- Behavioral evaluation:
-- Trust or release audit:
-- Independent admission or reapproval:
+- Conformity or closure audit:
+- Behavioral or host evidence:
+- Independent governance decision:
 - Assumptions and unsupported hosts:

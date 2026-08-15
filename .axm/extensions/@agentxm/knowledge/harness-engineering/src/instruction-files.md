@@ -14,7 +14,7 @@ generated:
 This concept was split so understanding and procedure no longer compete in one
 document.
 
-- Read [Instruction files](elements/instruction-files.md) to understand the
+- Read [Instruction files as harness elements](elements/instruction-files-as-harness-elements.md) to understand the
   general element's context cost, scope, relationships, and failure modes.
 - Read [Repository instruction files](domains/software-engineering/repository-instruction-files.md)
   for the software-engineering specialization.

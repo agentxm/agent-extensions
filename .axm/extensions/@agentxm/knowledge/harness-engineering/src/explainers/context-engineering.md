@@ -11,4 +11,4 @@ generated:
 
 # Context engineering (former route)
 
-This concept moved to [Context engineering](../foundations/context-engineering.md).
+This concept moved to the [Context engineering boundary](../foundations/context-engineering-boundary.md).

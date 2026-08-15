@@ -1,18 +1,17 @@
 {
   "$schema": "https://axm.sh/schemas/pack.schema.json",
   "owner": "@agentxm",
-  "version": "0.1.0",
-  "description": "Engineers and governs Agent Skills through authoring, evaluation, audit, admission, ownership, capability control, and portfolio lifecycle workflows",
+  "version": "0.2.0",
+  "description": "Develops Agent Skills through canonical authoring and guidance-bound audits with optional remediation and closure verification",
   "keywords": [
     "agent-skills",
     "skill-engineering",
     "skill-authoring",
-    "skill-evaluation",
     "eval-engineering",
+    "skill-audit",
+    "skill-remediation",
     "skill-security",
     "skill-portability",
-    "skill-governance",
-    "skill-admission",
     "skill-library"
   ],
   "repository": {
@@ -25,12 +24,9 @@
   "type": "pack",
   "name": "skill-engineering",
   "dependencies": {
-    "@agentxm/knowledge/skill-engineering": "^0.1.0",
-    "@agentxm/skills/author-agent-skill": "^0.1.0",
-    "@agentxm/skills/evaluate-agent-skill": "^0.1.0",
-    "@agentxm/skills/audit-agent-skill": "^0.1.0",
-    "@agentxm/skills/admit-agent-skill": "^0.1.0",
-    "@agentxm/skills/govern-agent-skill-library": "^0.1.0",
+    "@agentxm/knowledge/skill-engineering": "^0.2.0",
+    "@agentxm/skills/author-agent-skill": "^0.2.0",
+    "@agentxm/skills/audit-agent-skill": "^0.2.0",
     "@agentxm/knowledge/prompt-engineering": "^0.1.0",
     "@agentxm/knowledge/eval-engineering": "^0.1.0"
   }

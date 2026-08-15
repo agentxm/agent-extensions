@@ -30,24 +30,31 @@ axm install @agentxm/knowledge/harness-engineering
 Browse from the bundle index or open a concept directly:
 
 ```bash
-axm knowledge open harness-engineering foundations/harness-engineering
-axm knowledge open harness-engineering foundations/agent-system-composition
-axm knowledge open harness-engineering foundations/harness-classification
-axm knowledge open harness-engineering foundations/agent-legibility
-axm knowledge open harness-engineering elements/action-and-observation-interfaces
-axm knowledge open harness-engineering elements/runtime-and-environments
-axm knowledge open harness-engineering elements/feedback-and-verification
-axm knowledge open harness-engineering elements/authority-and-containment
-axm knowledge open harness-engineering domains/software-engineering/harnesses
-axm knowledge open harness-engineering domains/software-engineering/repository-harnesses
-axm knowledge open harness-engineering operations/evaluating-and-improving-harnesses
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#foundations/harness-engineering'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#foundations/agent-system-composition'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#foundations/harness-classification'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#foundations/agent-legibility'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#elements/action-and-observation-interfaces'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#elements/runtime-and-environments'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#elements/feedback-and-verification'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#elements/authority-and-containment'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#domains/software-engineering/harnesses'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#domains/software-engineering/repository-harnesses'
+axm knowledge concepts get '@agentxm/knowledge/harness-engineering#operations/evaluating-and-improving-harnesses'
 ```
 
 The bundle was migrated from the original `@agentxm` package while preserving
 its content provenance.
 
-Stable concepts record machine generation and verification events in OKF
-frontmatter. Machine confirmation does not claim human review.
+## Trust and freshness
+
+Concept frontmatter distinguishes lifecycle status from provenance. `stable`
+means the concept is intended for current use; it does not claim independent
+review. `generated` records the producing actor. A `verified` event applies to
+the current generated content only when its timestamp is at or after
+`generated.at`. A `codex/*` verification is machine confirmation, not human
+review. Unless a `human:*` verifier is recorded, confirm consequential claims
+against cited sources and current product documentation.
 
 ## License
 

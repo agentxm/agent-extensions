@@ -14,9 +14,6 @@ sources:
 generated:
   by: codex/gpt-5.6
   at: 2026-08-14T22:24:33Z
-verified:
-  - by: codex/gpt-5.6
-    at: 2026-08-09T22:13:44Z
 stale_after: 2027-02-09
 ---
 
@@ -140,7 +137,7 @@ for the axes and recognizable applied profiles.
 
 ## Relationship to neighboring concepts
 
-- [Context engineering](context-engineering.md) owns the informational
+- [Context engineering boundary](context-engineering-boundary.md) owns the informational
   environment and its lifecycle.
 - [Agent legibility](agent-legibility.md) describes whether task-relevant
   intent, state, interfaces, and evidence are usable by the agent.
@@ -152,14 +149,14 @@ for the axes and recognizable applied profiles.
   and evaluation role.
 - [Software engineering harnesses](../domains/software-engineering/harnesses.md)
   apply the discipline to software work.
-- [Instruction files](../elements/instruction-files.md) and
+- [Instruction files as harness elements](../elements/instruction-files-as-harness-elements.md) and
   [agent skills](../elements/agent-skills.md) are elements that implement
   parts of a harness; neither is the harness by itself.
 - Context engineering owns detailed information selection, routing, memory,
   compaction, and lifecycle practices.
 - Prompt engineering owns reusable model-facing instruction, template,
   example, presentation, and prompt-evaluation practices.
-- [Glossary](../glossary.md) defines the vocabulary used across the bundle.
+- [Harness engineering glossary](../harness-engineering-glossary.md) defines the vocabulary used across the bundle.
 
 [^openai-harness-engineering]: OpenAI — Harness engineering
 [^ai-harness-runtime]: AI Harness Engineering — A Runtime Substrate for Foundation-Model Software Agents

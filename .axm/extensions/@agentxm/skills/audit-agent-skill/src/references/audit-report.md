@@ -1,44 +1,62 @@
-# Agent Skill Audit Report
+# Agent Skill audit report
 
 ## Audit identity
 
 - Skill and version:
-- Source and acquisition path:
-- Revision, tree, or archive integrity:
+- Canonical source and acquisition path:
+- Revision, tree, archive integrity, or content identity:
 - Inspected path and time:
-- Intended installation or release scope:
+- Intended use, hosts, and active cohort:
+- Audit mode and exclusions:
+- Guidance bundle, version, and content revision:
 - Previous accepted identity, when applicable:
 
 ## Package inventory
 
-| Surface | Present | Capability or purpose | Trust notes |
+| Surface | Present | Capability or purpose | Evidence or trust notes |
 | --- | --- | --- | --- |
 
-## Capability and information-flow summary
+## Conformity matrix
 
-- Requested capability envelope:
-- Approved capability envelope:
-- Intended effective policy:
-- Observed capability evidence:
-- Risk tier and reviewer implications:
-- Filesystem:
-- Commands and executable code:
-- Network and destinations:
-- Credentials and sensitive inputs:
-- External mutations:
-- Approvals and escalation:
+| Expectation or guide location | Applicability | Evidence | Result |
+| --- | --- | --- | --- |
 
 ## Findings
 
-| ID | Severity | Evidence | Trust boundary | Consequence | Required action |
-| --- | --- | --- | --- | --- | --- |
+| ID | Severity | Expectation | Evidence | Consequence | Responsible surface | Required action |
+| --- | --- | --- | --- | --- | --- | --- |
 
-## Portability, licensing, and public suitability
+## Behavioral evidence
 
-## Change and reapproval triggers
+- Routing scope, cases, and results:
+- Activated-execution scope, cases, and results:
+- Baselines, graders, hosts, and trials:
+- Untested claims and unavailable environment:
 
-## Recommendation
+## Authority, trust, and public suitability
 
-`Accept` | `Accept with conditions` | `Revise before release` | `Reject` | `Inconclusive`
+- Requested capability envelope:
+- Intended or approved effective policy:
+- Observed capability evidence:
+- Filesystem, commands, network, credentials, and external mutation:
+- Provenance, integrity, dependencies, licensing, and public suitability:
 
-## Conditions, uncertainty, and untested behavior
+## Change and lifecycle integrity
+
+- Compatibility and risk deltas:
+- Evidence freshness and refresh triggers:
+- Migration, rollback, deprecation, or governance implications:
+
+## Remediation and closure
+
+| Finding | Authoring disposition | Revised evidence | Closure status |
+| --- | --- | --- | --- |
+
+- Pre-change identity:
+- Post-change identity:
+- Verification independence limitations:
+- Remaining human decisions or external evidence:
+
+## Disposition
+
+`Conformant` | `Conformant with conditions` | `Revise` | `Reject` | `Inconclusive`

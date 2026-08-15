@@ -58,4 +58,10 @@ the developer explicitly requests that operation.
 | [harness-engineering](.axm/extensions/@agentxm/knowledge/harness-engineering/src/index.md) | Runtime, interface, environment, persistence, feedback, authority, and containment engineering for agent systems |
 | [prompt-engineering](.axm/extensions/@agentxm/knowledge/prompt-engineering/src/index.md) | Prompt design, templating, evaluation, trust, versioning, and adaptation across model-facing instruction surfaces |
 | [skill-engineering](.axm/extensions/@agentxm/knowledge/skill-engineering/src/index.md) | Agent Skill design, evaluation, trust, admission, ownership, capability governance, portability, and portfolio lifecycle practices |
+
+### @craigsmitham
+
+| Bundle | Description |
+| --- | --- |
+| [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for understanding, authoring, organizing, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
 <!-- axm:end region=knowledge-base -->

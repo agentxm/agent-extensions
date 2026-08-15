@@ -1,5 +1,16 @@
 # Context engineering update log
 
+## 2026-08-15
+
+- **Repository instructions**: Distinguished scope, applicability,
+  composition, and precedence in the instruction-file explainer; added a
+  portable guide for authoring and validating scoped repository instructions.
+- **Trust semantics**: Clarified lifecycle, machine-provenance, machine-
+  confirmation, and human-review signals; removed a verification event that
+  predated the current generated content.
+- **Discovery naming**: Aligned root section labels with their canonical
+  context-engineering titles.
+
 ## 2026-08-14
 
 - **Ownership**: Forked the bundle to the first-party

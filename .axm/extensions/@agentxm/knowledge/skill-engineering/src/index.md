@@ -13,7 +13,7 @@ coordination, and host documentation for product mechanics.
 
 ## Begin here
 
-- [Skill engineering](overview.md) - Why Agent Skills need an engineering lifecycle beyond valid SKILL.md syntax.
+- [Skill engineering](skill-engineering.md) - Why Agent Skills need an engineering lifecycle beyond valid SKILL.md syntax.
 - [Foundations](foundations/) - The artifact model, neighboring elements, and lifecycle that bound the discipline.
 
 ## Design and build
@@ -33,3 +33,8 @@ coordination, and host documentation for product mechanics.
 
 - [Operations](operations/) - Compatibility, maintenance, evolution, and retirement execution.
 - [Platforms](platforms/) - The portable Agent Skills core and concise deltas for current host implementations.
+
+## Compatibility
+
+- [Skill engineering (former route)](overview.md) - Deprecated route retained
+  for callers that used the generic overview concept ID.

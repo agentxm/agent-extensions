@@ -11,7 +11,7 @@ generated:
 
 # Instruction files (former explainer route)
 
-- Read [Instruction files](../elements/instruction-files.md) for the general
+- Read [Instruction files as harness elements](../elements/instruction-files-as-harness-elements.md) for the general
   harness element.
 - Read [Repository instruction files](../domains/software-engineering/repository-instruction-files.md)
   for the software-engineering specialization.

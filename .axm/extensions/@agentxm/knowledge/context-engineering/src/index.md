@@ -13,17 +13,17 @@ persistence, interfaces, and structural control.
 
 ## Begin with the context system
 
-- [Foundations](foundations/) - The context lifecycle, forms, quality,
+- [Context engineering foundations](foundations/) - The context lifecycle, forms, quality,
   authority, and boundaries from neighboring disciplines.
 
 ## Design selection and discovery
 
-- [Design](design/) - Progressive disclosure and persistent instruction
+- [Context design](design/) - Progressive disclosure and persistent instruction
   surfaces that keep context relevant and discoverable.
 
 ## Operate across time
 
-- [Operations](operations/) - Context gardening, evaluation, memory,
+- [Context operations](operations/) - Context gardening, evaluation, memory,
   compaction, feedback, and continuity.
 
 ## Apply to software engineering

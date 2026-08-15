@@ -176,11 +176,11 @@ mistaking their preferred representations for universal harness elements.
 ## Related
 
 - [Harness engineering](harness-engineering.md)
-- [Context engineering](context-engineering.md)
+- [Context engineering boundary](context-engineering-boundary.md)
 - [Progressive disclosure](../patterns/progressive-disclosure.md)
 - [Context gardening](../practices/context-gardening.md)
 - [Software engineering harnesses](../domains/software-engineering/harnesses.md)
-- [Glossary](../glossary.md)
+- [Harness engineering glossary](../harness-engineering-glossary.md)
 
 [^openai-harness-engineering]: OpenAI — Harness engineering
 [^ai-harness-runtime]: AI Harness Engineering — A Runtime Substrate for Foundation-Model Software Agents

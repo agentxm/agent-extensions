@@ -1,5 +1,17 @@
 # Skill engineering update log
 
+## 2026-08-15
+
+- **OpenAI profile**: Added the current `agents/openai.yaml` invocation-policy
+  role and surface-specific explicit-invocation checks.
+- **AXM profile**: Replaced the authenticated product homepage source with
+  public architecture and CLI-help authorities.
+- **Trust semantics**: Clarified that lifecycle status, machine provenance,
+  machine confirmation, and independent human review are distinct signals.
+- **Discovery naming**: Replaced generic or stale concept IDs for Skill
+  engineering, progressive disclosure, and comparison surfaces while
+  preserving their former routes for compatibility.
+
 ## 2026-08-14
 
 - **Ownership**: Forked the bundle to the first-party

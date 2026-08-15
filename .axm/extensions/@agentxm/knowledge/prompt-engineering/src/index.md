@@ -13,23 +13,23 @@ runtime implementation and enforcement.
 
 ## Begin with ownership
 
-- [Foundations](foundations/) - The prompt artifact, its engineering lifecycle,
+- [Prompt engineering foundations](foundations/) - The prompt artifact, its engineering lifecycle,
   and its boundaries from agent, context, harness, skill, and evaluation
   engineering.
 
 ## Design model-facing contracts
 
-- [Design](design/) - Prompt contracts, instruction structure, examples,
+- [Prompt design](design/) - Prompt contracts, instruction structure, examples,
   templates, response presentations, and distinct prompt-bearing surfaces.
 
 ## Establish evidence and evolve
 
-- [Evaluation and operations](operations/) - Prompt-specific ablation,
+- [Prompt evaluation and operations](operations/) - Prompt-specific ablation,
   robustness, versioning, and compatibility across models and hosts.
 
 ## Preserve trust boundaries
 
-- [Trust](trust/) - Prompt-injection-aware composition and the limits of
+- [Prompt trust](trust/) - Prompt-injection-aware composition and the limits of
   probabilistic instructions as security controls.
 
 ## Diagnose the responsible surface

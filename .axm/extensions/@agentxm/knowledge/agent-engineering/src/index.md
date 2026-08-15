@@ -14,7 +14,7 @@ and reinforcement learning are neighboring fields rather than covered domains.
 
 ## Establish agency and boundaries
 
-- [Foundations](foundations/) - The discipline, the choice between agents and
+- [Agent engineering foundations](foundations/) - The discipline, the choice between agents and
   workflows, system ownership boundaries, and autonomy-risk classification.
 
 ## Design one agent
@@ -29,15 +29,20 @@ and reinforcement learning are neighboring fields rather than covered domains.
 
 ## Engineer trust
 
-- [Trust](trust/) - Identity, authority, accountability, and an agent-specific
+- [Agent trust](trust/) - Identity, authority, accountability, and an agent-specific
   threat model.
 
 ## Operate and improve
 
-- [Operations](operations/) - Reliability, failure attribution, agent-specific
+- [Agent operations](operations/) - Reliability, failure attribution, agent-specific
   evaluation obligations, observability, improvement, and retirement.
 
 ## Shared vocabulary
 
-- [Agent engineering glossary](glossary.md) - Concise definitions for agency,
+- [Agent engineering glossary](agent-engineering-glossary.md) - Concise definitions for agency,
   control, tools, memory, delegation, oversight, and neighboring system layers.
+
+## Compatibility
+
+- [Agent engineering glossary (former route)](glossary.md) - Deprecated route
+  retained for callers that used the original concept ID.

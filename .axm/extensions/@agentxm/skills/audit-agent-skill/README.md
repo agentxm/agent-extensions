@@ -1,17 +1,15 @@
 # Audit Agent Skill
 
-Audit an Agent Skill before installing, trusting, distributing, or publishing
-it. The workflow examines metadata, instructions, bundled code, permissions,
-network and data flow, dependencies, provenance, licensing, fixtures,
-portability claims, and packaging.
+Audit an exact Agent Skill revision against an explicit skill-engineering
+guidance baseline and intended use. The workflow covers design, routing,
+activated execution, resources, portability, authority, provenance, licensing,
+packaging, public suitability, change control, and lifecycle evidence.
 
-For governed libraries it distinguishes requested, approved, intended effective,
-and observed capabilities, assigns risk implications, and identifies changes
-that require reapproval. Portable tool metadata is not treated as proof of
-runtime enforcement.
-
-The audit is static by default and does not execute untrusted bundled code. Use
-the evaluation workflow separately when behavioral performance must be tested.
+A plain audit is read-only. An explicit “audit and remediate” request preserves
+the initial findings, applies the sibling authoring workflow, and verifies the
+new exact revision. That final pass is closure verification, not independent
+approval. Untrusted packages remain static by default and their bundled code is
+not executed merely for inspection.
 
 ## Install
 
@@ -21,5 +19,6 @@ axm install @agentxm/packs/skill-engineering
 
 ## Example
 
-> Audit this downloaded Agent Skill for installation. Do not run its scripts;
-> report its capabilities, risks, provenance gaps, and recommendation.
+> Audit this Agent Skill against the current skill-engineering guidance,
+> remediate supported findings, and verify the resulting revision. Do not
+> publish or claim independent approval.

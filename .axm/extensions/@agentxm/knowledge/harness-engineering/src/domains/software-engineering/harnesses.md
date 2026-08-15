@@ -20,9 +20,6 @@ sources:
 generated:
   by: codex/gpt-5.6
   at: 2026-08-14T21:42:14Z
-verified:
-  - by: codex/gpt-5.6
-    at: 2026-08-09T22:13:44Z
 stale_after: 2027-02-09
 ---
 
@@ -104,7 +101,7 @@ exist locally; local tools often satisfy them implicitly.
 
 ## Coding context
 
-[Context engineering](../../foundations/context-engineering.md) in this domain includes more
+[Context engineering](../../foundations/context-engineering-boundary.md) in this domain includes more
 than selecting source files. Relevant context can include:
 
 - the task, acceptance criteria, and product intent;
@@ -148,7 +145,7 @@ be compared by how well they fulfill the same
 responsibilities, not by whether they use the same files or infrastructure.
 
 See [Harness classification](../../foundations/harness-classification.md) for
-the axes behind these profiles and the [glossary](../../glossary.md) for the
+the axes behind these profiles and the [harness engineering glossary](../../harness-engineering-glossary.md) for the
 bundle's shared terminology.
 
 [^openai-codex-sdk]: OpenAI — Codex SDK

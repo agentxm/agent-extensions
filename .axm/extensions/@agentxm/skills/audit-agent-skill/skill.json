@@ -3,11 +3,13 @@
   "owner": "@agentxm",
   "type": "skill",
   "name": "audit-agent-skill",
-  "version": "0.1.0",
-  "description": "Audits Agent Skills for quality, portability, capability boundaries, risk, executable behavior, provenance, licensing, and supply-chain integrity",
+  "version": "0.2.0",
+  "description": "Audits Agent Skills against skill-engineering guidance and can orchestrate explicitly authorized remediation with snapshot-bound closure verification",
   "keywords": [
     "agent-skills",
     "skill-audit",
+    "skill-conformance",
+    "skill-remediation",
     "skill-security",
     "supply-chain",
     "public-readiness"

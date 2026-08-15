@@ -1,5 +1,8 @@
 {
   "owner": "@agentxm",
+  "publish": {
+    "defaultVisibility": "public"
+  },
   "agents": [
     "claude-code",
     "codex",
@@ -8,7 +11,7 @@
     "zed"
   ],
   "minimumReleaseAgeExclude": [
-    "@agentxm/skills/axm"
+    "@agentxm/*"
   ],
   "rulesConfig": {
     "instructions": {
@@ -18,13 +21,11 @@
   },
   "skills": {
     "axm": "@agentxm/skills/axm",
-    "admit-agent-skill": "workspace:@agentxm/skills/admit-agent-skill",
     "audit-agent-skill": "workspace:@agentxm/skills/audit-agent-skill",
     "author-agent-skill": "workspace:@agentxm/skills/author-agent-skill",
-    "evaluate-agent-skill": "workspace:@agentxm/skills/evaluate-agent-skill",
-    "govern-agent-skill-library": "workspace:@agentxm/skills/govern-agent-skill-library",
     "garden-context": "workspace:@agentxm/skills/garden-context",
-    "improve-instructions": "workspace:@agentxm/skills/improve-instructions"
+    "author-agent-instructions": "workspace:@agentxm/skills/author-agent-instructions",
+    "audit-agent-instructions": "workspace:@agentxm/skills/audit-agent-instructions"
   },
   "knowledge": {
     "agent-engineering": "workspace:@agentxm/knowledge/agent-engineering",
@@ -38,6 +39,7 @@
     "agent-engineering": "workspace:@agentxm/packs/agent-engineering",
     "context-engineering": "workspace:@agentxm/packs/context-engineering",
     "harness-engineering": "workspace:@agentxm/packs/harness-engineering",
-    "skill-engineering": "workspace:@agentxm/packs/skill-engineering"
+    "skill-engineering": "workspace:@agentxm/packs/skill-engineering",
+    "docs": "@craigsmitham/packs/docs"
   }
 }

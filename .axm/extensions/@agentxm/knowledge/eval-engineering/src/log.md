@@ -1,5 +1,14 @@
 # Evaluation Engineering Update Log
 
+## 2026-08-15
+
+- **Trust semantics**: Clarified that lifecycle status, machine provenance,
+  machine confirmation, and independent human review are distinct signals.
+- **Discovery cleanup**: Removed a leftover authoring-template comment from
+  the bundle index.
+- **Discovery naming**: Gave the active glossary a context-free concept ID and
+  preserved `glossary` as a deprecated compatibility route.
+
 ## 2026-08-14
 
 - **Ownership**: Forked the bundle to the first-party

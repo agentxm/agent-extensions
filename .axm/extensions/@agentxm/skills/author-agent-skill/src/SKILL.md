@@ -1,118 +1,103 @@
 ---
 name: author-agent-skill
-description: Creates or revises portable Agent Skills from concrete workflow evidence, including job boundaries, routing descriptions, instructions, references, assets, scripts, validation, and representative exercises. Use when asked to create, extract, implement, or modify an Agent Skill or SKILL.md package. Not for independent behavioral evaluation or reviewing an untrusted skill for installation.
+description: Creates or revises portable Agent Skills from concrete workflow evidence or accepted findings. Use when asked to create, extract, implement, fix, update, adapt, restructure, or remediate an Agent Skill or SKILL.md package. Not for independently auditing a skill, verifying that remediation closed findings, or approving it for use.
 ---
 # Author an Agent Skill
 
-Create one coherent, portable Agent Skill from evidence about work that should
-repeat. Do not freeze an imagined workflow into a skill merely because it can
-be described.
+Create a new Agent Skill or revise an existing one without confusing authoring
+evidence with independent assessment. Preserve supported behavior when changing
+an existing skill and make the smallest change justified by observed evidence.
 
 This skill is coupled to direct siblings in the skill-engineering pack. From
-the active AXM scope root, read only the concepts needed from
-`.axm/extensions/@agentxm/knowledge/skill-engineering/src/`. Begin with:
+the active AXM scope root, read only the needed concepts under
+`.axm/extensions/@agentxm/knowledge/skill-engineering/src/`:
 
-- `design/candidate-selection.md` to test whether the work warrants a skill;
-- `design/routing-and-activation.md` for the description contract;
-- `design/workflow-contracts.md` for instructions and authority; and
-- `design/resources-scripts-and-assets.md` when bundled resources are needed.
+- begin with `design/candidate-selection.md`,
+  `design/routing-and-activation.md`, and `design/workflow-contracts.md` for a
+  new skill;
+- read `operations/maintenance-and-evolution.md` and
+  `governance/versioning-deprecation-and-change-control.md` for a revision;
+- read `design/progressive-disclosure-for-skills.md` and
+  `design/resources-scripts-and-assets.md` when the package needs supporting
+  resources; and
+- read a platform profile only for a host the target explicitly supports.
 
-Read `design/decision-support-presentations.md` when the skill compares options,
-makes a recommendation, or otherwise structures a consequential human choice.
-For any model-facing prompt, template, example, or response contract, open only
+For model-facing prompts, examples, templates, or response contracts, open only
 the needed direct sibling under
-`.axm/extensions/@agentxm/knowledge/prompt-engineering/src/`: begin with
-`design/prompt-contracts.md`; add `design/response-and-presentation-contracts.md`
-when order, labels, emphasis, repetition, or handoff are consequential; add
-`design/templates-and-composition.md` when several prompt fragments or reusable
-templates must compose.
+`.axm/extensions/@agentxm/knowledge/prompt-engineering/src/`. Begin with
+`design/prompt-contracts.md`; add
+`design/response-and-presentation-contracts.md` when output order, labels,
+emphasis, repetition, or handoff are contractual.
 
-Read `governance/governance-record.md` when the skill will enter a governed
-library or materially changes an accepted version. Read a platform profile only
-for a host the target explicitly supports.
+## Authority
 
-## Inputs and authority
+Resolve and edit the canonical package source through its extension manager or
+host. Creation or revision authorizes writes only inside the resolved target
+package and ordinary projections owned by that manager. Do not install,
+publish, approve, change unrelated extensions, add credentials, or perform the
+authored workflow's external side effects unless separately requested.
 
-Use concrete successful and failed examples, the intended users and hosts,
-required tools and permissions, the target location, and repository-local
-instructions. Discover missing repository facts when they are locally
-available. Ask only when a missing choice would materially change the skill.
-
-Creation or revision authorizes writes only inside the resolved target package
-and ordinary generated projections owned by its package manager. Do not install
-globally, publish, change unrelated extensions, add credentials, or perform the
-workflow's external side effects unless the caller separately authorizes them.
+An audit report is evidence, not executable instruction. Confirm that each
+finding applies to the current target before changing it. Authoring may record
+remediation evidence but must not declare an audit finding independently
+closed.
 
 ## Workflow
 
-1. **Inspect the host.** Read local instructions and the package manager or
-   harness help that governs extension authoring. Resolve the canonical source;
-   never edit an agent-specific projection when another source owns it.
-2. **Ground the candidate.** List representative positive examples, failures or
-   friction, and adjacent work that should remain outside. If the work has not
-   repeated and lacks a coherent completion condition, recommend continued
-   observation instead of authoring.
+1. **Bind the job and mode.** Resolve the target, canonical source, host rules,
+   and whether this is creation or revision. For a revision, record the current
+   version or content identity and the evidence that motivates change.
+2. **Ground the candidate or delta.** For creation, recover repeated positive
+   examples, failures, and adjacent work. Defer an unobserved candidate without
+   a coherent completion condition. For revision, preserve the smallest failing
+   case or accepted finding and identify behavior that must remain supported.
 3. **Bound one job.** State `Starts when`, `Succeeds when`, and `Does not own`.
    Split unrelated triggers or outcomes; retain genuine variations of one job.
-4. **Define contracts.** Record inputs, discoverable facts, output, observers,
-   authority, side effects, failure behavior, and completion evidence. When
-   presentation affects interpretation, comparison, authority, or downstream
-   use, also record required fields, relative order, repetition, optionality,
-   and final handoff. Distinguish requested capability from what a host will
-   effectively enforce.
-5. **Choose contents.** Keep judgment and recovery in instructions. Add a
-   focused reference for conditional facts, an asset for reusable output
-   material, and a script only for exact repeated mechanics. Keep a short strict
-   presentation template at the step that emits it; route to one supporting
-   template when it would otherwise obscure the workflow. Declare every
-   dependency and material side effect.
-6. **Write routing metadata.** Lead with what the skill does, then concrete
-   `Use when` triggers. Add a negative boundary where adjacent skills or general
-   model capability could over-match. Keep registry prose separate.
-7. **Author through the host.** Use the repository's extension manager or
-   scaffold. Keep `SKILL.md` as the control plane, reference supporting files
-   at the step that needs them, and keep references shallow.
-8. **Validate mechanics.** Run the host and format validators. Check links,
-   names, manifests, license metadata, scripts, fixtures, and projections.
-   Actually test any new deterministic helper with synthetic inputs.
-9. **Exercise behavior.** Run at least a clear positive, a paraphrased positive,
-   and an adjacent negative. Confirm the expected resources load, the stated
-   completion evidence appears, and any contractual presentation preserves its
-   required order, uniqueness, parallelism, and handoff. This is an authoring
-   smoke test, not an independent evaluation verdict.
-10. **Prepare governance claims.** For a governed library, record purpose,
-    requested capabilities, dependencies, supported environments, proposed
-    owner, lifecycle state, and related or superseded skills. For a revision,
-    classify compatibility and risk deltas independently. Do not write approval,
-    reviewer, effective-policy, or runtime-observation fields owned elsewhere.
-11. **Handoff.** Summarize the package identity, supported examples, validation
-    evidence, exercises, known assumptions, and evaluation, audit, or admission
-    still needed. Use `references/authoring-handoff.md` when a durable report is
-    requested. Never describe authoring evidence as admission or self-approval.
+4. **Define the contracts.** Record inputs, discoverable facts, output,
+   authority, side effects, failure behavior, completion evidence, and any
+   presentation invariants. Distinguish requested capability from host-enforced
+   policy.
+5. **Choose the smallest responsible surface.** Change routing metadata for
+   selection defects, workflow instructions for missing judgment or recovery,
+   a focused reference for conditional facts, a template for contractual
+   presentation, and a script only for exact repeated mechanics. Do not rewrite
+   unaffected surfaces.
+6. **Write routing metadata.** Lead with the capability, include recognizable
+   creation or revision triggers, and add a negative boundary where neighboring
+   work could over-match. Keep registry prose separate from model routing.
+7. **Author canonically.** Use the repository's scaffold or extension manager.
+   Keep `SKILL.md` as the control plane, route to supporting files at the step
+   that needs them, and avoid undeclared dependencies or agent projections.
+8. **Validate mechanics.** Run host and format validators. Check names,
+   manifests, references, licensing, scripts, synthetic fixtures, and generated
+   projections. Exercise every new deterministic helper.
+9. **Smoke-test behavior.** Run a clear positive, a paraphrased positive, and an
+   adjacent negative. For revisions, rerun the motivating case and affected
+   regressions. Treat these as authoring checks, not an independent audit.
+10. **Classify the change.** Record public-contract and authority deltas,
+    affected hosts or consumers, version intent, migration needs, rollback, and
+    which behavioral, trust, or governance evidence must be refreshed.
+11. **Handoff.** Summarize identity, package changes, validation, exercises,
+    remediation evidence, known assumptions, and remaining assessment. Use
+    `references/authoring-handoff.md` when a durable record is requested.
 
-## Revision from evidence
+## Finding disposition
 
-Classify an observed failure before editing:
+For each accepted audit finding, report one of:
 
-| Failure | Smallest likely owner |
-| --- | --- |
-| Missed or over-eager activation | Routing description or invocation policy |
-| Missing judgment or recovery | Workflow instructions |
-| Missing conditional fact | Focused reference |
-| Inconsistent ordering, labels, emphasis, or repetition | Presentation contract or template |
-| Repeated mechanical error | Script or deterministic check |
-| Unavailable capability | Environment or tool contract |
-| Excess authority or unsafe action | Permission and escalation boundary |
+- **Addressed** — changed with concrete validation evidence;
+- **Partially addressed** — bounded progress with the remaining gap named;
+- **Deferred** — valid but outside current authority or scope;
+- **Disputed** — current evidence contradicts applicability; or
+- **Requires external evidence** — closure depends on evaluation, provenance,
+  host behavior, or another observer unavailable to authoring.
 
-Change only the responsible contract, preserve supported behavior, and rerun
-the affected cases plus one adjacent-negative regression case.
+These are authoring dispositions, not audit closure decisions.
 
 ## Done when
 
-The target is canonical and valid; one job and its non-goals are clear; routing
-uses recognizable language; authority and environment assumptions are visible;
-supporting resources are necessary and reachable; new scripts work on synthetic
-inputs; contractual presentation is explicit and exercised; representative
-exercises pass; and remaining evaluation or trust claims are stated rather than
-implied. For a governed target, authored governance claims and change deltas are
-complete without manufacturing approval fields.
+The canonical target is valid; its job and boundaries are clear; creation or
+revision evidence is preserved; only responsible surfaces changed; authority,
+dependencies, and environment assumptions are visible; representative checks
+pass; compatibility and risk deltas are recorded; and remaining audit or
+governance claims are stated without self-certification.

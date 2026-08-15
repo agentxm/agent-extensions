@@ -31,6 +31,16 @@ axm knowledge concepts get '@agentxm/knowledge/skill-engineering#trust/skill-thr
 axm knowledge concepts get '@agentxm/knowledge/skill-engineering#governance/governance-model'
 ```
 
+## Trust and freshness
+
+Concept frontmatter distinguishes lifecycle status from provenance. `stable`
+means the concept is intended for current use; it does not claim independent
+review. `generated` records the producing actor. A `verified` event applies to
+the current generated content only when its timestamp is at or after
+`generated.at`. A `codex/*` verification is machine confirmation, not human
+review. Unless a `human:*` verifier is recorded, confirm consequential claims
+against cited sources and current product documentation.
+
 ## License
 
 CC-BY-SA-4.0. Source attribution and provenance are recorded on concepts and in

@@ -138,13 +138,11 @@ expected=(
   packs/context-engineering
   packs/harness-engineering
   packs/skill-engineering
-  skills/admit-agent-skill
+  skills/audit-agent-instructions
   skills/audit-agent-skill
+  skills/author-agent-instructions
   skills/author-agent-skill
-  skills/evaluate-agent-skill
   skills/garden-context
-  skills/govern-agent-skill-library
-  skills/improve-instructions
 )
 
 expected_list="$(printf '%s\n' "${expected[@]}")"
@@ -222,8 +220,8 @@ if jq -e --argjson expected_count "${#expected[@]}" '
    [.knowledge | to_entries[] | .value] +
    [.packs | to_entries[] | .value] +
    [(.rules // {}) | to_entries[] | .value]) |
-  length == $expected_count and
-  all(type == "string" and startswith("workspace:@agentxm/"))
+  map(select(type == "string" and startswith("workspace:@agentxm/"))) |
+  length == $expected_count
 ' "$validation_root/.axm/settings.json" >/dev/null; then
   :
 else
@@ -231,10 +229,68 @@ else
   exit 1
 fi
 
+if ! jq -e '
+  .owner == "@agentxm" and
+  .publish.defaultVisibility == "public"
+' "$validation_root/.axm/settings.json" >/dev/null; then
+  echo "Public first-party extensions must default to public Registry visibility." >&2
+  exit 1
+fi
+
 while IFS= read -r -d '' manifest; do
   axm knowledge lint --path "$(dirname "$manifest")"
 done < <(find "$validation_root/.axm/extensions/@agentxm/knowledge" \
   -mindepth 2 -maxdepth 2 -name knowledge.json -print0)
+
+knowledge_cursor=""
+while :; do
+  metadata_output=""
+  query_args=(
+    knowledge concepts query
+    --kind concept
+    --limit 100
+    --json
+  )
+  if [[ -n "$knowledge_cursor" ]]; then
+    query_args+=(--cursor "$knowledge_cursor")
+  fi
+
+  if ! metadata_output="$(
+    cd "$validation_root"
+    axm "${query_args[@]}"
+  )"; then
+    printf '%s\n' "$metadata_output"
+    echo "Could not inspect knowledge lifecycle metadata." >&2
+    exit 1
+  fi
+
+  if ! jq -e '
+    .result.items as $items |
+    all($items[];
+      . as $item |
+      (($item.verified // []) | length) == 0 or
+      (
+        ($item.generated.at? | type) == "string" and
+        all($item.verified[]; .at >= $item.generated.at)
+      )
+    )
+  ' <<<"$metadata_output" >/dev/null; then
+    echo "Knowledge verification must not predate generated content." >&2
+    jq -r '
+      .result.items[] |
+      . as $item |
+      ($item.verified // [])[] |
+      select(($item.generated.at? // "") == "" or .at < $item.generated.at) |
+      "  \($item.ref.bundle)#\($item.ref.conceptId): generated=\($item.generated.at // "missing") verified=\(.at)"
+    ' <<<"$metadata_output" >&2
+    exit 1
+  fi
+
+  if [[ "$(jq -r '.result.hasMore' <<<"$metadata_output")" != "true" ]]; then
+    break
+  fi
+  knowledge_cursor="$(jq -er '.result.cursor' <<<"$metadata_output")"
+done
 
 if [[ "$view" == "git-index" ]]; then
   assert_index_unchanged

@@ -4,7 +4,42 @@ skills:
     type: registry
     owner: "@agentxm"
     name: axm
-    resolvedVersion: 0.27.4
-    integrity: sha512-8pgobUF1Ke+uyimuqc1JapTzgg5odL7/0GEKypNy4cY/eNvZ6GfFZ0cI7ZmpoHZxkTJOvpCVLGYPhk/wrhv1NA==
+    resolvedVersion: 0.27.5
+    integrity: sha512-r49blXS0VpcRtNfPpP/0Iphrc7R7xTFSCF26LdRoccxhgq5bS5+yhQsdZ6K20eEyTWuCKsttUXM9YDpMZo//nQ==
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0efz9m4w5qsv4q5qp
+  author-docs:
+    type: registry
+    owner: "@craigsmitham"
+    name: author-docs
+    resolvedVersion: 0.3.0
+    integrity: sha512-oMLwDue7S/9gL+DrBr5i0sK841ZQL/BOCZgeAmCz9eZ8ihRvXa8GFjcmUgToR8J+r2LPkKes9f7X9vak/Xylow==
+    sourceName: default
+    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
+  audit-docs:
+    type: registry
+    owner: "@craigsmitham"
+    name: audit-docs
+    resolvedVersion: 0.1.0
+    integrity: sha512-xzZcJE/qRuhl7fP7SLVbH+y1KsEdAraRj70esZRkkxdtqrtdNOZXqoItxjc/5XSLczCgMe2O0R1yz1FxH0HAKQ==
+    sourceName: default
+    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
+knowledge:
+  docs:
+    type: registry
+    owner: "@craigsmitham"
+    name: docs
+    resolvedVersion: 0.9.0
+    integrity: sha512-Pothz3c/gYpWdce5NLz6QwH63xpGmfrQRkw3A4u9FrpF3riFqwK690LUHXhQq6q+vdV1OEBbkMb3AYzY9GpVNw==
+    sourceName: default
+    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
+packs:
+  docs:
+    type: registry
+    owner: "@craigsmitham"
+    name: docs
+    resolvedVersion: 0.4.0
+    integrity: sha512-qGTRT7X5ntDe1fFptDeZIIewckaVoyN1rl2HlQFAbwFwtcHNP9es/9Ac8VYrEo5Y6j1d9lwxBWG5HdTRl28Trw==
+    manifestContentIdentity: 8fa2dd2da4b893c9bc25a50d3b7563d23f52364fbccb6705df43197da05a4cdc
+    sourceName: default
+    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7

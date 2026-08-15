@@ -61,10 +61,11 @@ When a finding concerns provenance, `status`, `generated`, `verified`, or
 active AXM scope root after selecting it.
 
 Treat these concepts as decision support, not project policy. When instruction
-files are the chosen owner, use the pack's `improve-instructions` skill. If it
-must be opened directly, resolve
-`.axm/extensions/@agentxm/skills/improve-instructions/src/SKILL.md` from
-the active AXM scope root.
+files are the chosen owner, use `audit-agent-instructions` for assessment and
+`author-agent-instructions` for creation or revision. For an explicitly
+authorized audit-remediation loop, begin with the audit skill. Resolve their
+canonical `src/SKILL.md` files under
+`.axm/extensions/@agentxm/skills/<name>/` from the active AXM scope root.
 
 ## Workflow
 

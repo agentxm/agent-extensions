@@ -1,16 +1,14 @@
 # Author Agent Skill
 
-Create or revise a portable Agent Skill from concrete examples of a recurring
-workflow. The skill helps bound one job, design its routing contract, choose
-instructions versus deterministic resources, define presentation contracts,
-author through the host's package workflow, validate the package, exercise
-representative cases, and prepare
-authored governance claims and change deltas for independent review.
+Create a new portable Agent Skill or revise an existing one from concrete
+workflow evidence, accepted audit findings, observed failures, or changed
+requirements. The workflow bounds one job, authors the canonical package,
+validates it, exercises representative cases, and records compatibility,
+authority, migration, and remaining-evidence implications.
 
-Use it to create, extract, implement, or modify an Agent Skill. Use the sibling
-evaluation workflow for an independent behavioral verdict and the audit
-workflow for trust or release review. Use admission separately; authoring never
-self-approves the candidate.
+Use it for requests to create, fix, update, adapt, restructure, or remediate an
+Agent Skill. Use `audit-agent-skill` to assess conformity or verify closure;
+authoring does not independently certify its own changes.
 
 ## Install
 
@@ -20,5 +18,6 @@ axm install @agentxm/packs/skill-engineering
 
 ## Example
 
-> Turn the deployment recovery workflow we just completed into a portable
-> Agent Skill, including positive and adjacent-negative routing examples.
+> Revise this Agent Skill to address findings A-01 and A-03. Preserve its
+> supported routing behavior, validate the package, and record any remaining
+> evidence needed for closure.

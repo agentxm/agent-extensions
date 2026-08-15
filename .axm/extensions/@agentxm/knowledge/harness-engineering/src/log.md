@@ -1,5 +1,20 @@
 # Bundle update log
 
+## 2026-08-15
+
+- **Usage**: Replaced retired `axm knowledge open` examples with exact
+  `axm knowledge concepts get` references.
+- **Trust semantics**: Clarified lifecycle, machine-provenance, machine-
+  confirmation, and human-review signals; removed three verification events
+  that predated their current generated content.
+- **Source traceability**: Connected two previously unused source notes to the
+  claims they support.
+- **Discovery naming**: Renamed the active glossary, context boundary, and
+  instruction-file boundary to context-free concept IDs while preserving their
+  former IDs as deprecated routes.
+- **Compatibility navigation**: Made guide-route retirement explicit and
+  aligned section links with their canonical titles.
+
 ## 2026-08-14
 
 - **Ownership**: Forked the bundle to the first-party
@@ -63,7 +78,7 @@
   evidence-led maintenance cycle for repairing discovery, pruning noise, and
   promoting knowledge to the right harness element.
 - **Vocabulary**: Added agent experience (AX) to the
-  [glossary](glossary.md) as an emerging lens distinct from harness engineering.
+  [glossary](harness-engineering-glossary.md) as an emerging lens distinct from harness engineering.
 - **Foundation**: Added [agent legibility](foundations/agent-legibility.md) as
   the cross-domain quality of making task-relevant intent, state, capabilities,
   constraints, and feedback usable by an agent.
@@ -74,7 +89,7 @@
 - **Software engineering**: Promoted [software engineering](domains/software-engineering/)
   to the first application domain and retained “coding harness” as a glossary
   term for [software engineering harnesses](domains/software-engineering/harnesses.md).
-- **Instruction split**: Separated general [instruction files](elements/instruction-files.md)
+- **Instruction split**: Separated general [instruction files](elements/instruction-files-as-harness-elements.md)
   from [repository instruction files](domains/software-engineering/repository-instruction-files.md)
   and moved the existing workflow to
   [How to design repository instruction files](domains/software-engineering/guides/repository-instruction-files.md).
@@ -87,12 +102,12 @@
 - **Foundations**: Added explainers for [harness engineering](explainers/harness-engineering.md),
   [context engineering](explainers/context-engineering.md), and
   [coding harnesses](explainers/coding-harnesses.md).
-- **Reference**: Added the [harness engineering glossary](glossary.md) to keep
+- **Reference**: Added the [harness engineering glossary](harness-engineering-glossary.md) to keep
   application domains, runtime topologies, working environments, and elements
   distinct.
 - **Expansion**: Added explainer and guide sections with paired concepts for
   [agent skills](elements/agent-skills.md) and
-  [instruction files](elements/instruction-files.md).
+  [instruction files](elements/instruction-files-as-harness-elements.md).
 - **Structure**: Added placeholder indexes for [patterns](patterns/) and
   [practices](practices/), and retained the original `instruction-files`
   concept ID as a deprecated compatibility route.

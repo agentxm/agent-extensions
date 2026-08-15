@@ -5,9 +5,6 @@ description: How the informational environment is selected, structured, routed, 
 tags: [context-engineering, retrieval, routing, memory, feedback, lifecycle]
 status: stable
 generated: { by: "codex/gpt-5.6", at: 2026-08-14T22:24:33Z }
-verified:
-  - by: codex/gpt-5.6
-    at: 2026-08-09T22:13:44Z
 stale_after: 2027-02-09
 sources:
   - id: anthropic-context

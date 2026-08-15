@@ -23,7 +23,7 @@ Harness evaluation applies general evaluation practice to the complete
 model–harness–environment system. Its specialization is making runtime effects
 observable and attributable. A model score cannot show whether a runtime
 provisioned correctly, a tool hid decisive state, an approval boundary failed,
-or verification accepted a false completion.
+or verification accepted a false completion.[^openai-harness-engineering]
 
 1. Bind each trial to exact model, harness, tool, policy, environment, and
    fixture identities.

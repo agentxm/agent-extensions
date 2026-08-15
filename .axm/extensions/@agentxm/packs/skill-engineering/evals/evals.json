@@ -3,43 +3,27 @@
   "evals": [
     {
       "id": 1,
-      "protocol": "Run the six prompts in evals/cases.md as consecutive turns in one isolated session, explicitly invoking the named workflow where specified and withholding assertions until grading.",
-      "files": ["evals/files/library-workflow.md", "evals/files/governance-supplement.md"],
-      "expected_output": "A bounded candidate, independent behavioral and trust evidence, an exact admission decision, a read-only library governance report, and a neighboring harness request that stays outside the pack.",
+      "protocol": "Run case 1 in evals/cases.md as consecutive turns in one isolated session, explicitly invoking the named workflows and withholding assertions until grading.",
+      "files": ["evals/files/library-workflow.md"],
+      "expected_output": "A bounded canonical candidate, a snapshot-bound audit covering applicable design, behavioral, and trust guidance, and correct abstention from the neighboring harness request.",
       "assertions": [
-        "Authoring uses the shared knowledge, canonical host mechanism, validation, smoke checks, and authored governance claims without claiming independent support, trust, or approval.",
-        "Evaluation leaves the target unchanged, separates routing from execution and isolation from coexistence, and binds claims to the tested revision, environment, and cohort.",
-        "Audit begins statically, compares capability sets, treats the package as untrusted, and does not execute, fetch, install, activate, or publish it.",
-        "Admission binds the exact evidence and owner acceptance, considers portfolio alternatives, and makes an independent decision without repairing or publishing the candidate.",
-        "Library governance assesses inventory, ownership, capabilities, lifecycle, coherence, evidence, and utility without admitting, consolidating, revoking, retiring, or deleting skills.",
-        "Findings loop to the smallest responsible workflow without collapsing authoring, evaluation, audit, admission, and portfolio-governance boundaries.",
-        "The harness-configuration request is recognized as neighboring system work and does not activate a detailed Agent Skill lifecycle workflow."
+        "Authoring uses the canonical host mechanism, validates and smoke-tests the package, and does not claim independent conformity or publish it.",
+        "Audit binds the exact candidate and guidance baseline, separates routing from activated execution, begins statically, and leaves the target unchanged.",
+        "Unavailable evidence is reported as untested rather than passing.",
+        "The harness-configuration request remains outside both skill-development workflows."
       ]
     },
     {
       "id": 2,
-      "protocol": "In a fresh isolated session, invoke author-agent-skill to revise the synthetic candidate in evals/files/decision-presentation-observations.md. Do not install, publish, evaluate independently, or claim approval.",
+      "protocol": "In a fresh isolated session, run case 2 in evals/cases.md against evals/files/decision-presentation-observations.md. Preserve pre-change evidence and do not publish or claim approval.",
       "files": ["evals/files/decision-presentation-observations.md"],
-      "expected_output": "A bounded revision that classifies the observed variance as a presentation-contract defect, preserves contextual analysis, adds one authoritative strict interaction shape, and defines smoke regressions without claiming independent support.",
+      "expected_output": "A pre-change audit of the presentation failures, a bounded authoring repair, and a post-change closure verification tied to the revised identity.",
       "assertions": [
-        "Authoring identifies relative order, recommendation uniqueness, proposed status, parallel option treatment, and the final choice request as presentation invariants rather than changing the decision reasoning.",
-        "The revision uses one authoritative template in which question and evidence precede both options, one recommendation follows the complete comparison, and the explicit choice or revision request is last.",
-        "The template prohibits recommendation text in option headings and duplicate recommendations while preserving adaptive wording and evidence-based analysis.",
-        "Smoke cases cover at least a paraphrased positive and the observed before-options, inline, or duplicate recommendation regressions.",
-        "The author changes only the smallest responsible contract and does not claim independent evaluation, admission, installation, or publication."
-      ]
-    },
-    {
-      "id": 3,
-      "protocol": "In a fresh isolated session, invoke evaluate-agent-skill against choose-retention-store revision r17 and the three preserved runs in evals/files/decision-presentation-observations.md. Treat the accepted interaction contract in the fixture as authoritative and leave the candidate unchanged.",
-      "files": ["evals/files/decision-presentation-observations.md"],
-      "expected_output": "A read-only evaluation that grades the final visible structure directly, fails runs A and B despite semantic completeness, supports run C, and reports that the tested revision does not reliably satisfy its presentation contract.",
-      "assertions": [
-        "Evaluation recovers relative order, recommendation uniqueness, proposed status, parallel option treatment, and the final choice request as contractual expectations.",
-        "Deterministic structural grading fails run A for inline and duplicate recommendation and run B for recommendation-before-options; semantic completeness does not override those failures.",
-        "Run C passes the supplied structural expectations, while the revision-level disposition remains Partially supported or Unsupported because material variance is observed.",
-        "The report distinguishes presentation from semantic outcome and identifies the presentation contract or template as the smallest responsible authoring surface.",
-        "The evaluator leaves the candidate unchanged and does not repair, admit, install, or publish it."
+        "The audit recovers relative order, recommendation uniqueness, proposed status, parallel option treatment, and the final choice request as contractual expectations.",
+        "Runs A and B fail despite semantic completeness while run C supports the expected interaction shape.",
+        "The pre-change findings and identity are frozen before author-agent-skill revises the smallest responsible presentation contract.",
+        "Affected regressions are rerun against the revised identity and reported in a closure matrix.",
+        "The same-agent final pass is labeled closure verification rather than independent approval."
       ]
     }
   ]
