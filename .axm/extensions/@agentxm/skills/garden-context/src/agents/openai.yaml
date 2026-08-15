@@ -1,4 +1,0 @@
-interface:
-  display_name: "Garden Context"
-  short_description: "Garden project and workspace context"
-  default_prompt: "Use $garden-context to audit this project context and recommend evidence-backed cultivation moves."

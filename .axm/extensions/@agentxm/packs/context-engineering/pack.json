@@ -1,8 +1,8 @@
 {
   "$schema": "https://axm.sh/schemas/pack.schema.json",
   "owner": "@agentxm",
-  "version": "0.2.0",
-  "description": "Context, prompt, and evaluation engineering knowledge with workflows for gardening context and authoring or auditing agent instructions",
+  "version": "0.2.1",
+  "description": "Context, prompt, and evaluation engineering knowledge with workflows for authoring and auditing agent instructions",
   "keywords": [
     "context-engineering",
     "prompt-engineering",
@@ -27,7 +27,6 @@
   "dependencies": {
     "@agentxm/knowledge/context-engineering": "^0.2.0",
     "@agentxm/knowledge/prompt-engineering": "^0.1.0",
-    "@agentxm/skills/garden-context": "^0.1.0",
     "@agentxm/knowledge/eval-engineering": "^0.1.0",
     "@agentxm/skills/author-agent-instructions": "^0.1.0",
     "@agentxm/skills/audit-agent-instructions": "^0.1.0"

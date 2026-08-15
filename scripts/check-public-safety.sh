@@ -142,7 +142,6 @@ expected=(
   skills/audit-agent-skill
   skills/author-agent-instructions
   skills/author-agent-skill
-  skills/garden-context
 )
 
 expected_list="$(printf '%s\n' "${expected[@]}")"

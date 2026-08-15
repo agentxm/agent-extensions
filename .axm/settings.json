@@ -23,7 +23,6 @@
     "axm": "@agentxm/skills/axm",
     "audit-agent-skill": "workspace:@agentxm/skills/audit-agent-skill",
     "author-agent-skill": "workspace:@agentxm/skills/author-agent-skill",
-    "garden-context": "workspace:@agentxm/skills/garden-context",
     "author-agent-instructions": "workspace:@agentxm/skills/author-agent-instructions",
     "audit-agent-instructions": "workspace:@agentxm/skills/audit-agent-instructions"
   },
