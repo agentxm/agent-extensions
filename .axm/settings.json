@@ -39,6 +39,7 @@
     "context-engineering": "workspace:@agentxm/packs/context-engineering",
     "harness-engineering": "workspace:@agentxm/packs/harness-engineering",
     "skill-engineering": "workspace:@agentxm/packs/skill-engineering",
-    "docs": "@craigsmitham/packs/docs"
+    "docs": "@craigsmitham/packs/docs",
+    "field-notes": "@craigsmitham/packs/field-notes@0.1.0"
   }
 }

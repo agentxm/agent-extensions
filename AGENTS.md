@@ -45,6 +45,12 @@ Before publishing:
 Do not commit, push, publish, deprecate, or change external repositories unless
 the developer explicitly requests that operation.
 
+## Field note subjects
+
+| Subject | Mode | Scope | Target condition | Retire when |
+| --- | --- | --- | --- | --- |
+| axm-cli-interactions | survey | Sessions that directly run `axm` to complete work in this workspace or manually validate AXM behavior; automated test invocations excluded | — | Recurring notes support a specific target condition, or two triage reviews find no pattern |
+
 <!-- axm:start region=knowledge-base -->
 ## Knowledge Base
 
@@ -64,4 +70,47 @@ the developer explicitly requests that operation.
 | Bundle | Description |
 | --- | --- |
 | [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft: craft, quality, and workflow concepts, the four Diátaxis type pairs, and named genres such as playbooks and runbooks |
+| [field-notes](.axm/extensions/@craigsmitham/knowledge/field-notes/src/index.md) | Observing work in progress and converting it into durable improvement: work-as-imagined vs work-as-done, survey and target subjects, recurrence thresholds, and verified closure |
 <!-- axm:end region=knowledge-base -->
+<!-- axm:start region=rules -->
+<!-- axm:rule @craigsmitham/rules/field-notes@0.1.4 -->
+## Field notes
+
+Record how work actually goes, so recurring obstacles become durable
+improvements instead of repeated friction.
+
+Subjects under observation are declared in the `## Field note subjects` table in
+this file. **If that section is missing or has no rows, this rule is inactive —
+do nothing.**
+
+### When to record
+
+While doing ordinary work within a declared subject, record one note when:
+
+- reality differs from instructions, documentation, or command output;
+- you retry, guess, search, or improvise an undocumented workaround; or
+- a `target`-mode subject is blocked from its target condition.
+
+Do not record your own typo, a note already captured this session, or speculation
+without an observed incident.
+
+### How to record
+
+On the first qualifying incident, read the
+[capture instructions](.axm/extensions/@craigsmitham/rules/field-notes/src/capture.md)
+and append one note. Recording it is expected behavior, not an admission of
+failure.
+
+### Stay in the work
+
+Log and continue. Do not investigate the note, fix what it describes, open an
+issue, or discuss it beyond one short line at the end of your response.
+
+Raise a live correctness, data-loss, or security problem immediately instead of
+filing it. Stop to ask only when genuinely blocked on ambiguous architecture,
+data model, or destructive scope; name the ambiguity in one sentence with two or
+three options.
+
+To declare subjects, triage notes, or promote them into findings, use the
+`field-notes` skill. Never do that work inline.
+<!-- axm:end region=rules -->
