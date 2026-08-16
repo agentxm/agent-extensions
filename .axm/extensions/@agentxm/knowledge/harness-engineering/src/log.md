@@ -2,6 +2,10 @@
 
 ## 2026-08-15
 
+- **Human interaction surfaces**: Added the harness surface that renders
+  questions, choices, and approvals to a person, its structured and plain-text
+  forms, harness-owned label rendering, and surface selection as behavioral
+  policy owned by the agent or skill layer.
 - **Usage**: Replaced retired `axm knowledge open` examples with exact
   `axm knowledge concepts get` references.
 - **Trust semantics**: Clarified lifecycle, machine-provenance, machine-

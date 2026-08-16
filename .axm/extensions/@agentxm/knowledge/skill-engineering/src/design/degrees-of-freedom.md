@@ -4,7 +4,7 @@ title: Degrees of freedom
 description: How task variability and fragility determine instruction and automation strictness.
 tags: [agent-skills, degrees-of-freedom, judgment, scripts, safety]
 status: stable
-generated: { by: "codex/gpt-5.6", at: 2026-08-14T20:25:35Z }
+generated: { by: "claude-code/claude-opus-5", at: 2026-08-16T01:39:08Z }
 sources:
   - id: anthropic-best-practices
     resource: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
@@ -27,6 +27,12 @@ Assign freedom per surface, not once for the whole skill. Discovery and
 analysis may require broad judgment while execution mechanics, presentation
 order, or validation remain exact. Constrain only the surface whose variation
 causes failure.
+
+Freedom also divides within a single template. A template holds fixed tokens and
+fillable slots, and a nearby instruction to adapt detail applies only to the
+slots. Mark the difference explicitly: identifiers, labels, and status
+vocabularies are usually the low-freedom tokens, and unmarked ones drift even
+when the surrounding workflow is followed exactly.
 
 ## Two opposite failures
 

@@ -3,7 +3,7 @@
   "owner": "@agentxm",
   "type": "skill",
   "name": "author-agent-skill",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Creates or revises portable Agent Skills from workflow evidence, observed failures, changed requirements, or accepted audit findings",
   "keywords": [
     "agent-skills",

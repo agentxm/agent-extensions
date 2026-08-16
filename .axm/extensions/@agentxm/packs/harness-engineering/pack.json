@@ -1,7 +1,7 @@
 {
   "$schema": "https://axm.sh/schemas/pack.schema.json",
   "owner": "@agentxm",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Compatibility umbrella for harness, context, prompt, and evaluation knowledge plus agent-instruction workflows",
   "keywords": [
     "harness",
@@ -32,9 +32,9 @@
   "type": "pack",
   "name": "harness-engineering",
   "dependencies": {
-    "@agentxm/knowledge/harness-engineering": "^0.1.0",
+    "@agentxm/knowledge/harness-engineering": "^0.2.0",
     "@agentxm/knowledge/context-engineering": "^0.2.0",
-    "@agentxm/knowledge/prompt-engineering": "^0.1.0",
+    "@agentxm/knowledge/prompt-engineering": "^0.2.0",
     "@agentxm/knowledge/eval-engineering": "^0.1.0",
     "@agentxm/skills/author-agent-instructions": "^0.1.0",
     "@agentxm/skills/audit-agent-instructions": "^0.1.0"

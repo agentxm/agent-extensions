@@ -2,6 +2,14 @@
 
 ## 2026-08-15
 
+- **Decision support**: Added stable choice referents across a skill's turns and
+  its pack siblings, explicit emission-surface selection between assistant text
+  and a host question affordance, and grading for label-scheme and surface drift.
+- **Degrees of freedom**: Extended per-surface strictness to per-token
+  strictness within a template.
+- **Portability**: Added the rule that a question, choice, or approval must
+  stand as ordinary output, with a host prompting affordance treated as an
+  optional rendering mapped onto the skill's own identifiers.
 - **OpenAI profile**: Added the current `agents/openai.yaml` invocation-policy
   role and surface-specific explicit-invocation checks.
 - **AXM profile**: Replaced the authenticated product homepage source with

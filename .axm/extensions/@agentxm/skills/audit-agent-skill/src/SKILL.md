@@ -15,8 +15,10 @@ and open only the concepts needed for the declared scope:
 
 - design conformity: `design/candidate-selection.md`,
   `design/routing-and-activation.md`, `design/workflow-contracts.md`,
-  `design/progressive-disclosure-for-skills.md`, and
-  `design/resources-scripts-and-assets.md`;
+  `design/progressive-disclosure-for-skills.md`,
+  `design/resources-scripts-and-assets.md`, and
+  `design/decision-support-presentations.md` when the target compares
+  alternatives or leaves a consequential choice with a human;
 - behavioral claims: `evaluation/evaluation-model.md`,
   `evaluation/routing-evaluations.md`, and
   `evaluation/execution-evaluations.md` plus the needed direct siblings under

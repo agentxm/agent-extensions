@@ -3,7 +3,7 @@
 Concrete responsibilities and constituents used to shape or operate a harness.
 Domain profiles own assumptions that do not transfer across kinds of work.
 
-- [Action and observation interfaces](action-and-observation-interfaces.md) - How harness interfaces expose useful capabilities and legible environmental state to an agent.
+- [Action and observation interfaces](action-and-observation-interfaces.md) - How harness interfaces expose useful capabilities and legible environmental state to an agent, and how they render questions and choices to a person.
 - [Runtime and environments](runtime-and-environments.md) - How runtime substrates, adapted working environments, execution, isolation, reproducibility, and topology shape what an agent can accomplish safely.
 - [State and continuity](state-and-continuity.md) - How harnesses preserve task and execution state across long work, retries, interruption, and handoff.
 - [Feedback and verification](feedback-and-verification.md) - How harnesses turn action consequences into useful feedback and establish completion with evidence.

@@ -5,7 +5,7 @@ description: The cross-host package and progressive-disclosure contract defined 
 tags: [agent-skills, specification, portability, package]
 status: stable
 stale_after: 2027-02-14
-generated: { by: "codex/gpt-5.6", at: 2026-08-14T19:36:04Z }
+generated: { by: "claude-code/claude-opus-5", at: 2026-08-16T01:39:08Z }
 sources:
   - id: agent-skills-spec
     resource: https://agentskills.io/specification
@@ -32,7 +32,15 @@ Portable authoring rules:
 - declare environment and tool requirements rather than assuming them;
 - use scripts for deterministic work and validate their input and output;
 - keep host-only extensions outside the portable contract or clearly optional;
+- write any question, choice, or approval so it stands as ordinary output, and
+  treat a host affordance for structured prompts as an optional rendering whose
+  item labels must map onto the identifiers the skill already defines; and
 - validate structure, then exercise routing and execution on every claimed host.
+
+The prompting affordance is a common portability trap. A skill written around
+one host's question surface loses its choice request where that surface does not
+exist, and a skill that lets the surface supply the labels produces a different
+referent on each host.
 
 [^agent-skills-spec]: Agent Skills specification
 

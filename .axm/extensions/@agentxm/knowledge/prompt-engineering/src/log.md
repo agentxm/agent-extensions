@@ -2,6 +2,9 @@
 
 ## 2026-08-15
 
+- **Presentation contracts**: Made the identifier scheme for enumerated items a
+  named contract field, and added the distinction between a template's fixed
+  tokens and its fillable slots.
 - **Trust semantics**: Clarified that lifecycle status, machine provenance,
   machine confirmation, and independent human review are distinct signals.
 - **Discovery naming**: Renamed the prompt-specific eval-driven development

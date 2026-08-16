@@ -19,7 +19,10 @@ the active AXM scope root, read only the needed concepts under
   `governance/versioning-deprecation-and-change-control.md` for a revision;
 - read `design/progressive-disclosure-for-skills.md` and
   `design/resources-scripts-and-assets.md` when the package needs supporting
-  resources; and
+  resources;
+- read `design/decision-support-presentations.md` when the workflow compares
+  alternatives, recommends one, or leaves a consequential choice with a human;
+  and
 - read a platform profile only for a host the target explicitly supports.
 
 For model-facing prompts, examples, templates, or response contracts, open only
@@ -27,7 +30,7 @@ the needed direct sibling under
 `.axm/extensions/@agentxm/knowledge/prompt-engineering/src/`. Begin with
 `design/prompt-contracts.md`; add
 `design/response-and-presentation-contracts.md` when output order, labels,
-emphasis, repetition, or handoff are contractual.
+identifiers, emphasis, repetition, or handoff are contractual.
 
 ## Authority
 

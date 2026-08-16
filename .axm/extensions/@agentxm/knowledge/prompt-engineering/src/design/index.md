@@ -11,7 +11,7 @@ examples, and stable response behavior.
 - [Templates and composition](templates-and-composition.md) - How fixed and
   variable content combine without confusing instructions, data, or ownership.
 - [Response and presentation contracts](response-and-presentation-contracts.md) -
-  How answer shape, relative order, emphasis, uniqueness, and handoff become
-  explicit output obligations.
+  How answer shape, relative order, identifiers, emphasis, uniqueness, and
+  handoff become explicit output obligations.
 - [Prompt surfaces](prompt-surfaces.md) - How task prompts, tool descriptions,
   graders, handoffs, and multimodal instructions specialize the same craft.

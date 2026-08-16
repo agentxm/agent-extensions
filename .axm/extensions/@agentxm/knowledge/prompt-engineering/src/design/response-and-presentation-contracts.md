@@ -1,10 +1,10 @@
 ---
 type: Reference
 title: Response and presentation contracts
-description: How answer shape, relative order, emphasis, uniqueness, and handoff become explicit output obligations.
-tags: [response-contract, presentation, answer-shape, ordering, structured-output, decision-support]
+description: How answer shape, relative order, identifiers, emphasis, uniqueness, and handoff become explicit output obligations.
+tags: [response-contract, presentation, answer-shape, ordering, identifiers, structured-output, decision-support]
 status: stable
-generated: { by: "codex/gpt-5.6", at: 2026-08-14T20:43:46Z }
+generated: { by: "claude-code/claude-opus-5", at: 2026-08-16T01:39:08Z }
 stale_after: 2027-02-14
 sources:
   - id: prompt-report
@@ -33,6 +33,8 @@ as design decisions rather than incidental formatting.[^prompt-report] Define:
 - required and optional sections;
 - field names and permitted values;
 - relative order when sequencing changes meaning;
+- the identifier scheme for enumerated items a reply, later turn, or durable
+  record must refer to;
 - repetition or uniqueness constraints;
 - length and compression priorities;
 - uncertainty, refusal, and missing-evidence forms;
@@ -42,6 +44,23 @@ as design decisions rather than incidental formatting.[^prompt-report] Define:
 Use deterministic structured-output or schema validation when syntax must be
 enforced. Google recommends native structured output for complex schemas rather
 than relying only on natural-language formatting instructions.[^google-prompting]
+
+## Literal and fillable parts of an output template
+
+An output template shown to the model is not an input template assembled from
+variables; it is a shape the response must reproduce. It still mixes tokens the
+contract fixes with slots the response fills, and it must state which is which.
+A template presented without that distinction is read as an illustration, and a
+nearby instruction to adapt detail or depth is read as license to vary the fixed
+tokens too.
+
+Identifier schemes are the common casualty. Whether items are labeled `A, B, C`,
+`1, 2, 3`, or by name is arbitrary in isolation but contractual in use: the
+reply, the ledger entry, the downstream artifact, and any sibling surface must
+name the same item the same way. Fix the scheme once, mark it literal, and keep
+it stable across the surfaces that share a referent. Where a rendering layer
+imposes its own labels, define the mapping rather than leaving both schemes
+visible.
 
 ## Decision-support presentation
 
