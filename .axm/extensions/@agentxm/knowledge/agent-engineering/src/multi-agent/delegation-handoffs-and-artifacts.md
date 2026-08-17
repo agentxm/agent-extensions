@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Reference
 title: Delegation, handoffs, and artifacts
 description: Defines responsibility transfer, authority, context, deliverables, acceptance, and return paths.
 tags: [delegation, handoffs, artifacts, responsibility, authority, acceptance, escalation]

@@ -8,14 +8,14 @@ Create or revise the effective repository instruction system, not merely one
 Markdown file. Keep persistent context small, scoped, authoritative, and
 discoverable while preserving useful routes to deeper owners.
 
-This skill is coupled to direct siblings in the context-engineering pack. From
+This skill is coupled to a direct sibling in the agent-engineering pack. From
 the active AXM scope root, read:
 
-- `.axm/extensions/@agentxm/knowledge/context-engineering/src/domains/software-engineering/authoring-repository-instruction-files.md`;
+- `.axm/extensions/@agentxm/knowledge/agent-engineering/src/domains/software-engineering/authoring-agent-instruction-files.md`;
   and
-- `.axm/extensions/@agentxm/knowledge/context-engineering/src/domains/software-engineering/repository-instruction-files.md`.
+- `.axm/extensions/@agentxm/knowledge/agent-engineering/src/domains/software-engineering/agent-instruction-files.md`.
 
-Read only the additional context-engineering concepts routed from those files
+Read only the additional context concepts routed from those files
 that the task actually needs. Prefer the active repository and harness
 documentation for current discovery, composition, precedence, and projection
 behavior.

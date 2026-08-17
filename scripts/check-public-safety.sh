@@ -129,15 +129,7 @@ fi
 
 expected=(
   knowledge/agent-engineering
-  knowledge/context-engineering
-  knowledge/eval-engineering
-  knowledge/harness-engineering
-  knowledge/prompt-engineering
-  knowledge/skill-engineering
   packs/agent-engineering
-  packs/context-engineering
-  packs/harness-engineering
-  packs/skill-engineering
   skills/audit-agent-instructions
   skills/audit-agent-skill
   skills/author-agent-instructions

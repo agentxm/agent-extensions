@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Reference
 title: Observability, improvement, and retirement
 description: Uses decisions, actions, effects, interventions, and drift to improve or withdraw an agent safely.
 tags: [agent-observability, traces, monitoring, improvement, drift, retirement, lifecycle]

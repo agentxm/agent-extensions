@@ -4,53 +4,30 @@ okf_version: "0.2"
 
 # Documentation craft knowledge
 
-Portable concepts for documentation quality. The scope is documentation craft
-generally; on the question of **what kinds of documentation exist**, this
-bundle adopts [Diátaxis](https://diataxis.fr/). That commitment settles one
-axis, not the whole field — concepts that Diátaxis does not address belong
-here too.
+Portable guidance for understanding, authoring, and improving documentation.
+Concepts are organized by the form of guidance they provide: explainers for
+understanding, guides for action, and patterns for reusable solutions to
+recurring problems.
 
-Concepts are grouped by the question they answer:
+Diátaxis remains foundational for matching documentation to reader needs. It
+does not define this bundle's directory structure or turn every named artifact
+into a competing taxonomy.
 
-| Section | Question | Form |
-| --- | --- | --- |
-| Craft | How do I judge and improve documentation at all? | Explainers, and guides where practice differs from understanding |
-| [Types](types/index.md) | What reader need does this content serve? | `*-explainer` + `*-guide` pairs |
-| [Genres](genres/index.md) | What artifact is the organization shipping? | Explainer-only |
+## Foundations
+
+Start here when the appropriate form or quality bar is unclear.
+
+* [Documentation craft](explainers/documentation-craft.md) - What effective documentation craft is — matching form to reader need, keeping each job recognizable, and respecting host conventions over portable layout rules.
+* [Documentation quality](explainers/documentation-quality.md) - What functional quality and deep quality mean in documentation craft — and how form-aware craft primarily serves deep quality while exposing functional gaps.
+* [Documentation audits](explainers/documentation-audits.md) - What a documentation audit is — a bounded, evidence-backed assessment of a documentation corpus that distinguishes diagnosis from review, linting, verification, and remediation.
+* [Documentation workflow](explainers/documentation-workflow.md) - Why documentation craft improves best through small iterative remediation — guide not plan, inside-out structure, and complete-not-finished organic growth.
+* [Documentation organization and discovery](explainers/documentation-organization-and-discovery.md) - Why documentation organization should follow reader entry points and semantic relationships, when to prefer form-first or subject-first grouping, and how paths, titles, metadata, and indexes work together.
+
+## Browse by form
+
+* [Explainers](explainers/) - Concepts that establish what something is, why it matters, where its boundaries lie, and how it relates to neighboring ideas.
+* [Guides](guides/) - Actionable processes for creating, revising, and maintaining documentation.
+* [Patterns](patterns/) - Evidence-backed, adaptable solutions to recurring documentation problems.
 
 This bundle does not prescribe repository layout, metadata schemas, or host
-tooling. The `author-docs` skill routes authoring and review work through these
-definitions.
-
-## Craft
-
-* [Documentation craft](docs-explainer.md) - What effective documentation
-  craft is — four jobs from user needs (tutorial, how-to, reference,
-  explanation), one job per document, genres versus types, and host
-  conventions over portable layout rules.
-* [Documentation craft guide](docs-guide.md) - How to choose a documentation
-  type and produce a document that keeps one job clear without inventing host
-  layout or metadata rules.
-* [Documentation workflow](workflow-explainer.md) - Why documentation craft
-  improves best through small iterative remediation — guide not plan,
-  inside-out structure, and complete-not-finished organic growth.
-* [Documentation workflow guide](workflow-guide.md) - How to improve
-  documentation iteratively — choose something, assess against craft, take one
-  action, publish — without empty type shells or top-down plans.
-* [Documentation quality](quality-explainer.md) - What functional quality and
-  deep quality mean in documentation craft — and how type-based craft
-  primarily serves deep quality while exposing functional gaps.
-
-## Types
-
-The four Diátaxis types, each with an explainer and an authoring guide. See
-[types](types/index.md) for the full list.
-
-Tutorial · How-to guide · Reference · Explanation
-
-## Genres
-
-Named artifacts that decompose into the types rather than extending them. See
-[genres](genres/index.md) for the full list.
-
-[Playbook](genres/playbook-explainer.md) · [Runbook](genres/runbook-explainer.md)
+tooling. Local rules remain authoritative for those implementation details.

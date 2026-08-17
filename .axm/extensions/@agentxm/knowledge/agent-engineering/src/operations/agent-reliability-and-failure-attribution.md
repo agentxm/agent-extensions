@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Reference
 title: Agent reliability and failure attribution
 description: Diagnoses failures across agency choice, behavioral policy, prompts, context, tools, harness, environment, and evaluation.
 tags: [agent-reliability, failure-attribution, diagnosis, recovery, robustness, incidents]

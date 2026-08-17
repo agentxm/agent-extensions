@@ -2,14 +2,14 @@
   "$schema": "https://axm.sh/schemas/knowledge.schema.json",
   "owner": "@agentxm",
   "name": "agent-engineering",
-  "version": "0.1.1",
+  "version": "0.3.0",
   "type": "knowledge",
   "format": {
     "name": "okf",
     "version": "0.2"
   },
   "bundleRoot": "src",
-  "description": "Design of goal-directed AI agents: agency choice, goals, control loops, planning, tool use, memory policy, human oversight, coordination, trust, reliability, and lifecycle",
+  "description": "End-to-end design of goal-directed AI agent systems: agent behavior, multi-agent coordination, prompts, context, harness, skills, evaluation, trust, and operations",
   "keywords": [
     "agent-engineering",
     "ai-agents",
@@ -21,6 +21,12 @@
     "multi-agent",
     "human-oversight",
     "agent-safety",
+    "prompt-engineering",
+    "context-engineering",
+    "harness-engineering",
+    "skill-engineering",
+    "agent-skills",
+    "eval-engineering",
     "agent-evaluation"
   ],
   "repository": {

@@ -2,14 +2,14 @@
   "$schema": "https://axm.sh/schemas/knowledge.schema.json",
   "owner": "@craigsmitham",
   "name": "docs",
-  "version": "0.6.0",
+  "version": "0.9.0",
   "type": "knowledge",
   "format": {
     "name": "okf",
     "version": "0.2"
   },
   "bundleRoot": "src",
-  "description": "Portable documentation craft: craft, quality, and workflow concepts, the four Diátaxis type pairs, and named genres such as playbooks and runbooks",
+  "description": "Portable documentation craft for understanding, authoring, organizing, auditing, and improving explainers, guides, principles, and evidence-backed patterns",
   "keywords": [
     "docs",
     "documentation",
@@ -21,6 +21,15 @@
     "authoring",
     "workflow",
     "quality",
+    "audit",
+    "organization",
+    "discovery",
+    "remediation",
+    "principle",
+    "normative",
+    "judgment",
+    "pattern",
+    "pattern-library",
     "playbook",
     "runbook"
   ],

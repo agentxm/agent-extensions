@@ -4,16 +4,16 @@ skills:
     type: registry
     owner: "@agentxm"
     name: axm
-    resolvedVersion: 0.27.5
-    integrity: sha512-r49blXS0VpcRtNfPpP/0Iphrc7R7xTFSCF26LdRoccxhgq5bS5+yhQsdZ6K20eEyTWuCKsttUXM9YDpMZo//nQ==
+    resolvedVersion: 0.27.8
+    integrity: sha512-3YNuT0xfx8RPbFExNujlufNgBHcT6SHYzcKU2c99C8DOYUqV9rhAwBZTe8K9tEx4izv8Apdl8ynuOoa4hffzwA==
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0efz9m4w5qsv4q5qp
   author-docs:
     type: registry
     owner: "@craigsmitham"
     name: author-docs
-    resolvedVersion: 0.1.1
-    integrity: sha512-f52jpM8azCw4v+ZxPChGxAm1zMr43L35hug45pab7zyk51JV4nzaVqEa+6ZpF4TTsc2fQo39OiUKG91k5nwHyw==
+    resolvedVersion: 0.3.1
+    integrity: sha512-fe2Z7Wqhc91yYee5XqiO6fBfuoggW8baZbYABBu0FKjRrqPShtzWoeojXjUY7YgrIF7Swd61L7sL26jmujwNaA==
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
   field-notes:
@@ -22,6 +22,14 @@ skills:
     name: field-notes
     resolvedVersion: 0.1.1
     integrity: sha512-t1ycgY5vXgTRHfhz1cwYUa2lbZlTGvZEUTrL0L8qkIVdSvRxk05fbfrk09hAbQ7qjQvjA+7CxXbCpJGmI5xnsg==
+    sourceName: default
+    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
+  audit-docs:
+    type: registry
+    owner: "@craigsmitham"
+    name: audit-docs
+    resolvedVersion: 0.1.0
+    integrity: sha512-xzZcJE/qRuhl7fP7SLVbH+y1KsEdAraRj70esZRkkxdtqrtdNOZXqoItxjc/5XSLczCgMe2O0R1yz1FxH0HAKQ==
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
 rules:
@@ -38,8 +46,8 @@ knowledge:
     type: registry
     owner: "@craigsmitham"
     name: docs
-    resolvedVersion: 0.6.0
-    integrity: sha512-TgOtiv2ugP0MQCVDR3rzSxojaKGby0UzS7e5VZG26WY0JuJPhYqjrlwd73tk/nzWHH6HE4v0hriyhYSFx0IBiw==
+    resolvedVersion: 0.9.0
+    integrity: sha512-Pothz3c/gYpWdce5NLz6QwH63xpGmfrQRkw3A4u9FrpF3riFqwK690LUHXhQq6q+vdV1OEBbkMb3AYzY9GpVNw==
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
   field-notes:
@@ -55,9 +63,9 @@ packs:
     type: registry
     owner: "@craigsmitham"
     name: docs
-    resolvedVersion: 0.2.1
-    integrity: sha512-W5XuMJI8HHsoGBGuO3IuhC0UQ6HJPjVEulu9oB5rqcfZBOE1ry7YcM+osdFILYUjngVimID3orSsdnwXHTuiGw==
-    manifestContentIdentity: 8cf397357982c876d0b5804bf5937ab88d52b87e1a9927478563af5ee0eaa139
+    resolvedVersion: 0.4.0
+    integrity: sha512-qGTRT7X5ntDe1fFptDeZIIewckaVoyN1rl2HlQFAbwFwtcHNP9es/9Ac8VYrEo5Y6j1d9lwxBWG5HdTRl28Trw==
+    manifestContentIdentity: 8fa2dd2da4b893c9bc25a50d3b7563d23f52364fbccb6705df43197da05a4cdc
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
   field-notes:

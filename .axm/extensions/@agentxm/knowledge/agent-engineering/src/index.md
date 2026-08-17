@@ -2,47 +2,62 @@
 okf_version: "0.2"
 ---
 
-# Agent engineering knowledge
+# Agent engineering
 
-Portable knowledge for deciding when to use an AI agent and designing its
-goal-directed behavior. Use it for goals, loops, planning, tool and memory
-policy, human control, coordination, trust, reliability, and lifecycle; use
-neighboring disciplines for prompts, context representation, runtime
-enforcement, packaged skills, workflow durability, and evaluation method.
-The scope is foundation-model software agents; robotics, autonomous vehicles,
+Portable knowledge for building goal-directed AI agent systems: deciding when
+an agent is the right shape at all, designing its behavior, shaping what the
+model sees, building the runtime around it, measuring whether it works, and
+operating it over time.
+
+The scope is foundation-model software agents. Robotics, autonomous vehicles,
 and reinforcement learning are neighboring fields rather than covered domains.
 
-## Establish agency and boundaries
+## Start here
 
-- [Agent engineering foundations](foundations/) - The discipline, the choice between agents and
-  workflows, system ownership boundaries, and autonomy-risk classification.
+- [Foundations](foundations/) - What the discipline covers, how agent systems
+  compose, how autonomy and risk are classified, and which surface owns which
+  concern.
 
-## Design one agent
+## Design the agent's behavior
 
-- [Agent design](design/) - Goals, control loops, planning, action and
-  observation, memory policy, and human collaboration.
-
-## Coordinate several actors
-
+- [Agent design](agents/) - Goals, control loops, planning, observation and
+  tool-use policy, memory policy, and human collaboration.
 - [Multi-agent systems](multi-agent/) - Roles, topologies, delegation,
-  handoffs, coordination, consistency, and failure containment.
+  handoffs, coordination, and failure containment.
 
-## Engineer trust
+## Shape what the model sees
 
-- [Agent trust](trust/) - Identity, authority, accountability, and an agent-specific
-  threat model.
+- [Prompts](prompts/) - Model-facing instructions, contracts, templates,
+  examples, presentation, and prompt robustness.
+- [Context](context/) - Selection, authority, progressive disclosure,
+  instruction files, memory, compaction, and gardening.
 
-## Operate and improve
+## Build the system around the agent
 
-- [Agent operations](operations/) - Reliability, failure attribution, agent-specific
-  evaluation obligations, observability, improvement, and retirement.
+- [Harness](harness/) - Runtime, environments, action and observation
+  interfaces, state, feedback, authority, and containment.
+- [Skills](skills/) - Packaging reusable workflows behind routing metadata,
+  with resources, contracts, portability, and platform profiles.
+
+## Measure it and trust it
+
+- [Evaluation](evaluation/) - Contracts, task distributions, graders, trials,
+  uncertainty, validity, and the specialized evidence each surface owes.
+- [Trust](trust/) - Threat models, identity and authority, provenance, and
+  permission boundaries.
+
+## Operate it
+
+- [Operations](operations/) - Reliability, failure attribution, observability,
+  improvement, retirement, and library governance.
+
+## Apply it to a domain
+
+- [Application domains](domains/) - Specializations of the general material for
+  particular kinds of work.
 
 ## Shared vocabulary
 
-- [Agent engineering glossary](agent-engineering-glossary.md) - Concise definitions for agency,
-  control, tools, memory, delegation, oversight, and neighboring system layers.
-
-## Compatibility
-
-- [Agent engineering glossary (former route)](glossary.md) - Deprecated route
-  retained for callers that used the original concept ID.
+- [Glossary](glossary.md) - Working definitions for agency, control, system
+  composition, context, interfaces, authority, harness elements, and
+  evaluation.

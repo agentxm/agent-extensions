@@ -1,5 +1,5 @@
 ---
-type: Guide
+type: Reference
 title: Coordination, consistency, and failure
 description: Controls duplicate work, conflicting state, cascades, deadlock, partial failure, and reconciliation.
 tags: [multi-agent, coordination, consistency, failure, reconciliation, cascades, deadlock]

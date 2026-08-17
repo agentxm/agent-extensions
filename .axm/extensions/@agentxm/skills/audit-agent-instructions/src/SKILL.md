@@ -8,14 +8,14 @@ Assess an exact effective instruction system against an explicit guidance
 baseline and the active harness contract. Review the sources that actually
 compose for representative work, not isolated Markdown files alone.
 
-This skill is coupled to direct siblings in the context-engineering pack. From
+This skill is coupled to a direct sibling in the agent-engineering pack. From
 the active AXM scope root, read:
 
-- `.axm/extensions/@agentxm/knowledge/context-engineering/src/domains/software-engineering/repository-instruction-files.md`;
+- `.axm/extensions/@agentxm/knowledge/agent-engineering/src/domains/software-engineering/agent-instruction-files.md`;
   and
-- `.axm/extensions/@agentxm/knowledge/context-engineering/src/domains/software-engineering/authoring-repository-instruction-files.md`.
+- `.axm/extensions/@agentxm/knowledge/agent-engineering/src/domains/software-engineering/authoring-agent-instruction-files.md`.
 
-Read `.axm/extensions/@agentxm/knowledge/context-engineering/src/operations/context-evaluation.md`
+Read `.axm/extensions/@agentxm/knowledge/agent-engineering/src/evaluation/context-evaluation.md`
 when the requested scope requires evidence about selection, use, or economy.
 
 ## Modes and authority

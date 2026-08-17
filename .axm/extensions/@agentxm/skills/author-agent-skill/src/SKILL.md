@@ -8,28 +8,29 @@ Create a new Agent Skill or revise an existing one without confusing authoring
 evidence with independent assessment. Preserve supported behavior when changing
 an existing skill and make the smallest change justified by observed evidence.
 
-This skill is coupled to direct siblings in the skill-engineering pack. From
+This skill is coupled to a direct sibling in the agent-engineering pack. From
 the active AXM scope root, read only the needed concepts under
-`.axm/extensions/@agentxm/knowledge/skill-engineering/src/`:
+`.axm/extensions/@agentxm/knowledge/agent-engineering/src/`:
 
-- begin with `design/candidate-selection.md`,
-  `design/routing-and-activation.md`, and `design/workflow-contracts.md` for a
+- begin with `skills/candidate-selection.md`,
+  `skills/routing-and-activation.md`, and `skills/workflow-contracts.md` for a
   new skill;
-- read `operations/maintenance-and-evolution.md` and
-  `governance/versioning-deprecation-and-change-control.md` for a revision;
-- read `design/progressive-disclosure-for-skills.md` and
-  `design/resources-scripts-and-assets.md` when the package needs supporting
+- read `skills/maintenance-and-evolution.md` and
+  `operations/governance/versioning-deprecation-and-change-control.md` for a
+  revision;
+- read `skills/progressive-disclosure-for-skills.md` and
+  `skills/resources-scripts-and-assets.md` when the package needs supporting
   resources;
-- read `design/decision-support-presentations.md` when the workflow compares
+- read `skills/decision-support-presentations.md` when the workflow compares
   alternatives, recommends one, or leaves a consequential choice with a human;
   and
-- read a platform profile only for a host the target explicitly supports.
+- read a profile under `skills/platforms/` only for a host the target
+  explicitly supports.
 
 For model-facing prompts, examples, templates, or response contracts, open only
-the needed direct sibling under
-`.axm/extensions/@agentxm/knowledge/prompt-engineering/src/`. Begin with
-`design/prompt-contracts.md`; add
-`design/response-and-presentation-contracts.md` when output order, labels,
+the needed concept under `prompts/`. Begin with
+`prompts/prompt-contracts.md`; add
+`prompts/response-and-presentation-contracts.md` when output order, labels,
 identifiers, emphasis, repetition, or handoff are contractual.
 
 ## Authority

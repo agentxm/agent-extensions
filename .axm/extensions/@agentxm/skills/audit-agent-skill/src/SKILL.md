@@ -8,28 +8,30 @@ Assess an exact Agent Skill revision against an explicit guidance baseline and
 intended use. Keep assessment evidence separate from mutation even when one
 developer request authorizes an audit-remediation-verification loop.
 
-This skill is coupled to direct siblings in the skill-engineering pack. From
+This skill is coupled to a direct sibling in the agent-engineering pack. From
 the active AXM scope root, begin with
-`.axm/extensions/@agentxm/knowledge/skill-engineering/src/skill-engineering.md`
-and open only the concepts needed for the declared scope:
+`.axm/extensions/@agentxm/knowledge/agent-engineering/src/skills/skill-engineering.md`
+and open only the concepts needed for the declared scope, all relative to
+`.axm/extensions/@agentxm/knowledge/agent-engineering/src/`:
 
-- design conformity: `design/candidate-selection.md`,
-  `design/routing-and-activation.md`, `design/workflow-contracts.md`,
-  `design/progressive-disclosure-for-skills.md`,
-  `design/resources-scripts-and-assets.md`, and
-  `design/decision-support-presentations.md` when the target compares
+- design conformity: `skills/candidate-selection.md`,
+  `skills/routing-and-activation.md`, `skills/workflow-contracts.md`,
+  `skills/progressive-disclosure-for-skills.md`,
+  `skills/resources-scripts-and-assets.md`, and
+  `skills/decision-support-presentations.md` when the target compares
   alternatives or leaves a consequential choice with a human;
-- behavioral claims: `evaluation/evaluation-model.md`,
-  `evaluation/routing-evaluations.md`, and
-  `evaluation/execution-evaluations.md` plus the needed direct siblings under
-  `.axm/extensions/@agentxm/knowledge/eval-engineering/src/`;
+- behavioral claims: `evaluation/skill-evaluation-model.md`,
+  `evaluation/skill-routing-evaluations.md`, and
+  `evaluation/skill-execution-evaluations.md` plus the needed general
+  evaluation concepts under `evaluation/`;
 - trust and distribution: `trust/skill-threat-model.md`,
   `trust/permissions-and-side-effects.md`, and
   `trust/provenance-and-supply-chain.md`; and
-- change and lifecycle: `operations/maintenance-and-evolution.md` and
-  `governance/versioning-deprecation-and-change-control.md`.
+- change and lifecycle: `skills/maintenance-and-evolution.md` and
+  `operations/governance/versioning-deprecation-and-change-control.md`.
 
-Read a platform profile only for a host the target claims or the caller names.
+Read a platform profile under `skills/platforms/` only for a host the target
+claims or the caller names.
 
 ## Modes and authority
 

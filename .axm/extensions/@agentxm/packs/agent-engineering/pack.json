@@ -1,16 +1,19 @@
 {
   "$schema": "https://axm.sh/schemas/pack.schema.json",
   "owner": "@agentxm",
-  "version": "0.3.0",
-  "description": "Agent behavior foundations with companion harness, context, prompt, and evaluation engineering knowledge",
+  "version": "0.5.0",
+  "description": "Agent engineering knowledge with workflows for authoring and auditing agent instructions and Agent Skills",
   "keywords": [
     "agent-engineering",
     "ai-agents",
     "agentic-systems",
-    "harness-engineering",
-    "context-engineering",
     "prompt-engineering",
-    "eval-engineering"
+    "context-engineering",
+    "harness-engineering",
+    "skill-engineering",
+    "eval-engineering",
+    "agent-instructions",
+    "agent-skills"
   ],
   "repository": {
     "type": "git",
@@ -22,10 +25,10 @@
   "type": "pack",
   "name": "agent-engineering",
   "dependencies": {
-    "@agentxm/knowledge/agent-engineering": "^0.1.0",
-    "@agentxm/knowledge/harness-engineering": "^0.2.0",
-    "@agentxm/knowledge/context-engineering": "^0.2.0",
-    "@agentxm/knowledge/prompt-engineering": "^0.2.0",
-    "@agentxm/knowledge/eval-engineering": "^0.1.0"
+    "@agentxm/knowledge/agent-engineering": "^0.3.0",
+    "@agentxm/skills/author-agent-instructions": "^0.1.0",
+    "@agentxm/skills/audit-agent-instructions": "^0.1.0",
+    "@agentxm/skills/author-agent-skill": "^0.3.0",
+    "@agentxm/skills/audit-agent-skill": "^0.3.0"
   }
 }

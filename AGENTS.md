@@ -58,22 +58,18 @@ the developer explicitly requests that operation.
 
 | Bundle | Description |
 | --- | --- |
-| [agent-engineering](.axm/extensions/@agentxm/knowledge/agent-engineering/src/index.md) | Design of goal-directed AI agents: agency choice, goals, control loops, planning, tool use, memory policy, human oversight, coordination, trust, reliability, and lifecycle |
-| [context-engineering](.axm/extensions/@agentxm/knowledge/context-engineering/src/index.md) | Context selection, authority, routing, retrieval, memory, compaction, feedback, and lifecycle practices for agent systems |
-| [eval-engineering](.axm/extensions/@agentxm/knowledge/eval-engineering/src/index.md) | Evaluation design, validity, task sampling, trials, graders, uncertainty, evidence, and lifecycle practices for AI systems |
-| [harness-engineering](.axm/extensions/@agentxm/knowledge/harness-engineering/src/index.md) | Runtime, interface, environment, persistence, feedback, authority, and containment engineering for agent systems |
-| [prompt-engineering](.axm/extensions/@agentxm/knowledge/prompt-engineering/src/index.md) | Prompt design, templating, evaluation, trust, versioning, and adaptation across model-facing instruction surfaces |
-| [skill-engineering](.axm/extensions/@agentxm/knowledge/skill-engineering/src/index.md) | Agent Skill design, evaluation, trust, admission, ownership, capability governance, portability, and portfolio lifecycle practices |
+| [agent-engineering](.axm/extensions/@agentxm/knowledge/agent-engineering/src/index.md) | End-to-end design of goal-directed AI agent systems: agent behavior, multi-agent coordination, prompts, context, harness, skills, evaluation, trust, and operations |
 
 ### @craigsmitham
 
 | Bundle | Description |
 | --- | --- |
-| [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft: craft, quality, and workflow concepts, the four Diátaxis type pairs, and named genres such as playbooks and runbooks |
+| [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for understanding, authoring, organizing, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
 | [field-notes](.axm/extensions/@craigsmitham/knowledge/field-notes/src/index.md) | Observing work in progress and converting it into durable improvement: work-as-imagined vs work-as-done, survey and target subjects, recurrence thresholds, and verified closure |
 <!-- axm:end region=knowledge-base -->
 <!-- axm:start region=rules -->
 <!-- axm:rule @craigsmitham/rules/field-notes@0.1.4 -->
+
 ## Field notes
 
 Record how work actually goes, so recurring obstacles become durable

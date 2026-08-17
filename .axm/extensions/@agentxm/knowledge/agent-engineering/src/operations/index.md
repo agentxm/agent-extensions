@@ -1,8 +1,13 @@
-# Agent operations
+# Operations
 
-Operate agents as changing behavioral systems whose failures and risks must be
-attributed, measured, observed, corrected, and eventually retired.
+Keeping deployed agents and the libraries around them reliable, accountable,
+and current.
 
-- [Agent reliability and failure attribution](agent-reliability-and-failure-attribution.md) - Diagnoses failures across agency choice, behavioral policy, prompts, context, tools, harness, environment, and evaluation.
-- [Agent-specific evaluation](agent-specific-evaluation.md) - Defines the scenarios, behaviors, trajectories, and risks an agent design must supply to evaluation engineering.
-- [Observability, improvement, and retirement](observability-improvement-and-retirement.md) - Uses decisions, actions, effects, interventions, and drift to improve or withdraw an agent safely.
+- [Agent reliability and failure attribution](agent-reliability-and-failure-attribution.md) -
+  Diagnosing failures across agency choice, behavioral policy, prompts,
+  context, tools, harness, environment, and evaluation.
+- [Observability, improvement, and retirement](observability-improvement-and-retirement.md) -
+  Using decisions, actions, effects, interventions, and drift to improve or
+  withdraw an agent safely.
+- [Governance](governance/) - Admission, ownership, capability boundaries,
+  versioning, and portfolio health for a library of skills.
