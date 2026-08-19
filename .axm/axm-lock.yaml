@@ -4,8 +4,8 @@ skills:
     type: registry
     owner: "@agentxm"
     name: axm
-    resolvedVersion: 0.27.8
-    integrity: sha512-3YNuT0xfx8RPbFExNujlufNgBHcT6SHYzcKU2c99C8DOYUqV9rhAwBZTe8K9tEx4izv8Apdl8ynuOoa4hffzwA==
+    resolvedVersion: 0.27.11
+    integrity: sha512-t3AehSeKGZPlJBHy+detqCNHNmCNNJz+fHYXCq482JC1LBfTqNXxqhkd+DDpSds4StNPKbC7jpCB1d2pZ14M7g==
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0efz9m4w5qsv4q5qp
   author-docs:
@@ -46,8 +46,8 @@ knowledge:
     type: registry
     owner: "@craigsmitham"
     name: docs
-    resolvedVersion: 0.9.0
-    integrity: sha512-Pothz3c/gYpWdce5NLz6QwH63xpGmfrQRkw3A4u9FrpF3riFqwK690LUHXhQq6q+vdV1OEBbkMb3AYzY9GpVNw==
+    resolvedVersion: 0.9.1
+    integrity: sha512-LkqY2fjZ5AJ27e4AZuLXJgpV6lv9W4QsvBDqxLKfLMColTQSDq3TCTtZi0PJ67RfzvZmCj93fxPkUdFHYMZymw==
     sourceName: default
     publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
   field-notes:

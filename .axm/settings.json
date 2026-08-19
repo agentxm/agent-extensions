@@ -13,11 +13,9 @@
   "minimumReleaseAgeExclude": [
     "@agentxm/*"
   ],
-  "rulesConfig": {
-    "instructions": {
-      "fileName": "AGENTS.md",
-      "gitignoreAliases": true
-    }
+  "instructionFiles": {
+    "fileName": "AGENTS.md",
+    "gitignoreAliases": true
   },
   "skills": {
     "axm": "@agentxm/skills/axm",

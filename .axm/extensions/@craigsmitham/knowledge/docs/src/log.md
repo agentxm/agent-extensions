@@ -2,6 +2,9 @@
 
 ## 2026-08-15
 
+- **Update**: Expanded bundle discovery metadata to name documentation naming
+  and information architecture explicitly, making the existing organizing and
+  naming guidance easier to find before a document exists.
 - **Creation**: Added [Documentation
   audits](explainers/documentation-audits.md) and [Auditing
   documentation](guides/auditing-documentation.md) to distinguish corpus-level

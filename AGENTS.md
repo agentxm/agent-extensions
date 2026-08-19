@@ -64,7 +64,7 @@ the developer explicitly requests that operation.
 
 | Bundle | Description |
 | --- | --- |
-| [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for understanding, authoring, organizing, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
+| [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for authoring, naming, information architecture, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
 | [field-notes](.axm/extensions/@craigsmitham/knowledge/field-notes/src/index.md) | Observing work in progress and converting it into durable improvement: work-as-imagined vs work-as-done, survey and target subjects, recurrence thresholds, and verified closure |
 <!-- axm:end region=knowledge-base -->
 <!-- axm:start region=rules -->
