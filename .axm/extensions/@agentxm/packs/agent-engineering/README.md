@@ -63,12 +63,36 @@ runner's CLI, and the workflow never auto-discovers or runs two mechanisms.
 The pack metadata is MIT licensed. Each dependency retains the license in its
 own manifest.
 
-## Revision 0.10.0
+## Revision 0.10.3
 
-- Previous version: `0.9.1`
-- Contract delta: adds the standalone Agent Skill evaluator as the enabled
-  pack default while retaining replaceable runner selection, evaluation
-  strategy, and interpretation in `evaluate-agent-skill`
-- Membership adds `@agentxm/skills/agent-skill-evaluator` at `>=0.1.0`
-- Lower bounds select the knowledge and author, evaluate, and audit skill
-  revisions that honor explicit runner bindings and AXM disabled state
+- Previous version: `0.10.2`
+- Contract delta: selects audit-agent-skill `>=0.7.2` for the strengthened
+  static-execution boundary and evaluator `>=0.2.1` for coherent pass records
+- Compatibility and cohort: all other member lower bounds and the contract v3
+  evidence model remain unchanged
+- Migration: update the pack as a unit before collecting new regression runs
+- Rollback: restore pack `0.10.2`, accepting the recorded audit and runner
+  behavioral defects
+- Evidence: audit case 1 passes three of three trials on the revised identity,
+  evaluator conformance passes, and all workspace suites validate; neither
+  result is independent release approval
+- Bound manifest identity:
+  `sha256:be0b46bd8a83cfe727a098292ed1875559f6e87b1b96e6363474448a2588c923`
+
+## Revision 0.10.1
+
+- Previous version: `0.10.0`
+- Contract delta: aligns every first-party Agent Skill suite on evaluation
+  contract `3.0.0` and the evaluator's mechanical critical-assertion gates
+- Compatibility and cohort: all six skill members move together; existing
+  contract `2.0.0` packages remain readable outside the pack during migration
+- Membership lower bounds select evaluator `>=0.2.0`, audit-agent-skill
+  `>=0.7.1`, and the corresponding author, evaluator, and instruction-skill
+  patch revisions
+- Migration: update the pack as a unit before collecting new regression runs
+- Rollback: restore pack `0.10.0` and all prior member constraints together
+- Evidence: all workspace suites validate against the v3 evaluator and the
+  deterministic conformance suite passes; release-tier evidence and independent
+  approval remain outside this revision
+- Bound manifest identity:
+  `sha256:37d06c4214b6c7395d430c15f99e00d4dd629aee9fb49223b5bc20c329b00d17`

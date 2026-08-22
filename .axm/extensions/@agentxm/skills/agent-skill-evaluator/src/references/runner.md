@@ -23,10 +23,13 @@ node "$evaluator/scripts/agent-skill-eval.mjs" validate \
 ```
 
 Omit `--package` in an AXM workspace to validate every workspace-authored
-Agent Skill. Validation requires evaluation contract version `2.0.0`, absolute
-run-result paths such as `suite.suite_content_identity`, safe fixtures, both
-routing and execution cases, all four outcome states, an explicit fixed-suite
-estimand, and retry and resume lifecycle semantics.
+Agent Skill. Contract `3.0.0` requires absolute run-result paths such as
+`suite.suite_content_identity`; immutable runner, host-adapter, and
+grader-adapter identities and capabilities; exact mappings from every critical
+gate to a case assertion; safe fixtures; both routing and execution cases; all
+four outcome states; an explicit fixed-suite estimand; and retry and resume
+lifecycle semantics. Legacy contract `2.0.0` remains readable for migration but
+does not receive the stronger mechanism-identity or assertion-level gate checks.
 
 ## Run a suite
 
@@ -75,7 +78,7 @@ Useful options:
 | `--token-budget N` | Require host and grader adapters to report aggregate token usage |
 | `--cost-budget-usd N` | Require host and grader adapters to report aggregate cost |
 
-Version 0.1 accepts `authoring-smoke` and `regression`. It rejects `release`
+Version 0.2 accepts `authoring-smoke` and `regression`. It rejects `release`
 at preflight because the protocol does not yet establish the necessary cohort,
 calibration, retention, and independence controls.
 
@@ -102,14 +105,18 @@ attempts. An identity conflict refuses resume without changing preserved
 evidence.
 
 `summarize` deterministically re-derives `summary.json` and `report.md` from
-trial records. It preserves a failed or canceled lifecycle state; a summary
-does not convert lifecycle completion or evaluation support.
+trial records and the identity-bound `contract.json` snapshot. Legacy runs
+without a snapshot may be summarized only while the current suite still
+matches the recorded suite identity. It preserves a failed or canceled
+lifecycle state; a summary does not convert lifecycle completion or evaluation
+support.
 
 ## Evidence layout
 
 ```text
 .work/evals/<owner>/skills/<name>/<run-id>/
 ├── run.json
+├── contract.json
 ├── summary.json
 ├── report.md
 └── trials/<case>/<configuration>/<trial>/
@@ -129,9 +136,11 @@ attempt. Run records bind content identities for the target, suite, runner, and
 adapters plus the runner selection source; declared, observed, verified, and
 enforced statuses remain distinct.
 
-Summaries count candidate outcomes separately from baselines. They preserve
-selected versus available coverage, routing mode and trigger rates, critical
-failures, unknowns, harness errors, per-case Wilson 95% intervals, and
+Summaries count candidate outcomes separately from baselines. For contract v3,
+they derive critical failures from the exact mapped assertion results and retain
+the gate, case, trial, result, evidence, and grade path. They also preserve
+selected versus available coverage, routing mode and trigger rates, unknowns,
+harness errors, per-case Wilson 95% intervals, and
 limitations. Those intervals are descriptive for the bound fixed suite, not a
 task-population generalization. A selected subset receives the
 `selected-cases` claim scope, never an unqualified whole-suite conclusion.

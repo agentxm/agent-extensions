@@ -46,14 +46,47 @@ axm install @agentxm/packs/agent-engineering
 > remediate supported findings, and verify the resulting revision. Do not
 > publish or claim independent approval.
 
-## Revision 0.7.0
+## Revision 0.7.2
 
-- Previous version: `0.6.1`
-- Contract delta: read-only evaluation-source validation now honors explicit
-  trusted validator selection and AXM enabled state
-- Compatibility: static audit remains available when no validator is selected;
-  mechanical validation is reported unverified rather than inferred
-- Risk delta: retained disabled source and undeclared executables are never run
-  as evaluator infrastructure
-- Evaluation source: suite `0.7.0` covers disabled-but-present validator state
-  without changing the audit-only mutation boundary
+- Previous version: `0.7.1`
+- Contract delta: static audits now prohibit executing or reproducing target
+  behavior even through sandboxed, synthetic, or in-memory imitation; the
+  trusted-helper exception is limited to audit-owned read-only mechanisms
+- Compatibility and cohort: ordinary static audit inputs are unchanged; case 1
+  adds an explicit `Reject` or `Revise` disposition assertion and suite `0.7.2`
+  requires evaluator `0.2.0` or a compatible v3 runner
+- Risk delta: closes a behavioral path that reproduced hostile shell behavior
+  while auditing an installer designed to test the no-execution boundary
+- Migration: update the pack to `0.10.3`; route any desired target-behavior
+  trial through `evaluate-agent-skill` rather than the audit workflow
+- Rollback: restore skill `0.7.1` and suite `0.7.1` together, accepting the
+  documented static-boundary regression
+- Evidence: two consecutive `0.7.1` critical failures motivated the change;
+  their routine run was not retained after its transcript captured a personal
+  absolute path. Case 1 then passed three times on `0.7.2` in same-agent
+  `gpt-5.4` regression run `2026-08-22-static-boundary-0.7.2`; the retained run
+  is selected-case, no-baseline, network-unobserved evidence and is not release
+  or independent approval
+- Bound identities: package
+  `sha256:e7b08c2fec01f71bcdf5da932b0dc64012b2c22e5470b204f6848a0062ab8589`
+  and suite `sha256:0db9505a15310c6ae4deb2ca18db35376930ef6fb24745d922310cfa81e3252f`
+
+## Revision 0.7.1
+
+- Previous version: `0.7.0`
+- Contract delta: evaluation contract `3.0.0` maps all five critical gates to
+  exact suite assertions and requires immutable runner and adapter evidence
+- Compatibility and cohort: runtime audit behavior is unchanged; suite `0.7.1`
+  requires evaluator `0.2.0` or another runner with the same v3 evidence model
+- Risk delta: a missing gate mapping or evaluator-mechanism identity now fails
+  source validation instead of leaving a declared safety gate unenforced
+- Migration: use the `agent-engineering` pack at `0.10.1` or bind a compatible
+  external evaluator before producing new regression evidence
+- Rollback: restore skill and suite `0.7.0` together with contract `2.0.0`; do
+  not relabel v3 evidence as v2 evidence
+- Evidence: workspace validator acceptance plus evaluator conformance tests for
+  v3 mapping and assertion-level failure semantics; no release-tier behavioral
+  run or independent approval is claimed
+- Bound identities: package
+  `sha256:e495c0d125c9a27e983921bfe6c0405eb6063c38ba39ed46ec5cb402f6334cac`
+  and suite `sha256:e1f18687863803bf50683c0eec4984bb63fb8d913fe1bf9b298a1c571dcf44ec`

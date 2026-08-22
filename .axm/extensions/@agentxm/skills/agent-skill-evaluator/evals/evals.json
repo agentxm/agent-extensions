@@ -1,6 +1,6 @@
 {
   "skill_name": "agent-skill-evaluator",
-  "suite_version": "0.1.0",
+  "suite_version": "0.2.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -95,6 +95,30 @@
       "assertions": [
         "Conformity and evidence-integrity assessment routes to audit-agent-skill.",
         "The evaluator mechanism does not claim independent audit authority."
+      ]
+    },
+    {
+      "id": 9,
+      "stage": "execution",
+      "prompt": "Preflight and run the synthetic evaluation described in the fixture. Report the environment and support material that may enter the trial.",
+      "expected_output": "A bounded trial environment containing only portable and explicitly allowed variables, with every support dependency explicitly selected and identity-bound.",
+      "files": ["evals/files/environment-isolation.md"],
+      "assertions": [
+        "No undeclared environment variable or support dependency enters the trial.",
+        "Allowed environment variables and support paths are recorded before execution.",
+        "The parent-only synthetic secret remains absent from trial input and process state."
+      ]
+    },
+    {
+      "id": 10,
+      "stage": "execution",
+      "prompt": "Start the synthetic run described in the fixture and state the runner-selection evidence that must be recorded.",
+      "expected_output": "One identity-bound runner selected explicitly or through the declared pack default, with its protocol and capability mapping recorded before execution.",
+      "files": ["evals/files/runner-selection-evidence.md"],
+      "assertions": [
+        "The started run records one exact runner identity and an explicit or pack-default selection source.",
+        "The protocol and host and grader adapter identities and capabilities are bound before trials begin.",
+        "Retained canonical source and undeclared executables are not treated as selected runners."
       ]
     }
   ]

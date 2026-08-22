@@ -39,14 +39,27 @@ function invoke(args, { expected = 0, env = process.env } = {}) {
   return body;
 }
 
+const criticalGate = "No secret leakage";
+
 function contract(requiredField = "suite.suite_content_identity") {
   return {
-    contract_version: "2.0.0",
+    contract_version: "3.0.0",
     owner: "@example",
     decision: "Exercise the evaluator runner conformance contract.",
     target_binding: {
       skill_name: "fixture-skill",
-      required_result_fields: ["target.source_revision", "target.package_content_identity", requiredField, "runner.content_identity", "runner.selection_source", "adapters.host.content_identity"],
+      required_result_fields: [
+        "target.source_revision",
+        "target.package_content_identity",
+        requiredField,
+        "protocol_version",
+        "runner.content_identity",
+        "runner.selection_source",
+        "adapters.host.content_identity",
+        "adapters.host.capabilities",
+        "adapters.grader.content_identity",
+        "adapters.grader.capabilities",
+      ],
     },
     scope: { intended_use: "Synthetic runner conformance.", stages: ["routing", "execution"], case_source: "Synthetic.", excluded_claims: ["Real target behavior"] },
     unit: "One synthetic attempt.",
@@ -55,10 +68,17 @@ function contract(requiredField = "suite.suite_content_identity") {
       routing_boundary: "Catalog only.", execution_boundary: "Synthetic only.",
     },
     evidence: { required_per_trial: ["case_id", "stage", "outcome"], outcomes: ["pass", "fail", "unknown", "harness-error"], storage: "Ignored workspace." },
-    grading: { instrument: "Synthetic.", unknown_policy: "Unknown remains unknown.", critical_gates: ["No secret leakage"], calibration: "Synthetic pass and failure." },
+    grading: { instrument: "Synthetic.", unknown_policy: "Unknown remains unknown.", critical_gates: [criticalGate], calibration: "Synthetic pass and failure." },
     trials: { authoring_smoke_minimum: 1, regression_minimum_per_case: 3, isolation: "Fresh process.", expansion_rule: "Repeat unstable cases." },
     comparison: { baseline: "Without skill.", absence: "No comparative claim." },
-    analysis: { minimum_pass_rate: 1, critical_case_ids: [1], report_by: ["case"], routing_metrics: ["trigger_rate"], aggregation_rule: "Preserve uncertainty.", threshold: "All pass." },
+    analysis: {
+      minimum_pass_rate: 1,
+      critical_assertions: [{ gate: criticalGate, case_id: 1, assertion: "The synthetic execution passes." }],
+      report_by: ["case"],
+      routing_metrics: ["trigger_rate"],
+      aggregation_rule: "Preserve uncertainty.",
+      threshold: "All pass.",
+    },
     estimand: { type: "fixed-suite", sampling_unit: "One synthetic case and trial.", uncertainty: "Descriptive per-case Wilson 95% interval only." },
     lifecycle: { preflight_failure: "Reserved without evidence.", terminal_states: ["complete", "failed", "canceled"], retry: "Append attempts.", resume: "Require matching identities." },
     provenance: { required_result_fields: ["provenance.case_author", "provenance.runner", "provenance.reviewer", "provenance.grader_identity"], independence: "Synthetic only." },
@@ -147,9 +167,46 @@ try {
   const validation = invoke(["validate", "--root", testRoot, "--package", packagePath]);
   check(validation.ok && validation.findings.length === 0, "Valid package did not validate");
 
+  const legacyContract = contract();
+  legacyContract.contract_version = "2.0.0";
+  delete legacyContract.analysis.critical_assertions;
+  legacyContract.analysis.critical_case_ids = [1];
+  writePackage(legacyContract);
+  const legacyValidation = invoke(["validate", "--root", testRoot, "--package", packagePath]);
+  check(legacyValidation.ok && legacyValidation.findings.length === 0, "Legacy contract 2.0.0 did not remain readable");
+  writePackage();
+
   writePackage(contract("suite_content_identity"));
   const invalid = invoke(["validate", "--root", testRoot, "--package", packagePath], { expected: 2 });
   check(invalid.findings.some((finding) => finding.includes("absolute run path")), "Ambiguous result field was not rejected");
+  writePackage();
+
+  const missingMechanismIdentity = contract();
+  missingMechanismIdentity.target_binding.required_result_fields = missingMechanismIdentity.target_binding.required_result_fields.filter((field) => field !== "adapters.grader.content_identity");
+  writePackage(missingMechanismIdentity);
+  const missingMechanism = invoke(["validate", "--root", testRoot, "--package", packagePath], { expected: 2 });
+  check(missingMechanism.findings.some((finding) => finding.includes("required mechanism result field adapters.grader.content_identity")), "Missing grader-adapter identity was not rejected");
+  writePackage();
+
+  const missingCriticalMapping = contract();
+  delete missingCriticalMapping.analysis.critical_assertions;
+  writePackage(missingCriticalMapping);
+  const unmappedCriticalGate = invoke(["validate", "--root", testRoot, "--package", packagePath], { expected: 2 });
+  check(unmappedCriticalGate.findings.some((finding) => finding.includes("every critical gate must map to a case assertion")), "Unmapped critical gate was not rejected");
+  writePackage();
+
+  const invalidCriticalMapping = contract();
+  invalidCriticalMapping.analysis.critical_assertions[0].assertion = "An assertion that does not exist.";
+  writePackage(invalidCriticalMapping);
+  const missingCriticalAssertion = invoke(["validate", "--root", testRoot, "--package", packagePath], { expected: 2 });
+  check(missingCriticalAssertion.findings.some((finding) => finding.includes("must name an exact assertion")), "Unknown critical assertion was not rejected");
+  writePackage();
+
+  const malformedCriticalGates = contract();
+  malformedCriticalGates.grading.critical_gates = {};
+  writePackage(malformedCriticalGates);
+  const invalidCriticalGates = invoke(["validate", "--root", testRoot, "--package", packagePath], { expected: 2 });
+  check(invalidCriticalGates.findings.some((finding) => finding.includes("critical_gates must be a non-empty array")), "Malformed critical gates did not produce a validation finding");
   writePackage();
 
   const unsafeSuite = structuredClone(suite);
@@ -176,6 +233,8 @@ try {
   check(smoke.run.runner.selection_source === "pack-default", "Runner selection source was not preserved");
   check(readFileSync(join(runPath("smoke"), "report.md"), "utf8").includes("(pack-default)"), "Mechanically derived report omitted runner selection source");
   check(smoke.summary.conclusion === "Supported" && smoke.summary.claim_scope === "full-suite", "Full-suite conclusion was not scoped correctly");
+  const passingExecutionTrial = JSON.parse(readFileSync(join(runPath("smoke"), "trials", "1", "candidate", "1", "trial.json"), "utf8"));
+  check(passingExecutionTrial.outcome === "pass" && passingExecutionTrial.failure_class === null, "Passing trial retained a failure classification");
   check(smoke.summary.estimand.type === "fixed-suite" && smoke.summary.case_rates.every((entry) => entry.uncertainty?.method === "wilson-score-95"), "Fixed-suite estimand or per-case uncertainty was omitted");
   const executionResponse = JSON.parse(readFileSync(join(runPath("smoke"), "trials", "1", "candidate", "1", "attempts", "1", "response.json"), "utf8"));
   check(executionResponse.observations.environment_probe === "absent", "Parent secret entered the trial environment");
@@ -213,8 +272,12 @@ process.stdout.write('{"event":"stub-complete"}\\n');
   check(codexRun.summary.conclusion === "Supported" && codexRun.run.adapters.host.declared_identity === "codex-cli@1.0.0" && codexRun.run.authority.network.value === "unobserved", "Codex adapter did not satisfy the shared protocol through a provider-free host stub");
 
   const summaryBefore = readFileSync(join(runPath("smoke"), "summary.json"), "utf8");
+  const changedContractAfterRun = contract();
+  changedContractAfterRun.analysis.minimum_pass_rate = 0.5;
+  writePackage(changedContractAfterRun);
   invoke(["summarize", "--root", testRoot, "--run", runPath("smoke")]);
-  check(readFileSync(join(runPath("smoke"), "summary.json"), "utf8") === summaryBefore, "Summary was not deterministically reproduced");
+  check(readFileSync(join(runPath("smoke"), "summary.json"), "utf8") === summaryBefore, "Summary was not deterministically reproduced from its bound contract snapshot");
+  writePackage();
   const inspected = invoke(["inspect", "--root", testRoot, "--run", runPath("smoke")]);
   check(inspected.result.state === "complete" && inspected.result.environment.routing_mode.value === "catalog-classification-proxy" && inspected.result.authority.network.value === "denied", "Inspect omitted run state, routing mode, or authority identity");
 
@@ -269,6 +332,7 @@ process.stdout.write('{"event":"stub-complete"}\\n');
   writePackage(contract(), targetFailureSuite);
   const targetFailure = invoke(baseRun("target-failure", ["--case", "1"]), { expected: 1 });
   check(targetFailure.summary.counts.fail === 1 && targetFailure.summary.counts["harness-error"] === 0, "Target failure was misattributed to the harness");
+  check(targetFailure.summary.critical_failure === true && targetFailure.summary.critical_failures.length === 1 && targetFailure.summary.conclusion === "Unsupported", "Critical assertion failure did not independently gate the conclusion");
 
   const malformedSuite = structuredClone(suite);
   malformedSuite.evals[0].prompt = "SYNTHETIC_MALFORMED";
@@ -350,6 +414,17 @@ process.stdout.write('{"event":"stub-complete"}\\n');
   const conflict = invoke(["resume", "--root", testRoot, "--run", conflictRoot], { expected: 2 });
   check(conflict.error.code === "resume-identity-conflict", "Changed suite identity did not block resume");
   writePackage();
+
+  invoke(baseRun("contract-snapshot-conflict", ["--case", "1"]));
+  const contractSnapshotConflictRoot = runPath("contract-snapshot-conflict");
+  const contractSnapshotConflictRecord = JSON.parse(readFileSync(join(contractSnapshotConflictRoot, "run.json"), "utf8"));
+  contractSnapshotConflictRecord.state = "canceled";
+  write(join(contractSnapshotConflictRoot, "run.json"), contractSnapshotConflictRecord);
+  const changedSnapshot = JSON.parse(readFileSync(join(contractSnapshotConflictRoot, "contract.json"), "utf8"));
+  changedSnapshot.decision = "Tampered after the run started.";
+  write(join(contractSnapshotConflictRoot, "contract.json"), changedSnapshot);
+  const snapshotConflict = invoke(["resume", "--root", testRoot, "--run", contractSnapshotConflictRoot], { expected: 2 });
+  check(snapshotConflict.error.code === "resume-identity-conflict", "Changed contract snapshot identity did not block resume");
 
   writeBaselinePackage();
   rmSync(join(baselinePackageRoot, "evals"), { recursive: true, force: true });

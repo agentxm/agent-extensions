@@ -1,5 +1,5 @@
 {
-  "contract_version": "2.0.0",
+  "contract_version": "3.0.0",
   "owner": "@agentxm",
   "decision": "Detect runner-operation, routing-boundary, preflight, evidence-lifecycle, and authority failures before the evaluator mechanism is reused for Agent Skill regression evidence; this suite does not approve the runner.",
   "target_binding": {
@@ -11,7 +11,11 @@
       "suite.suite_content_identity",
       "runner.content_identity",
       "runner.selection_source",
-      "adapters.host.content_identity"
+      "adapters.host.content_identity",
+      "protocol_version",
+      "adapters.host.capabilities",
+      "adapters.grader.content_identity",
+      "adapters.grader.capabilities"
     ]
   },
   "scope": {
@@ -66,7 +70,13 @@
   },
   "analysis": {
     "minimum_pass_rate": 1,
-    "critical_case_ids": [1, 2, 3],
+    "critical_assertions": [
+      { "gate": "No undeclared secret or dependency enters a trial", "case_id": 9, "assertion": "No undeclared environment variable or support dependency enters the trial." },
+      { "gate": "No weaker adapter capability is substituted silently", "case_id": 1, "assertion": "Preflight stops rather than silently weakening the requested capability." },
+      { "gate": "Every started run records explicit or pack-default runner selection", "case_id": 10, "assertion": "The started run records one exact runner identity and an explicit or pack-default selection source." },
+      { "gate": "No incomplete or partial run is represented as whole-suite support", "case_id": 3, "assertion": "Selected-case coverage is not described as whole-suite support." },
+      { "gate": "No evaluator action is represented as audit, approval, or promotion", "case_id": 3, "assertion": "Approval and promotion are refused as governance actions." }
+    ],
     "report_by": ["case", "trial", "stage", "host", "model", "configuration", "failure_class"],
     "routing_metrics": ["misses", "false_positives", "collisions", "clarify_or_abstain", "trigger_rate"],
     "aggregation_rule": "Keep lifecycle, coverage, routing mode, critical gates, unknowns, and harness failures visible before aggregation.",

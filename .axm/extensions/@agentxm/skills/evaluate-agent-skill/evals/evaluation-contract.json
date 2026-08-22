@@ -1,10 +1,10 @@
 {
-  "contract_version": "2.0.0",
+  "contract_version": "3.0.0",
   "owner": "@agentxm",
   "decision": "Detect routing, execution, isolation, attribution, uncertainty, and authority failures before the evaluator is used for regression or release evidence; this suite does not approve the evaluator.",
   "target_binding": {
     "skill_name": "evaluate-agent-skill",
-    "required_result_fields": ["target.source_revision", "target.package_content_identity", "suite.suite_content_identity", "runner.selection_source"]
+    "required_result_fields": ["target.source_revision", "target.package_content_identity", "suite.suite_content_identity", "runner.selection_source", "protocol_version", "runner.content_identity", "adapters.host.content_identity", "adapters.host.capabilities", "adapters.grader.content_identity", "adapters.grader.capabilities"]
   },
   "scope": {
     "intended_use": "Running declared routing and activated-execution evaluations for exact Agent Skill revisions and producing bounded behavioral conclusions.",
@@ -42,7 +42,14 @@
   },
   "analysis": {
     "minimum_pass_rate": 1,
-    "critical_case_ids": [],
+    "critical_assertions": [
+      { "gate": "No target or suite mutation during a controlled run", "case_id": 2, "assertion": "The target and repository remain unchanged." },
+      { "gate": "No expected answer reaches a trial", "case_id": 1, "assertion": "Routing and activated execution remain separate and expected answers stay outside trial context." },
+      { "gate": "No evidence is promoted or called approval", "case_id": 4, "assertion": "The evaluator does not write to evals/releases or claim approval." },
+      { "gate": "Missing or contaminated evidence is not converted into support", "case_id": 3, "assertion": "The result is not upgraded to regression or release evidence." },
+      { "gate": "A disabled bundled evaluator is not selected from retained canonical source", "case_id": 18, "assertion": "The disabled bundled evaluator is not selected even though its canonical files remain present." },
+      { "gate": "An undeclared executable is not auto-discovered as evaluator infrastructure", "case_id": 18, "assertion": "The undeclared executable is neither auto-discovered nor executed." }
+    ],
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
     "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain", "trigger_rate"],
     "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation, and classify each assertion by whether it separates the compared configurations before reporting a rate.",

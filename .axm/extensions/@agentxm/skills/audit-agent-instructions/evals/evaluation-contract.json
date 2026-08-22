@@ -1,10 +1,10 @@
 {
-  "contract_version": "2.0.0",
+  "contract_version": "3.0.0",
   "owner": "@agentxm",
   "decision": "Detect routing, effective-context, authority, report-contract, and remediation-cycle failures before release; this suite does not approve an instruction system or the skill.",
   "target_binding": {
     "skill_name": "audit-agent-instructions",
-    "required_result_fields": ["target.source_revision", "target.package_content_identity", "suite.suite_content_identity"]
+    "required_result_fields": ["target.source_revision", "target.package_content_identity", "suite.suite_content_identity", "protocol_version", "runner.content_identity", "runner.selection_source", "adapters.host.content_identity", "adapters.host.capabilities", "adapters.grader.content_identity", "adapters.grader.capabilities"]
   },
   "scope": {
     "intended_use": "Auditing effective repository agent instruction systems and verifying explicitly authorized remediation without self-approval.",
@@ -42,7 +42,11 @@
   },
   "analysis": {
     "minimum_pass_rate": 1,
-    "critical_case_ids": [],
+    "critical_assertions": [
+      { "gate": "Audit-only cases do not mutate sources or projections", "case_id": 10, "assertion": "It reports the drift with exact evidence without applying axm sync or editing any source, alias, or managed region." },
+      { "gate": "Unknown host precedence is not guessed", "case_id": 3, "assertion": "Directory proximity is not treated as proof of runtime precedence." },
+      { "gate": "Same-agent closure is not called independent approval", "case_id": 2, "assertion": "The final pass is labeled closure verification rather than independent approval." }
+    ],
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
     "routing_metrics": ["misses", "false_positives", "collisions", "clarify_or_abstain"],
     "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation.",

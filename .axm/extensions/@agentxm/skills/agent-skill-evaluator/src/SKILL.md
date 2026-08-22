@@ -79,8 +79,11 @@ runner may expose another native interface when the evaluation workflow has an
 explicit trusted adapter or evidence mapping that satisfies its evaluation
 contract.
 
-Version 0.1 supports authoring-smoke and regression evidence. Reject release
-evidence until a later protocol version explicitly supplies and verifies its
+Version 0.2 supports authoring-smoke and regression evidence and validates
+evaluation contract `3.0.0`, including immutable mechanism identities and exact
+critical-gate-to-assertion mappings. It continues to read legacy contract
+`2.0.0` without applying the stronger v3 guarantees. Reject release evidence
+until a later protocol version explicitly supplies and verifies its
 independence, calibration, retention, and cohort requirements.
 
 ## Done when

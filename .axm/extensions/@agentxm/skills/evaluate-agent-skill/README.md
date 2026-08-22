@@ -46,3 +46,20 @@ identity, isolation, lifecycle, uncertainty, and evidence semantics.
 To make an external runner the persistent workspace choice, disable the
 bundled default with `axm skills disable agent-skill-evaluator`. Restore it with
 `axm skills enable agent-skill-evaluator`.
+
+## Revision 0.3.1
+
+- Previous version: `0.3.0`
+- Contract delta: evaluation contract `3.0.0` binds all six critical gates to
+  exact assertions and records immutable runner and adapter evidence
+- Compatibility and cohort: runtime evaluation strategy is unchanged; suite
+  `0.4.1` requires evaluator `0.2.0` or an equivalent v3-capable runner
+- Risk delta: mutation, answer leakage, evidence promotion, contamination, and
+  runner-selection gates can no longer remain declared without mappings
+- Migration: update the pack to `0.10.1` before collecting new regression runs
+- Rollback: restore skill `0.3.0`, suite `0.4.0`, and contract `2.0.0` together
+- Evidence: workspace validator acceptance and deterministic evaluator
+  conformance; no release-tier behavioral run or independent approval is claimed
+- Bound identities: package
+  `sha256:e1c2e81c9676e453b1c12909d359353c66f9a3beaf1dc9afc91d4ee6a8416a93`
+  and suite `sha256:f36fc197ab4fc21e2c808402ba287ba56de823436071b815bca9bfda5bc3a97e`

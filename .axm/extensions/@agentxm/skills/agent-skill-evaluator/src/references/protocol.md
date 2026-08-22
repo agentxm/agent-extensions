@@ -4,6 +4,13 @@ Protocol version `1.0.0` separates the provider-neutral runner from host and
 grader adapters. JSON Schemas live under `schemas/` and are part of the runner
 identity.
 
+Evaluation contract `3.0.0` binds that mechanism by requiring the protocol,
+runner identity and selection source, and host and grader adapter identities
+and capabilities in every run. It also maps each critical gate to an exact
+suite assertion so summary gating is mechanical and attributable. Contract
+`2.0.0` remains a migration-only readable format and retains legacy case-level
+critical gating.
+
 ## Adapter process contract
 
 The runner invokes an executable in one of three modes:

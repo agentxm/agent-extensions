@@ -1,6 +1,6 @@
 {
   "skill_name": "evaluate-agent-skill",
-  "suite_version": "0.4.0",
+  "suite_version": "0.4.1",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {

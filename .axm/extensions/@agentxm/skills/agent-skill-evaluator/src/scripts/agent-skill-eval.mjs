@@ -19,7 +19,17 @@ import { basename, dirname, extname, join, relative, resolve, sep } from "node:p
 import { fileURLToPath } from "node:url";
 
 const PROTOCOL_VERSION = "1.0.0";
-const CONTRACT_VERSION = "2.0.0";
+const CURRENT_CONTRACT_VERSION = "3.0.0";
+const SUPPORTED_CONTRACT_VERSIONS = new Set(["2.0.0", CURRENT_CONTRACT_VERSION]);
+const REQUIRED_MECHANISM_RESULT_FIELDS = [
+  "protocol_version",
+  "runner.content_identity",
+  "runner.selection_source",
+  "adapters.host.content_identity",
+  "adapters.host.capabilities",
+  "adapters.grader.content_identity",
+  "adapters.grader.capabilities",
+];
 const OUTCOMES = new Set(["pass", "fail", "unknown", "harness-error"]);
 const STAGES = new Set(["routing", "execution"]);
 const EVIDENCE_CLASSES = new Set(["authoring-smoke", "regression"]);
@@ -267,12 +277,14 @@ function validateSuite(packageRoot, findings) {
   if (!Array.isArray(suite.evals) || suite.evals.length === 0) { findings.push(`${suitePath}: evals must be a non-empty array`); return; }
 
   const ids = new Set();
+  const casesById = new Map();
   const stages = new Set();
   for (const item of suite.evals) {
     const id = String(item.id ?? "");
     if (!id || ids.has(id)) findings.push(`${suitePath}: every case must have a unique id`);
     if (!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(id)) findings.push(`${suitePath}: every case id must be safe for evidence paths`);
     ids.add(id);
+    casesById.set(id, item);
     if (!STAGES.has(item.stage)) findings.push(`${suitePath} case ${id}: invalid or missing stage`);
     else stages.add(item.stage);
     if (typeof item.prompt !== "string" || item.prompt.length === 0) findings.push(`${suitePath} case ${id}: prompt is required`);
@@ -304,16 +316,41 @@ function validateSuite(packageRoot, findings) {
 
   const contractPath = join(evalRoot, "evaluation-contract.json");
   for (const key of REQUIRED_CONTRACT_KEYS) if (!(key in contract)) findings.push(`${contractPath}: missing ${key}`);
-  if (contract.contract_version !== CONTRACT_VERSION) findings.push(`${contractPath}: contract_version must be ${CONTRACT_VERSION}`);
+  if (!SUPPORTED_CONTRACT_VERSIONS.has(contract.contract_version)) findings.push(`${contractPath}: contract_version must be one of ${[...SUPPORTED_CONTRACT_VERSIONS].join(", ")}`);
   if (contract.target_binding?.skill_name !== manifest.name) findings.push(`${contractPath}: target_binding.skill_name must equal ${manifest.name}`);
   const resultFields = requiredRunFields(contract);
-  const allowedRoots = new Set(["target", "suite", "runner", "adapters", "environment", "authority", "budgets", "coverage", "provenance", "started_at", "ended_at"]);
+  const allowedRoots = new Set(["target", "suite", "runner", "adapters", "environment", "authority", "budgets", "coverage", "provenance"]);
+  const allowedSingletons = new Set(["protocol_version", "started_at", "ended_at"]);
   if (resultFields.length === 0) findings.push(`${contractPath}: required_result_fields must not be empty`);
   for (const field of resultFields) {
     const root = typeof field === "string" ? field.split(".")[0] : "";
-    if (typeof field !== "string" || !field || (!field.includes(".") && !new Set(["started_at", "ended_at"]).has(field)) || !allowedRoots.has(root)) findings.push(`${contractPath}: required result field must be an absolute run path: ${field}`);
+    if (typeof field !== "string" || !field || (field.includes(".") ? !allowedRoots.has(root) : !allowedSingletons.has(field))) findings.push(`${contractPath}: required result field must be an absolute run path: ${field}`);
   }
   if (new Set(resultFields).size !== resultFields.length) findings.push(`${contractPath}: run result fields must be unique`);
+  if (contract.contract_version === CURRENT_CONTRACT_VERSION) {
+    const analysis = contract.analysis && typeof contract.analysis === "object" && !Array.isArray(contract.analysis) ? contract.analysis : {};
+    if (analysis !== contract.analysis) findings.push(`${contractPath}: analysis must be an object`);
+    for (const field of REQUIRED_MECHANISM_RESULT_FIELDS) if (!resultFields.includes(field)) findings.push(`${contractPath}: required mechanism result field ${field} is missing`);
+    if ("critical_case_ids" in analysis) findings.push(`${contractPath}: analysis.critical_case_ids is legacy; contract 3.0.0 must map critical gates to exact assertions`);
+    const gates = contract.grading?.critical_gates;
+    if (!Array.isArray(gates) || gates.length === 0 || gates.some((gate) => typeof gate !== "string" || !gate) || new Set(gates).size !== gates.length) findings.push(`${contractPath}: grading.critical_gates must be a non-empty array of unique strings`);
+    const mappings = analysis.critical_assertions;
+    if (!Array.isArray(mappings) || mappings.length === 0) findings.push(`${contractPath}: every critical gate must map to a case assertion in analysis.critical_assertions`);
+    else {
+      const mappedGates = new Set();
+      for (const mapping of mappings) {
+        const gate = mapping?.gate;
+        const caseId = String(mapping?.case_id ?? "");
+        const assertion = mapping?.assertion;
+        if (!Array.isArray(gates) || !gates.includes(gate)) findings.push(`${contractPath}: critical assertion mapping must name an exact critical gate: ${gate}`);
+        else mappedGates.add(gate);
+        const activeCase = casesById.get(caseId);
+        if (!activeCase) findings.push(`${contractPath}: critical assertion mapping references unknown case ${caseId}`);
+        else if (!activeCase.assertions.includes(assertion)) findings.push(`${contractPath}: critical assertion mapping for case ${caseId} must name an exact assertion`);
+      }
+      for (const gate of Array.isArray(gates) ? gates : []) if (!mappedGates.has(gate)) findings.push(`${contractPath}: every critical gate must map to a case assertion; unmapped gate: ${gate}`);
+    }
+  }
   const declaredStages = new Set(contract.scope?.stages ?? []);
   for (const stage of STAGES) if (!declaredStages.has(stage)) findings.push(`${contractPath}: scope.stages must include ${stage}`);
   const outcomes = new Set(contract.evidence?.outcomes ?? []);
@@ -724,7 +761,7 @@ function createRun(context, args) {
     evidence_class: evidenceClass,
     claim_ceiling: evidenceClass === "authoring-smoke" ? "Same-author development evidence only" : "Bounded reliability for the tested identities",
     target,
-    suite: { version: suite.suite_version, suite_content_identity: suiteIdentity(root, packageRoot), contract_version: contract.contract_version },
+    suite: { version: suite.suite_version, suite_content_identity: suiteIdentity(root, packageRoot), contract_version: contract.contract_version, contract_content_identity: jsonIdentity(contract) },
     runner: { implementation: "@agentxm/skills/agent-skill-evaluator", version: readJson(join(resolve(skillSourceRoot, ".."), "skill.json")).version, content_identity: runnerIdentity(), runtime: process.version, selection_source: args.selectionSource ?? "explicit" },
     adapters: { host: adapterRecord(root, adapter, capabilities), grader: adapterRecord(root, graderAdapter, graderCapabilities) },
     environment: {
@@ -933,7 +970,7 @@ async function executeRun(context, run) {
           observations: finalResponse?.observations ?? {},
           usage: finalResponse?.usage ?? { tokens: null, cost_usd: null },
           outcome: finalGrade?.outcome ?? "harness-error",
-          failure_class: finalGrade?.failure_class ?? "harness",
+          failure_class: finalGrade ? finalGrade.failure_class : "harness",
         });
       }
       if (cancellationRequested) break;
@@ -995,8 +1032,32 @@ function deriveSummary(runRoot, run = readJson(join(runRoot, "run.json")), contr
   const requiredStages = new Set(contract.scope?.stages ?? []);
   const fullStages = [...requiredStages].every((stage) => selectedStages.has(stage));
   const claimScope = selectedAll && fullStages ? "full-suite" : "selected-cases";
-  const criticalIds = new Set((contract.analysis?.critical_case_ids ?? []).map(String));
-  const criticalFailure = candidate.some((item) => criticalIds.has(String(item.case_id)) && item.outcome !== "pass");
+  const criticalFailures = [];
+  if (contract.contract_version === CURRENT_CONTRACT_VERSION) {
+    for (const record of candidate) {
+      const mappings = (contract.analysis?.critical_assertions ?? []).filter((mapping) => String(mapping.case_id) === String(record.case_id));
+      if (mappings.length === 0) continue;
+      const gradePath = join(dirname(join(runRoot, record.path)), record.assertion_results);
+      const grade = readJson(gradePath);
+      for (const mapping of mappings) {
+        const assertionResult = grade.assertions.find((item) => item.assertion === mapping.assertion);
+        if (!assertionResult || assertionResult.result !== "pass") criticalFailures.push({
+          gate: mapping.gate,
+          case_id: String(record.case_id),
+          configuration_id: record.configuration_id,
+          trial_number: record.trial_number,
+          assertion: mapping.assertion,
+          result: assertionResult?.result ?? "unknown",
+          evidence: assertionResult?.evidence ?? "Mapped critical assertion was absent from the grade.",
+          grade: relative(runRoot, gradePath).split(sep).join("/"),
+        });
+      }
+    }
+  } else {
+    const criticalIds = new Set((contract.analysis?.critical_case_ids ?? []).map(String));
+    for (const record of candidate) if (criticalIds.has(String(record.case_id)) && record.outcome !== "pass") criticalFailures.push({ gate: null, case_id: String(record.case_id), configuration_id: record.configuration_id, trial_number: record.trial_number, assertion: null, result: record.outcome, evidence: "Legacy contract 2.0.0 case-level critical failure.", grade: record.assertion_results });
+  }
+  const criticalFailure = criticalFailures.length > 0;
   const total = candidate.length;
   const passRate = total ? counts.pass / total : 0;
   const threshold = Number(contract.analysis?.minimum_pass_rate ?? 1);
@@ -1026,6 +1087,7 @@ function deriveSummary(runRoot, run = readJson(join(runRoot, "run.json")), contr
     pass_rate: passRate,
     threshold,
     critical_failure: criticalFailure,
+    critical_failures: criticalFailures,
     conclusion,
     claim_scope: claimScope,
     limitations,
@@ -1076,6 +1138,7 @@ async function runEvaluation(args) {
   }
   const run = createRun(context, args);
   mkdirSync(context.runRoot, { recursive: true });
+  writeJsonAtomic(join(context.runRoot, "contract.json"), context.contract);
   try {
     const summary = await executeRun(context, run);
     if (!summary) return { run: readJson(join(context.runRoot, "run.json")), summary: null, exitCode: 3 };
@@ -1125,6 +1188,10 @@ function verifyResumeIdentity(root, run) {
   if (!matches(() => runnerIdentity(), run.runner.content_identity)) problems.push("runner identity changed");
   if (!matches(() => packageIdentity(root, packageRoot), run.target.package_content_identity)) problems.push("target identity changed");
   if (!matches(() => suiteIdentity(root, packageRoot), run.suite.suite_content_identity)) problems.push("suite identity changed");
+  if (run.suite.contract_content_identity) {
+    const snapshotPath = join(packageRoot, "evals", "evaluation-contract.json");
+    if (!matches(() => jsonIdentity(readJson(snapshotPath)), run.suite.contract_content_identity)) problems.push("contract identity changed");
+  }
   if (!matches(() => pathIdentity(adapter), run.adapters.host.content_identity)) problems.push("host adapter identity changed");
   if (!matches(() => pathIdentity(graderAdapter), run.adapters.grader.content_identity)) problems.push("grader adapter identity changed");
   for (const configuration of run.comparison.configurations) {
@@ -1150,6 +1217,10 @@ async function resumeEvaluation(args) {
   if (!existsSync(path)) fail(`Run record not found: ${path}`, { code: "missing-run" });
   const run = readJson(path);
   if (!RUN_STATES.has(run.state) || run.state === "complete") fail(`Run state ${run.state} is not resumable`, { code: "invalid-run-state" });
+  if (run.suite.contract_content_identity) {
+    const snapshotPath = join(runRoot, "contract.json");
+    if (!existsSync(snapshotPath) || jsonIdentity(readJson(snapshotPath)) !== run.suite.contract_content_identity) fail("Resume refused: run contract snapshot identity changed", { code: "resume-identity-conflict" });
+  }
   verifyResumeIdentity(root, run);
   run.state = "running";
   run.ended_at = null;
@@ -1174,8 +1245,16 @@ function summarizeCommand(args) {
   const runRoot = resolve(root, args.run);
   const run = readJson(join(runRoot, "run.json"));
   if (run.state === "running") fail("Cannot summarize an incomplete running run", { code: "invalid-run-state" });
-  const packageRoot = resolve(root, run.invocation.package);
-  const contract = readJson(join(packageRoot, "evals", "evaluation-contract.json"));
+  const snapshotPath = join(runRoot, "contract.json");
+  let contract;
+  if (existsSync(snapshotPath)) {
+    contract = readJson(snapshotPath);
+    if (run.suite.contract_content_identity && jsonIdentity(contract) !== run.suite.contract_content_identity) fail("Run contract snapshot identity changed", { code: "summary-identity-conflict" });
+  } else {
+    const packageRoot = resolve(root, run.invocation.package);
+    if (suiteIdentity(root, packageRoot) !== run.suite.suite_content_identity) fail("Legacy run suite identity changed and no contract snapshot is available", { code: "summary-identity-conflict" });
+    contract = readJson(join(packageRoot, "evals", "evaluation-contract.json"));
+  }
   return deriveSummary(runRoot, run, contract);
 }
 

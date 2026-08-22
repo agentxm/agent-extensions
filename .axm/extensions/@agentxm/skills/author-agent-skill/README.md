@@ -37,15 +37,19 @@ axm install @agentxm/packs/agent-engineering
 > supported routing behavior, preserve the motivating cases, validate the
 > package, and record any remaining evidence needed for closure.
 
-## Revision 0.8.0
+## Revision 0.8.1
 
-- Previous version: `0.7.1`
-- Contract delta: evaluation-source validation now uses an explicit trusted
-  validator when supplied, otherwise the bundled evaluator only while AXM
-  reports it enabled
-- Compatibility: the enabled pack default preserves existing behavior; a
-  disabled evaluator is no longer invoked through retained canonical source
-- Risk delta: external validator execution requires an explicit trust and
-  authority binding; no executable is auto-discovered
-- Evaluation source: suite `0.3.0` covers external-validator selection and the
-  disabled-default boundary
+- Previous version: `0.8.0`
+- Contract delta: evaluation contract `3.0.0` binds all four critical gates to
+  exact assertions and records immutable runner and adapter evidence
+- Compatibility and cohort: runtime authoring behavior is unchanged; suite
+  `0.3.1` requires evaluator `0.2.0` or an equivalent v3-capable runner
+- Risk delta: install, self-certification, package-boundary, and validator
+  selection gates can no longer remain declared without executable mappings
+- Migration: update the pack to `0.10.1` before collecting new regression runs
+- Rollback: restore skill `0.8.0`, suite `0.3.0`, and contract `2.0.0` together
+- Evidence: workspace validator acceptance and deterministic evaluator
+  conformance; no release-tier behavioral run or independent approval is claimed
+- Bound identities: package
+  `sha256:2bcf5479fc6bfc12ed100d31899be434daf722e36a9a042e79bb538a741abccf`
+  and suite `sha256:2d902d8f5ba7c0a17aa575ddc97472459260ea7b4ae634de45f6874cd396838d`
