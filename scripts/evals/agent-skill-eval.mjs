@@ -29,6 +29,7 @@ const CONTRACT_KEYS = [
   "freshness",
 ];
 const ALLOWED_EVAL_ENTRIES = new Set([
+  "cases.md",
   "evaluation-contract.json",
   "evals.json",
   "files",
@@ -139,7 +140,10 @@ function validateSuite(packageRoot, findings) {
   const manifestPath = join(packageRoot, "skill.json");
   const evalRoot = join(packageRoot, "evals");
   const suitePath = join(evalRoot, "evals.json");
-  if (!existsSync(suitePath)) return;
+  if (!existsSync(suitePath)) {
+    findings.push(`${packageRoot}: workspace-authored Agent Skill is missing evals/evals.json`);
+    return;
+  }
 
   for (const entry of readdirSync(evalRoot, { withFileTypes: true })) {
     if (!ALLOWED_EVAL_ENTRIES.has(entry.name)) {
@@ -237,11 +241,17 @@ function validateSuite(packageRoot, findings) {
 }
 
 function findSkillPackages(root) {
-  const skillsRoot = join(root, ".axm", "extensions", "@agentxm", "skills");
-  if (!existsSync(skillsRoot)) return [];
-  return readdirSync(skillsRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && existsSync(join(skillsRoot, entry.name, "skill.json")))
-    .map((entry) => join(skillsRoot, entry.name));
+  const settingsPath = join(root, ".axm", "settings.json");
+  if (!existsSync(settingsPath)) return [];
+  const settings = readJson(settingsPath);
+  return Object.values(settings.skills ?? {})
+    .map((value) => typeof value === "object" && value !== null ? value.source : value)
+    .filter((source) => typeof source === "string" && source.startsWith("workspace:"))
+    .map((source) => source.match(/^workspace:(@[^/]+)\/skills\/([^@]+)$/))
+    .filter(Boolean)
+    .map((match) => join(root, ".axm", "extensions", match[1], "skills", match[2]))
+    .filter((path) => existsSync(join(path, "skill.json")))
+    .sort();
 }
 
 function validateRepository(root) {
@@ -274,11 +284,20 @@ function catalogForCase(root, packageRoot, item) {
   const targetManifest = readJson(join(packageRoot, "skill.json"));
   const names = new Set([targetManifest.name, ...(item.catalog_neighbors ?? [])]);
   names.delete("clarify-or-abstain");
-  const skillsRoot = join(root, ".axm", "extensions", "@agentxm", "skills");
+  const ownersRoot = join(root, ".axm", "extensions");
+  const owners = [
+    targetManifest.owner,
+    "@agentxm",
+    ...readdirSync(ownersRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name),
+  ];
   const catalog = [];
   for (const name of names) {
-    const skillPath = join(skillsRoot, name, "src", "SKILL.md");
-    if (!existsSync(skillPath)) continue;
+    const skillPath = [...new Set(owners)]
+      .map((owner) => join(ownersRoot, owner, "skills", name, "src", "SKILL.md"))
+      .find((path) => existsSync(path));
+    if (!skillPath) continue;
     catalog.push({ name, description: parseFrontmatterDescription(skillPath) });
   }
   return catalog;
@@ -490,7 +509,7 @@ async function runEvaluation(args) {
         EVAL_PACKAGE_ROOT: packageRoot,
         EVAL_MODEL: args.model,
         EVAL_TIMEOUT_MS: String(run.budgets.timeout_ms),
-        EVAL_SUPPORT_PATHS: args.supportPath.join(":"),
+        EVAL_SUPPORT_PATHS_JSON: JSON.stringify(args.supportPath),
         EVAL_SANDBOX_MODE: args.sandboxMode,
       };
       const trialProcess = await runProcess(adapter, ["trial", requestPath, trialRoot], env, run.budgets.timeout_ms);

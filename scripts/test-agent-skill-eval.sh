@@ -23,7 +23,7 @@ printf '%s\n' \
   'if (mode === "trial") {' \
   '  const response = request.stage === "routing"' \
   '    ? { selected: request.catalog.some((item) => item.name === "axm") ? ["axm", request.target.name] : request.target.name, reason: "synthetic runner test", side_effects: [] }' \
-  '    : { final_response: "Synthetic execution response for runner mechanics.", side_effects: [] };' \
+  '    : { final_response: "Synthetic execution response for runner mechanics.", side_effects: [], support_paths: JSON.parse(process.env.EVAL_SUPPORT_PATHS_JSON ?? "[]") };' \
   '  writeFileSync(join(trialRoot, "response.json"), `${JSON.stringify(response, null, 2)}\n`);' \
   '} else {' \
   '  const grade = {' \
@@ -55,6 +55,7 @@ run_suite() {
     --reviewer-id same-agent-test \
     --grader-id synthetic-grader-1 \
     --evidence-class authoring-smoke \
+    --support-path .axm/extensions/@agentxm/knowledge/agent-engineering/src/index.md \
     --case "$cases" \
     --run-id "$run_id" \
     --output-root "$test_root/output" \
@@ -86,5 +87,9 @@ for run_record in \
     (.raw_evidence | length > 0)
   ' "$run_record" >/dev/null
 done
+
+jq -e '
+  .support_paths == [".axm/extensions/@agentxm/knowledge/agent-engineering/src/index.md"]
+' "$test_root/output/@agentxm/skills/author-agent-skill/author-agent-skill-runner-test/trials/1/1/response.json" >/dev/null
 
 echo "Agent Skill evaluation runner tests passed."

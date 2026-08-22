@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { spawn, spawnSync } from "node:child_process";
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync, cpSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { mkdtempSync, mkdirSync, readFileSync, realpathSync, rmSync, writeFileSync, cpSync } from "node:fs";
+import { dirname, join, relative, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
 function writeJson(path, value) {
@@ -100,6 +100,16 @@ try {
     const knowledgeTarget = join(workspace, ".axm", "extensions", "@agentxm", "knowledge", "agent-engineering", "src");
     mkdirSync(dirname(knowledgeTarget), { recursive: true });
     cpSync(knowledgeSource, knowledgeTarget, { recursive: true });
+    const supportPaths = JSON.parse(process.env.EVAL_SUPPORT_PATHS_JSON ?? "[]");
+    for (const supportPath of supportPaths) {
+      const source = resolve(repoRoot, supportPath);
+      if (!source.startsWith(`${resolve(repoRoot)}/`)) throw new Error(`Support path escapes repository: ${supportPath}`);
+      const realSource = realpathSync(source);
+      if (!realSource.startsWith(`${realpathSync(repoRoot)}/`)) throw new Error(`Support path resolves outside repository: ${supportPath}`);
+      const target = join(workspace, relative(resolve(repoRoot), source));
+      mkdirSync(dirname(target), { recursive: true });
+      cpSync(realSource, target, { recursive: true });
+    }
     const inputRoot = join(workspace, "inputs");
     mkdirSync(inputRoot, { recursive: true });
     for (const fixture of request.fixtures) writeFileSync(join(inputRoot, fixture.name), fixture.content);

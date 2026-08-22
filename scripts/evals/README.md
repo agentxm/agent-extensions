@@ -31,6 +31,10 @@ node scripts/evals/agent-skill-eval.mjs run \
   --case 1,6
 ```
 
+Pass repeatable `--support-path` values for additional declared public inputs
+needed by execution cases. Each path is copied from the repository into the
+same location in the disposable workspace.
+
 Use `--case` more than once or pass comma-separated case IDs. Other options
 include `--trials`, `--run-id`, `--output-root`, `--baseline`, `--timeout-ms`,
 `--token-budget`, `--cost-budget-usd`, and `--independence`.
