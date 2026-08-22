@@ -32,6 +32,7 @@
     "started_at": { "type": "string" },
     "ended_at": { "type": ["string", "null"] },
     "outcomes": { "type": ["object", "null"] },
-    "raw_evidence": { "type": "array" }
+    "raw_evidence": { "type": "array" },
+    "evidence_redaction": { "type": "object" }
   }
 }

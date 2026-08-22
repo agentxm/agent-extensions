@@ -46,6 +46,33 @@ axm install @agentxm/packs/agent-engineering
 > remediate supported findings, and verify the resulting revision. Do not
 > publish or claim independent approval.
 
+## Revision 0.7.3
+
+- Previous version: `0.7.2`
+- Contract delta: the static non-execution boundary is now an early invariant
+  with explicit read-only data tools, forbidden direct and nested launch forms,
+  failed/no-op attempts, and handoff-as-recommendation semantics
+- Compatibility and cohort: ordinary audit inputs and report fields are
+  unchanged; case 1 now supplies a present inert installer and requires an
+  evaluator that supports structured `forbid-target-execution` assertions
+- Risk delta: prevents an audit from satisfying a caller's execution request by
+  launching target code as a supposedly separate observation, including a
+  missing or inert installer
+- Migration: update the `agent-engineering` pack to `0.10.3` and evaluator to
+  `0.2.2`; keep target-behavior execution in a separately authorized evaluation
+  workflow
+- Rollback: restore skill and suite `0.7.2` together, accepting that attempted
+  target execution may escape assertion-level detection
+- Evidence: the first current-catalog regression correctly rejected an earlier
+  candidate after structured evidence found forbidden launches. The revised
+  package then passed case 1 three times in same-agent `gpt-5.4` regression run
+  `2026-08-22-remediation-0.7.3-case1-regression-r4`; all three deterministic
+  command assertions passed. This is selected-case, no-baseline,
+  network-unobserved evidence, not release evidence or independent approval
+- Bound identities: package
+  `sha256:9feffb2b51ab848aa835d0acf2ab043fd38b1cd1d42999f35f43c172b8b12aa2`
+  and suite `sha256:1846a27a2d2db79747bf34d4dd12269274e57bf2679cd3436f22404bdfb742d6`
+
 ## Revision 0.7.2
 
 - Previous version: `0.7.1`

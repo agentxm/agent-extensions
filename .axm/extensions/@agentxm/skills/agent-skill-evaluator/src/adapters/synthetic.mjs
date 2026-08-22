@@ -25,7 +25,7 @@ if (operation === "capabilities") {
     sandbox_modes: ["read-only", "workspace-write"],
     sandbox_status: "enforced",
     enforced_budgets: ["wall-clock", "output-bytes", "invocations", "tokens", "cost"],
-    evidence: ["response", "artifacts", "filesystem", "usage"],
+    evidence: ["response", "artifacts", "filesystem", "usage", "tool-calls"],
     network: { mode: "denied", status: "enforced" },
     credential_isolation: "verified",
     lifecycle: { cancellation: "process-tree-signal", retry: "runner-reinvocation", resume: "stateless" }
@@ -53,6 +53,9 @@ if (operation === "capabilities") {
       routing_mode: request.stage === "routing" ? "catalog-classification-proxy" : null,
       filesystem: [],
       subprocesses: [],
+      tool_calls: request.prompt.includes("SYNTHETIC_FORBIDDEN_COMMAND")
+        ? [{ type: "command_execution", command: "/bin/zsh -lc 'sh scripts/install.sh demo'", status: "failed", exit_code: 127 }]
+        : [],
       network: "denied",
       environment_probe: process.env.SYNTHETIC_SECRET === undefined ? "absent" : "present"
     },
@@ -60,7 +63,7 @@ if (operation === "capabilities") {
   };
   write("response.json", request.stage === "routing"
     ? { ...common, selected, reason: "Synthetic deterministic routing for runner conformance only." }
-    : { ...common, final_response: request.prompt.includes("SYNTHETIC_OVERSIZED") ? "x".repeat(16384) : request.prompt.includes("SYNTHETIC_MALFORMED_GRADE") ? "SYNTHETIC_MALFORMED_GRADE" : request.prompt.includes("SYNTHETIC_CONTRADICTORY_GRADE") ? "SYNTHETIC_CONTRADICTORY_GRADE" : request.prompt.includes("SYNTHETIC_FAIL") ? "SYNTHETIC_FAIL" : "Synthetic execution response for runner conformance only." });
+    : { ...common, final_response: request.prompt.includes("SYNTHETIC_OVERSIZED") ? "x".repeat(16384) : request.prompt.includes("SYNTHETIC_MALFORMED_GRADE") ? "SYNTHETIC_MALFORMED_GRADE" : request.prompt.includes("SYNTHETIC_CONTRADICTORY_GRADE") ? "SYNTHETIC_CONTRADICTORY_GRADE" : request.prompt.includes("SYNTHETIC_FAIL") ? "SYNTHETIC_FAIL" : request.prompt.includes("SYNTHETIC_PRIVATE_PATH") ? `${process.env.HOME}/private/repo\nC:\\Users\\synthetic\\private` : "Synthetic execution response for runner conformance only." });
 } else {
   if (request.response?.final_response === "SYNTHETIC_MALFORMED_GRADE") {
     write("grade.json", { schema_version: "1.0.0", outcome: "not-an-outcome", failure_class: null, assertions: [], detail: "Malformed synthetic grade.", suite_findings: [], usage: { tokens: 5, cost_usd: 0.0005 } });

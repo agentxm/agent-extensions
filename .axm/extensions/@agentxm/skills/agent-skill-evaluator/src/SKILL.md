@@ -20,8 +20,9 @@ explicit external runner instead.
 
 This skill owns deterministic runner mechanics: schema and suite validation,
 preflight, isolated attempts, adapter invocation, budget enforcement, evidence
-records, recovery, and mechanically derived summaries. It may write routine
-evidence only to the declared ignored or external run workspace.
+records, private-path redaction, recovery, deterministic policy assertions, and
+mechanically derived summaries. It may write routine evidence only to the
+declared ignored or external run workspace.
 
 It does not create or repair cases, fixtures, graders, targets, or expected
 results during a run. It does not decide an evaluation strategy, independently
@@ -55,6 +56,8 @@ trust.
    this active default.
 5. For a started run, preserve its exact path and lifecycle state. Use `resume`
    only when the runner verifies that every material identity still matches.
+   Generated text evidence is retained only after private repository, home, and
+   common user-path forms are replaced with public-safe placeholders.
 6. Use `summarize` to re-derive analysis from immutable trial evidence and
    `inspect` to report status, coverage, identities, and limitations.
 7. Close with the run state, conclusion scope, counts, generated path, enforced
@@ -63,8 +66,10 @@ trust.
 
 Use the included `adapters/codex.mjs` only for Codex CLI trials. Its routing
 mode is a catalog-classification proxy, not observation of native host skill
-activation. Use `adapters/synthetic.mjs` only for runner conformance tests; its
-results are never behavioral evidence about a target.
+activation. It exposes normalized command observations for deterministic
+`forbid-target-execution` assertions. Use `adapters/synthetic.mjs` only for
+runner conformance tests; its results are never behavioral evidence about a
+target.
 
 ## Integrate or extend
 

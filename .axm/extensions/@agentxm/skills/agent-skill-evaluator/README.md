@@ -56,6 +56,35 @@ are not permission for another skill to invoke the disabled evaluator. With no
 explicit replacement, evaluation preflight is reserved and the higher-level
 workflow reports `Inconclusive` without creating run evidence.
 
+## Revision 0.2.2
+
+- Previous version: `0.2.1`
+- Contract delta: generated text evidence is redacted before retention, Codex
+  adapter command events are normalized as structured observations, and suites
+  may bind an exact assertion to deterministic `forbid-target-execution`
+  semantics
+- Compatibility and cohort: protocol `1.0.0` and existing cases remain
+  readable; only cases using deterministic command assertions require an
+  adapter that declares `tool-calls` evidence
+- Risk delta: prevents private user paths from entering retained routine
+  evidence and prevents a model grader from passing a recorded forbidden target
+  launch
+- Migration: update the `agent-engineering` pack to `0.10.3`; adapters used for
+  deterministic command cases must return normalized command observations
+- Rollback: restore `0.2.1`, remove deterministic command assertions from active
+  suites, and accept the earlier path-retention and grader-evidence risks
+- Evidence: the full deterministic runner conformance suite passes private-path
+  redaction, structured Codex command normalization, capability preflight, and
+  model-pass override checks; audit skill regression
+  `2026-08-22-remediation-0.7.3-case1-regression-r4` passed its deterministic
+  command gate in three of three trials
+- Bound identities: package
+  `sha256:40bc4d8c164f28825e573268598e25d3f25c324793fbb02cc351537e1d43d33e`,
+  suite `sha256:02ca982fb920a76c51caacd4652e52c6bb7859cda739c84b75f818b266a17303`,
+  and runner `sha256:9d9e7b6366ec952f9499c32a639282dbbc3e41365693562a07496a160dd73c11`
+- Release status: deterministic conformance and bounded selected-case regression
+  evidence only; no release-tier evidence or independent approval is claimed
+
 ## Revision 0.2.1
 
 - Previous version: `0.2.0`

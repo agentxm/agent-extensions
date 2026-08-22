@@ -57,6 +57,8 @@ node "$evaluator/scripts/agent-skill-eval.mjs" run \
 The runner preflights the suite, adapter protocol, routing mode, sandbox,
 budgets, baseline, and planned invocation count before creating a run
 directory. A failed preflight returns `reserved` and creates no run evidence.
+Cases with `forbid-target-execution` deterministic assertions additionally
+require structured `tool-calls` evidence from the host adapter.
 
 Useful options:
 
@@ -134,7 +136,10 @@ support.
 Each stochastic repetition is a trial. Each infrastructure retry is a distinct
 attempt. Run records bind content identities for the target, suite, runner, and
 adapters plus the runner selection source; declared, observed, verified, and
-enforced statuses remain distinct.
+enforced statuses remain distinct. Generated text is redacted before retention:
+private repository and home roots and common user-path forms become public-safe
+placeholders, with enforcement and the changed-file count recorded in
+`run.json`.
 
 Summaries count candidate outcomes separately from baselines. For contract v3,
 they derive critical failures from the exact mapped assertion results and retain
@@ -174,6 +179,10 @@ Synthetic results are never behavioral evidence about a target.
   `--allow-env`; the full parent environment is not inherited.
 - Targets and fixtures are copied as data. The runner does not execute code
   bundled in a target skill.
+- Deterministic `forbid-target-execution` assertions inspect normalized command
+  observations and override a contradictory model pass.
+- Private user and repository paths are replaced before generated text evidence
+  is read or retained.
 - Fixture, dependency, and artifact paths cannot escape through traversal or
   symlinks.
 - Timeouts and cancellation terminate adapter process groups.

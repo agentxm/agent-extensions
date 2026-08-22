@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { chmodSync, cpSync, existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { chmodSync, cpSync, existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { spawn, spawnSync } from "node:child_process";
@@ -241,6 +241,30 @@ try {
   check(smoke.run.environment.routing_mode.value === "catalog-classification-proxy", "Routing mode was not preserved");
   check(smoke.run.environment.routing_catalogs["2"].status === "verified" && smoke.run.environment.routing_catalogs["2"].entries[0].name === "fixture-skill", "Resolved routing catalog identity was not preserved");
 
+  const forbiddenCommandSuite = structuredClone(suite);
+  forbiddenCommandSuite.evals[0].prompt = "SYNTHETIC_FORBIDDEN_COMMAND";
+  forbiddenCommandSuite.evals[0].deterministic_assertions = [{
+    assertion: "The synthetic execution passes.",
+    kind: "forbid-target-execution",
+    targets: ["scripts/install.sh"],
+    launchers: ["sh", "bash", "zsh"],
+  }];
+  writePackage(contract(), forbiddenCommandSuite);
+  const forbiddenCommand = invoke(baseRun("forbidden-command", ["--case", "1"]), { expected: 1 });
+  const forbiddenGrade = JSON.parse(readFileSync(join(runPath("forbidden-command"), "trials", "1", "candidate", "1", "attempts", "1", "grade.json"), "utf8"));
+  check(forbiddenCommand.summary.critical_failure === true && forbiddenGrade.failure_class === "deterministic-policy-violation" && forbiddenGrade.assertions[0].result === "fail", "Structured forbidden target execution did not override the model grade");
+
+  const privatePathSuite = structuredClone(suite);
+  privatePathSuite.evals[0].prompt = "SYNTHETIC_PRIVATE_PATH";
+  writePackage(contract(), privatePathSuite);
+  const privatePath = invoke(baseRun("private-path", ["--case", "1", "--allow-env", "HOME"]));
+  const privateEvidence = readdirSync(runPath("private-path"), { recursive: true }).map((entry) => {
+    const path = join(runPath("private-path"), entry);
+    return existsSync(path) && !statSync(path).isDirectory() ? readFileSync(path, "utf8") : "";
+  }).join("\n");
+  check(privatePath.run.evidence_redaction.private_paths.files_redacted > 0 && !privateEvidence.includes(process.env.HOME) && !privateEvidence.includes("C:\\\\Users\\\\synthetic") && privateEvidence.includes("<private-root>") && privateEvidence.includes("C:\\\\Users\\\\<redacted>"), "Generated evidence did not redact private POSIX and Windows paths before retention");
+  writePackage();
+
   const direct = invoke(removeOption(baseRun("direct", ["--case", "1"]), "--selection-source"));
   check(direct.run.runner.selection_source === "explicit", "Direct runner invocation did not default selection source to explicit");
 
@@ -261,7 +285,7 @@ else {
   output = { outcome: "pass", failure_class: null, assertions: payload.assertions.map((assertion) => ({ assertion, result: "pass", evidence: "Stubbed grader evidence." })), detail: "Stubbed grader response.", suite_findings: [] };
 }
 writeFileSync(valueAfter("--output-last-message"), JSON.stringify(output));
-process.stdout.write('{"event":"stub-complete"}\\n');
+process.stdout.write('{"type":"item.completed","item":{"id":"stub-command","type":"command_execution","command":"sed -n 1,10p scripts/install.sh","status":"completed","exit_code":0}}\\n');
 `);
   chmodSync(stubCodex, 0o755);
   let codexArgs = baseRun("codex-adapter", ["--case", "1,2"]);
@@ -270,6 +294,8 @@ process.stdout.write('{"event":"stub-complete"}\\n');
   codexArgs = replaceOption(codexArgs, "--network-mode", "unobserved");
   const codexRun = invoke(codexArgs, { env: { ...process.env, PATH: `${stubBin}:${process.env.PATH}` } });
   check(codexRun.summary.conclusion === "Supported" && codexRun.run.adapters.host.declared_identity === "codex-cli@1.0.0" && codexRun.run.authority.network.value === "unobserved", "Codex adapter did not satisfy the shared protocol through a provider-free host stub");
+  const codexResponse = JSON.parse(readFileSync(join(runPath("codex-adapter"), "trials", "1", "candidate", "1", "attempts", "1", "response.json"), "utf8"));
+  check(codexResponse.observations.tool_calls[0]?.command.startsWith("sed "), "Codex adapter did not normalize structured command observations");
 
   const summaryBefore = readFileSync(join(runPath("smoke"), "summary.json"), "utf8");
   const changedContractAfterRun = contract();

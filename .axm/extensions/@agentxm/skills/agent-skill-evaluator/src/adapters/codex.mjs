@@ -145,6 +145,24 @@ function codexVersion() {
   return result.status === 0 ? result.stdout.trim() : null;
 }
 
+function observedToolCalls(transcriptPath) {
+  const calls = new Map();
+  for (const line of readFileSync(transcriptPath, "utf8").split("\n").filter(Boolean)) {
+    let event;
+    try { event = JSON.parse(line); } catch { continue; }
+    const item = event?.item;
+    if (item?.type !== "command_execution" || typeof item.command !== "string") continue;
+    const key = item.id ?? `${item.command}:${calls.size}`;
+    calls.set(key, {
+      type: "command_execution",
+      command: item.command,
+      status: item.status ?? null,
+      exit_code: Number.isInteger(item.exit_code) ? item.exit_code : null,
+    });
+  }
+  return [...calls.values()];
+}
+
 const [mode, requestArg, outputArg] = process.argv.slice(2);
 if (!new Set(["capabilities", "trial", "grade"]).has(mode) || !requestArg || !outputArg) {
   process.stderr.write("Usage: codex.mjs <capabilities|trial|grade> REQUEST_JSON OUTPUT_DIR\n");
@@ -166,7 +184,7 @@ if (mode === "capabilities") {
     sandbox_modes: ["read-only", "workspace-write"],
     sandbox_status: "enforced",
     enforced_budgets: ["wall-clock", "output-bytes", "invocations"],
-    evidence: ["response", "transcript", "artifacts", "filesystem", "subprocess"],
+    evidence: ["response", "transcript", "artifacts", "filesystem", "subprocess", "tool-calls"],
     network: { mode: "unobserved", status: "observed" },
     credential_isolation: "not-verified",
     lifecycle: { cancellation: "process-tree-signal", retry: "runner-reinvocation", resume: "stateless" },
@@ -264,6 +282,7 @@ try {
   }
 
   writeJsonAtomic(schemaPath, schema);
+  const transcriptPath = join(outputRoot, `${mode}-transcript.jsonl`);
   const result = await run("codex", [
     "exec", "--ignore-user-config", "--ignore-rules", "--ephemeral", "--skip-git-repo-check",
     "--sandbox", mode === "trial" ? sandboxMode : "read-only",
@@ -273,7 +292,7 @@ try {
     "--output-schema", schemaPath,
     "--output-last-message", finalPath,
     prompt,
-  ], workspace, timeoutMs, join(outputRoot, `${mode}-transcript.jsonl`), join(outputRoot, `${mode}-codex.stderr.log`));
+  ], workspace, timeoutMs, transcriptPath, join(outputRoot, `${mode}-codex.stderr.log`));
   if (result.code !== 0) {
     process.stderr.write(`codex exited ${result.code}; signal=${result.signal ?? "none"}; output_exceeded=${result.exceeded}\n`);
     process.exitCode = result.code;
@@ -290,7 +309,7 @@ try {
           filesystem: artifacts.map((item) => ({ path: item.path, change: item.change })),
           subprocesses: ["codex"],
           network: "unobserved",
-          tool_calls: "retained-in-transcript",
+          tool_calls: observedToolCalls(transcriptPath),
         },
         usage: { tokens: null, cost_usd: null },
       });

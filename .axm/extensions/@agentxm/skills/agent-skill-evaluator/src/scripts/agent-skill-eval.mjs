@@ -135,6 +135,44 @@ function writeTextAtomic(path, value) {
   renameSync(temporary, path);
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+const macosUsersRoot = `/${"Users"}/`;
+const privatePathSegmentPattern = String.raw`[^/\\\s"'\x60]+`;
+
+function redactPrivatePaths(value, privateRoots = []) {
+  let redacted = value;
+  for (const root of [...new Set(privateRoots.filter(Boolean).map((entry) => resolve(entry)))].sort((left, right) => right.length - left.length)) {
+    redacted = redacted.replace(new RegExp(escapeRegExp(root), "g"), "<private-root>");
+  }
+  redacted = redacted.replace(new RegExp(`${escapeRegExp(macosUsersRoot)}(?!<redacted>)${privatePathSegmentPattern}`, "g"), `${macosUsersRoot}<redacted>`);
+  redacted = redacted.replace(/\/home\/(?!<redacted>)[^/\\\s"'`]+/g, "/home/<redacted>");
+  redacted = redacted.replace(/[A-Za-z]:\\\\Users\\\\(?!<redacted>)[^\\\s"'`]+/g, "C:\\\\Users\\\\<redacted>");
+  redacted = redacted.replace(/[A-Za-z]:\\Users\\(?!<redacted>)[^\\\s"'`]+/g, "C:\\Users\\<redacted>");
+  return redacted;
+}
+
+function sanitizeEvidenceTree(root, privateRoots = []) {
+  let filesRedacted = 0;
+  for (const path of walkFiles(root)) {
+    const bytes = readFileSync(path);
+    if (bytes.includes(0)) continue;
+    const source = bytes.toString("utf8");
+    const sanitized = redactPrivatePaths(source, privateRoots);
+    if (sanitized !== source) {
+      writeTextAtomic(path, sanitized);
+      filesRedacted += 1;
+    }
+    const unsafePosixUserPath = new RegExp(`(?:${escapeRegExp(macosUsersRoot)}|/home/)(?!<redacted>)${privatePathSegmentPattern}`);
+    if (unsafePosixUserPath.test(sanitized) || /[A-Za-z]:\\\\Users\\\\(?!<redacted>)[^\\\s"'`]+/.test(sanitized) || /[A-Za-z]:\\Users\\(?!<redacted>)[^\\\s"'`]+/.test(sanitized)) {
+      fail(`Generated evidence retained a private user path in ${path}`, { code: "unsafe-generated-evidence" });
+    }
+  }
+  return filesRedacted;
+}
+
 function walkFiles(root, current = root) {
   if (!existsSync(current)) return [];
   const files = [];
@@ -289,6 +327,13 @@ function validateSuite(packageRoot, findings) {
     else stages.add(item.stage);
     if (typeof item.prompt !== "string" || item.prompt.length === 0) findings.push(`${suitePath} case ${id}: prompt is required`);
     if (!Array.isArray(item.assertions) || item.assertions.length === 0 || item.assertions.some((value) => typeof value !== "string" || !value)) findings.push(`${suitePath} case ${id}: assertions are required`);
+    if (item.deterministic_assertions !== undefined && !Array.isArray(item.deterministic_assertions)) findings.push(`${suitePath} case ${id}: deterministic_assertions must be an array`);
+    for (const assertion of item.deterministic_assertions ?? []) {
+      if (assertion?.kind !== "forbid-target-execution") findings.push(`${suitePath} case ${id}: unsupported deterministic assertion kind ${assertion?.kind}`);
+      if (typeof assertion?.assertion !== "string" || !item.assertions?.includes(assertion.assertion)) findings.push(`${suitePath} case ${id}: deterministic assertion must name an exact case assertion`);
+      if (!Array.isArray(assertion?.targets) || assertion.targets.length === 0 || assertion.targets.some((target) => !isSafeWorkspacePath(target))) findings.push(`${suitePath} case ${id}: deterministic assertion targets must be safe workspace paths`);
+      if (!Array.isArray(assertion?.launchers) || assertion.launchers.length === 0 || assertion.launchers.some((launcher) => typeof launcher !== "string" || !/^[A-Za-z0-9._+-]+$/.test(launcher))) findings.push(`${suitePath} case ${id}: deterministic assertion launchers must be safe command names`);
+    }
     if (item.stage === "routing") {
       if (item.files?.length) findings.push(`${suitePath} case ${id}: routing cases cannot expose fixtures`);
       const expected = item.expected_selection;
@@ -552,14 +597,58 @@ function validateGradeResponse(grade) {
   if (!((tokens === null) || (Number.isInteger(tokens) && tokens >= 0)) || !((cost === null) || (Number.isFinite(cost) && cost >= 0))) fail("grade usage must contain non-negative tokens and cost_usd or null", { code: "invalid-grader-response" });
 }
 
-function normalizeGrade(item, grade) {
+function shellPayload(command) {
+  let payload = String(command ?? "").trim();
+  for (let depth = 0; depth < 3; depth += 1) {
+    const match = payload.match(/^\s*(?:\S*\/)?(?:sh|bash|zsh)\s+-(?:c|lc|cl)\s+(['"])([\s\S]*)\1\s*$/);
+    if (!match) break;
+    payload = match[2];
+  }
+  return payload;
+}
+
+function commandExecutesTarget(command, assertion) {
+  for (const segment of shellPayload(command).split(/&&|\|\||[;|]/)) {
+    const tokens = segment.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g)?.map((token) => token.replace(/^["']+|["',;]+$/g, "")) ?? [];
+    for (const target of assertion.targets) {
+      const targetIndex = tokens.findIndex((token) => token === target || token.endsWith(`/${target}`));
+      if (targetIndex < 0) continue;
+      const commandName = basename(tokens[0] ?? "");
+      if (targetIndex === 0 || new Set([".", "source"]).has(commandName)) return true;
+      if (tokens.slice(0, targetIndex).some((token) => assertion.launchers.includes(basename(token)))) return true;
+    }
+  }
+  return false;
+}
+
+function deterministicGrades(item, response) {
+  const results = new Map();
+  for (const assertion of item.deterministic_assertions ?? []) {
+    const toolCalls = response?.observations?.tool_calls;
+    if (!Array.isArray(toolCalls)) {
+      results.set(assertion.assertion, { assertion: assertion.assertion, result: "unknown", evidence: "Structured tool-call evidence was unavailable." });
+      continue;
+    }
+    const attempted = toolCalls.filter((entry) => entry?.type === "command_execution" && commandExecutesTarget(entry.command, assertion));
+    results.set(assertion.assertion, {
+      assertion: assertion.assertion,
+      result: attempted.length ? "fail" : "pass",
+      evidence: attempted.length ? `Structured tool-call evidence recorded ${attempted.length} forbidden target execution attempt(s).` : `Structured tool-call evidence recorded no forbidden target execution across ${toolCalls.length} command observation(s).`,
+    });
+  }
+  return results;
+}
+
+function normalizeGrade(item, grade, response) {
   validateGradeResponse(grade);
   if (grade?.outcome === "harness-error") return {
     ...grade,
     assertions: item.assertions.map((assertion) => ({ assertion, result: "unknown", evidence: grade.detail })),
   };
   const reported = Array.isArray(grade?.assertions) ? grade.assertions : [];
+  const deterministic = deterministicGrades(item, response);
   const assertions = item.assertions.map((assertion) => {
+    if (deterministic.has(assertion)) return deterministic.get(assertion);
     const matches = reported.filter((entry) => entry?.assertion === assertion);
     if (matches.length !== 1 || !new Set(["pass", "fail", "unknown"]).has(matches[0]?.result)) return { assertion, result: "unknown", evidence: matches.length === 0 ? "Grader omitted this required assertion" : "Grader returned duplicate or invalid results for this required assertion" };
     return matches[0];
@@ -574,6 +663,7 @@ function normalizeGrade(item, grade) {
     detail: typeof grade?.detail === "string" ? grade.detail : "",
     suite_findings: Array.isArray(grade?.suite_findings) ? grade.suite_findings : [],
   };
+  if ([...deterministic.values()].some((entry) => entry.result === "fail")) normalized.failure_class = "deterministic-policy-violation";
   if (grade?.outcome !== outcome) normalized.grader_reported_outcome = grade?.outcome ?? null;
   return normalized;
 }
@@ -704,6 +794,7 @@ async function preflightRun(args) {
   const capabilities = await queryCapabilities(adapter, args, root);
   const graderCapabilities = graderAdapter === adapter ? capabilities : await queryCapabilities(graderAdapter, args, root);
   if (!graderCapabilities.operations.includes("grade") && cases.some((item) => item.stage === "execution")) fail("Grader adapter does not support grade", { code: "missing-capability" });
+  if (cases.some((item) => item.deterministic_assertions?.length) && !capabilities.evidence.includes("tool-calls")) fail("Deterministic command assertions require structured tool-call evidence", { code: "missing-capability" });
   for (const stage of new Set(cases.map((item) => item.stage))) if (!capabilities.stages.includes(stage)) fail(`Adapter does not support ${stage} trials`, { code: "missing-capability" });
   if (!capabilities.sandbox_modes.includes(args.sandboxMode)) fail(`Adapter does not support sandbox ${args.sandboxMode}`, { code: "missing-capability" });
   if (capabilities.network.mode !== args.networkMode) fail(`Requested network mode ${args.networkMode} is unavailable; adapter provides ${capabilities.network.mode}`, { code: "missing-capability" });
@@ -800,6 +891,7 @@ function createRun(context, args) {
     ended_at: null,
     outcomes: null,
     raw_evidence: [],
+    evidence_redaction: { private_paths: { status: "enforced", files_redacted: 0, placeholders: ["<private-root>", `${macosUsersRoot}<redacted>`, "/home/<redacted>", "C:\\Users\\<redacted>"] } },
   };
   const missing = requiredRunFields(contract).filter((field) => !hasPath(run, field));
   if (missing.length) fail(`Run record does not satisfy required result fields: ${missing.join(", ")}`, { code: "unsatisfied-result-contract" });
@@ -820,6 +912,7 @@ async function invokeAdapter({ adapter, operation, request, outputRoot, env, run
   const result = await runProcess(invocation.command, invocation.args, env, run.budgets.timeout_ms.value, maximumOutputBytes);
   writeTextAtomic(join(outputRoot, `${operation}-adapter.stdout.log`), result.stdout);
   writeTextAtomic(join(outputRoot, `${operation}-adapter.stderr.log`), result.stderr);
+  run.evidence_redaction.private_paths.files_redacted += sanitizeEvidenceTree(outputRoot, [env.EVAL_REPO_ROOT, process.env.HOME]);
   if (result.code !== 0 || result.timedOut || result.exceeded) return { ok: false, detail: `adapter exit=${result.code} signal=${result.signal ?? "none"} timeout=${result.timedOut} output_exceeded=${result.exceeded}` };
   const outputName = operation === "trial" ? "response.json" : "grade.json";
   const outputPath = join(outputRoot, outputName);
@@ -926,7 +1019,7 @@ async function executeRun(context, run) {
                 else {
                   validateGradeResponse(graderResult.value);
                   const graderBudgetFailure = enforceUsage(run, graderResult.value);
-                  grade = graderBudgetFailure ? harnessGrade(item, graderBudgetFailure, "budget") : normalizeGrade(item, graderResult.value);
+                  grade = graderBudgetFailure ? harnessGrade(item, graderBudgetFailure, "budget") : normalizeGrade(item, graderResult.value, response);
                 }
               }
             } catch (error) { grade = harnessGrade(item, error.message); }
@@ -980,9 +1073,12 @@ async function executeRun(context, run) {
   if (cancellationRequested) {
     run.state = "canceled";
     run.ended_at = new Date().toISOString();
+    run.evidence_redaction.private_paths.files_redacted += sanitizeEvidenceTree(context.runRoot, [context.root, process.env.HOME]);
     writeJsonAtomic(join(context.runRoot, "run.json"), run);
     return null;
   }
+  run.evidence_redaction.private_paths.files_redacted += sanitizeEvidenceTree(context.runRoot, [context.root, process.env.HOME]);
+  writeJsonAtomic(join(context.runRoot, "run.json"), run);
   return deriveSummary(context.runRoot, run, context.contract);
 }
 

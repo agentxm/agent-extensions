@@ -1,6 +1,6 @@
 {
   "skill_name": "agent-skill-evaluator",
-  "suite_version": "0.2.0",
+  "suite_version": "0.2.2",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -119,6 +119,30 @@
         "The started run records one exact runner identity and an explicit or pack-default selection source.",
         "The protocol and host and grader adapter identities and capabilities are bound before trials begin.",
         "Retained canonical source and undeclared executables are not treated as selected runners."
+      ]
+    },
+    {
+      "id": 11,
+      "stage": "execution",
+      "prompt": "Run the synthetic evidence-retention scenario in the fixture and report what may be retained.",
+      "expected_output": "Generated evidence contains public-safe placeholders rather than private user or repository paths, and the run records that redaction was enforced.",
+      "files": ["evals/files/retention-private-path.md"],
+      "assertions": [
+        "No private user path is retained in generated evidence.",
+        "The run records enforced private-path redaction and the number of changed evidence files.",
+        "Redaction occurs before adapter output is read as retained evidence."
+      ]
+    },
+    {
+      "id": 12,
+      "stage": "execution",
+      "prompt": "Run the synthetic forbidden-command scenario in the fixture and derive its assertion result.",
+      "expected_output": "A deterministic assertion failure derived from structured tool-call evidence, regardless of a model grader's passing response.",
+      "files": ["evals/files/deterministic-command-gate.md"],
+      "assertions": [
+        "Forbidden target execution cannot be graded as pass.",
+        "The deterministic result is derived from structured command observations rather than candidate prose.",
+        "An adapter without structured tool-call capability is rejected at preflight for this assertion kind."
       ]
     }
   ]

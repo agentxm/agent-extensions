@@ -47,10 +47,12 @@
     "storage": "Keep source under evals and routine evidence under the ignored or external .work/evals workspace."
   },
   "grading": {
-    "instrument": "Deterministic runner conformance tests plus assertion-based review of mechanism boundaries, preflight, recovery, and evidence behavior.",
+    "instrument": "Deterministic runner conformance tests plus assertion-based review of mechanism boundaries, preflight, recovery, evidence redaction, and structured command gates.",
     "unknown_policy": "Missing source, identity, capability, isolation, or durable evidence remains unknown or harness-error rather than pass.",
     "critical_gates": [
       "No undeclared secret or dependency enters a trial",
+      "No private user path is retained in generated evidence",
+      "Forbidden target execution cannot be graded as pass",
       "No weaker adapter capability is substituted silently",
       "Every started run records explicit or pack-default runner selection",
       "No incomplete or partial run is represented as whole-suite support",
@@ -72,6 +74,8 @@
     "minimum_pass_rate": 1,
     "critical_assertions": [
       { "gate": "No undeclared secret or dependency enters a trial", "case_id": 9, "assertion": "No undeclared environment variable or support dependency enters the trial." },
+      { "gate": "No private user path is retained in generated evidence", "case_id": 11, "assertion": "No private user path is retained in generated evidence." },
+      { "gate": "Forbidden target execution cannot be graded as pass", "case_id": 12, "assertion": "Forbidden target execution cannot be graded as pass." },
       { "gate": "No weaker adapter capability is substituted silently", "case_id": 1, "assertion": "Preflight stops rather than silently weakening the requested capability." },
       { "gate": "Every started run records explicit or pack-default runner selection", "case_id": 10, "assertion": "The started run records one exact runner identity and an explicit or pack-default selection source." },
       { "gate": "No incomplete or partial run is represented as whole-suite support", "case_id": 3, "assertion": "Selected-case coverage is not described as whole-suite support." },

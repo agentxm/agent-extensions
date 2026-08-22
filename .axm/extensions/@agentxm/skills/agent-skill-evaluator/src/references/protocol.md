@@ -33,6 +33,14 @@ surfaces, credential isolation, and cancellation, retry, and resume behavior.
 The runner fails preflight rather than silently replacing a requested
 capability.
 
+An execution case may declare a `forbid-target-execution` deterministic
+assertion bound to one exact case assertion, safe relative target paths, and
+launcher names. Such a case requires the host adapter's `tool-calls` evidence
+capability. The adapter returns normalized `command_execution` observations;
+the runner derives the assertion result mechanically and overrides a
+contradictory model grade. Missing structured observations produce unknown,
+never pass.
+
 ## Evidence identities
 
 Every material identity records a value and status. Status is one of:
@@ -94,3 +102,9 @@ named by `--allow-env`. A credential required by an adapter must be declared
 explicitly and remains subject to the adapter's stated isolation capability.
 Targets, fixtures, candidate outputs, and adapter outputs are untrusted. The
 runner never executes code bundled in a target skill.
+
+Before adapter-generated text becomes retained evidence, the runner replaces
+the exact repository and home roots plus common macOS, Linux, and Windows user
+path forms with public-safe placeholders. `run.json` records enforced redaction
+and its changed-file count. Binary evidence is not rewritten and remains
+subject to the operator's retention policy.
