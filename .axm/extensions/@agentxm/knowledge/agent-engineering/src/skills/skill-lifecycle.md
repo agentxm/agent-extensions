@@ -41,6 +41,11 @@ Governed libraries add explicit states: `candidate`, `experimental`,
 do not imply approval. Decisions bind to an exact artifact, intended cohort,
 and effective capability policy.
 
+Governance states do not themselves change registry availability or installed
+state. Apply the extension manager's native deprecation, availability,
+activation, and removal controls needed to realize the decision. For AXM, see
+the [AXM extension-management profile](platforms/axm.md).
+
 ## Feedback without self-approval
 
 Evaluation and audit should route evidence back to authoring, not silently

@@ -10,8 +10,8 @@ single body rather than as separate bundles. The pack does not add a framework,
 runtime, or executable agent.
 
 AXM supplies the extension-manager workflow used when these skills change
-managed packages; it is host infrastructure and is not installed as a pack
-dependency.
+managed packages; it is workspace management infrastructure, not an agent
+host, and is not installed as a pack dependency.
 
 ## Install
 
@@ -39,3 +39,10 @@ evaluation.
 
 The pack metadata is MIT licensed. Each dependency retains the license in its
 own manifest.
+
+## Revision 0.9.1
+
+- Previous version: `0.9.0`
+- Contract delta: clarifies that AXM is the pack's extension-management layer,
+  independent of the agent hosts its members support
+- Membership and dependency ranges are unchanged

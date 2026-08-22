@@ -34,7 +34,10 @@ do not improvise a second authoring method in this skill.
   skills.
 - Read `skills/decision-support-presentations.md` when the workflow compares
   alternatives, recommends one, or leaves a consequential choice with a human;
-- Read a profile under `skills/platforms/` only for a host the target
+- Read `skills/platforms/axm.md` whenever AXM manages the target package, and
+  use the installed `axm` skill plus current CLI help as the operational
+  authority. AXM is an extension-management layer, not a host claim.
+- Read another profile under `skills/platforms/` only for a host the target
   explicitly supports.
 - Read the relevant concept under `prompts/` only when a model-facing prompt,
   example, template, or response presentation is part of the target.

@@ -77,10 +77,14 @@ whose observable behavior has been checked in proportion to its risk.
    the workflow compares alternatives, recommends one, or leaves a
    consequential choice with a person. Do not add questions, progress, or
    confirmations to a one-step or non-interactive job merely for consistency.
-7. **Adapt only to claimed hosts.** Keep the portable contract authoritative.
-   Open a profile under [Platforms](platforms/) only for a host the skill
-   explicitly supports, and keep optional UI or invocation metadata consistent
-   with the portable skill without making it the sole source of behavior.
+7. **Adapt through independent layers.** Keep the portable contract
+   authoritative. Open a host profile under
+   [Host and extension-management profiles](platforms/) only for a host the
+   skill explicitly supports. When AXM owns the package, also read the
+   [AXM extension-management profile](platforms/axm.md) and current CLI help;
+   manager selection does not imply a host claim. Keep optional UI, invocation,
+   or distribution metadata consistent with the portable skill without making
+   it the sole source of behavior.
 8. **Author canonically.** Use the repository's extension manager or host
    scaffold, preserve unrelated supported metadata and invocation policy, and
    reference only portable package paths or declared pack siblings. Do not

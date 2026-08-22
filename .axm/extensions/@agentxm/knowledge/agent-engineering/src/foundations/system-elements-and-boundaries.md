@@ -40,7 +40,8 @@ repair the observed behavior. Influence is shared; ownership should not be.
 | [Prompts](../prompts/) | Intentional instructions, examples, templates, and response contracts | Controlled prompt variants and response grading |
 | [Context](../context/) | Selection, provenance, ordering, routing, loading, compaction, and retirement of all information in attention | Retrieval, ablation, freshness, and context-use evidence |
 | [Harness](../harness/) | Model invocation, tool implementation, runtime, persistence, mechanical feedback, validation, permissions, and enforcement | End-to-end traces, environment state, control decisions, and outcome checks |
-| [Skills](../skills/) | Discoverable workflow packaging, routing, resources, execution contract, trust, admission, and lifecycle | Routing and activated-workflow evaluations |
+| [Skills](../skills/) | Discoverable workflow packaging, routing, resources, execution contract, trust claims, admission criteria, and behavioral lifecycle | Routing and activated-workflow evaluations |
+| Extension management | Canonical package authority, manifests, projections, composition graphs, installation, activation, distribution, and registry lifecycle | Desired and resolved state, package identities, projection health, and lifecycle transactions |
 | [Evaluation](../evaluation/) | Objectives, task distributions, trials, graders, baselines, uncertainty, aggregation, validity, and suite lifecycle | Attributable reports bound to target and evaluation identities |
 
 Anthropic distinguishes prompt methods for writing and organizing instructions
@@ -64,9 +65,9 @@ claims to have produced.[^anthropic-evals]
 | Output schema | Prompt states semantic fields and interaction requirements | Structured-output or validation code enforces syntax |
 | Safety and authority | Prompt communicates role, limits, and escalation behavior | Harness enforces least privilege, approvals, isolation, and monitoring |
 | Durable process | Agent behavior owns dynamic choices inside an agent step | Workflow automation owns schedules, dependencies, retries, cancellation, compensation |
-| Reusable job | Agent behavior may select or delegate a job | Skills own routing, packaged procedure, resources, trust, and lifecycle |
+| Reusable job | Agent behavior may select or delegate a job | Skills own routing and the packaged procedure; extension management owns canonical packaging, projection, composition, and distribution state |
 | Evaluation | Each surface defines the behaviors, risks, and scenarios that matter to it | Evaluation owns sampling, trials, graders, uncertainty, validity, and reporting |
-| Versioning | Each artifact versions its own content and compatibility evidence | Neighboring artifacts version their own configuration and lifecycle |
+| Versioning | Each artifact declares its public contract and version intent | Extension management validates, changes, resolves, and distributes package versions; governance separately owns approval |
 
 No surface should absorb another merely because all of them ultimately
 influence model behavior.

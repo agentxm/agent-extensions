@@ -24,7 +24,9 @@ can be placed in the same directory or plugin.
 | Script | Execute deterministic mechanics | Cannot own the full contextual workflow |
 | Subagent | Configure a delegated actor, tools, or context | Defines an actor or isolation boundary rather than one reusable job |
 | Hook | React automatically to a lifecycle event | Is event-driven rather than selected for a user goal |
-| Plugin or extension pack | Distribute several capabilities together | Is a package boundary, not itself the procedure |
+| Extension manager | Own canonical packages, manifests, projections, composition, installation, and distribution lifecycle | Manages the skill artifact without owning its workflow semantics |
+| Extension pack | Declare a capability set and dependency graph for coordinated installation and lifecycle | Is a composition contract, not itself the procedure |
+| Agent plugin | Distribute host-native capabilities in one host-specific container | Is a host package boundary and is not interchangeable with an extension-manager pack |
 
 ## Selection rules
 
@@ -41,3 +43,6 @@ can be placed in the same directory or plugin.
 
 Combining elements is normal. Incidental coupling—depending on whatever happens
 to be installed on the author's machine—is not.
+
+For AXM-specific package, pack, plugin-integration, and lifecycle behavior, read
+the [AXM extension-management profile](platforms/axm.md).

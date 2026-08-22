@@ -1,6 +1,6 @@
 {
   "skill_name": "author-agent-skill",
-  "suite_version": "0.2.0",
+  "suite_version": "0.2.1",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -37,6 +37,7 @@
       "files": ["evals/files/axm-managed-skill.md"],
       "assertions": [
         "The response reads current AXM help and edits the canonical extension source rather than a projected .agents or .github path.",
+        "AXM extension-management guidance is applied independently of every host profile the target claims.",
         "The routing contract adds a deployment negative without broad unrelated changes.",
         "The observed false positive becomes a regression case.",
         "Generated AXM state is previewed or reviewed rather than assumed harmless."

@@ -2,6 +2,12 @@
 
 ## 2026-08-22
 
+- **AXM-aware extension guidance**: Reframed AXM as an extension-management
+  layer independent of agent hosts, expanded its profile across extension
+  types, workspace state, pack and plugin relationships, and lifecycle
+  controls, and routed skill authoring, maintenance, and retirement through
+  that profile. Governance deprecation, registry yanking, installed-state
+  disabling, and workspace uninstall are now distinct operations.
 - **Routing measurement**: Routing evaluations now measure a trigger rate over
   repeated attempts instead of a single verdict, require cases sized so that
   selection can vary at all, and require decision cases held out before a

@@ -29,6 +29,23 @@ Examples and fixtures must be synthetic.
 - Packs may depend only on public, active extensions and may not depend on
   other packs.
 
+## AXM-aware extension design
+
+- Here, “extension” includes skills, subagents, MCP servers, rules, hooks,
+  knowledge bundles, packs, agent plugins, and similar agent capability
+  packages.
+- Treat AXM as the extension composition and lifecycle substrate, not merely a
+  packaging tool. Before addressing discovery, projections, dependencies,
+  packs, reconciliation, validation, versioning, or release, consult the
+  installed `axm` skill and relevant `axm help` topics.
+- Prefer AXM's native models and workflows. Do not prescribe parallel
+  manifests, manual projections or copies, implicit dependencies, or lifecycle
+  processes that bypass AXM without a clear design or portability reason.
+- Keep portable principles independent of AXM while providing AXM-specific
+  realization where applicable. Within the `agent-engineering` pack, use
+  declared pack relationships and canonical same-pack references for
+  intentional coupling, while keeping standalone extensions self-contained.
+
 ## Authoring and release
 
 Before changing an extension, read the installed `axm` skill and the relevant

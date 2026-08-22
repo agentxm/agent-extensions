@@ -20,6 +20,11 @@ the agent-engineering guidance for openings, progress, questions, interaction
 surfaces, gates, and closeouts. It leaves one-step and non-interactive skills
 free of unnecessary interaction ceremony.
 
+For AXM-managed packages, the workflow applies AXM extension-management
+guidance independently of the runtime host profiles the skill claims. This
+preserves the portable core while using AXM's canonical package, projection,
+composition, validation, and lifecycle capabilities.
+
 ## Install
 
 ```sh
@@ -31,3 +36,12 @@ axm install @agentxm/packs/agent-engineering
 > Revise this Agent Skill to address findings A-01 and A-03. Preserve its
 > supported routing behavior, preserve the motivating cases, validate the
 > package, and record any remaining evidence needed for closure.
+
+## Revision 0.7.1
+
+- Previous version: `0.7.0`
+- Contract delta: AXM management is now an explicit adaptation axis independent
+  of host support
+- Risk delta: no authority expansion; current AXM help remains the operational
+  authority for managed package changes
+- Evaluation source: suite `0.2.1` protects the manager-versus-host distinction

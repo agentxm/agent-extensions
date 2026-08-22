@@ -1,6 +1,6 @@
 {
   "skill_name": "audit-agent-instructions",
-  "suite_version": "0.1.0",
+  "suite_version": "0.2.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -88,6 +88,19 @@
       "expected_selection": "audit-agent-instructions",
       "catalog_neighbors": ["author-agent-instructions", "audit-agent-skill"],
       "assertions": ["Explicit invocation selects the target.", "The result is treated as a control rather than implicit-routing evidence."]
+    },
+    {
+      "id": 10,
+      "stage": "execution",
+      "prompt": "Audit the supplied managed instruction system without repairing it.",
+      "expected_output": "A read-only AXM-aware audit that binds canonical and contributed ownership, confirms target drift through native diagnostics, and leaves reconciliation unapplied.",
+      "files": ["evals/files/axm-managed-instruction-system.md"],
+      "assertions": [
+        "The audit recognizes AXM management from the workspace facts even though the prompt does not name AXM, then reads current axm help instructions.",
+        "It uses axm instructions and axm lint for current ownership and health evidence and axm sync --preview only to inspect the proposed reconciliation.",
+        "It distinguishes the authored canonical source, propagated alias, and independently owned Rules and Knowledge regions.",
+        "It reports the drift with exact evidence without applying axm sync or editing any source, alias, or managed region."
+      ]
     }
   ]
 }

@@ -43,6 +43,11 @@ current Agent Skill research.[^dynamic-lifecycle]
    unchanged version.
 7. **Pin or withdraw the release when a critical claim cannot be supported.**
 
+Use the extension manager's native version and availability controls rather
+than editing generated state or treating a governance label as an operational
+action. For AXM-managed packages, read the
+[AXM extension-management profile](platforms/axm.md) and current CLI help.
+
 Add every confirmed failure to the regression set as you go, so the next
 revision starts from a suite that already knows about this one.
 

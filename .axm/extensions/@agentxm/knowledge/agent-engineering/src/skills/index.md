@@ -48,8 +48,8 @@ Reusable workflows packaged behind routing metadata and disclosed on demand.
   rollback decisions.
 - [How to retire a skill](skill-retirement.md) - Deprecating, revoking,
   migrating, removing, and preserving the history of a retired skill.
-- [Platform profiles](platforms/) - Host-specific behavior layered on the
-  portable core.
+- [Host and extension-management profiles](platforms/) - Host behavior and
+  extension-management behavior layered independently on the portable core.
 
 For skill evaluation, see [evaluation](../evaluation/). For admission,
 ownership, and library-wide control, see
