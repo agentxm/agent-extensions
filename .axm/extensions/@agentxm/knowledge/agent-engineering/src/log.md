@@ -2,6 +2,11 @@
 
 ## 2026-08-22
 
+- **Catalog and composition authority**: Clarified that an active catalog or
+  observed cohort supplies routing, coexistence, and compatibility context but
+  cannot create a dependency or required composition. Required collaboration
+  needs independent package, host, or workflow authority, and collision
+  findings belong to the smallest responsible surface.
 - **Replaceable evaluation runners**: Defined explicit-runner precedence over
   an active configured default, selection-source attribution, disabled-source
   handling, no auto-discovery or fallback, and adapter-based evidence mapping

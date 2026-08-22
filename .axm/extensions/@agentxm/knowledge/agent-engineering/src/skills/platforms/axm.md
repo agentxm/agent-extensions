@@ -5,7 +5,7 @@ description: How AXM manages canonical packages, projections, composition, works
 tags: [agent-extensions, agent-skills, axm, packaging, projections, packs, lifecycle]
 status: stable
 stale_after: 2027-02-22
-generated: { by: "codex/gpt-5.6", at: 2026-08-22T15:54:57Z }
+generated: { by: "codex/gpt-5.6", at: 2026-08-22T22:33:39Z }
 sources:
   - id: axm-skills-architecture
     resource: https://github.com/agentxm/axm/blob/main/docs/architecture/extensions/skills.md
@@ -60,6 +60,14 @@ one pack. Every required sibling must be a direct member of that pack; the
 referencing extension must be non-standalone, recommend the pack, and use the
 canonical same-pack path. Pack install, update, enable, disable, uninstall, and
 unpack apply to the complete member graph atomically.[^axm-packs-help]
+
+An active catalog or observed cohort records what happened to coexist during a
+run; it is not relationship authority. A co-installed extension can be a useful
+routing neighbor or collision case without becoming a dependency, required
+collaborator, or remediation target. Infer required composition only from the
+declared package relationship above, and attribute a catalog-level collision to
+the smallest surface that owns it rather than rewriting an unrelated package to
+depend on an incidental neighbor.
 
 `recommendedPacks` is discovery metadata, not an installation guarantee. A
 host-native agent plugin is not an AXM extension type and is not interchangeable

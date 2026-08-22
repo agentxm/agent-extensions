@@ -6,7 +6,10 @@
 - Canonical source and acquisition path:
 - Revision, tree, archive integrity, or content identity:
 - Inspected path and time:
-- Intended use, hosts, and active cohort:
+- Intended use and hosts:
+- Declared package relationships:
+- Supported cohort or host contract:
+- Observed active catalog:
 - Audit mode and exclusions:
 - Guidance bundle, version, and content revision:
 - Previous accepted identity, when applicable:
@@ -15,6 +18,10 @@
 
 | Surface | Present | Capability or purpose | Evidence or trust notes |
 | --- | --- | --- | --- |
+
+- Relationship authority:
+- Declared direct pack siblings or supported collaborators:
+- Incidental active neighbors:
 
 ## Conformity matrix
 
@@ -36,6 +43,11 @@ Use these severity labels:
 
 | ID | Applicability | Severity | Expectation or guide location | Evidence | Consequence | Responsible surface | Required action or condition |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+
+## External conditions and referrals
+
+| Condition | Evidence | Owning surface | Effect on this audit | Required external action or evidence |
+| --- | --- | --- | --- | --- |
 
 ## Behavioral evidence
 
