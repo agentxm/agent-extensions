@@ -15,6 +15,11 @@ When authoring changes behavior, the workflow keeps versioned evaluation source
 separate from generated runs, preserves confirmed failures as regressions, and
 labels same-agent exercises as authoring smoke rather than release evidence.
 
+Before executing target-controlled helpers, package commands, interpreters, or
+dependencies, the workflow resolves their identity and provenance, inspects the
+execution path, and requires an explicit trust decision and bounded execution
+authority. Source edits do not silently authorize code execution.
+
 When the target owns a meaningful user-facing sequence, the workflow applies
 the agent-engineering guidance for openings, progress, questions, interaction
 surfaces, gates, and closeouts. It leaves one-step and non-interactive skills
@@ -37,28 +42,43 @@ axm install @agentxm/packs/agent-engineering
 > supported routing behavior, preserve the motivating cases, validate the
 > package, and record any remaining evidence needed for closure.
 
-## Revision 0.9.0
+## Revision 0.10.0
 
-- Previous version: `0.8.1`
-- Contract delta: the runtime now resolves the target package, declared
-  repository evaluation-source root, and strictly required manager-owned state
-  before writing; it also distinguishes confirmed regression evidence from
-  requirement-derived greenfield cases
-- Suite delta: suite `0.4.0` supplies complete synthetic target packages for
-  remediation and validator-selection cases, supplies coherent greenfield
-  requirements, and adds a baseline-bound ambiguous-lifecycle authority case
-- Compatibility and cohort: routing is unchanged; the suite is validated with
-  `agent-engineering` pack `0.10.3` and evaluator `0.2.2`
-- Risk delta: the bounded local write envelope now includes declared evaluation
-  source and manager state required by the request; install, enable, publish,
-  certification, and unrelated external effects still require separate authority
-- Migration: resolve and report all authorized roots before writes; treat
-  suite `0.3.1` runs as stale for the revised runtime and evaluation source
-- Rollback: restore skill `0.8.1`, suite `0.3.1`, and their prior fixtures and
-  critical-gate mappings together
-- Evidence: AXM and evaluator structural validation plus synthetic target-package
-  validation and deterministic validator fail/pass calibration; no controlled
-  behavioral regression run or independent approval is claimed
+- Previous version: `0.9.0`
+- Contract delta: target-controlled helpers, package commands, interpreters,
+  executables, and dependencies now require identity, provenance, static
+  inspection, explicit trust, and bounded execution authority before use;
+  unavailable dynamic checks remain visible rather than being improvised;
+  combined proof requests now require explicit owner-bound handoffs to
+  `evaluate-agent-skill` for behavioral evidence and `audit-agent-skill` for
+  conformity, trust, and closure rather than relabeling authoring checks
+- Suite delta: suite `0.5.0` separates behavioral evaluation from audit,
+  introduces the active `skill-creator` collision, and adds missing-knowledge,
+  unavailable-validator, and untrusted-helper cases with deterministic
+  non-execution gates
+- Compatibility and cohort: the model-facing description is unchanged pending
+  held-out routing evidence; portable AXM-managed authoring remains the target
+  job, while explicitly Codex-local skill creation is assigned to its host
+  neighbor
+- Risk delta: executable validation is narrower and may now leave a dynamic
+  check unavailable when trust or execution authority is incomplete; the local
+  write envelope, install, enable, publish, certification, credential, network,
+  and external-effect boundaries are otherwise unchanged
+- Migration: callers that expect a target helper or package command to run must
+  provide or establish its exact trust and authority binding; treat all suite
+  `0.4.0` and older runs as stale for this revision
+- Rollback: restore skill `0.9.0`, suite `0.4.0`, the prior handoff template,
+  fixtures, and critical-gate mappings together
+- Evidence: AXM version preview and application, evaluator `0.2.2` structural
+  validation, and same-author selected-case smoke. A pre-final candidate
+  (`sha256:ca308d16ee0a9ea3ff1fe406c9bddd7868c04ffbf3355e63634c414805005e6e`)
+  passed cases 10, 11, 18, 20, 21, 22, and 23 in run
+  `2026-08-22-authoring-smoke-0.10.0-affected-v1`; its initially inconclusive
+  case 4 exposed the remaining handoff gap. The exact final package identity
+  below passed remediated case 4 in
+  `2026-08-22-authoring-smoke-0.10.0-case4-retry-v3`. Exact-final affected
+  regression, baseline evidence, and independent audit closure remain separate
+  work; no approval is claimed
 - Bound identities: package
-  `sha256:282473451c9804f1b617cb72ee1ad3a490d40d49c8d60a34a1273bc3d11581d1`
-  and suite `sha256:786fc4aba38dcb3d2abf5f1bc10150ed5700699d82070c1a1eb5987693b2e27a`
+  `sha256:7c7e424e9b51d90b1f28de42846001fad249e2b4b51f0d5fd6051fceb4b57fae`
+  and suite `sha256:c27a8e80fea4a0ecafb203b41c2833f2603c72acb62ca8ad04838754938dcbec`

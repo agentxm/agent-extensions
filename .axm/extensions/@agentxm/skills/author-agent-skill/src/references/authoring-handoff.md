@@ -25,6 +25,8 @@
 - Generated run workspace or durable locator:
 - Evidence class and independence limits:
 - Format and host validation:
+- Executable or helper trust and authority binding:
+- Checks intentionally not run and why:
 - Script checks:
 - Positive exercise:
 - Paraphrased exercise:
@@ -50,8 +52,8 @@
 
 ## Remaining work
 
-- Conformity or closure audit:
-- Behavioral or host evidence:
+- Conformity, trust, or closure audit owner (`audit-agent-skill`):
+- Behavioral or host-evidence owner (`evaluate-agent-skill`):
 - Release-evidence promotion:
 - Independent governance decision:
 - Assumptions and unsupported hosts:
