@@ -76,9 +76,11 @@ axm install @agentxm/packs/agent-engineering
   focused run `2026-08-22T22-51-20-802Z-ce65edb6` passed case 21 three times.
   A later full-matrix run found no target failures but surfaced one conditional
   case-21 assertion as undecidable; that suite defect was corrected before the
-  final validation. These are ignored-workspace, no-baseline,
-  network-unobserved results rather than release evidence or independent
-  approval
+  final validation. The next matrix exposed one remaining external-condition
+  ownership error without a cross-pack dependency or critical-gate failure;
+  condition ownership was tightened before closure. These are
+  ignored-workspace, no-baseline, network-unobserved results rather than release
+  evidence or independent approval
 
 ## Revision 0.7.3
 

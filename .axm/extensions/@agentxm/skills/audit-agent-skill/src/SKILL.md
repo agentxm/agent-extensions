@@ -198,7 +198,11 @@ not an independent audit or approval.
    package has broader or overlapping metadata. Keep unavailable evidence in
    the conformity matrix, behavioral-evidence limits, or external conditions;
    never manufacture a target finding merely to carry an unverified
-   expectation.
+   expectation. When a collision is not established and bounded inputs withhold
+   the artifacts or trials needed to assess it, assign the limitation to the
+   audit-input or evidence surface. Name target metadata, host behavior, or
+   workflow state only as evidence to test; do not label those hypothetical
+   surfaces as owners of a defect or condition not yet observed.
 9. **Remediate when authorized.** Freeze the pre-change identity and findings,
    then apply the authoring workflow to accepted findings. Preserve supported
    behavior, validate mechanically, run affected regressions, and record each
