@@ -3,7 +3,7 @@
   "owner": "@agentxm",
   "type": "skill",
   "name": "audit-agent-skill",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Audits Agent Skills against skill-engineering guidance and can orchestrate explicitly authorized remediation with snapshot-bound closure verification",
   "keywords": [
     "agent-skills",

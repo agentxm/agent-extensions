@@ -8,16 +8,20 @@ Assess an exact Agent Skill revision against an explicit guidance baseline and
 intended use. Keep assessment evidence separate from mutation even when one
 developer request authorizes an audit-remediation-verification loop.
 
-This skill is coupled to a direct sibling in the agent-engineering pack. From
-the active AXM scope root, begin with
+This skill is coupled to direct siblings in the agent-engineering pack. Resolve
+the active AXM scope root, then begin with
 `.axm/extensions/@agentxm/knowledge/agent-engineering/src/skills/skill-engineering.md`
-and open only the concepts needed for the declared scope, all relative to
+and `skills/authoring-agent-skills.md`. Open only the additional concepts needed
+for the declared scope, all relative to
 `.axm/extensions/@agentxm/knowledge/agent-engineering/src/`:
 
 - design conformity: `skills/candidate-selection.md`,
+  `skills/skill-boundaries-and-neighboring-elements.md`,
   `skills/routing-and-activation.md`, `skills/workflow-contracts.md`,
+  `skills/degrees-of-freedom.md`,
   `skills/progressive-disclosure-for-skills.md`,
-  `skills/resources-scripts-and-assets.md`, and
+  `skills/resources-scripts-and-assets.md`,
+  `skills/portability-and-compatibility.md`, and
   `skills/decision-support-presentations.md` when the target compares
   alternatives or leaves a consequential choice with a human;
 - behavioral claims: `evaluation/skill-evaluation-model.md`,
@@ -30,8 +34,17 @@ and open only the concepts needed for the declared scope, all relative to
 - change and lifecycle: `skills/maintenance-and-evolution.md` and
   `operations/governance/versioning-deprecation-and-change-control.md`.
 
-Read a platform profile under `skills/platforms/` only for a host the target
-claims or the caller names.
+Read `skills/platforms/portable-agent-skills-core.md` when the target claims the
+portable Agent Skills format or cross-host portability. Read another platform
+profile under `skills/platforms/` only for a host the target claims or the
+caller names.
+
+If the active scope root, coupled knowledge sibling, required guidance route,
+or `references/audit-report.md` is unavailable, preserve the target, stop, and
+return `Inconclusive` with the missing dependency and evidence needed to resume.
+Apply the same stop when remediation is authorized but the authoring sibling is
+unavailable. Do not improvise a substitute baseline, report contract, or
+authoring method.
 
 ## Modes and authority
 

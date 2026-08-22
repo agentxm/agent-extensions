@@ -11,6 +11,16 @@ new exact revision. That final pass is closure verification, not independent
 approval. Untrusted packages remain static by default and their bundled code is
 not executed merely for inspection.
 
+## Evaluation
+
+`evals/evals.json` contains separate routing and activated-execution cases.
+`evals/evaluation-contract.json` defines the required target, environment,
+trial, grader, provenance, freshness, and result evidence. Case definitions do
+not imply that a revision passed: release evidence must bind actual results to
+the exact package identity, host, model, configuration, and active catalog.
+Any bundled authoring-smoke result remains same-agent evidence and does not
+satisfy the contract's isolated release threshold.
+
 ## Install
 
 ```sh
