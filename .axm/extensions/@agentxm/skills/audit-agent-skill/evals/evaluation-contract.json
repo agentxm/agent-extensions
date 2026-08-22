@@ -32,7 +32,7 @@
       "started_at",
       "ended_at"
     ],
-    "routing_boundary": "Expose only names and descriptions until selection is recorded.",
+    "routing_boundary": "Expose only names and descriptions until a single selection or required ordered composition is recorded.",
     "execution_boundary": "Activate the target explicitly, use only the declared synthetic fixture, and prohibit undeclared external effects."
   },
   "evidence": {
@@ -46,7 +46,7 @@
       "outcome"
     ],
     "outcomes": ["pass", "fail", "unknown", "harness-error"],
-    "storage": "Store immutable per-trial result records outside the src/ agent payload and retain their package-relative path or another durable locator with release evidence."
+    "storage": "Keep evaluation source outside the src/ agent payload; write routine per-trial records to an ignored or external run workspace; promote only explicit decision evidence whose manifest retains durable raw-evidence locators and content identities."
   },
   "grading": {
     "instrument": "Reference-based assertions with deterministic checks for selection, required report fields, status labels, and forbidden effects; human review for open-ended audit correctness.",
@@ -71,7 +71,7 @@
   },
   "analysis": {
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
-    "routing_metrics": ["misses", "false_positives", "collisions", "clarify_or_abstain"],
+    "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain"],
     "aggregation_rule": "Preserve per-trial evidence; aggregate only after critical gates and unknowns remain visible.",
     "threshold": "All critical gates pass, no intended routing case misses, no adjacent negative falsely selects the target, and all material execution assertions pass for the claimed scope."
   },
@@ -85,6 +85,7 @@
       "Skill instructions, description, report template, or evaluation case changes",
       "Guidance baseline or pack dependency changes",
       "Host, model, configuration, active catalog, grader, authority policy, or intended cohort changes",
+      "Evaluation storage, retention, promotion, or evidence-locator policy changes",
       "A confirmed routing, execution, trust, or report-contract failure"
     ]
   }

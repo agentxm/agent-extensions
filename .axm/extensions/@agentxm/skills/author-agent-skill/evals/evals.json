@@ -1,8 +1,11 @@
 {
   "skill_name": "author-agent-skill",
+  "suite_version": "0.1.0",
+  "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
       "id": 1,
+      "stage": "execution",
       "prompt": "Create an Agent Skill for the repeated release-note normalization workflow in the supplied observation. Do not install or publish it.",
       "expected_output": "A bounded skill authored through the host's canonical mechanism, with routing boundaries, workflow contracts, validation, and a concise handoff.",
       "files": ["evals/files/repeated-workflow.md"],
@@ -16,6 +19,7 @@
     },
     {
       "id": 2,
+      "stage": "execution",
       "prompt": "Turn the supplied hypothetical idea into a public skill now.",
       "expected_output": "A defer or observe recommendation because no repeated workflow or stable contract has been demonstrated.",
       "files": ["evals/files/hypothetical-candidate.md"],
@@ -27,6 +31,7 @@
     },
     {
       "id": 3,
+      "stage": "execution",
       "prompt": "Revise the AXM-managed sample skill described in the fixture so it rejects deployment work. Make the change in the correct place.",
       "expected_output": "A canonical AXM source revision made through AXM, followed by validation and a routing regression case.",
       "files": ["evals/files/axm-managed-skill.md"],
@@ -39,6 +44,7 @@
     },
     {
       "id": 4,
+      "stage": "execution",
       "prompt": "Create this skill and prove with a full conformity and trust audit that it is production-safe.",
       "expected_output": "An authored and smoke-checked skill plus an explicit handoff to audit-agent-skill, without self-certification.",
       "files": ["evals/files/repeated-workflow.md"],
@@ -50,6 +56,7 @@
     },
     {
       "id": 5,
+      "stage": "execution",
       "prompt": "Apply the accepted audit findings in the fixture to the existing skill, validate the revision, and close the findings.",
       "expected_output": "A bounded canonical revision with authoring dispositions and a handoff for audit closure rather than self-certification.",
       "files": ["evals/files/remediation-findings.md"],
@@ -62,6 +69,7 @@
     },
     {
       "id": 6,
+      "stage": "execution",
       "prompt": "Create an Agent Skill for the repeated interactive architecture-decision workflow in the supplied observation. It must work both with native interaction affordances and through ordinary assistant output.",
       "expected_output": "A bounded interactive skill whose user-visible states, interaction intents, authority-aware gates, surface fallbacks, and evidence-led closeout are explicit and behaviorally exercised.",
       "files": ["evals/files/interactive-workflow.md"],
@@ -75,6 +83,7 @@
     },
     {
       "id": 7,
+      "stage": "execution",
       "prompt": "Create the local release-note normalization skill from the supplied observation. Keep user interaction proportional to this one-step job.",
       "expected_output": "A bounded non-interactive skill that produces and verifies the named output without inventing run frames, progress theater, discovery questions, or redundant approval gates.",
       "files": ["evals/files/repeated-workflow.md"],
@@ -86,6 +95,7 @@
     },
     {
       "id": 8,
+      "stage": "execution",
       "prompt": "Create the explicitly commissioned greenfield skill in the supplied requirements. There is no prior usage history; keep unsupported readiness claims visible.",
       "expected_output": "A bounded experimental skill authored from the coherent commissioned contract, with stated assumptions, synthetic representative checks, and no unsupported production-readiness claim.",
       "files": ["evals/files/defined-greenfield.md"],
@@ -95,6 +105,76 @@
         "Unsupported assumptions and compatibility claims remain explicit rather than being presented as observed evidence.",
         "Representative routing and execution checks use synthetic fixtures, and the handoff describes the result as experimental rather than production-proven."
       ]
+    },
+    {
+      "id": 9,
+      "stage": "execution",
+      "prompt": "Create the skill and its evaluation coverage using the repository profile in the fixture. Record the evidence honestly.",
+      "expected_output": "A canonical runtime skill plus versioned evaluation source, generated authoring checks in the ignored workspace, and a handoff that does not promote same-agent smoke evidence.",
+      "files": ["evals/files/evaluation-artifacts.md"],
+      "assertions": [
+        "Runtime skill contents remain under src while the contract, cases, and fixtures remain under evals.",
+        "The routing cases include a clear positive, paraphrase, and adjacent deployment negative, while activated execution is evaluated separately.",
+        "Generated transcripts, grades, timing, and summaries are written only to the ignored evaluation workspace rather than tracked package source.",
+        "The same-agent non-isolated run is labeled authoring smoke and is not promoted to release evidence.",
+        "The handoff names the evaluation source, workspace, evidence class, independence limits, and remaining isolated evaluation work."
+      ]
+    },
+    {
+      "id": 10,
+      "stage": "routing",
+      "prompt": "Create a portable Agent Skill for our recurring release-note normalization workflow.",
+      "expected_selection": ["axm", "author-agent-skill"],
+      "catalog_neighbors": ["axm", "audit-agent-skill", "evaluate-agent-skill", "author-agent-instructions"],
+      "assertions": ["AXM and the target are selected in execution order for explicit Agent Skill creation.", "Selection occurs before requirements fixtures or expected output are visible."]
+    },
+    {
+      "id": 11,
+      "stage": "routing",
+      "prompt": "Turn this repeated agent workflow into a reusable SKILL.md package with clear activation boundaries.",
+      "expected_selection": ["axm", "author-agent-skill"],
+      "catalog_neighbors": ["axm", "audit-agent-skill", "evaluate-agent-skill"],
+      "assertions": ["The paraphrased extraction request selects AXM and the target in execution order.", "The target does not require the exact phrase create a skill."]
+    },
+    {
+      "id": 12,
+      "stage": "routing",
+      "prompt": "Audit this Agent Skill for security, provenance, and conformity without changing it.",
+      "expected_selection": "audit-agent-skill",
+      "catalog_neighbors": ["audit-agent-skill", "evaluate-agent-skill"],
+      "assertions": ["The target abstains because the request is assessment-only.", "The audit neighbor remains eligible."]
+    },
+    {
+      "id": 13,
+      "stage": "routing",
+      "prompt": "Run this Agent Skill's routing and execution eval suite against the previous revision.",
+      "expected_selection": "evaluate-agent-skill",
+      "catalog_neighbors": ["evaluate-agent-skill", "audit-agent-skill"],
+      "assertions": ["The target abstains because the request is to execute evaluation rather than author a skill or suite.", "The evaluator neighbor remains eligible."]
+    },
+    {
+      "id": 14,
+      "stage": "routing",
+      "prompt": "Rewrite our AGENTS.md hierarchy and reconcile CLAUDE.md.",
+      "expected_selection": "author-agent-instructions",
+      "catalog_neighbors": ["author-agent-instructions", "audit-agent-skill"],
+      "assertions": ["The target abstains because repository instructions are a neighboring artifact.", "The instruction-authoring neighbor remains eligible."]
+    },
+    {
+      "id": 15,
+      "stage": "routing",
+      "prompt": "Can you improve this agent thing?",
+      "expected_selection": "clarify-or-abstain",
+      "catalog_neighbors": ["audit-agent-skill", "evaluate-agent-skill", "author-agent-instructions"],
+      "assertions": ["Generic agent and improve vocabulary does not select the target.", "The response clarifies the artifact and desired operation."]
+    },
+    {
+      "id": 16,
+      "stage": "routing",
+      "prompt": "$author-agent-skill revise this SKILL.md package from the accepted findings.",
+      "expected_selection": ["axm", "author-agent-skill"],
+      "catalog_neighbors": ["axm", "audit-agent-skill", "evaluate-agent-skill"],
+      "assertions": ["Explicit authoring invocation still composes AXM before the target.", "The result is treated as a control rather than implicit-routing evidence."]
     }
   ]
 }

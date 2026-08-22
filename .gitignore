@@ -4,3 +4,6 @@
 # axm:start v=1 region=instruction-aliases ext=@agentxm/instructions/aliases
 /CLAUDE.md
 # axm:end v=1 region=instruction-aliases
+
+# Generated evaluation runs
+/.work/evals/

@@ -24,7 +24,7 @@ make_fixture() {
   git -C "$fixture" config user.email "public-safety@example.invalid"
   git -C "$fixture" add -A
   git -C "$fixture" add -f CLAUDE.md \
-    .axm/extensions/@agentxm/knowledge/skill-engineering/src/platforms/claude.md
+    .axm/extensions/@agentxm/knowledge/agent-engineering/src/skills/platforms/claude.md
   git -C "$fixture" commit -qm baseline
   printf '%s\n' "$fixture"
 }
@@ -67,7 +67,7 @@ if find "$test_root" -maxdepth 1 \
 fi
 
 verification_fixture="$(make_fixture)"
-verification_subject=".axm/extensions/@agentxm/knowledge/context-engineering/src/design/instruction-files.md"
+verification_subject=".axm/extensions/@agentxm/knowledge/agent-engineering/src/skills/agent-skills.md"
 sed 's/2026-08-09T20:48:38Z/2026-08-10T20:48:38Z/' \
   "$verification_fixture/$verification_subject" \
   >"$verification_fixture/$verification_subject.next"
@@ -127,6 +127,38 @@ expect_failure "untracked secret in workspace mode" \
   env TMPDIR="$test_root" bash -c 'cd "$1" && PATH="$2:$PATH" scripts/check-public-safety.sh' \
   _ "$untracked_fixture" "$(dirname "$real_axm")"
 
+eval_result_fixture="$(make_fixture)"
+mkdir -p "$eval_result_fixture/.axm/extensions/@agentxm/skills/author-agent-skill/evals/results"
+printf '{"evidence_class":"authoring-smoke"}\n' \
+  >"$eval_result_fixture/.axm/extensions/@agentxm/skills/author-agent-skill/evals/results/smoke.json"
+expect_failure "routine evaluation result stored in extension source" \
+  env TMPDIR="$test_root" bash -c 'cd "$1" && PATH="$2:$PATH" scripts/check-public-safety.sh' \
+  _ "$eval_result_fixture" "$(dirname "$real_axm")"
+
+eval_runs_fixture="$(make_fixture)"
+mkdir -p "$eval_runs_fixture/.axm/extensions/@agentxm/skills/author-agent-skill/evals/runs"
+printf '{"evidence_class":"authoring-smoke"}\n' \
+  >"$eval_runs_fixture/.axm/extensions/@agentxm/skills/author-agent-skill/evals/runs/smoke.json"
+expect_failure "routine evaluation run stored under an alternative source path" \
+  env TMPDIR="$test_root" bash -c 'cd "$1" && PATH="$2:$PATH" scripts/check-public-safety.sh' \
+  _ "$eval_runs_fixture" "$(dirname "$real_axm")"
+
+malformed_suite_fixture="$(make_fixture)"
+malformed_suite=".axm/extensions/@agentxm/skills/author-agent-skill/evals/evals.json"
+jq 'del(.suite_version)' "$malformed_suite_fixture/$malformed_suite" \
+  >"$malformed_suite_fixture/$malformed_suite.next"
+mv "$malformed_suite_fixture/$malformed_suite.next" "$malformed_suite_fixture/$malformed_suite"
+expect_failure "malformed Agent Skill evaluation source" \
+  env TMPDIR="$test_root" bash -c 'cd "$1" && PATH="$2:$PATH" scripts/check-public-safety.sh' \
+  _ "$malformed_suite_fixture" "$(dirname "$real_axm")"
+
+eval_symlink_fixture="$(make_fixture)"
+ln -s ../../src/SKILL.md \
+  "$eval_symlink_fixture/.axm/extensions/@agentxm/skills/author-agent-skill/evals/files/escaped-source.md"
+expect_failure "evaluation source symlink into runtime payload" \
+  env TMPDIR="$test_root" bash -c 'cd "$1" && PATH="$2:$PATH" scripts/check-public-safety.sh' \
+  _ "$eval_symlink_fixture" "$(dirname "$real_axm")"
+
 unmerged_fixture="$(make_fixture)"
 base_blob="$(printf 'base\n' | git -C "$unmerged_fixture" hash-object -w --stdin)"
 ours_blob="$(printf 'ours\n' | git -C "$unmerged_fixture" hash-object -w --stdin)"
@@ -151,6 +183,19 @@ chmod 755 "$trusted_fixture/scripts/check-public-safety.sh"
 TMPDIR="$test_root" run_gate "$trusted_fixture" --view git-index >/dev/null
 if [[ -e "$sentinel" ]]; then
   echo "The safety gate executed the script from the untrusted snapshot." >&2
+  exit 1
+fi
+
+trusted_eval_fixture="$(make_fixture)"
+eval_sentinel="$test_root/snapshot-eval-validator-executed"
+printf '#!/usr/bin/env node\nimport { writeFileSync } from "node:fs";\nwriteFileSync("%s", "executed\\n");\n' "$eval_sentinel" \
+  >"$trusted_eval_fixture/scripts/evals/agent-skill-eval.mjs"
+git -C "$trusted_eval_fixture" add scripts/evals/agent-skill-eval.mjs
+git -C "$trusted_eval_fixture" show HEAD:scripts/evals/agent-skill-eval.mjs \
+  >"$trusted_eval_fixture/scripts/evals/agent-skill-eval.mjs"
+TMPDIR="$test_root" run_gate "$trusted_eval_fixture" --view git-index >/dev/null
+if [[ -e "$eval_sentinel" ]]; then
+  echo "The safety gate executed the evaluation validator from the untrusted snapshot." >&2
   exit 1
 fi
 

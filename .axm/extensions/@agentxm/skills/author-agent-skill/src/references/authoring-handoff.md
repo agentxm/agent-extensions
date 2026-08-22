@@ -21,6 +21,9 @@
 
 ## Evidence
 
+- Evaluation source created or changed:
+- Generated run workspace or durable locator:
+- Evidence class and independence limits:
 - Format and host validation:
 - Script checks:
 - Positive exercise:
@@ -49,5 +52,6 @@
 
 - Conformity or closure audit:
 - Behavioral or host evidence:
+- Release-evidence promotion:
 - Independent governance decision:
 - Assumptions and unsupported hosts:

@@ -21,13 +21,14 @@ fi
 
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
+trusted_eval_validator="$repo_root/scripts/evals/agent-skill-eval.mjs"
 
 if ! command -v axm >/dev/null 2>&1; then
   echo "AXM is required. Install the latest release from https://axm.sh." >&2
   exit 1
 fi
 
-for dependency in jq rg realpath sha256sum; do
+for dependency in jq node rg realpath sha256sum; do
   if ! command -v "$dependency" >/dev/null 2>&1; then
     echo "The public safety gate requires '$dependency', but it is not installed." >&2
     exit 1
@@ -134,6 +135,7 @@ expected=(
   skills/audit-agent-skill
   skills/author-agent-instructions
   skills/author-agent-skill
+  skills/evaluate-agent-skill
 )
 
 expected_list="$(printf '%s\n' "${expected[@]}")"
@@ -148,6 +150,11 @@ actual_list="$(
 if [[ "$expected_list" != "$actual_list" ]]; then
   echo "Public package inventory differs from the approved ${#expected[@]}-package set." >&2
   diff <(printf '%s\n' "$expected_list") <(printf '%s\n' "$actual_list") || true
+  exit 1
+fi
+
+if ! node "$trusted_eval_validator" validate --root "$validation_root"; then
+  echo "Agent Skill evaluation source does not conform to repository policy." >&2
   exit 1
 fi
 

@@ -45,6 +45,28 @@ Before publishing:
 Do not commit, push, publish, deprecate, or change external repositories unless
 the developer explicitly requests that operation.
 
+## Evaluation artifacts
+
+For extension evaluations, keep runtime payload under `<extension>/src/`,
+versioned contracts, cases, public-safe synthetic fixtures, graders, and harness
+source under `<extension>/evals/`, and routine generated runs under the ignored
+`.work/evals/<owner>/<type>/<name>/<run-id>/` tree. Before adding or changing
+evaluation material, read
+[How to manage evaluation assets and evidence](.axm/extensions/@agentxm/knowledge/agent-engineering/src/evaluation/managing-evaluation-assets-and-evidence.md);
+for Agent Skill behavior, also read
+[How to evaluate an Agent Skill](.axm/extensions/@agentxm/knowledge/agent-engineering/src/evaluation/evaluating-agent-skills.md).
+After changing Agent Skill evaluation source, run
+`node scripts/evals/agent-skill-eval.mjs validate`.
+
+Do not track routine transcripts, traces, outputs, grades, timing, summaries, or
+same-agent authoring-smoke results. Promote a compact immutable manifest under
+`<extension>/evals/releases/` only for an explicit release, admission, rollback,
+or published benchmark decision, and only when it binds clean target, suite,
+harness, environment, grader, trial, baseline, and durable raw-evidence
+identities. Preserve unknown and harness-error outcomes; missing evidence is
+never a pass. Apply the public-by-construction rule to ignored workspaces, CI
+logs, and workflow artifacts as well as tracked files.
+
 ## Field note subjects
 
 | Subject | Mode | Scope | Target condition | Retire when |

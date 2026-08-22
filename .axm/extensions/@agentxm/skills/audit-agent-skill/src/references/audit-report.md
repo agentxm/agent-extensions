@@ -44,6 +44,17 @@ Use these severity labels:
 - Baselines, graders, hosts, and trials:
 - Untested claims and unavailable environment:
 
+## Evaluation artifact lifecycle
+
+| Artifact | Class | Authority and storage | Identity or locator | Claim ceiling and retention |
+| --- | --- | --- | --- | --- |
+
+- Runtime payload boundary:
+- Versioned evaluation-source boundary:
+- Generated run workspace or artifact store:
+- Promoted decision evidence:
+- Contamination, independence, expiry, or durability limits:
+
 ## Authority, trust, and public suitability
 
 - Requested capability envelope:

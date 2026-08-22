@@ -18,8 +18,13 @@ not executed merely for inspection.
 trial, grader, provenance, freshness, and result evidence. Case definitions do
 not imply that a revision passed: release evidence must bind actual results to
 the exact package identity, host, model, configuration, and active catalog.
-Any bundled authoring-smoke result remains same-agent evidence and does not
-satisfy the contract's isolated release threshold.
+Authoring-smoke results belong in an ignored or external run workspace, remain
+same-agent evidence, and do not satisfy the contract's isolated release
+threshold merely because they were retained or committed.
+
+Use `evaluate-agent-skill` when new behavioral trials must be executed. This
+audit inspects the resulting evidence and its claim limits; it does not own the
+evaluation run.
 
 ## Install
 

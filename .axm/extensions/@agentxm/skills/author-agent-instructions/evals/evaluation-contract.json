@@ -1,0 +1,56 @@
+{
+  "contract_version": "1.0.0",
+  "owner": "@agentxm",
+  "decision": "Detect routing, canonical-authority, scope, projection, validation, and self-certification failures before release; this suite does not approve authored instruction systems.",
+  "target_binding": {
+    "skill_name": "author-agent-instructions",
+    "required_result_fields": ["source_revision", "package_content_identity", "suite_content_identity"]
+  },
+  "scope": {
+    "intended_use": "Creating and revising scoped repository instruction systems through their canonical owners.",
+    "stages": ["routing", "execution"],
+    "case_source": "Synthetic instruction systems covering broad and local scope, managed projections, accepted findings, and neighboring responsibilities.",
+    "excluded_claims": ["Independent conformity approval", "Universal host behavior", "Production representativeness"]
+  },
+  "unit": "One isolated attempt at one case under one recorded host, model, configuration, catalog, and authority policy.",
+  "environment": {
+    "required_result_fields": ["host", "model", "configuration_identity", "active_catalog", "authority_policy", "started_at", "ended_at"],
+    "routing_boundary": "Expose only catalog names and descriptions until a single selection or required ordered composition is recorded.",
+    "execution_boundary": "Activate the target explicitly in a disposable task-local workspace with only declared synthetic inputs."
+  },
+  "evidence": {
+    "required_per_trial": ["case_id", "stage", "raw_output_or_durable_locator", "observed_selection_or_abstention", "assertion_results", "side_effects", "outcome"],
+    "outcomes": ["pass", "fail", "unknown", "harness-error"],
+    "storage": "Keep source under evals and write routine runs only to the ignored or external evaluation workspace."
+  },
+  "grading": {
+    "instrument": "Deterministic routing and file-state checks plus assertion-based review of scope, authority, reconciliation, and handoff behavior.",
+    "unknown_policy": "Unavailable harness state, projection ownership, output, or side-effect evidence produce unknown rather than pass.",
+    "critical_gates": ["Only canonical sources and owned projections change", "The authored workflow does not expand authority", "Authoring does not claim audit closure"],
+    "calibration": "Check one known pass, one known failure, and one unknown before relying on a model grader."
+  },
+  "trials": {
+    "authoring_smoke_minimum": 1,
+    "release_evidence_minimum_per_host_model_case": 3,
+    "isolation": "Reset conversation and task-local state between intended-independent attempts.",
+    "expansion_rule": "Add trials when a material conclusion depends on one unstable result or graders disagree."
+  },
+  "comparison": {
+    "baseline": "Previous accepted exact revision under the same cases, environment, budgets, and graders when available.",
+    "absence": "Record no-baseline rather than inferring improvement."
+  },
+  "analysis": {
+    "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
+    "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain"],
+    "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation.",
+    "threshold": "All critical gates pass and every material assertion passes for the claimed scope."
+  },
+  "provenance": {
+    "required_result_fields": ["case_author", "runner", "reviewer", "grader_identity"],
+    "independence": "Same-agent evidence must remain labeled and cannot become independent approval."
+  },
+  "freshness": {
+    "expires_after_days": 180,
+    "refresh_triggers": ["Skill or handoff-template changes", "Case, grader, or harness changes", "Host, model, catalog, authority, or intended-cohort changes", "Confirmed routing or execution failure"]
+  }
+}

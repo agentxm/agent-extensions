@@ -14,7 +14,7 @@ pass is verification, not independent approval.
 ## Install
 
 ```sh
-axm install @agentxm/packs/context-engineering
+axm install @agentxm/packs/agent-engineering
 ```
 
 ## Example

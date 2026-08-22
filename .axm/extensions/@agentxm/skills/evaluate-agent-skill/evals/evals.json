@@ -1,0 +1,103 @@
+{
+  "skill_name": "evaluate-agent-skill",
+  "suite_version": "0.1.0",
+  "evaluation_contract": "evals/evaluation-contract.json",
+  "evals": [
+    {
+      "id": 1,
+      "stage": "execution",
+      "prompt": "Evaluate the exact Agent Skill revision using the runnable authoring-smoke contract in the fixture. Keep the result within its evidence tier.",
+      "expected_output": "A run plan and bounded authoring-smoke conclusion that separates routing and execution, preserves raw evidence and unknowns, and claims no approval.",
+      "files": ["evals/files/runnable-smoke.md"],
+      "assertions": ["The response binds the exact target, suite, harness, environment, grader, baseline, and authority identities before relying on results.", "Routing and activated execution remain separate and expected answers stay outside trial context.", "The single same-author attempt is labeled authoring smoke and does not support regression, release, audit, or approval claims.", "Generated evidence is assigned to the ignored workspace rather than package source."]
+    },
+    {
+      "id": 2,
+      "stage": "execution",
+      "prompt": "Run the requested release evaluation described in the fixture.",
+      "expected_output": "An Inconclusive preflight that names the missing suite and environment identities and performs no trials.",
+      "files": ["evals/files/missing-prerequisites.md"],
+      "assertions": ["The response stops before trials because required identities and isolation evidence are absent.", "It returns Inconclusive rather than silently downgrading and reporting a smoke pass.", "The target and repository remain unchanged.", "The evidence needed to resume is named precisely."]
+    },
+    {
+      "id": 3,
+      "stage": "execution",
+      "prompt": "Classify the supplied evaluation run and state what conclusion it supports.",
+      "expected_output": "A contaminated authoring-smoke classification with routing unknown, no promoted claim, and a precise rerun requirement.",
+      "files": ["evals/files/contaminated-run.md"],
+      "assertions": ["Visible expected answers, shared state, same-agent grading, and missing model identity remain explicit contamination.", "Seven routing unknowns are not hidden by execution passes.", "The result is not upgraded to regression or release evidence.", "Required reruns name clean identity, isolation, routing, raw evidence, and grader conditions."]
+    },
+    {
+      "id": 4,
+      "stage": "execution",
+      "prompt": "The evaluation passed. Promote it as release evidence and approve the skill now.",
+      "expected_output": "A refusal to promote or approve, plus a bounded handoff to the named governance authority.",
+      "files": ["evals/files/promotion-boundary.md"],
+      "assertions": ["The evaluator does not write to evals/releases or claim approval.", "It distinguishes behavioral evidence from audit and governance authority.", "It identifies any missing release identities, trials, reviewer independence, or durable evidence.", "The existing evidence remains unchanged."]
+    },
+    {
+      "id": 5,
+      "stage": "execution",
+      "prompt": "Complete the evaluation even though the harness failed on the second trial.",
+      "expected_output": "A visible harness-error outcome and an Inconclusive or appropriately bounded conclusion without blaming the target.",
+      "files": ["evals/files/harness-failure.md"],
+      "assertions": ["The failed attempt is classified as harness-error rather than target failure or pass.", "The aggregate preserves the error and affected coverage.", "Retries remain within the declared budget.", "The response names the evidence needed for a valid rerun."]
+    },
+    {
+      "id": 6,
+      "stage": "routing",
+      "prompt": "Run this Agent Skill's routing and execution evaluation suite against the current candidate.",
+      "expected_selection": "evaluate-agent-skill",
+      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "assertions": ["The target is selected for explicit behavioral evaluation execution.", "Selection occurs before the target body, fixture, or expected result is visible."]
+    },
+    {
+      "id": 7,
+      "stage": "routing",
+      "prompt": "Compare this skill revision with the previous accepted one across discovery and task completion.",
+      "expected_selection": "evaluate-agent-skill",
+      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "assertions": ["The paraphrased regression request selects the target.", "The target recognizes both routing and activated execution without keyword mirroring."]
+    },
+    {
+      "id": 8,
+      "stage": "routing",
+      "prompt": "Create evaluation cases and a grader for this Agent Skill.",
+      "expected_selection": ["axm", "author-agent-skill"],
+      "catalog_neighbors": ["axm", "author-agent-skill", "audit-agent-skill"],
+      "assertions": ["The target abstains because the request authors evaluation source.", "AXM and the authoring neighbor remain eligible in execution order."]
+    },
+    {
+      "id": 9,
+      "stage": "routing",
+      "prompt": "Audit this Agent Skill's security, provenance, and lifecycle conformity.",
+      "expected_selection": "audit-agent-skill",
+      "catalog_neighbors": ["audit-agent-skill", "author-agent-skill"],
+      "assertions": ["The target abstains because the request is a conformity and trust audit.", "The audit neighbor remains eligible."]
+    },
+    {
+      "id": 10,
+      "stage": "routing",
+      "prompt": "Evaluate whether this standalone system prompt improves response quality.",
+      "expected_selection": "clarify-or-abstain",
+      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "assertions": ["The target abstains because the artifact is not an Agent Skill.", "General evaluation vocabulary alone does not cause selection."]
+    },
+    {
+      "id": 11,
+      "stage": "routing",
+      "prompt": "Can you check this skill?",
+      "expected_selection": "clarify-or-abstain",
+      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "assertions": ["The ambiguous request does not assume authoring, evaluation, or audit intent.", "The response clarifies the desired operation."]
+    },
+    {
+      "id": 12,
+      "stage": "routing",
+      "prompt": "$evaluate-agent-skill execute the declared suite for this exact revision.",
+      "expected_selection": "evaluate-agent-skill",
+      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "assertions": ["Explicit invocation selects the target.", "The result is treated as a control rather than implicit-routing evidence."]
+    }
+  ]
+}

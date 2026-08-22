@@ -2,6 +2,11 @@
 
 ## 2026-08-21
 
+- **Evaluation evidence lifecycle**: Added portable guides for managing
+  evaluation source, generated runs, and promoted decision evidence and for
+  evaluating Agent Skills through independent routing and activated-execution
+  stages. Added provisional repository layouts, isolation and retention rules,
+  evidence tiers, and an explicit artifact lifecycle to evaluation governance.
 - **Agent Skill authoring architecture**: Added a focused creation guide and
   moved candidate admission, routing, workflow contracts, package composition,
   host adaptation, interaction design, and proportional lifecycle guidance

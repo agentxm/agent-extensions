@@ -7,10 +7,7 @@ First-party public extensions maintained by
 
 | Pack | Purpose | Install |
 | --- | --- | --- |
-| `agent-engineering` | Agent behavior foundations with companion harness, context, prompt, and evaluation knowledge | `axm install @agentxm/packs/agent-engineering` |
-| `context-engineering` | Context, prompt, and evaluation knowledge plus project-context workflows | `axm install @agentxm/packs/context-engineering` |
-| `harness-engineering` | Agent-system harness foundations and context-engineering workflows | `axm install @agentxm/packs/harness-engineering` |
-| `skill-engineering` | Agent Skill authoring, evaluation, audit, admission, governance, and lifecycle | `axm install @agentxm/packs/skill-engineering` |
+| `agent-engineering` | Agent, harness, context, prompt, evaluation, instruction-system, and Agent Skill engineering workflows | `axm install @agentxm/packs/agent-engineering` |
 
 Canonical packages live under `.axm/extensions/@agentxm`. Agent-specific skill
 directories are AXM-managed projections and are not authoring locations.

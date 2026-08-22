@@ -1,6 +1,6 @@
 ---
 name: audit-agent-skill
-description: Audits an Agent Skill against applicable skill-engineering guidance and produces snapshot-bound findings about design, routing, execution, portability, authority, provenance, licensing, packaging, and lifecycle integrity. Use when asked to audit, review, assess, check conformity, verify remediation, benchmark relevant claims, or audit and fix an Agent Skill or SKILL.md package. Not for silently modifying a skill during an assessment-only audit or independently approving it.
+description: Audits an Agent Skill against applicable skill-engineering guidance and produces snapshot-bound findings about design, routing, execution, portability, authority, provenance, licensing, packaging, and lifecycle integrity. Use when asked to audit, review, assess, check conformity, verify remediation, or audit and fix an Agent Skill or SKILL.md package. Not for running a behavioral evaluation suite, silently modifying a skill during an assessment-only audit, or independently approving it.
 ---
 # Audit an Agent Skill
 
@@ -25,6 +25,8 @@ for the declared scope, all relative to
   `skills/decision-support-presentations.md` when the target compares
   alternatives or leaves a consequential choice with a human;
 - behavioral claims: `evaluation/skill-evaluation-model.md`,
+  `evaluation/evaluating-agent-skills.md`,
+  `evaluation/managing-evaluation-assets-and-evidence.md`,
   `evaluation/skill-routing-evaluations.md`, and
   `evaluation/skill-execution-evaluations.md` plus the needed general
   evaluation concepts under `evaluation/`;
@@ -80,17 +82,30 @@ not an independent audit or approval.
    mandatory defects.
 3. **Inventory the complete package.** Include manifests, `SKILL.md`, scripts,
    references, assets, symlinks, generated metadata, examples, evaluations,
-   dependencies, licenses, and projections. Resolve symlinks without traversing
-   unsafe or unrelated locations.
+   dependencies, licenses, and projections. Classify evaluation source,
+   generated run evidence, aggregate analysis, promoted decision evidence, and
+   governance records separately. Resolve symlinks without traversing unsafe or
+   unrelated locations.
 4. **Assess design and routing.** Check candidate evidence, one-job boundaries,
    trigger language, negative boundaries, workflow contracts, progressive
    disclosure, resource necessity, references, host claims, and agreement
    between model-facing and registry-facing promises.
 5. **Assess behavior where claimed.** Keep routing and activated execution
-   separate. Use representative positives, paraphrases, adjacent negatives,
-   failure and authority cases, useful baselines, and deterministic graders for
-   structural contracts. Report unavailable hosts or trials as untested, not
-   passing.
+   separate. Verify that existing evidence binds clean target, suite, harness,
+   host, model, configuration, catalog, authority, grader, trial, baseline, and
+   raw-evidence identities before relying on it. Detect same-agent grading,
+   visible expected answers, shared state, summaries substituted for raw output,
+   expired locators, hidden unknowns, and untested stages. Use representative
+   positives, paraphrases, adjacent negatives, failure and authority cases,
+   useful baselines, and deterministic graders for structural contracts. Report
+   unavailable hosts or trials as untested, not passing.
+   Treat one conversation or mutable task workspace reused across cases or
+   intended-independent attempts as explicit shared-state contamination; name
+   it separately even when the aggregate otherwise looks successful.
+   When the caller also requests new behavioral trials, hand the exact target,
+   suite, and claim tier to the direct sibling
+   `.axm/extensions/@agentxm/skills/evaluate-agent-skill/src/SKILL.md`, then audit
+   the resulting evidence; audit owns evidence assessment, not run execution.
 6. **Trace authority and trust.** Identify reads, writes, deletion, commands,
    network destinations, credentials, data classes, approvals, external
    mutations, executable dependencies, provenance, integrity, licensing,
@@ -99,6 +114,9 @@ not an independent audit or approval.
 7. **Assess lifecycle integrity.** Check version intent, compatibility and risk
    deltas, evidence freshness, migration, rollback, deprecated dependencies,
    ownership, and which changes require refreshed evidence or governance.
+   Confirm that runtime payload, versioned evaluation source, generated
+   workspace, and promoted evidence follow their declared repository lifecycle;
+   source control alone does not promote a run.
 8. **Report findings.** Use `references/audit-report.md`. Every finding names a
    guideline or expectation, applicability, severity, exact evidence,
    consequence, smallest responsible surface, and required remediation or
@@ -128,7 +146,8 @@ not an independent audit or approval.
 
 The report binds exact target and guidance identities; inventories every
 material surface; distinguishes static, behavioral, trust, and lifecycle
-evidence; traces findings to applicable guidance and exact evidence; preserves
-pre- and post-change identities when remediation occurs; exposes untested
-claims and remaining authority; and does not turn same-agent verification into
+evidence; classifies evaluation artifacts and their claim ceilings; traces
+findings to applicable guidance and exact evidence; preserves pre- and
+post-change identities when remediation occurs; exposes untested claims and
+remaining authority; and does not turn tracked or same-agent evidence into
 independent approval.

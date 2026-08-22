@@ -1,6 +1,6 @@
 {
   "skill_name": "audit-agent-skill",
-  "suite_version": "0.2.0",
+  "suite_version": "0.3.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -110,7 +110,7 @@
       "stage": "routing",
       "prompt": "Review this SKILL.md package for conformity and security before we admit it.",
       "expected_selection": "audit-agent-skill",
-      "catalog_neighbors": ["audit-agent-instructions", "author-agent-skill", "author-docs"],
+      "catalog_neighbors": ["audit-agent-instructions", "author-agent-skill"],
       "assertions": [
         "The target skill is selected from name and description alone.",
         "Selection occurs before the skill body or expected output is exposed."
@@ -142,22 +142,22 @@
       "id": 12,
       "stage": "routing",
       "prompt": "Create a portable Agent Skill for our release-note normalization workflow.",
-      "expected_selection": "author-agent-skill",
-      "catalog_neighbors": ["audit-agent-skill"],
+      "expected_selection": ["axm", "author-agent-skill"],
+      "catalog_neighbors": ["axm", "author-agent-skill", "audit-agent-skill"],
       "assertions": [
         "The target skill abstains because the request is authoring rather than assessment.",
-        "The neighboring authoring skill remains eligible."
+        "AXM and the neighboring authoring skill remain eligible in execution order."
       ]
     },
     {
       "id": 13,
       "stage": "routing",
       "prompt": "Review and improve this README for clarity.",
-      "expected_selection": "author-docs",
+      "expected_selection": "clarify-or-abstain",
       "catalog_neighbors": ["audit-agent-skill"],
       "assertions": [
         "Shared review vocabulary does not cause the target skill to activate.",
-        "The request remains with documentation authoring or review."
+        "The request remains available for a documentation authoring or review capability when one is present."
       ]
     },
     {
@@ -175,11 +175,11 @@
       "id": 15,
       "stage": "routing",
       "prompt": "Audit and fix this SKILL.md package, then verify the revised version.",
-      "expected_selection": "audit-agent-skill",
-      "catalog_neighbors": ["author-agent-skill", "audit-agent-instructions"],
+      "expected_selection": ["audit-agent-skill", "axm", "author-agent-skill", "audit-agent-skill"],
+      "catalog_neighbors": ["axm", "author-agent-skill", "audit-agent-instructions"],
       "assertions": [
-        "The combined audit-remediation-verification request selects the target skill.",
-        "The activated workflow delegates only the authorized revision phase to author-agent-skill."
+        "The combined request selects audit first, AXM and authoring for the authorized revision, and audit again for closure verification.",
+        "The activated workflow keeps audit, authoring, and verification responsibilities distinct."
       ]
     },
     {
@@ -191,6 +191,20 @@
       "assertions": [
         "Explicit invocation selects the target skill.",
         "The result is recorded as an explicit control rather than implicit-routing evidence."
+      ]
+    },
+    {
+      "id": 17,
+      "stage": "execution",
+      "prompt": "Audit the evaluation evidence and repository lifecycle described in the fixture. Do not modify it.",
+      "expected_output": "A bounded finding that recognizes the record as honestly labeled authoring smoke but unsupported as release evidence, classifies its storage as routine generated output, and requires a repository evidence lifecycle.",
+      "files": ["evals/files/authoring-smoke-evidence.md"],
+      "assertions": [
+        "The tracked file is not treated as promoted evidence merely because it is committed or reports zero failures.",
+        "The audit identifies the uncommitted target identity, undisclosed environment, same-agent grading, visible expected outputs, shared state, missing raw evidence, and untested routing stage.",
+        "The nine-pass aggregate does not conceal the seven unknown routing cases or raise the claim ceiling.",
+        "The audit preserves the honest authoring-smoke label while recommending that routine generated runs move to an ignored or external workspace.",
+        "Required remediation distinguishes versioned evaluation source, generated run evidence, promoted decision evidence, and the governance decision."
       ]
     }
   ]

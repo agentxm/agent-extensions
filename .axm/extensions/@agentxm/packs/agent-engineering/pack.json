@@ -1,8 +1,8 @@
 {
   "$schema": "https://axm.sh/schemas/pack.schema.json",
   "owner": "@agentxm",
-  "version": "0.7.0",
-  "description": "Agent engineering knowledge with workflows for authoring and auditing agent instructions and Agent Skills",
+  "version": "0.9.0",
+  "description": "Agent engineering knowledge with workflows for authoring, evaluating, and auditing agent instructions and Agent Skills",
   "keywords": [
     "agent-engineering",
     "ai-agents",
@@ -25,10 +25,11 @@
   "type": "pack",
   "name": "agent-engineering",
   "dependencies": {
-    "@agentxm/knowledge/agent-engineering": ">=0.5.0",
+    "@agentxm/knowledge/agent-engineering": ">=0.6.0",
     "@agentxm/skills/author-agent-instructions": "^0.1.0",
     "@agentxm/skills/audit-agent-instructions": "^0.1.0",
-    "@agentxm/skills/author-agent-skill": ">=0.5.0",
-    "@agentxm/skills/audit-agent-skill": ">=0.3.2"
+    "@agentxm/skills/author-agent-skill": ">=0.6.0",
+    "@agentxm/skills/audit-agent-skill": ">=0.5.0",
+    "@agentxm/skills/evaluate-agent-skill": ">=0.1.1"
   }
 }

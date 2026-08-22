@@ -22,7 +22,8 @@
     "audit-agent-skill": "workspace:@agentxm/skills/audit-agent-skill",
     "author-agent-skill": "workspace:@agentxm/skills/author-agent-skill",
     "author-agent-instructions": "workspace:@agentxm/skills/author-agent-instructions",
-    "audit-agent-instructions": "workspace:@agentxm/skills/audit-agent-instructions"
+    "audit-agent-instructions": "workspace:@agentxm/skills/audit-agent-instructions",
+    "evaluate-agent-skill": "workspace:@agentxm/skills/evaluate-agent-skill"
   },
   "knowledge": {
     "agent-engineering": "workspace:@agentxm/knowledge/agent-engineering"
