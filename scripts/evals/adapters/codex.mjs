@@ -1,12 +1,53 @@
 #!/usr/bin/env node
 
 import { spawn, spawnSync } from "node:child_process";
-import { mkdtempSync, mkdirSync, readFileSync, realpathSync, rmSync, writeFileSync, cpSync } from "node:fs";
+import { mkdtempSync, mkdirSync, readFileSync, realpathSync, readdirSync, rmSync, writeFileSync, cpSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
 function writeJson(path, value) {
   writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function taskFiles(root, current = root) {
+  const files = new Map();
+  for (const entry of readdirSync(current, { withFileTypes: true })) {
+    if (current === root && new Set([".axm", ".git", "inputs", "output-schema.json", "final.json"]).has(entry.name)) continue;
+    const path = join(current, entry.name);
+    if (entry.isDirectory()) {
+      for (const [name, content] of taskFiles(root, path)) files.set(name, content);
+    } else if (entry.isFile()) {
+      files.set(relative(root, path), readFileSync(path));
+    }
+  }
+  return files;
+}
+
+function changedArtifacts(before, after) {
+  const artifacts = [];
+  let retainedBytes = 0;
+  for (const path of [...new Set([...before.keys(), ...after.keys()])].sort()) {
+    const previous = before.get(path);
+    const current = after.get(path);
+    if (previous && current && previous.equals(current)) continue;
+    if (!current) {
+      artifacts.push({ path, deleted: true });
+      continue;
+    }
+    const binary = current.includes(0);
+    const remaining = Math.max(0, 131072 - retainedBytes);
+    const retained = current.subarray(0, Math.min(current.length, 32768, remaining));
+    retainedBytes += retained.length;
+    artifacts.push({
+      path,
+      deleted: false,
+      size_bytes: current.length,
+      content: binary ? null : retained.toString("utf8"),
+      truncated: retained.length < current.length,
+      binary,
+    });
+  }
+  return artifacts;
 }
 
 function run(command, args, cwd, timeoutMs, stdoutPath, stderrPath) {
@@ -54,6 +95,7 @@ if (!new Set(["read-only", "workspace-write"]).has(sandboxMode)) {
 try {
   let prompt;
   let schema;
+  let beforeTaskFiles = new Map();
   if (mode === "trial" && request.stage === "routing") {
     schema = {
       type: "object",
@@ -113,6 +155,7 @@ try {
     const inputRoot = join(workspace, "inputs");
     mkdirSync(inputRoot, { recursive: true });
     for (const fixture of request.fixtures) writeFileSync(join(inputRoot, fixture.name), fixture.content);
+    beforeTaskFiles = taskFiles(workspace);
     schema = {
       type: "object",
       additionalProperties: false,
@@ -191,6 +234,10 @@ try {
     process.exitCode = result.code;
   } else {
     const output = JSON.parse(readFileSync(finalPath, "utf8"));
+    if (mode === "trial" && request.stage === "execution") {
+      output.artifacts = changedArtifacts(beforeTaskFiles, taskFiles(workspace));
+      writeJson(join(trialRoot, "artifacts.json"), output.artifacts);
+    }
     writeJson(join(trialRoot, mode === "trial" ? "response.json" : "grade.json"), output);
   }
 } finally {

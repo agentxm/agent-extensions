@@ -48,8 +48,10 @@ The Codex adapter starts a fresh temporary workspace and process for each trial
 and grader call. Routing trials see only catalog names and descriptions.
 Execution trials receive the target runtime payload, the coupled public
 agent-engineering knowledge, and declared fixture contents. The adapter removes
-the temporary workspace after preserving transcripts, responses, grades,
-timing, and adapter logs in the run directory.
+the temporary workspace after preserving transcripts, responses, changed
+task-artifact contents, grades, timing, and adapter logs in the run directory.
+Text artifact evidence is bounded and may be marked truncated; binary content
+is described but not embedded.
 
 ## Adapter contract
 
