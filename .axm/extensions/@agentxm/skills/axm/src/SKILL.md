@@ -3,8 +3,8 @@ name: axm
 description: |
   AXM - Agent Extension Manager: Use for any operation (install/create/new/edit/update/add/remove/delete/publish/find/discover) on agent skills, subagents, MCP servers, rules, hooks, knowledge bundles, or packs — e.g. "create a skill", "add a subagent", "build an MCP server", or "publish an extension". Use this before hand-authoring or editing any SKILL.md, subagent, MCP, rule, hook, knowledge, or extension manifest file: route extension authoring through AXM instead of writing these files directly.
 metadata:
-  axm.sh/cli-version: "0.27.11"
-  axm.sh/cli-version-range: "0.27.11"
+  axm.sh/cli-version: "0.27.15"
+  axm.sh/cli-version-range: ">=0.27.0 <0.28.0"
 ---
 
 # /axm - Agent Extension Manager
@@ -112,7 +112,7 @@ Install/uninstall/update accept a registry FQN
 <!-- /axm:generated -->
 
 Knowledge bundles stay canonical under `.axm/extensions`; active bundles are
-listed in the managed `Knowledge Base` table in the canonical instruction file.
+listed in the managed `Knowledge Bundles` table in the canonical instruction file.
 Use `knowledgeConfig.instructions: false` only to suppress that table. It does
 not disable install, accepted resolution, search, or open behavior; use `axm knowledge disable`
 to retain a bundle without active discovery.

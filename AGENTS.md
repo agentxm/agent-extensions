@@ -51,8 +51,8 @@ the developer explicitly requests that operation.
 | --- | --- | --- | --- | --- |
 | axm-cli-interactions | survey | Sessions that directly run `axm` to complete work in this workspace or manually validate AXM behavior; automated test invocations excluded | — | Recurring notes support a specific target condition, or two triage reviews find no pattern |
 
-<!-- axm:start region=knowledge-base -->
-## Knowledge Base
+<!-- axm:start v=1 region=knowledge ext=@agentxm/knowledge/discovery -->
+## Knowledge Bundles
 
 ### @agentxm
 
@@ -66,9 +66,9 @@ the developer explicitly requests that operation.
 | --- | --- |
 | [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for authoring, naming, information architecture, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
 | [field-notes](.axm/extensions/@craigsmitham/knowledge/field-notes/src/index.md) | Observing work in progress and converting it into durable improvement: work-as-imagined vs work-as-done, survey and target subjects, recurrence thresholds, and verified closure |
-<!-- axm:end region=knowledge-base -->
-<!-- axm:start region=rules -->
-<!-- axm:rule @craigsmitham/rules/field-notes@0.1.4 -->
+<!-- axm:end v=1 region=knowledge -->
+<!-- axm:start v=1 region=rules ext=@agentxm/rules/instructions -->
+<!-- axm:point v=1 ext=@craigsmitham/rules/field-notes@0.1.4 kind=rule -->
 
 ## Field notes
 
@@ -109,4 +109,4 @@ three options.
 
 To declare subjects, triage notes, or promote them into findings, use the
 `field-notes` skill. Never do that work inline.
-<!-- axm:end region=rules -->
+<!-- axm:end v=1 region=rules -->
