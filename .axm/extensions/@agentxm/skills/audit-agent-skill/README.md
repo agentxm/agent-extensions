@@ -14,7 +14,7 @@ not executed merely for inspection.
 ## Install
 
 ```sh
-axm install @agentxm/packs/skill-engineering
+axm install @agentxm/packs/agent-engineering
 ```
 
 ## Example

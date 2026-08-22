@@ -19,6 +19,9 @@ Reusable workflows packaged behind routing metadata and disclosed on demand.
 
 ## Design
 
+- [How to author an Agent Skill](authoring-agent-skills.md) - Turning defined
+  requirements or workflow evidence into a bounded portable skill with
+  proportionate validation.
 - [How to select a skill candidate](candidate-selection.md) - Deciding whether
   repeated work warrants a reusable Agent Skill.
 - [Routing and activation](routing-and-activation.md) - How metadata becomes a

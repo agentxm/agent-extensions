@@ -1,5 +1,20 @@
 # Agent engineering update log
 
+## 2026-08-21
+
+- **Agent Skill authoring architecture**: Added a focused creation guide and
+  moved candidate admission, routing, workflow contracts, package composition,
+  host adaptation, interaction design, and proportional lifecycle guidance
+  into the knowledge bundle. The coupled authoring skill now acts as a thin
+  execution router over those concepts instead of duplicating their method.
+- **Agent-mediated user experience**: Extracted portable interaction guidance
+  for user-facing agent workflows: task-state translation, surface-independent
+  interaction intents, proportional openings and progress, answerable
+  questions, authority-aware gates, evidence-led closeouts, and plain-text
+  degradation. The guide distinguishes interaction choreography from harness
+  rendering, prompt presentation contracts, human-control policy, and agent
+  experience; the glossary now records that distinction.
+
 ## 2026-08-17
 
 - **Consolidation**: Merged the `context-engineering`, `eval-engineering`,

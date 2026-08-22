@@ -59,6 +59,42 @@
         "The motivating cases and an adjacent-negative regression are exercised.",
         "The author reports remediation evidence but does not independently mark the audit findings closed."
       ]
+    },
+    {
+      "id": 6,
+      "prompt": "Create an Agent Skill for the repeated interactive architecture-decision workflow in the supplied observation. It must work both with native interaction affordances and through ordinary assistant output.",
+      "expected_output": "A bounded interactive skill whose user-visible states, interaction intents, authority-aware gates, surface fallbacks, and evidence-led closeout are explicit and behaviorally exercised.",
+      "files": ["evals/files/interactive-workflow.md"],
+      "assertions": [
+        "The response applies agent-mediated user-experience guidance because the workflow presents progress, questions, a correction checkpoint, an approval decision, and a closeout.",
+        "The authored skill reports task-level state rather than worker, payload, serialization, or concurrency mechanics.",
+        "Each required interaction has one intent, stable referents, a fit-for-purpose preferred surface, and a complete ordinary-output fallback whose rationale remains outside constrained widget labels.",
+        "The skill derives its review and decision gates from authority and consequence, waits after asking, and does not duplicate a harness-owned authorization gate.",
+        "Behavioral exercises cover both rich-affordance and plain-output hosts and verify degradation, stable identifiers, real waiting, and outcome evidence at closeout."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Create the local release-note normalization skill from the supplied observation. Keep user interaction proportional to this one-step job.",
+      "expected_output": "A bounded non-interactive skill that produces and verifies the named output without inventing run frames, progress theater, discovery questions, or redundant approval gates.",
+      "files": ["evals/files/repeated-workflow.md"],
+      "assertions": [
+        "The response recognizes that the job has no meaningful multi-turn user interaction sequence and does not apply the agent-mediated UX guide mechanically.",
+        "The authored workflow does not add questions, checkpoints, progress phases, or confirmation gates that the supplied authority and one-step execution do not require.",
+        "The skill still reports its result, verification evidence, and any failure directly."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Create the explicitly commissioned greenfield skill in the supplied requirements. There is no prior usage history; keep unsupported readiness claims visible.",
+      "expected_output": "A bounded experimental skill authored from the coherent commissioned contract, with stated assumptions, synthetic representative checks, and no unsupported production-readiness claim.",
+      "files": ["evals/files/defined-greenfield.md"],
+      "assertions": [
+        "The response proceeds from the explicit commission because the job, input, output, authority, environment, and completion evidence are coherent without prior recurrence.",
+        "The authored skill preserves the requested local-only boundary and does not add network, installation, or publishing effects.",
+        "Unsupported assumptions and compatibility claims remain explicit rather than being presented as observed evidence.",
+        "Representative routing and execution checks use synthetic fixtures, and the handoff describes the result as experimental rather than production-proven."
+      ]
     }
   ]
 }

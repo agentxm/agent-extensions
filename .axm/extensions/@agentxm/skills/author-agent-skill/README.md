@@ -1,19 +1,24 @@
 # Author Agent Skill
 
-Create a new portable Agent Skill or revise an existing one from concrete
-workflow evidence, accepted audit findings, observed failures, or changed
-requirements. The workflow bounds one job, authors the canonical package,
-validates it, exercises representative cases, and records compatibility,
-authority, migration, and remaining-evidence implications.
+Create a new portable Agent Skill or revise an existing one from defined or
+changed requirements, concrete workflow evidence, accepted audit findings, or
+observed failures. The skill is a thin execution layer over the authoritative
+authoring and interaction guidance in the coupled `agent-engineering` knowledge
+bundle.
 
 Use it for requests to create, fix, update, adapt, restructure, or remediate an
 Agent Skill. Use `audit-agent-skill` to assess conformity or verify closure;
 authoring does not independently certify its own changes.
 
+When the target owns a meaningful user-facing sequence, the workflow applies
+the agent-engineering guidance for openings, progress, questions, interaction
+surfaces, gates, and closeouts. It leaves one-step and non-interactive skills
+free of unnecessary interaction ceremony.
+
 ## Install
 
 ```sh
-axm install @agentxm/packs/skill-engineering
+axm install @agentxm/packs/agent-engineering
 ```
 
 ## Example

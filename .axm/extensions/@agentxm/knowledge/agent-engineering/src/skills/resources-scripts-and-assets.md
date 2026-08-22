@@ -39,6 +39,10 @@ repeated fragile transformations as prose merely to avoid maintaining code.
 - Avoid absolute local paths and undeclared sibling dependencies.
 - Keep one authoritative copy of information.
 - Remove placeholders, unused files, and orphaned assets before release.
+- Do not add empty directories, duplicated quick references, changelogs,
+  installation prose, or other ancillary files to the agent-facing payload by
+  habit. Keep human-facing package documentation only when the distribution
+  surface requires it.
 - Review every packaged byte; non-`SKILL.md` content can still execute, leak,
   mislead, or violate redistribution rights.
 
