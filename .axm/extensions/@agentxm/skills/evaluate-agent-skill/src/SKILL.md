@@ -91,7 +91,10 @@ it.
 6. **Run routing independently.** Expose only the catalog discovery surface,
    normally names and descriptions, until selection or abstention is recorded.
    Do not reveal the target body, fixtures, expected selection, assertions, or
-   grader internals. Treat explicit invocation as a control.
+   grader internals. Treat explicit invocation as a control. Sample each case
+   enough times to report a trigger rate against a declared threshold rather
+   than a single verdict, and keep decision cases held out from any set used to
+   tune the description.
 7. **Run activated execution independently.** Explicitly activate the target,
    provide only declared task-local inputs, and preserve output artifacts,
    external state, side effects, permissions, costs, timing, raw response, and
@@ -99,16 +102,22 @@ it.
 8. **Run comparisons and trials.** Use the previous accepted exact revision or
    a meaningful without-skill alternative under fixed conditions. Record
    `no-baseline` when none is defensible. Apply consistent budgets and enough
-   independent trials to expose decision-relevant variance.
+   independent trials to expose decision-relevant variance. Where a comparison
+   rests on judged quality, withhold provenance from the judge and attribute the
+   difference only after the verdict is recorded.
 9. **Grade and inspect evidence.** Preserve per-assertion evidence and separate
    target, case, harness, environment, and grader failures. Inspect a
    representative sample of passes, failures, unknowns, and disagreements
    before aggregation. A persuasive final answer cannot substitute for the
-   promised artifact or state.
+   promised artifact or state. Keep uncertainties and workarounds a trial
+   reported about its own run as observations, never as grades, and record
+   grader reports of assertions a wrong output would also satisfy, outcomes no
+   assertion covers, and assertions the evidence cannot verify.
 10. **Analyze without erasing uncertainty.** Report routing and execution
     separately, retain case and environment slices, apply critical gates before
     averages, and show unknown and harness-error coverage next to headline
-    results.
+    results. Classify each measure by whether it separates the compared
+    configurations before reporting a rate.
 11. **Conclude within the evidence.** Use `Supported`, `Partially supported`,
     `Unsupported`, or `Inconclusive`. Name exact tested identities,
     contamination, exclusions, independence limits, expiry, and remaining
@@ -116,8 +125,9 @@ it.
 12. **Retain and hand off.** Keep raw evidence and aggregate analysis in the
     ignored workspace or governed artifact store. Use
     `references/evaluation-report.md` for a durable report. Route confirmed
-    target or suite failures to authoring, evidence-integrity questions to
-    audit, and promotion or approval to the named governance authority.
+    target failures and suite findings to authoring, evidence-integrity
+    questions to audit, and promotion or approval to the named governance
+    authority.
 
 ## Critical failures
 

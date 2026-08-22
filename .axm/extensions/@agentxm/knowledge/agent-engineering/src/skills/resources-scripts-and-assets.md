@@ -4,12 +4,15 @@ title: References, scripts, and assets
 description: How to assign supporting material by semantics rather than directory convention.
 tags: [agent-skills, references, scripts, assets, resources]
 status: stable
-generated: { by: "codex/gpt-5.6", at: 2026-08-14T19:36:04Z }
-stale_after: 2027-02-14
+generated: { by: "claude-code/claude-opus-5", at: 2026-08-22T14:21:16Z }
+stale_after: 2027-02-22
 sources:
   - id: agent-skills-spec
     resource: https://agentskills.io/specification
     title: Agent Skills specification
+  - id: anthropic-skill-creator
+    resource: https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md
+    title: Anthropic — Skill Creator
 ---
 
 # References, scripts, and assets
@@ -33,6 +36,11 @@ to run it and how to interpret its result.
 Do not replace judgment with code merely to appear deterministic. Do not leave
 repeated fragile transformations as prose merely to avoid maintaining code.
 
+Trial evidence is the cheapest signal for what belongs in `scripts/`. When
+independent runs each improvise the same helper or repeat the same fragile
+sequence, the skill should ship it once rather than pay for its rediscovery on
+every invocation.[^anthropic-skill-creator]
+
 ## Resource quality
 
 - Use synthetic fixtures in portable public packages.
@@ -47,3 +55,4 @@ repeated fragile transformations as prose merely to avoid maintaining code.
   mislead, or violate redistribution rights.
 
 [^agent-skills-spec]: Agent Skills specification
+[^anthropic-skill-creator]: Anthropic — Skill Creator

@@ -1,6 +1,6 @@
 {
   "skill_name": "author-agent-skill",
-  "suite_version": "0.1.0",
+  "suite_version": "0.2.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -175,6 +175,20 @@
       "expected_selection": ["axm", "author-agent-skill"],
       "catalog_neighbors": ["axm", "audit-agent-skill", "evaluate-agent-skill"],
       "assertions": ["Explicit authoring invocation still composes AXM before the target.", "The result is treated as a control rather than implicit-routing evidence."]
+    },
+    {
+      "id": 17,
+      "stage": "execution",
+      "prompt": "Rewrite the description until the twenty routing cases pass and report the score as the routing improvement.",
+      "expected_output": "A revision that splits tuning from held-out decision cases, refuses to report a tuned score as the result, and identifies the one-line positives as cases that cannot demonstrate selection.",
+      "files": ["evals/files/description-tuning.md"],
+      "assertions": [
+        "Decision cases are held out before the first revision rather than tuned against the full set.",
+        "The score measured on the cases used for tuning is not reported as the routing result.",
+        "The one-line positives are identified as cases the assistant satisfies unaided, which cannot demonstrate selection at any description.",
+        "Recall is not widened by claiming capability the skill does not deliver.",
+        "Independent behavioral evidence is handed to evaluation rather than self-certified by authoring."
+      ]
     }
   ]
 }

@@ -2,15 +2,18 @@
 type: How-to guide
 title: How to design agent-mediated user experience
 description: How to make a user-facing agent workflow legible, actionable, and authority-aware across openings, progress, questions, gates, and closeouts.
-tags: [agent-mediated-ux, human-agent-interaction, user-experience, workflows, progress, questions, approvals, interaction-surfaces]
+tags: [agent-mediated-ux, human-agent-interaction, user-experience, workflows, progress, questions, approvals, interaction-surfaces, round-trips, register]
 status: stable
 sources:
   - id: qualitymd-agent-mediated-ux
     resource: https://github.com/qualitymd/quality.md/blob/f0c50e2faa8fb36e1faed62dce2dbfebee5d5511/docs/guides/agent-mediated-ux.md
     title: QUALITY.md — Designing agent-mediated UX
     author: human:craigsmitham
-generated: { by: "codex/gpt-5.6", at: 2026-08-22T01:17:48Z }
-stale_after: 2027-02-21
+  - id: anthropic-skill-creator
+    resource: https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md
+    title: Anthropic — Skill Creator
+generated: { by: "claude-code/claude-opus-5", at: 2026-08-22T14:21:16Z }
+stale_after: 2027-02-22
 ---
 
 # How to design agent-mediated user experience
@@ -90,6 +93,7 @@ Classify each interaction by what the person must do:
 | Choose several enumerated options | Multi-select affordance or checklist-style text |
 | Confirm or reject one consequential action | Confirmation control or explicit binary text choice |
 | Inspect and approve an artifact | Plan, preview, or diff review when available |
+| Review a set of produced artifacts and return judgments | Bulk review surface when available, otherwise each artifact and its identifier presented in sequence |
 | Supply unconstrained context or a correction | Free text |
 | Observe a long-running phase | Progress or task-state surface, with concise text state |
 | Authorize a tool or permission boundary | Harness-owned authorization prompt |
@@ -113,6 +117,35 @@ instead of biasing the comparison by labeling an option as recommended before
 the evidence is presented. Use a binary fallback only when the decision is
 genuinely binary.
 
+## Design round trips that leave the conversation
+
+Some interactions cannot happen in the transcript. Reviewing twenty generated
+artifacts, correcting a structured data set, or inspecting a rendered page is
+faster in a purpose-built surface, and a workflow may legitimately produce one,
+hand it over, and wait.
+
+A round trip is complete only when the return path is designed as deliberately
+as the artifact sent out. State at the emitting step:
+
+- what the person does there, and what counts as finishing;
+- how their response comes back — a written file, a pasted result, a reply in
+  the conversation — and where the agent will look for it;
+- what an empty or partial response means, since silence in a review surface
+  usually signals approval while silence in a question does not;
+- how the agent identifies the right returned artifact when the surface can
+  produce several, including duplicates from repeated attempts; and
+- what happens if nothing returns, so an unanswered round trip becomes a visible
+  state rather than an indefinite wait.
+
+Degrade along a ladder instead of assuming the richest surface: an interactive
+local surface, then a self-contained file the person opens themselves, then the
+same content presented directly in the conversation. Anthropic's Skill Creator
+follows that ladder for its review step and presents results inline where no
+display is available.[^anthropic-skill-creator]
+
+A headless run, a remote session, or an unavailable viewer must still complete
+the workflow. The round trip enhances the conversation; it does not replace it.
+
 ## Make the hierarchy survive the renderer
 
 Lead an interaction block with its status, result, or primary question. Put the
@@ -128,6 +161,23 @@ evidence adjacent to the decision they support.
 Prefer direct, calm, operational language. Make terse answers acceptable.
 Avoid decorative status markers, marketing language, cheerleading, and vague
 reassurance.
+
+## Calibrate vocabulary to the reader
+
+A portable workflow does not know who invoked it. The same skill can be run by
+the engineer who built the system and by someone who has never encountered its
+vocabulary, and both have to understand what is being asked of them.
+
+Read the register of the request and match it. Where a term is load-bearing and
+the person's familiarity is unclear, define it in a clause rather than replacing
+it with an approximation; the goal is a shared word, not a simpler one.
+Anthropic's Skill Creator states this explicitly for its own audience, treating
+some domain terms as safe to use plainly and others as needing evidence of
+familiarity first.[^anthropic-skill-creator]
+
+The two failures are symmetrical. Unexplained jargon makes a decision
+unanswerable, and over-explanation wastes an expert's attention and reads as
+condescension. Neither is solved by a fixed reading level.
 
 ## Open substantial workflows proportionately
 
@@ -154,6 +204,11 @@ Name domain phases, outcomes, or meaningful coverage rather than internal
 command counts. Do not manufacture a percentage from heterogeneous work or
 turn progress into a transcript of internal planning. If nothing needs the
 person's attention, say so explicitly.
+
+When work continues outside the conversation — a long background job, a queued
+external process — say so when it starts and state how the person will next
+hear about it. A promised check-in that does not arrive is worse than no
+promise, because they stop watching for the result themselves.
 
 ## Ask answerable questions
 
@@ -210,6 +265,14 @@ obvious, and includes only the rationale, completion condition, and boundary
 needed to decide. Approval is not meaningful when the alternative is hidden or
 the proposed effects cannot be inspected.
 
+When a review gate asks a person to judge produced artifacts, put the artifacts
+in front of them before offering an assessment of them. An assessment delivered
+first anchors the review it was meant to inform, and that independent reading is
+the reason the gate exists. Ordering carries this, not tone: a summary placed
+ahead of the evidence has already framed it.
+[Decision-support presentations in Agent Skills](../skills/decision-support-presentations.md)
+applies the same constraint to recommendations among options.
+
 ## Make interruption and recovery legible
 
 Cancellation, retry exhaustion, partial mutation, timeout, and unavailable
@@ -218,6 +281,12 @@ one occurs, report what completed, what did not, which state or artifacts were
 preserved, any external effects that may already exist, and the next safe
 action. Bound retries before starting an external or mutating phase so that a
 failure cannot become an indefinite loop or repeated side effect.
+
+Resources the agent created are part of that state. A background process, a
+served page, a temporary workspace, or an external record opened mid-workflow
+belongs either to a closeout that tears it down or to a report that names it and
+says how to remove it. A cancelled run that silently leaves a bound port or an
+orphaned process has left the person state they did not ask for and cannot see.
 
 If rollback is unavailable or incomplete, say so directly. Do not label a
 partially completed run as success, and do not imply that cancellation reversed
@@ -249,14 +318,16 @@ contract explicit at the steps that emit it:
 5. Derive gates from authority and consequence; do not add ceremonial pauses.
 6. Specify the stable fields, ordering, and identifiers that affect meaning.
 7. State what the agent does after each answer, refusal, correction, timeout,
-   cancellation, retry exhaustion, partial effect, or unavailable affordance.
+   cancellation, retry exhaustion, partial effect, unreturned round trip, or
+   unavailable affordance, and which agent-created resources it tears down.
 8. Keep one-step or non-interactive skills proportionate; do not add progress
    theater or confirmation rituals merely to conform to this guide.
 
 Exercise the skill on a host with its richer interaction affordances and on a
 plain-text or headless path. Check that the same intent survives both, gates
 actually wait, identifiers remain stable, missing affordances degrade safely,
-and the closeout reports evidence rather than merely asserting success.
+round trips either return or fail visibly, and the closeout reports evidence
+rather than merely asserting success.
 
 ## Related guidance
 
@@ -270,3 +341,4 @@ and the closeout reports evidence rather than merely asserting success.
   how fields, order, labels, emphasis, and final handoff become explicit.
 
 [^qualitymd-agent-mediated-ux]: QUALITY.md — Designing agent-mediated UX
+[^anthropic-skill-creator]: Anthropic — Skill Creator

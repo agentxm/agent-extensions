@@ -66,7 +66,9 @@ closed.
    execution genuinely needs them.
 4. Validate the package and changed deterministic helpers. Exercise routing and
    execution in proportion to the change; include affected regressions and any
-   claimed rich and plain interaction paths. Write generated runs only to the
+   claimed rich and plain interaction paths. When a description is revised
+   against measured routing results, hold out decision cases before the first
+   revision so the reported result is not a measure of its own tuning. Write generated runs only to the
    repository's ignored or external evaluation workspace. Label same-agent or
    non-isolated exercises as authoring smoke and never promote them to release
    evidence.

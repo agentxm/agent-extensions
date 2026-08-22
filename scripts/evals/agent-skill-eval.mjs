@@ -580,18 +580,41 @@ async function runEvaluation(args) {
     }
   }
 
+  const routingTrials = trialRecords.filter((item) => item.stage === "routing");
+  const routingCaseRates = [...new Set(routingTrials.map((item) => item.case_id))].map((caseId) => {
+    const caseTrials = routingTrials.filter((item) => item.case_id === caseId);
+    const matched = caseTrials.filter((item) => item.outcome === "pass").length;
+    return {
+      case_id: caseId,
+      attempts: caseTrials.length,
+      matched,
+      match_rate: matched / caseTrials.length,
+      stable: matched === 0 || matched === caseTrials.length,
+    };
+  });
+  const unstableRouting = routingCaseRates.filter((item) => !item.stable);
+
+  const limitations = [run.claim_ceiling, run.independence];
+  if (trials === 1 && routingTrials.length > 0) {
+    limitations.push("Single-attempt routing cannot characterize a stochastic selection surface; rates are undetermined.");
+  }
+  if (unstableRouting.length > 0) {
+    limitations.push(`Selection varied between attempts on ${unstableRouting.length} routing case(s); read the rate, not the disposition.`);
+  }
+
   const summary = {
-    schema_version: "1.0.0",
+    schema_version: "1.1.0",
     run_id: runId,
     counts,
-    routing: trialRecords.filter((item) => item.stage === "routing"),
+    routing: routingTrials,
+    routing_case_rates: routingCaseRates,
     execution: trialRecords.filter((item) => item.stage === "execution"),
     conclusion: counts["harness-error"] > 0 || counts.unknown > 0
       ? "Inconclusive"
       : counts.fail > 0
         ? "Unsupported"
         : "Supported",
-    limitations: [run.claim_ceiling, run.independence],
+    limitations,
   };
   writeJson(join(runRoot, "summary.json"), summary);
   writeFileSync(join(runRoot, "report.md"), [
@@ -600,10 +623,16 @@ async function runEvaluation(args) {
     `- Run: \`${runId}\``,
     `- Evidence class: \`${evidenceClass}\``,
     `- Conclusion: **${summary.conclusion}**`,
-    `- Routing trials: ${summary.routing.length}`,
+    `- Routing trials: ${summary.routing.length} across ${routingCaseRates.length} case(s), ${trials} attempt(s) each`,
+    `- Routing cases with selection varying between attempts: ${
+      unstableRouting.length === 0
+        ? "none"
+        : unstableRouting.map((item) => `${item.case_id} (${item.matched}/${item.attempts})`).join(", ")
+    }`,
     `- Execution trials: ${summary.execution.length}`,
     `- Outcomes: ${JSON.stringify(counts)}`,
     `- Claim ceiling: ${run.claim_ceiling}`,
+    ...summary.limitations.slice(2).map((item) => `- Limitation: ${item}`),
     "",
     "This evaluation does not approve, publish, admit, or audit the target.",
     "",

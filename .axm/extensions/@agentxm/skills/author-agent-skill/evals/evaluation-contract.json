@@ -9,7 +9,7 @@
   "scope": {
     "intended_use": "Creating or revising portable Agent Skills from coherent requirements, workflow evidence, or accepted findings.",
     "stages": ["routing", "execution"],
-    "case_source": "Synthetic authoring, refusal, remediation, interaction, authority, and evaluation-lifecycle cases with neighboring skill collisions.",
+    "case_source": "Synthetic authoring, refusal, remediation, interaction, authority, routing-tuning, and evaluation-lifecycle cases with neighboring skill collisions.",
     "excluded_claims": ["Independent conformity approval", "Production readiness", "Compatibility with untested hosts or models"]
   },
   "unit": "One isolated attempt at one case under one recorded host, model, configuration, catalog, and authority policy.",
@@ -41,7 +41,7 @@
   },
   "analysis": {
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
-    "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain"],
+    "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain", "trigger_rate"],
     "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation.",
     "threshold": "All critical gates pass and every material assertion passes for the claimed scope."
   },

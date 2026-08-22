@@ -9,7 +9,7 @@
   "scope": {
     "intended_use": "Running declared routing and activated-execution evaluations for exact Agent Skill revisions and producing bounded behavioral conclusions.",
     "stages": ["routing", "execution"],
-    "case_source": "Synthetic evaluation contracts and evidence records covering valid runs, missing prerequisites, contamination, authority, and neighboring skill responsibilities.",
+    "case_source": "Synthetic evaluation contracts and evidence records covering valid runs, missing prerequisites, contamination, authority, suite-instrument defects, comparison integrity, and neighboring skill responsibilities.",
     "excluded_claims": ["Independent conformity or security audit", "Release approval", "General agent or prompt evaluation"]
   },
   "unit": "One isolated attempt at one case under one recorded host, model, configuration, catalog, and authority policy.",
@@ -41,8 +41,8 @@
   },
   "analysis": {
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
-    "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain"],
-    "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation.",
+    "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain", "trigger_rate"],
+    "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation, and classify each assertion by whether it separates the compared configurations before reporting a rate.",
     "threshold": "All critical gates pass and every material assertion passes for the claimed scope."
   },
   "provenance": {

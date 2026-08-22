@@ -4,7 +4,7 @@ title: How to manage evaluation assets and evidence
 description: How to separate versioned evaluation source, generated trial evidence, and deliberately promoted decision evidence while preserving provenance, portability, and safe retention.
 tags: [evaluation, artifacts, evidence, repositories, retention, provenance, ci, agent-skills]
 status: stable
-generated: { by: "codex/gpt-5.6", at: 2026-08-22T02:28:45Z }
+generated: { by: "claude-code/claude-opus-5", at: 2026-08-22T14:21:16Z }
 stale_after: 2027-02-22
 sources:
   - id: anthropic-agent-evals
@@ -157,6 +157,12 @@ analysis, not a replacement for the evidence it summarizes. Anthropic treats
 the transcript, outcome, grader, trial, and harness as separate evaluation
 objects and recommends inspecting transcripts to validate graders and
 failures.[^anthropic-agent-evals]
+
+Capture evidence that exists only at the moment it is produced — completion
+notifications, process exit status, wall-clock timing, expiring URLs, and
+interactive host state — into the trial record as it arrives. A value not
+written when observed cannot be reconstructed afterwards, and its absence
+belongs in the record as unknown rather than as a later estimate.
 
 ## 5. Grade and aggregate without erasing uncertainty
 

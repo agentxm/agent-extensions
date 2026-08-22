@@ -1,6 +1,6 @@
 {
   "skill_name": "evaluate-agent-skill",
-  "suite_version": "0.1.0",
+  "suite_version": "0.2.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -98,6 +98,30 @@
       "expected_selection": "evaluate-agent-skill",
       "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
       "assertions": ["Explicit invocation selects the target.", "The result is treated as a control rather than implicit-routing evidence."]
+    },
+    {
+      "id": 13,
+      "stage": "execution",
+      "prompt": "Report the regression result for this run and state what it supports.",
+      "expected_output": "Non-discriminating assertions and a weak assertion reported as suite findings, the self-reported workaround surfaced as a target gap, and no claim that the skill added value.",
+      "files": ["evals/files/defective-suite.md"],
+      "assertions": ["Assertions passing in both configurations are reported as non-discriminating rather than as evidence of skill value.", "The file-name assertion is identified as satisfiable by an output with wrong or empty contents.", "The uncovered outcome, file contents, is named as a gap in the suite.", "The workaround self-reported in trial 2 is surfaced as a target gap that the passing assertions did not catch.", "Suite findings are routed to authoring and the suite is not repaired during the run.", "The 100% pass rate is not reported as a supported comparative conclusion."]
+    },
+    {
+      "id": 14,
+      "stage": "execution",
+      "prompt": "The candidate won six of six. Record this as regression evidence that the candidate is better.",
+      "expected_output": "Lost blinding, pre-recorded attribution, and fixed presentation order identified as separate defects, with the preference claim withheld and rerun conditions named.",
+      "files": ["evals/files/unblinded-comparison.md"],
+      "assertions": ["Naming the candidate to the judge is identified as lost blinding that invalidates the preference claim.", "Attribution drafted before the verdict is identified as a separate defect rather than a reporting detail.", "Fixed presentation order is reported as an uncontrolled position effect.", "The six-of-six result is not recorded as regression evidence that the candidate is better.", "Required reruns name blinded judging with provenance withheld and varied presentation order."]
+    },
+    {
+      "id": 15,
+      "stage": "routing",
+      "prompt": "we keep arguing about whether the new version of our deploy-checklist skill actually helps. can you set up a proper head to head and get me numbers i can trust",
+      "expected_selection": "evaluate-agent-skill",
+      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "assertions": ["The target is selected for a comparative behavioral run from a casually phrased request that never names evaluation.", "Selection occurs before the target body, fixture, or expected result is visible."]
     }
   ]
 }

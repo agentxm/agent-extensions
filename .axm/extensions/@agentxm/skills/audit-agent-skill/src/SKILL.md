@@ -95,7 +95,9 @@ not an independent audit or approval.
    host, model, configuration, catalog, authority, grader, trial, baseline, and
    raw-evidence identities before relying on it. Detect same-agent grading,
    visible expected answers, shared state, summaries substituted for raw output,
-   expired locators, hidden unknowns, and untested stages. Use representative
+   expired locators, hidden unknowns, untested stages, a description tuned
+   against the same cases that report its result, unblinded preference judging,
+   and measures that pass in every compared configuration. Use representative
    positives, paraphrases, adjacent negatives, failure and authority cases,
    useful baselines, and deterministic graders for structural contracts. Report
    unavailable hosts or trials as untested, not passing.

@@ -15,6 +15,8 @@
 
 - Baseline or `no-baseline`:
 - Cases and trials:
+- Attempts per routing case and selection threshold:
+- Tuning and held-out case split, when a description was iterated:
 - Budgets and retries:
 - Generated workspace or artifact locator:
 - Raw-evidence identities and retention:
@@ -35,11 +37,23 @@
 | Case | Class | Target, case, harness, environment, or grader owner | Consequence | Required rerun or handoff |
 | --- | --- | --- | --- | --- |
 
+## Suite findings
+
+Defects in the instrument rather than the target. Record them; do not repair
+them during a controlled run. Kinds: `satisfiable-by-wrong-output`,
+`uncovered-outcome`, `unverifiable`, `non-discriminating`, `flaky`.
+
+| Finding | Kind | Evidence | Owner |
+| --- | --- | --- | --- |
+
 ## Analysis
 
 - Critical gates:
 - Routing misses, false positives, ambiguity, and collisions:
+- Routing trigger rates against the declared threshold:
 - Execution outcomes, recovery, and authority:
+- Measure discrimination across the compared configurations:
+- Self-reported uncertainties, workarounds, and review requests:
 - Host, model, configuration, catalog, and cohort slices:
 - Variance, grader disagreement, costs, and latency:
 - Unknown and harness-error coverage:

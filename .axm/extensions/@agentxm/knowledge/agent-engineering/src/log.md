@@ -1,5 +1,33 @@
 # Agent engineering update log
 
+## 2026-08-22
+
+- **Routing measurement**: Routing evaluations now measure a trigger rate over
+  repeated attempts instead of a single verdict, require cases sized so that
+  selection can vary at all, and require decision cases held out before a
+  description is tuned against measured results. Case-realism guidance covers
+  concrete detail, register variation, and near-miss negatives. The Claude
+  profile records the observed under-selection behavior with the precision-first
+  boundary that limits how far a description should widen in response.
+- **Instrument observation**: Added measure discrimination across compared
+  configurations, a grader channel for reporting defects in the suite itself,
+  provenance-blinded judging with unblinded attribution as a separate second
+  phase, and verification of the claims an output makes about its own work.
+  Trial evidence now retains self-reported uncertainties and workarounds as
+  observations that never move an outcome. Evaluation validity gains threat rows
+  for uninformative task difficulty and non-discriminating measures.
+- **Authoring generalization**: Skill maintenance now warns against fitting a
+  revision to the small case set that motivated it, treats repeated improvisation
+  across independent trials as evidence that the skill should own the work, and
+  prefers stated reasons over escalating emphasis, with absolutes reserved for
+  genuine invariants.
+- **Agent-mediated UX**: Added round trips that leave the conversation — return
+  paths, response semantics, artifact identification, and a degradation ladder
+  ending in ordinary conversation — plus vocabulary calibration to an unknown
+  reader, teardown of agent-created resources, artifacts presented before the
+  agent's own assessment at a review gate, and honoring a promised check-in
+  cadence for background work.
+
 ## 2026-08-21
 
 - **Evaluation evidence lifecycle**: Added portable guides for managing

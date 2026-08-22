@@ -39,6 +39,12 @@ Use `--case` more than once or pass comma-separated case IDs. Other options
 include `--trials`, `--run-id`, `--output-root`, `--baseline`, `--timeout-ms`,
 `--token-budget`, `--cost-budget-usd`, and `--independence`.
 
+Selection is a model judgment that varies between attempts, so `--trials 1`
+cannot characterize routing. The summary reports `routing_case_rates` with the
+attempts, matches, and match rate for each routing case, and records a
+limitation when a single attempt was used or when selection varied between
+attempts on the same case. Read the rate rather than the disposition.
+
 Use `--sandbox-mode workspace-write` only for a case whose declared task
 authority requires local artifacts. The Codex adapter provisions a disposable
 AXM project before such a trial; the generated workspace is deleted after the
