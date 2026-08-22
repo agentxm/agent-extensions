@@ -37,19 +37,28 @@ axm install @agentxm/packs/agent-engineering
 > supported routing behavior, preserve the motivating cases, validate the
 > package, and record any remaining evidence needed for closure.
 
-## Revision 0.8.1
+## Revision 0.9.0
 
-- Previous version: `0.8.0`
-- Contract delta: evaluation contract `3.0.0` binds all four critical gates to
-  exact assertions and records immutable runner and adapter evidence
-- Compatibility and cohort: runtime authoring behavior is unchanged; suite
-  `0.3.1` requires evaluator `0.2.0` or an equivalent v3-capable runner
-- Risk delta: install, self-certification, package-boundary, and validator
-  selection gates can no longer remain declared without executable mappings
-- Migration: update the pack to `0.10.1` before collecting new regression runs
-- Rollback: restore skill `0.8.0`, suite `0.3.0`, and contract `2.0.0` together
-- Evidence: workspace validator acceptance and deterministic evaluator
-  conformance; no release-tier behavioral run or independent approval is claimed
+- Previous version: `0.8.1`
+- Contract delta: the runtime now resolves the target package, declared
+  repository evaluation-source root, and strictly required manager-owned state
+  before writing; it also distinguishes confirmed regression evidence from
+  requirement-derived greenfield cases
+- Suite delta: suite `0.4.0` supplies complete synthetic target packages for
+  remediation and validator-selection cases, supplies coherent greenfield
+  requirements, and adds a baseline-bound ambiguous-lifecycle authority case
+- Compatibility and cohort: routing is unchanged; the suite is validated with
+  `agent-engineering` pack `0.10.3` and evaluator `0.2.2`
+- Risk delta: the bounded local write envelope now includes declared evaluation
+  source and manager state required by the request; install, enable, publish,
+  certification, and unrelated external effects still require separate authority
+- Migration: resolve and report all authorized roots before writes; treat
+  suite `0.3.1` runs as stale for the revised runtime and evaluation source
+- Rollback: restore skill `0.8.1`, suite `0.3.1`, and their prior fixtures and
+  critical-gate mappings together
+- Evidence: AXM and evaluator structural validation plus synthetic target-package
+  validation and deterministic validator fail/pass calibration; no controlled
+  behavioral regression run or independent approval is claimed
 - Bound identities: package
-  `sha256:2bcf5479fc6bfc12ed100d31899be434daf722e36a9a042e79bb538a741abccf`
-  and suite `sha256:2d902d8f5ba7c0a17aa575ddc97472459260ea7b4ae634de45f6874cd396838d`
+  `sha256:282473451c9804f1b617cb72ee1ad3a490d40d49c8d60a34a1273bc3d11581d1`
+  and suite `sha256:786fc4aba38dcb3d2abf5f1bc10150ed5700699d82070c1a1eb5987693b2e27a`
