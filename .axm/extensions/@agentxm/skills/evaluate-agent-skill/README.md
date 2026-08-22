@@ -43,23 +43,38 @@ after capability preflight fails. External runners may use a different native
 interface when a declared adapter or evidence mapping preserves the required
 identity, isolation, lifecycle, uncertainty, and evidence semantics.
 
-To make an external runner the persistent workspace choice, disable the
-bundled default with `axm skills disable agent-skill-evaluator`. Restore it with
+Disabling the bundled evaluator with
+`axm skills disable agent-skill-evaluator` only prevents `pack-default`
+selection; it does not select an external runner. Bind an external runner
+explicitly in the invocation or versioned evaluation source. With no explicit
+binding and no enabled default, the workflow reserves preflight and returns
+`Inconclusive` without creating run evidence. Restore the bundled default with
 `axm skills enable agent-skill-evaluator`.
 
-## Revision 0.3.1
+## Revision 0.3.2
 
-- Previous version: `0.3.0`
-- Contract delta: evaluation contract `3.0.0` binds all six critical gates to
-  exact assertions and records immutable runner and adapter evidence
-- Compatibility and cohort: runtime evaluation strategy is unchanged; suite
-  `0.4.1` requires evaluator `0.2.0` or an equivalent v3-capable runner
-- Risk delta: mutation, answer leakage, evidence promotion, contamination, and
-  runner-selection gates can no longer remain declared without mappings
-- Migration: update the pack to `0.10.1` before collecting new regression runs
-- Rollback: restore skill `0.3.0`, suite `0.4.0`, and contract `2.0.0` together
-- Evidence: workspace validator acceptance and deterministic evaluator
-  conformance; no release-tier behavioral run or independent approval is claimed
+- Previous version: `0.3.1`
+- Contract delta: suite `0.5.0` requires an artifact-producing runnable happy
+  path and mechanically grades undeclared-evaluator execution; evaluation
+  contract `3.0.0` is unchanged
+- Compatibility and cohort: runtime behavior and authority are unchanged; the
+  suite requires evaluator `0.2.2` or an equivalent runner with structured
+  command observations and deterministic forbidden-execution grading
+- Risk delta: a prose-only plan or reserved path cannot satisfy the runnable
+  case, and forbidden evaluator execution can no longer rely only on model
+  judgment
+- Migration: update the `agent-engineering` pack to `0.10.4` before collecting
+  new suite `0.5.0` evidence
+- Rollback: restore skill `0.3.1`, suite `0.4.1`, pack `0.10.3`, and the
+  evaluator dependency lower bound `>=0.2.1` together
+- Evidence: structural validation and deterministic harness checks are required;
+  authoring or regression runs remain bounded evidence and no release-tier run
+  or independent approval is claimed
 - Bound identities: package
-  `sha256:e1c2e81c9676e453b1c12909d359353c66f9a3beaf1dc9afc91d4ee6a8416a93`
-  and suite `sha256:f36fc197ab4fc21e2c808402ba287ba56de823436071b815bca9bfda5bc3a97e`
+  `sha256:e9a9c9e813b14cb911e11fa83254d870de1cf75a303f8c4968a8eea278fc69da`
+  and suite `sha256:9ead9e65518fc1aa635450338390b258c5fa9e39b0538eafe76bdc3cac83640f`
+
+## License
+
+This package is licensed under the MIT License. See
+[`LICENSES/MIT.txt`](../../../../../LICENSES/MIT.txt).

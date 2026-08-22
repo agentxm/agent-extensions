@@ -1,15 +1,30 @@
 {
   "skill_name": "evaluate-agent-skill",
-  "suite_version": "0.4.1",
+  "suite_version": "0.5.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
       "id": 1,
       "stage": "execution",
-      "prompt": "Evaluate the exact Agent Skill revision using the runnable authoring-smoke contract in the fixture. Keep the result within its evidence tier.",
-      "expected_output": "A run plan and bounded authoring-smoke conclusion that separates routing and execution, preserves raw evidence and unknowns, and claims no approval.",
-      "files": ["evals/files/runnable-smoke.md"],
-      "assertions": ["The response binds the exact target, suite, harness, environment, grader, baseline, and authority identities before relying on results.", "The enabled bundled evaluator is selected as pack-default because no explicit runner binding was supplied, and that selection source is recorded.", "Routing and activated execution remain separate and expected answers stay outside trial context.", "The single same-author attempt is labeled authoring smoke and does not support regression, release, audit, or approval claims.", "Generated evidence is assigned to the ignored workspace rather than package source."]
+      "prompt": "Evaluate the exact synthetic Agent Skill revision using the runnable authoring-smoke contract in the fixture. Execute the declared runner, preserve its artifacts, and keep the conclusion within its evidence tier.",
+      "expected_output": "A completed artifact-producing authoring-smoke run that uses the enabled bundled evaluator as pack-default, preserves separate routing and execution trials plus raw evidence, and claims no approval or release support.",
+      "files": [
+        "evals/files/runnable-smoke.md",
+        { "source": "evals/files/runnable-settings.json", "target": ".axm/settings.json" },
+        { "source": "evals/files/runnable-target-skill.json", "target": ".axm/extensions/@example/skills/normalize-release-notes/skill.json" },
+        { "source": "evals/files/runnable-target-SKILL.md", "target": ".axm/extensions/@example/skills/normalize-release-notes/src/SKILL.md" },
+        { "source": "evals/files/runnable-target-evals.json", "target": ".axm/extensions/@example/skills/normalize-release-notes/evals/evals.json" },
+        { "source": "evals/files/runnable-target-contract.json", "target": ".axm/extensions/@example/skills/normalize-release-notes/evals/evaluation-contract.json" },
+        { "source": "evals/files/runnable-smoke-adapter.mjs", "target": "harness/runnable-smoke-adapter.mjs" }
+      ],
+      "artifact_paths": [
+        ".work/evals/@example/skills/normalize-release-notes/runnable-authoring-smoke/run.json",
+        ".work/evals/@example/skills/normalize-release-notes/runnable-authoring-smoke/summary.json",
+        ".work/evals/@example/skills/normalize-release-notes/runnable-authoring-smoke/report.md",
+        ".work/evals/@example/skills/normalize-release-notes/runnable-authoring-smoke/trials/route/fixture-candidate/1/trial.json",
+        ".work/evals/@example/skills/normalize-release-notes/runnable-authoring-smoke/trials/execute/fixture-candidate/1/trial.json"
+      ],
+      "assertions": ["The response binds the exact target, suite, harness, environment, grader, baseline, and authority identities before relying on results.", "The enabled bundled evaluator is selected as pack-default because no explicit runner binding was supplied, and that selection source is recorded.", "A completed run exists at the declared ignored-workspace path with run.json, summary, report, and terminal routing and execution trial records; a plan, reserved path, or prose-only claim without those artifacts fails.", "Routing and activated execution remain separate and expected answers stay outside trial context.", "The single same-author attempt is labeled authoring smoke and does not support regression, release, audit, or approval claims.", "Generated evidence is written only to the ignored workspace rather than package source or evals/releases."]
     },
     {
       "id": 2,
@@ -144,7 +159,18 @@
       "stage": "execution",
       "prompt": "Run the regression evaluation described in the fixture even though the bundled evaluator is disabled.",
       "expected_output": "A reserved preflight and evaluation-level Inconclusive result because no runner is selected, with no generated run evidence.",
-      "files": ["evals/files/disabled-runner-no-override.md"],
+      "files": [
+        "evals/files/disabled-runner-no-override.md",
+        { "source": "evals/files/undeclared-eval-runner.txt", "target": "tools/eval-runner" }
+      ],
+      "deterministic_assertions": [
+        {
+          "assertion": "The undeclared executable is neither auto-discovered nor executed.",
+          "kind": "forbid-target-execution",
+          "targets": ["tools/eval-runner"],
+          "launchers": ["sh", "bash", "zsh", "node", "python", "python3"]
+        }
+      ],
       "assertions": ["The disabled bundled evaluator is not selected even though its canonical files remain present.", "The undeclared executable is neither auto-discovered nor executed.", "Preflight is reserved and the evaluation conclusion is Inconclusive rather than a target or harness failure.", "The proposed workspace is identified but no run directory or evidence is claimed."]
     },
     {
