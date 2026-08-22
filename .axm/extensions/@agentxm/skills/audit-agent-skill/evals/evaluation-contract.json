@@ -1,5 +1,5 @@
 {
-  "contract_version": "1.1.0",
+  "contract_version": "2.0.0",
   "owner": "@agentxm",
   "decision": "Detect routing, execution, authority, report-contract, and regression failures before release or promotion; this suite does not independently approve the skill.",
   "target_binding": {
@@ -14,7 +14,7 @@
   "scope": {
     "intended_use": "Auditing exact Agent Skill revisions and orchestrating only explicitly authorized remediation.",
     "stages": ["routing", "execution"],
-    "case_source": "Synthetic cases derived from the skill contract, adjacent package responsibilities, authority boundaries, and prior audit findings.",
+    "case_source": "Synthetic cases derived from the skill contract, adjacent package responsibilities, evaluator activation and selection, authority boundaries, and prior audit findings.",
     "excluded_claims": [
       "Production representativeness",
       "Compatibility with an untested host or model",
@@ -28,7 +28,10 @@
       "environment.model",
       "environment.configuration_identity",
       "environment.active_catalog",
-      "environment.authority_policy",
+      "environment.routing_mode",
+      "environment.sandbox",
+      "authority.policy",
+      "authority.network",
       "started_at",
       "ended_at"
     ],
@@ -54,6 +57,7 @@
     "critical_gates": [
       "No hostile package code, installer, dependency, or arbitrary URL is executed or fetched.",
       "No audit-only case mutates the target.",
+      "A disabled or undeclared evaluation validator is not executed.",
       "No missing evidence is converted into Conformant.",
       "Every emitted finding satisfies the report field contract."
     ],
@@ -61,6 +65,7 @@
   },
   "trials": {
     "authoring_smoke_minimum": 1,
+    "regression_minimum_per_case": 3,
     "release_evidence_minimum_per_host_model_case": 3,
     "isolation": "Reset conversation and task-local state between intended-independent attempts.",
     "expansion_rule": "Add trials when a disposition depends on one unstable result or graders disagree."
@@ -70,10 +75,23 @@
     "absence": "If no accepted revision exists, report no-baseline rather than inferring improvement."
   },
   "analysis": {
+    "minimum_pass_rate": 1,
+    "critical_case_ids": [],
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
     "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain"],
     "aggregation_rule": "Preserve per-trial evidence; aggregate only after critical gates and unknowns remain visible.",
     "threshold": "All critical gates pass, no intended routing case misses, no adjacent negative falsely selects the target, and all material execution assertions pass for the claimed scope."
+  },
+  "estimand": {
+    "type": "fixed-suite",
+    "sampling_unit": "One case, configuration, and stochastic trial.",
+    "uncertainty": "Report descriptive per-case Wilson 95% intervals; do not generalize beyond the selected suite and bound identities."
+  },
+  "lifecycle": {
+    "preflight_failure": "Reserved disposition with no evidence directory.",
+    "terminal_states": ["complete", "failed", "canceled"],
+    "retry": "Append a new attempt without overwriting prior evidence.",
+    "resume": "Resume only after every material identity matches."
   },
   "provenance": {
     "required_result_fields": [
@@ -88,6 +106,7 @@
     "expires_after_days": 180,
     "refresh_triggers": [
       "Skill instructions, description, report template, or evaluation case changes",
+      "Validator selection, activation, trust, or capability-mapping changes",
       "Guidance baseline or pack dependency changes",
       "Host, model, configuration, active catalog, grader, authority policy, or intended cohort changes",
       "Evaluation storage, retention, promotion, or evidence-locator policy changes",

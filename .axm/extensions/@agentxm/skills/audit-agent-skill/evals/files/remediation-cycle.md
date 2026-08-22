@@ -14,7 +14,7 @@ Accepted pre-change findings:
 The package otherwise has a valid manifest, a stable output contract, no
 runtime scripts or external side effects, and versioned regression cases for
 supplied Markdown, missing input, and the adjacent publishing boundary.
-The read-only `evals/check-contract.mjs` helper is trusted synthetic evaluation
+The read-only `evals/harness/check-contract.mjs` helper is trusted synthetic evaluation
 source; after editing, run it from any directory and require a zero exit.
 
 Remediation is authorized inside the named canonical target package only.

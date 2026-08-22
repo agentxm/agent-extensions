@@ -27,15 +27,29 @@ read these concepts under
 - `evaluation/baselines-thresholds-aggregation-and-slices.md` when comparing
   revisions or configurations.
 
+Read `references/runner-selection.md` and resolve exactly one runner before
+preflight. An explicit trusted binding takes precedence. Otherwise use the
+pack's `agent-skill-evaluator` only when current AXM state reports it installed
+and enabled. Canonical file presence is not activation evidence because AXM
+retains source for disabled extensions. When neither selection is available,
+reserve preflight and return `Inconclusive` without creating run evidence.
+
+The bundled evaluator is the reference implementation, not a mandatory CLI or
+schema for external runners. A selected external runner must have a declared
+adapter or evidence mapping that satisfies the same evaluation contract and
+claim requirements. Never auto-discover evaluator executables, run more than
+one runner, or fall back after the selected runner fails capability preflight.
+
 If the knowledge sibling, required contract, target identity, safe fixture, or
 capable harness is unavailable, preserve the target and return `Inconclusive`
 with the missing evidence needed to resume. Do not improvise a weaker run and
 present it at the requested claim tier. Preserve every declared identity with a
-`declared`, `observed`, or `verified` status even when its implementation is
-unavailable. Name the intended ignored or external generated-workspace owner
-and exact path, mark that location `reserved` when preflight stops before
-creation, and state explicitly that no run evidence was created. Copy identity
-values without abbreviating hashes, versions, or composite environment fields.
+`declared`, `observed`, `verified`, or `enforced` status even when its
+implementation is unavailable. Name the intended ignored or external
+generated-workspace owner and exact path. Mark that location `reserved` when
+preflight stops before creation, and state explicitly that no run evidence was
+created. Copy identity values without abbreviating hashes, versions, or
+composite environment fields.
 
 ## Responsibility and authority
 
@@ -61,33 +75,48 @@ it.
 
 ## Workflow
 
-1. **Bind the evaluation.** Record the exact target and suite identities,
-   decision, evidence tier, intended task distribution, hosts, models,
-   configuration, active catalog, environment, authority policy, budgets,
-   runner, grader, baseline, exclusions, and expiry.
+1. **Bind the evaluation and runner.** Record the exact target and suite
+   identities, decision, evidence tier, intended task distribution, hosts,
+   models, configuration, active catalog, environment, authority policy,
+   budgets, runner, runner-selection source, protocol or evidence mapping,
+   trust and authority boundary, grader, baseline, exclusions, and expiry.
+   Apply `references/runner-selection.md` before capability preflight. An
+   explicit runner takes precedence; otherwise consult AXM active state for the
+   bundled default. Select only one runner.
    Do not turn an unavailable implementation into an omitted binding;
    distinguish what the contract declares from what preflight observed and
    verified. Complete this binding and the preflight disposition before listing
    any stage result so an `unknown` cannot appear to come from an executed
    trial.
-2. **Validate the source and harness.** Resolve every case and fixture, confirm
-   routing and execution are separate, verify outcomes include `pass`, `fail`,
-   `unknown`, and `harness-error`, and establish that intended-independent
-   attempts receive fresh conversation and task-local state. Stop before trials
-   when a required identity or safe isolation boundary is missing.
+2. **Validate the source and harness.** Use the selected runner's declared
+   validation and capability-preflight interface. For `pack-default`, read the
+   evaluator sibling's `references/runner.md`, run its `validate`, and pass
+   `--selection-source pack-default` when starting a run. Resolve every case
+   and fixture, confirm routing and execution are separate, verify outcomes
+   include `pass`, `fail`, `unknown`, and `harness-error`, and establish that
+   intended-independent attempts receive fresh conversation and task-local
+   state. Stop before trials when a required identity, adapter capability, or
+   safe isolation boundary is missing. Distinguish native routing, host
+   simulation, and catalog-classification proxy evidence.
 3. **Choose the claim tier before running.** Label a same-author, single, or
    non-isolated exercise `authoring-smoke`. Use `regression` only for a
-   controlled suite protecting accepted behavior. Use `release` only for the
-   declared cohort, repeated trials, exact identities, calibrated graders, and
-   thresholds. Never relabel an earlier run upward.
+   controlled suite protecting accepted behavior. Release evidence requires a
+   protocol that verifies the declared cohort, repetitions, exact identities,
+   calibrated graders, thresholds, independence, and retention. The bundled
+   evaluator protocol 1.0 rejects that tier; an external runner may support it
+   only when its declared protocol and evidence mapping establish every
+   requirement. Preserve a reserved disposition instead of weakening the claim
+   or relabeling earlier evidence upward.
 4. **Calibrate cases and graders.** Check a known pass, known failure, and
    unknown condition where applicable. Prefer deterministic checks for
    selection, files, fields, state, tool arguments, and forbidden effects. Give
    judgment graders explicit rubrics and an unknown escape.
-5. **Create the run record.** Before trials, write `run.json` in the declared
-   generated workspace with target, suite, harness, environment, grader,
-   provenance, budget, baseline, and timing identities. Never store routine
-   output inside the extension package.
+5. **Create the run through the selected runner.** Supply the bound target,
+   suite, adapters, configurations, environment, authority, budgets, baseline,
+   and provenance to the single selected runner. Let preflight return
+   `reserved` without creating evidence or let the runner atomically create
+   `run.json` before its first trial. Never write routine output inside the
+   extension package.
 6. **Run routing independently.** Expose only the catalog discovery surface,
    normally names and descriptions, until selection or abstention is recorded.
    Do not reveal the target body, fixtures, expected selection, assertions, or
@@ -99,8 +128,9 @@ it.
    provide only declared task-local inputs, and preserve output artifacts,
    external state, side effects, permissions, costs, timing, raw response, and
    errors. Do not let routing success hide an execution defect.
-8. **Run comparisons and trials.** Use the previous accepted exact revision or
-   a meaningful without-skill alternative under fixed conditions. Record
+8. **Run comparisons and trials through the selected runner.** Use the previous
+   accepted exact revision or a meaningful without-skill alternative under
+   fixed conditions. Record
    `no-baseline` when none is defensible. Apply consistent budgets and enough
    independent trials to expose decision-relevant variance. Where a comparison
    rests on judged quality, withhold provenance from the judge and attribute the
@@ -118,7 +148,9 @@ it.
     averages, and show unknown and harness-error coverage next to headline
     results. Classify each measure by whether it separates the compared
     configurations before reporting a rate.
-11. **Conclude within the evidence.** Use `Supported`, `Partially supported`,
+11. **Conclude within the evidence.** Inspect the selected runner's raw evidence
+    and mechanically derived summary; do not treat that summary as the
+    independent interpretation. Use `Supported`, `Partially supported`,
     `Unsupported`, or `Inconclusive`. Name exact tested identities,
     contamination, exclusions, independence limits, expiry, and remaining
     evidence. Evaluation may inform an audit or decision; it does not make one.
@@ -140,15 +172,19 @@ it.
 - Generated output is written into versioned evaluation source.
 - Same-agent evidence is represented as independent, release, audit, or
   approval evidence.
+- A disabled bundled evaluator is invoked through retained canonical source.
+- An undeclared executable is auto-discovered or a second runner is used as a
+  silent fallback.
 
 Preserve the evidence, mark the affected outcome honestly, and stop further
 unsafe or invalid trials when continuing would compound contamination.
 
 ## Done when
 
-The run binds exact target, suite, harness, environment, grader, trial, and
-baseline identities; routing and execution were isolated; raw output and grades
-are reviewable; failures and unknowns retain their owners; the conclusion stays
+The run binds exact target, suite, selected runner, selection source, protocol
+or evidence mapping, harness, environment, grader, trial, and baseline
+identities; routing and execution were isolated; raw output and grades are
+reviewable; failures and unknowns retain their owners; the conclusion stays
 within the declared tier and tested cohort; generated evidence has a truthful
 retention owner; and no authoring, audit, promotion, or governance authority was
 claimed.

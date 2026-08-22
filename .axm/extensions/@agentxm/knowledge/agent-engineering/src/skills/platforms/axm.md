@@ -85,7 +85,10 @@ Deprecation is warning-only: it does not block fresh resolution or deactivate
 existing installations. Yanking changes fresh resolution without deleting the
 published identity. Disabling preserves managed canonical and resolution state;
 uninstalling removes only state no remaining direct or pack origin requires.
-Do not translate `deprecated`, `revoked`, or `retired` into one guessed command.
+Treat AXM's desired and listed `enabled` state as activation authority; retained
+canonical source or a surviving projection is not evidence that a disabled
+extension may be invoked. Do not translate `deprecated`, `revoked`, or
+`retired` into one guessed command.
 
 ## Authoring and verification
 

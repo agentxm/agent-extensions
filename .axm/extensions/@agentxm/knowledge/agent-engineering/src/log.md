@@ -2,6 +2,16 @@
 
 ## 2026-08-22
 
+- **Replaceable evaluation runners**: Defined explicit-runner precedence over
+  an active configured default, selection-source attribution, disabled-source
+  handling, no auto-discovery or fallback, and adapter-based evidence mapping
+  for runners that do not reproduce a reference implementation's interface.
+- **Evaluation runner engineering**: Added a portable runner pattern with a
+  versioned protocol, capability-aware host and grader adapters, native-versus-
+  proxy routing identity, declared/observed/verified/enforced controls,
+  preflight without empty evidence, environment allowlists, atomic lifecycle,
+  separate trials and retry attempts, resumability, enforced budgets, and
+  deterministic summaries bounded to selected coverage.
 - **AXM-aware extension guidance**: Reframed AXM as an extension-management
   layer independent of agent hosts, expanded its profile across extension
   types, workspace state, pack and plugin relationships, and lifecycle

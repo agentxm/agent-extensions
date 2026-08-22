@@ -46,19 +46,14 @@ axm install @agentxm/packs/agent-engineering
 > remediate supported findings, and verify the resulting revision. Do not
 > publish or claim independent approval.
 
-## Revision 0.6.1
+## Revision 0.7.0
 
-- Previous version: `0.6.0`
-- Contract delta: AXM-managed targets now receive native read-only package and
-  pack-state inspection; the existing routing, remediation, and authority
-  boundaries remain unchanged
-- Risk delta: synthetic fixtures may be mapped only into validated disposable
-  workspace paths, and declared artifact roots become reviewable evidence
-- Affected cohort: maintainers running the versioned audit suite and shared
-  repository harness
-- Migration: regenerate evidence with suite `0.6.0`; results from suite `0.5.0`
-  or earlier do not cover this revision
-- Rollback: restore the exact `0.6.0` package and its matching suite/harness
-  identities; do not mix old runs with the revised contract
-- Evidence: structural validation and targeted authoring regressions are
-  required before any release or promotion decision
+- Previous version: `0.6.1`
+- Contract delta: read-only evaluation-source validation now honors explicit
+  trusted validator selection and AXM enabled state
+- Compatibility: static audit remains available when no validator is selected;
+  mechanical validation is reported unverified rather than inferred
+- Risk delta: retained disabled source and undeclared executables are never run
+  as evaluator infrastructure
+- Evaluation source: suite `0.7.0` covers disabled-but-present validator state
+  without changing the audit-only mutation boundary

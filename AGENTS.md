@@ -73,7 +73,7 @@ evaluation material, read
 for Agent Skill behavior, also read
 [How to evaluate an Agent Skill](.axm/extensions/@agentxm/knowledge/agent-engineering/src/evaluation/evaluating-agent-skills.md).
 After changing Agent Skill evaluation source, run
-`node scripts/evals/agent-skill-eval.mjs validate`.
+`node .axm/extensions/@agentxm/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs validate`.
 
 Do not track routine transcripts, traces, outputs, grades, timing, summaries, or
 same-agent authoring-smoke results. Promote a compact immutable manifest under

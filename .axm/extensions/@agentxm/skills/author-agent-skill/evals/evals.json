@@ -1,6 +1,6 @@
 {
   "skill_name": "author-agent-skill",
-  "suite_version": "0.2.1",
+  "suite_version": "0.3.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -150,7 +150,7 @@
       "stage": "routing",
       "prompt": "Run this Agent Skill's routing and execution eval suite against the previous revision.",
       "expected_selection": "evaluate-agent-skill",
-      "catalog_neighbors": ["evaluate-agent-skill", "audit-agent-skill"],
+      "catalog_neighbors": ["agent-skill-evaluator", "evaluate-agent-skill", "audit-agent-skill"],
       "assertions": ["The target abstains because the request is to execute evaluation rather than author a skill or suite.", "The evaluator neighbor remains eligible."]
     },
     {
@@ -189,6 +189,19 @@
         "The one-line positives are identified as cases the assistant satisfies unaided, which cannot demonstrate selection at any description.",
         "Recall is not widened by claiming capability the skill does not deliver.",
         "Independent behavioral evidence is handed to evaluation rather than self-certified by authoring."
+      ]
+    },
+    {
+      "id": 18,
+      "stage": "execution",
+      "prompt": "Revise the target's evaluation source and validate it using the workspace state in the fixture.",
+      "expected_output": "A bounded evaluation-source revision validated through the explicit trusted validator while the disabled bundled evaluator remains unused.",
+      "files": ["evals/files/external-eval-validator.md"],
+      "assertions": [
+        "The explicit trusted validator takes precedence and its identity, authority, and capability mapping are recorded.",
+        "The disabled bundled evaluator is not invoked through retained canonical source.",
+        "No other executable is auto-discovered and no package-local generic runner is created.",
+        "The handoff distinguishes mechanical source validation from a controlled behavioral evaluation."
       ]
     }
   ]

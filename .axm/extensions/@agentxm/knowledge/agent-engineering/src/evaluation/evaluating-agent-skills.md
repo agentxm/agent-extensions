@@ -28,6 +28,8 @@ named host, model, configuration, catalog, and authority policy. It specializes
 the [Agent Skill evaluation model](skill-evaluation-model.md). Store source and
 generated evidence according to
 [How to manage evaluation assets and evidence](managing-evaluation-assets-and-evidence.md).
+Use [Evaluation runner engineering](evaluation-runner-engineering.md) when a
+shared runner or adapter executes the suite.
 
 Evaluation measures behavior. It does not author the target, independently
 audit its conformity or trust, approve it, or publish it. Keep those decisions
@@ -58,6 +60,14 @@ the target, scope, unit, cases, environment, evidence, graders, trial count,
 baseline, analysis, provenance, and decision. State unsupported hosts, models,
 catalogs, or cohorts as exclusions rather than generalizing from an available
 environment.
+
+Resolve one runner according to
+[Evaluation runner engineering](evaluation-runner-engineering.md): an explicit
+binding takes precedence, otherwise use an active configured default, otherwise
+reserve preflight and conclude `Inconclusive` without creating run evidence.
+Record the selection source and exact runner, protocol or evidence mapping,
+capability, trust, and authority identities. Do not infer activation or trust
+from retained files or auto-discover an executable.
 
 Choose the evidence tier before running:
 
@@ -91,6 +101,9 @@ judgment that varies between attempts, so one attempt cannot characterize it.
 Size cases so that consulting the skill is a plausible benefit; a request the
 assistant satisfies unaided measures task difficulty rather than routing. When a
 description is revised against these results, hold out decision cases first.
+Record whether the harness observes native host routing, uses a host simulation,
+or runs a catalog-classification proxy. Do not generalize proxy results into a
+claim about native host activation.
 
 Use [Routing evaluations](skill-routing-evaluations.md) for metrics and
 interpretation.

@@ -9,7 +9,8 @@
 - Environment and authority policy:
 - Evidence tier and claim ceiling:
 - Decision, cohort, exclusions, and expiry:
-- Runner, grader, reviewer, and independence:
+- Runner identity, selection source, protocol or evidence mapping, capabilities,
+  trust boundary, grader, reviewer, and independence:
 
 ## Trial plan and evidence
 

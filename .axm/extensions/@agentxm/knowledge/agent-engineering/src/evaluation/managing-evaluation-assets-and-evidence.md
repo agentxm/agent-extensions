@@ -148,9 +148,10 @@ is:
 
 `run.json` should bind the clean target revision or content identity, suite,
 harness, host, model, configuration, active catalog, environment, authority
-policy, budgets, runner, grader, start time, and end time. Give each independent
-trial fresh task-local state. Do not let previous outputs, repository history,
-caches, or shared conversations leak answers into later attempts.
+policy, budgets, runner, runner-selection source, grader, start time, and end
+time. Give each independent trial fresh task-local state. Do not let previous
+outputs, repository history, caches, or shared conversations leak answers into
+later attempts.
 
 Record complete transcripts or traces when policy permits. A prose summary is
 analysis, not a replacement for the evidence it summarizes. Anthropic treats
@@ -163,6 +164,12 @@ notifications, process exit status, wall-clock timing, expiring URLs, and
 interactive host state — into the trial record as it arrives. A value not
 written when observed cannot be reconstructed afterwards, and its absence
 belongs in the record as unknown rather than as a later estimate.
+
+Write started-run evidence incrementally and atomically. Keep lifecycle state
+separate from evaluation outcome, preserve infrastructure retries as distinct
+attempts, and resume only after verifying that target, suite, runner, adapter,
+and material environment identities still match. A preflight that creates no
+run should return a reserved disposition rather than an empty run directory.
 
 ## 5. Grade and aggregate without erasing uncertainty
 

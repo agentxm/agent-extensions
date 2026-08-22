@@ -1,6 +1,6 @@
 {
   "skill_name": "evaluate-agent-skill",
-  "suite_version": "0.2.0",
+  "suite_version": "0.4.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -9,7 +9,7 @@
       "prompt": "Evaluate the exact Agent Skill revision using the runnable authoring-smoke contract in the fixture. Keep the result within its evidence tier.",
       "expected_output": "A run plan and bounded authoring-smoke conclusion that separates routing and execution, preserves raw evidence and unknowns, and claims no approval.",
       "files": ["evals/files/runnable-smoke.md"],
-      "assertions": ["The response binds the exact target, suite, harness, environment, grader, baseline, and authority identities before relying on results.", "Routing and activated execution remain separate and expected answers stay outside trial context.", "The single same-author attempt is labeled authoring smoke and does not support regression, release, audit, or approval claims.", "Generated evidence is assigned to the ignored workspace rather than package source."]
+      "assertions": ["The response binds the exact target, suite, harness, environment, grader, baseline, and authority identities before relying on results.", "The enabled bundled evaluator is selected as pack-default because no explicit runner binding was supplied, and that selection source is recorded.", "Routing and activated execution remain separate and expected answers stay outside trial context.", "The single same-author attempt is labeled authoring smoke and does not support regression, release, audit, or approval claims.", "Generated evidence is assigned to the ignored workspace rather than package source."]
     },
     {
       "id": 2,
@@ -48,7 +48,7 @@
       "stage": "routing",
       "prompt": "Run this Agent Skill's routing and execution evaluation suite against the current candidate.",
       "expected_selection": "evaluate-agent-skill",
-      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "catalog_neighbors": ["agent-skill-evaluator", "author-agent-skill", "audit-agent-skill"],
       "assertions": ["The target is selected for explicit behavioral evaluation execution.", "Selection occurs before the target body, fixture, or expected result is visible."]
     },
     {
@@ -56,7 +56,7 @@
       "stage": "routing",
       "prompt": "Compare this skill revision with the previous accepted one across discovery and task completion.",
       "expected_selection": "evaluate-agent-skill",
-      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "catalog_neighbors": ["agent-skill-evaluator", "author-agent-skill", "audit-agent-skill"],
       "assertions": ["The paraphrased regression request selects the target.", "The target recognizes both routing and activated execution without keyword mirroring."]
     },
     {
@@ -120,8 +120,48 @@
       "stage": "routing",
       "prompt": "we keep arguing about whether the new version of our deploy-checklist skill actually helps. can you set up a proper head to head and get me numbers i can trust",
       "expected_selection": "evaluate-agent-skill",
-      "catalog_neighbors": ["author-agent-skill", "audit-agent-skill"],
+      "catalog_neighbors": ["agent-skill-evaluator", "author-agent-skill", "audit-agent-skill"],
       "assertions": ["The target is selected for a comparative behavioral run from a casually phrased request that never names evaluation.", "Selection occurs before the target body, fixture, or expected result is visible."]
+    },
+    {
+      "id": 16,
+      "stage": "routing",
+      "prompt": "Validate the evaluator protocol, add a host adapter, and diagnose why an interrupted run will not resume.",
+      "expected_selection": "agent-skill-evaluator",
+      "catalog_neighbors": ["agent-skill-evaluator", "author-agent-skill", "audit-agent-skill"],
+      "assertions": ["The runner-operation and integration request selects agent-skill-evaluator.", "The higher-level evaluation workflow abstains because no strategy or evidence interpretation is requested."]
+    },
+    {
+      "id": 17,
+      "stage": "execution",
+      "prompt": "Run the declared regression evaluation using the explicit runner binding in the fixture.",
+      "expected_output": "The explicit trusted runner is selected instead of the enabled bundled default, with one attributable runner identity and no duplicate execution.",
+      "files": ["evals/files/explicit-runner-override.md"],
+      "assertions": ["The explicit runner takes precedence over the enabled pack default.", "The selection source, exact runner identity, protocol, capability mapping, and trust boundary are recorded before execution.", "Only one runner is selected and the bundled evaluator is not also executed.", "The external runner is required to emit the evaluation evidence model but is not required to reproduce the bundled evaluator CLI."]
+    },
+    {
+      "id": 18,
+      "stage": "execution",
+      "prompt": "Run the regression evaluation described in the fixture even though the bundled evaluator is disabled.",
+      "expected_output": "A reserved preflight and evaluation-level Inconclusive result because no runner is selected, with no generated run evidence.",
+      "files": ["evals/files/disabled-runner-no-override.md"],
+      "assertions": ["The disabled bundled evaluator is not selected even though its canonical files remain present.", "The undeclared executable is neither auto-discovered nor executed.", "Preflight is reserved and the evaluation conclusion is Inconclusive rather than a target or harness failure.", "The proposed workspace is identified but no run directory or evidence is claimed."]
+    },
+    {
+      "id": 19,
+      "stage": "execution",
+      "prompt": "Run the declared regression evaluation while honoring the disabled bundled evaluator and the explicit external runner in the fixture.",
+      "expected_output": "The explicit external runner is selected and attributed while the disabled bundled evaluator remains unused.",
+      "files": ["evals/files/disabled-runner-external.md"],
+      "assertions": ["The explicit external runner remains eligible when the bundled evaluator is disabled.", "The disabled bundled evaluator is not invoked through its retained canonical source.", "Exactly one runner identity and selection source are recorded.", "Execution proceeds only after the external runner's trust, capability, and evidence mapping are established."]
+    },
+    {
+      "id": 20,
+      "stage": "execution",
+      "prompt": "Use the explicit external runner in the fixture to complete the requested native-routing regression evaluation.",
+      "expected_output": "A reserved preflight because the explicitly selected runner cannot provide the required native-routing and isolation capabilities.",
+      "files": ["evals/files/external-runner-capability-gap.md"],
+      "assertions": ["Explicit selection does not allow the runner to weaken the requested routing observation mode or isolation control.", "The enabled bundled evaluator is not used as a silent fallback after the explicit runner fails capability preflight.", "The capability gap is attributed to evaluator infrastructure rather than the target skill.", "No run workspace is created and the workflow reports Inconclusive with the requirements needed to resume."]
     }
   ]
 }

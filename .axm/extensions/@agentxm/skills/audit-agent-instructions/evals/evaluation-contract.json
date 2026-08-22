@@ -1,10 +1,10 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "2.0.0",
   "owner": "@agentxm",
   "decision": "Detect routing, effective-context, authority, report-contract, and remediation-cycle failures before release; this suite does not approve an instruction system or the skill.",
   "target_binding": {
     "skill_name": "audit-agent-instructions",
-    "required_result_fields": ["source_revision", "package_content_identity", "suite_content_identity"]
+    "required_result_fields": ["target.source_revision", "target.package_content_identity", "suite.suite_content_identity"]
   },
   "scope": {
     "intended_use": "Auditing effective repository agent instruction systems and verifying explicitly authorized remediation without self-approval.",
@@ -14,7 +14,7 @@
   },
   "unit": "One isolated attempt at one case under one recorded host, model, configuration, catalog, and authority policy.",
   "environment": {
-    "required_result_fields": ["host", "model", "configuration_identity", "active_catalog", "authority_policy", "started_at", "ended_at"],
+    "required_result_fields": ["environment.host", "environment.model", "environment.configuration_identity", "environment.active_catalog", "environment.routing_mode", "environment.sandbox", "authority.policy", "authority.network", "started_at", "ended_at"],
     "routing_boundary": "Expose only catalog names and descriptions until selection is recorded.",
     "execution_boundary": "Activate the target explicitly and expose only the declared synthetic fixture and harness contract."
   },
@@ -31,6 +31,7 @@
   },
   "trials": {
     "authoring_smoke_minimum": 1,
+    "regression_minimum_per_case": 3,
     "release_evidence_minimum_per_host_model_case": 3,
     "isolation": "Reset conversation and task-local state between intended-independent attempts.",
     "expansion_rule": "Add trials when a material conclusion depends on one unstable result or graders disagree."
@@ -40,13 +41,26 @@
     "absence": "Record no-baseline rather than inferring improvement."
   },
   "analysis": {
+    "minimum_pass_rate": 1,
+    "critical_case_ids": [],
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
     "routing_metrics": ["misses", "false_positives", "collisions", "clarify_or_abstain"],
     "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation.",
     "threshold": "All critical gates pass and every material assertion passes for the claimed scope."
   },
+  "estimand": {
+    "type": "fixed-suite",
+    "sampling_unit": "One case, configuration, and stochastic trial.",
+    "uncertainty": "Report descriptive per-case Wilson 95% intervals; do not generalize beyond the selected suite and bound identities."
+  },
+  "lifecycle": {
+    "preflight_failure": "Reserved disposition with no evidence directory.",
+    "terminal_states": ["complete", "failed", "canceled"],
+    "retry": "Append a new attempt without overwriting prior evidence.",
+    "resume": "Resume only after every material identity matches."
+  },
   "provenance": {
-    "required_result_fields": ["case_author", "runner", "reviewer", "grader_identity"],
+    "required_result_fields": ["provenance.case_author", "provenance.runner", "provenance.reviewer", "provenance.grader_identity"],
     "independence": "Same-agent evidence must remain labeled and cannot become independent approval."
   },
   "freshness": {

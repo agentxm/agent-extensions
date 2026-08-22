@@ -37,11 +37,15 @@ axm install @agentxm/packs/agent-engineering
 > supported routing behavior, preserve the motivating cases, validate the
 > package, and record any remaining evidence needed for closure.
 
-## Revision 0.7.1
+## Revision 0.8.0
 
-- Previous version: `0.7.0`
-- Contract delta: AXM management is now an explicit adaptation axis independent
-  of host support
-- Risk delta: no authority expansion; current AXM help remains the operational
-  authority for managed package changes
-- Evaluation source: suite `0.2.1` protects the manager-versus-host distinction
+- Previous version: `0.7.1`
+- Contract delta: evaluation-source validation now uses an explicit trusted
+  validator when supplied, otherwise the bundled evaluator only while AXM
+  reports it enabled
+- Compatibility: the enabled pack default preserves existing behavior; a
+  disabled evaluator is no longer invoked through retained canonical source
+- Risk delta: external validator execution requires an explicit trust and
+  authority binding; no executable is auto-discovered
+- Evaluation source: suite `0.3.0` covers external-validator selection and the
+  disabled-default boundary

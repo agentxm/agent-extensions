@@ -13,6 +13,9 @@ support of a decision.
 - [Evaluation systems and harnesses](evaluation-systems-and-harnesses.md) - The
   target, operational agent harness, evaluation harness, environment, evidence,
   and decision.
+- [Evaluation runner engineering](evaluation-runner-engineering.md) - Versioned
+  protocols, capability-aware adapters, isolation, enforced budgets,
+  recoverable lifecycle, and attributable evidence for reusable runners.
 
 ## Design
 

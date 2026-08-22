@@ -26,6 +26,7 @@ for the declared scope, all relative to
   alternatives or leaves a consequential choice with a human;
 - behavioral claims: `evaluation/skill-evaluation-model.md`,
   `evaluation/evaluating-agent-skills.md`,
+  `evaluation/evaluation-runner-engineering.md`,
   `evaluation/managing-evaluation-assets-and-evidence.md`,
   `evaluation/skill-routing-evaluations.md`, and
   `evaluation/skill-execution-evaluations.md` plus the needed general
@@ -94,8 +95,16 @@ not an independent audit or approval.
    generated run evidence, aggregate analysis, promoted decision evidence, and
    governance records separately. For AXM-managed targets, distinguish desired,
    accepted-resolution, canonical, and projected state and inspect declared pack
-   reachability. Resolve symlinks without traversing unsafe or unrelated
-   locations.
+   reachability. When versioned Agent Skill evaluation source is present,
+   apply the runner-selection contract under the direct
+   `.axm/extensions/@agentxm/skills/evaluate-agent-skill/src/references/runner-selection.md`
+   sibling. Use an explicitly bound trusted read-only validator when supplied;
+   otherwise use the bundled `agent-skill-evaluator` validator only when AXM
+   reports it enabled. Retained source from a disabled extension is not active
+   evaluator infrastructure. If no validator is selected, inspect statically
+   and mark mechanical structural validation unverified rather than
+   auto-discovering or executing another mechanism. Do not execute the suite.
+   Resolve symlinks without traversing unsafe or unrelated locations.
 4. **Assess design and routing.** Check candidate evidence, one-job boundaries,
    trigger language, negative boundaries, workflow contracts, progressive
    disclosure, resource necessity, references, host claims, and agreement

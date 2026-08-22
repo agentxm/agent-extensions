@@ -1,6 +1,6 @@
 {
   "skill_name": "audit-agent-instructions",
-  "suite_version": "0.2.0",
+  "suite_version": "0.2.1",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {

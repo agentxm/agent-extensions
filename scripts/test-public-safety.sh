@@ -189,10 +189,10 @@ fi
 trusted_eval_fixture="$(make_fixture)"
 eval_sentinel="$test_root/snapshot-eval-validator-executed"
 printf '#!/usr/bin/env node\nimport { writeFileSync } from "node:fs";\nwriteFileSync("%s", "executed\\n");\n' "$eval_sentinel" \
-  >"$trusted_eval_fixture/scripts/evals/agent-skill-eval.mjs"
-git -C "$trusted_eval_fixture" add scripts/evals/agent-skill-eval.mjs
-git -C "$trusted_eval_fixture" show HEAD:scripts/evals/agent-skill-eval.mjs \
-  >"$trusted_eval_fixture/scripts/evals/agent-skill-eval.mjs"
+  >"$trusted_eval_fixture/.axm/extensions/@agentxm/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs"
+git -C "$trusted_eval_fixture" add .axm/extensions/@agentxm/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs
+git -C "$trusted_eval_fixture" show HEAD:.axm/extensions/@agentxm/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs \
+  >"$trusted_eval_fixture/.axm/extensions/@agentxm/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs"
 TMPDIR="$test_root" run_gate "$trusted_eval_fixture" --view git-index >/dev/null
 if [[ -e "$eval_sentinel" ]]; then
   echo "The safety gate executed the evaluation validator from the untrusted snapshot." >&2

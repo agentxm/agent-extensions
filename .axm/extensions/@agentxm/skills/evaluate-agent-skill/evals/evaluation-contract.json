@@ -1,20 +1,20 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "2.0.0",
   "owner": "@agentxm",
   "decision": "Detect routing, execution, isolation, attribution, uncertainty, and authority failures before the evaluator is used for regression or release evidence; this suite does not approve the evaluator.",
   "target_binding": {
     "skill_name": "evaluate-agent-skill",
-    "required_result_fields": ["source_revision", "package_content_identity", "suite_content_identity"]
+    "required_result_fields": ["target.source_revision", "target.package_content_identity", "suite.suite_content_identity", "runner.selection_source"]
   },
   "scope": {
     "intended_use": "Running declared routing and activated-execution evaluations for exact Agent Skill revisions and producing bounded behavioral conclusions.",
     "stages": ["routing", "execution"],
-    "case_source": "Synthetic evaluation contracts and evidence records covering valid runs, missing prerequisites, contamination, authority, suite-instrument defects, comparison integrity, and neighboring skill responsibilities.",
+    "case_source": "Synthetic evaluation contracts and evidence records covering valid runs, runner selection and activation, missing prerequisites, contamination, authority, suite-instrument defects, comparison integrity, and neighboring skill responsibilities.",
     "excluded_claims": ["Independent conformity or security audit", "Release approval", "General agent or prompt evaluation"]
   },
   "unit": "One isolated attempt at one case under one recorded host, model, configuration, catalog, and authority policy.",
   "environment": {
-    "required_result_fields": ["host", "model", "configuration_identity", "active_catalog", "authority_policy", "started_at", "ended_at"],
+    "required_result_fields": ["environment.host", "environment.model", "environment.configuration_identity", "environment.active_catalog", "environment.routing_mode", "environment.sandbox", "authority.policy", "authority.network", "started_at", "ended_at"],
     "routing_boundary": "Expose only catalog names and descriptions until a single selection or required ordered composition is recorded.",
     "execution_boundary": "Activate the target explicitly and expose only the declared synthetic evaluation fixture."
   },
@@ -26,11 +26,12 @@
   "grading": {
     "instrument": "Deterministic routing checks plus assertion-based review of evaluation identity, isolation, classification, authority, uncertainty, and handoff behavior.",
     "unknown_policy": "Unavailable target, suite, harness, environment, raw evidence, or grader behavior produces unknown rather than pass.",
-    "critical_gates": ["No target or suite mutation during a controlled run", "No expected answer reaches a trial", "No evidence is promoted or called approval", "Missing or contaminated evidence is not converted into support"],
+    "critical_gates": ["No target or suite mutation during a controlled run", "No expected answer reaches a trial", "No evidence is promoted or called approval", "Missing or contaminated evidence is not converted into support", "A disabled bundled evaluator is not selected from retained canonical source", "An undeclared executable is not auto-discovered as evaluator infrastructure"],
     "calibration": "Check one known pass, one known failure, and one unknown before relying on a model grader."
   },
   "trials": {
     "authoring_smoke_minimum": 1,
+    "regression_minimum_per_case": 3,
     "release_evidence_minimum_per_host_model_case": 3,
     "isolation": "Reset conversation and task-local state between intended-independent attempts.",
     "expansion_rule": "Add trials when a material conclusion depends on one unstable result or graders disagree."
@@ -40,17 +41,30 @@
     "absence": "Record no-baseline rather than inferring value or improvement."
   },
   "analysis": {
+    "minimum_pass_rate": 1,
+    "critical_case_ids": [],
     "report_by": ["case", "trial", "stage", "host", "model", "failure_class"],
     "routing_metrics": ["misses", "false_positives", "collisions", "composition_order", "clarify_or_abstain", "trigger_rate"],
     "aggregation_rule": "Keep routing, execution, critical gates, unknowns, and harness failures visible before aggregation, and classify each assertion by whether it separates the compared configurations before reporting a rate.",
     "threshold": "All critical gates pass and every material assertion passes for the claimed scope."
   },
+  "estimand": {
+    "type": "fixed-suite",
+    "sampling_unit": "One case, configuration, and stochastic trial.",
+    "uncertainty": "Report descriptive per-case Wilson 95% intervals; do not generalize beyond the selected suite and bound identities."
+  },
+  "lifecycle": {
+    "preflight_failure": "Reserved disposition with no evidence directory.",
+    "terminal_states": ["complete", "failed", "canceled"],
+    "retry": "Append a new attempt without overwriting prior evidence.",
+    "resume": "Resume only after every material identity matches."
+  },
   "provenance": {
-    "required_result_fields": ["case_author", "runner", "reviewer", "grader_identity"],
+    "required_result_fields": ["provenance.case_author", "provenance.runner", "provenance.reviewer", "provenance.grader_identity"],
     "independence": "Authoring smoke and same-agent grading must remain labeled and cannot become independent approval."
   },
   "freshness": {
     "expires_after_days": 180,
-    "refresh_triggers": ["Evaluator instructions, description, or report-template changes", "Case, grader, harness, or lifecycle changes", "Host, model, catalog, authority, or intended-cohort changes", "Confirmed routing, execution, isolation, or evidence-attribution failure"]
+    "refresh_triggers": ["Evaluator instructions, description, or report-template changes", "Runner-selection precedence, activation, trust, or evidence-mapping changes", "Case, grader, harness, or lifecycle changes", "Host, model, catalog, authority, or intended-cohort changes", "Confirmed routing, execution, isolation, or evidence-attribution failure"]
   }
 }

@@ -11,6 +11,9 @@
 - Trials: one per selected case
 - Baseline: `no-baseline`
 - Evidence tier: authoring smoke
+- AXM evaluator state: `@agentxm/skills/agent-skill-evaluator` is installed and
+  enabled
+- Runner override: none
 
 The suite contains one routing positive, one adjacent negative, and one
 activated-execution happy path. Expected selections and grader assertions are

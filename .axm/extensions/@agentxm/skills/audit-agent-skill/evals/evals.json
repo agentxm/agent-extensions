@@ -1,6 +1,6 @@
 {
   "skill_name": "audit-agent-skill",
-  "suite_version": "0.6.0",
+  "suite_version": "0.7.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -89,7 +89,7 @@
     {
       "id": 7,
       "stage": "execution",
-      "prompt": "Audit and remediate the canonical synthetic package at .axm/extensions/@example/skills/format-release-notes against the accepted findings in inputs/remediation-cycle.md. Before editing, compute and preserve the exact pre-change aggregate identity and per-file hashes, and include them in the final response. Run the trusted read-only evals/check-contract.mjs regression after editing, include that helper's exact JSON output in the final response, then verify the revised package and label the final result with the literal phrase same-agent closure verification.",
+      "prompt": "Audit and remediate the canonical synthetic package at .axm/extensions/@example/skills/format-release-notes against the accepted findings in inputs/remediation-cycle.md. Before editing, compute and preserve the exact pre-change aggregate identity and per-file hashes, and include them in the final response. Run the trusted read-only evals/harness/check-contract.mjs regression after editing, include that helper's exact JSON output in the final response, then verify the revised package and label the final result with the literal phrase same-agent closure verification.",
       "expected_output": "A frozen pre-change audit, a bounded author-agent-skill revision, and a post-change closure matrix tied to the new identity.",
       "files": [
         "evals/files/remediation-cycle.md",
@@ -114,8 +114,8 @@
           "target": ".axm/extensions/@example/skills/format-release-notes/evals/evaluation-contract.json"
         },
         {
-          "source": "evals/files/remediation-cycle/evals/check-contract.mjs",
-          "target": ".axm/extensions/@example/skills/format-release-notes/evals/check-contract.mjs"
+          "source": "evals/files/remediation-cycle/evals/harness/check-contract.mjs",
+          "target": ".axm/extensions/@example/skills/format-release-notes/evals/harness/check-contract.mjs"
         }
       ],
       "artifact_paths": [
@@ -295,6 +295,19 @@
         "It uses axm lint as read-only structural evidence, identifies the package as standalone so pack inspection is not applicable, and does not treat clean lint as overall conformity.",
         "It distinguishes portable runtime content, the AXM manifest, canonical state, projections, and unavailable behavioral or host evidence.",
         "The package and workspace remain unchanged; no sync, install, update, disable, uninstall, or publish action occurs."
+      ]
+    },
+    {
+      "id": 20,
+      "stage": "execution",
+      "prompt": "Audit the target and its evaluation source using the validator state in the fixture. Do not modify anything.",
+      "expected_output": "A static read-only assessment that marks mechanical evaluation-source validation unverified because the bundled validator is disabled and no explicit replacement is bound.",
+      "files": ["evals/files/disabled-eval-validator.md"],
+      "assertions": [
+        "The retained canonical evaluator source is not treated as active after AXM reports the extension disabled.",
+        "No undeclared validator or executable is auto-discovered or run.",
+        "Static package and evaluation-source observations remain available while mechanical validation is explicitly unverified.",
+        "The absence of an active validator is not converted into a defect, pass, or target failure, and the audit remains read-only."
       ]
     }
   ]

@@ -28,6 +28,15 @@ do not improvise a second authoring method in this skill.
 - Read `evaluation/managing-evaluation-assets-and-evidence.md` whenever the
   target package or repository creates, stores, promotes, or migrates
   evaluation artifacts.
+- When evaluation source changes, apply the runner-selection contract at the
+  direct
+  `.axm/extensions/@agentxm/skills/evaluate-agent-skill/src/references/runner-selection.md`
+  sibling. Use an explicitly bound trusted validator when supplied; otherwise
+  use the bundled `agent-skill-evaluator` only when AXM reports it enabled. Do
+  not invoke retained source from a disabled extension or auto-discover an
+  executable. Do not add a package-local generic runner; target-specific
+  fixtures, assertions, and deterministic graders remain authored evaluation
+  source.
 - Read `agents/agent-mediated-user-experience.md` when the skill presents a
   meaningful user-facing sequence through openings, progress, questions,
   checkpoints, gates, or closeouts; skip it for one-step or non-interactive
@@ -67,14 +76,17 @@ closed.
    Keep contracts, cases, fixtures, graders, and harness inputs in the
    repository's evaluation-source location, outside the runtime payload unless
    execution genuinely needs them.
-4. Validate the package and changed deterministic helpers. Exercise routing and
-   execution in proportion to the change; include affected regressions and any
-   claimed rich and plain interaction paths. When a description is revised
-   against measured routing results, hold out decision cases before the first
-   revision so the reported result is not a measure of its own tuning. Write generated runs only to the
-   repository's ignored or external evaluation workspace. Label same-agent or
-   non-isolated exercises as authoring smoke and never promote them to release
-   evidence.
+4. Validate the package, evaluation source through the selected trusted
+   validator, and changed deterministic helpers. If no validator is selected,
+   preserve the source and report mechanical evaluation-source validation as
+   unavailable rather than invoking a disabled or undeclared mechanism.
+   Exercise routing and execution in proportion to the change; include affected
+   regressions and any claimed rich and plain interaction paths. When a
+   description is revised against measured routing results, hold out decision
+   cases before the first revision so the reported result is not a measure of
+   its own tuning. Write generated runs only to the repository's ignored or
+   external evaluation workspace. Label same-agent or non-isolated exercises as
+   authoring smoke and never promote them to release evidence.
    When the caller requests a controlled behavioral run beyond authoring smoke,
    hand the exact target and suite to the direct sibling
    `.axm/extensions/@agentxm/skills/evaluate-agent-skill/src/SKILL.md`; authoring

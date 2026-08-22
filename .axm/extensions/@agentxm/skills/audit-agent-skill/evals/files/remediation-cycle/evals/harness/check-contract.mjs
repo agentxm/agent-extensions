@@ -4,10 +4,11 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const packageRoot = dirname(dirname(fileURLToPath(import.meta.url)));
+const packageRoot = dirname(dirname(dirname(fileURLToPath(import.meta.url))));
 const skill = readFileSync(join(packageRoot, "src", "SKILL.md"), "utf8");
 const manifest = JSON.parse(readFileSync(join(packageRoot, "skill.json"), "utf8"));
 const suite = JSON.parse(readFileSync(join(packageRoot, "evals", "evals.json"), "utf8"));
+const contract = JSON.parse(readFileSync(join(packageRoot, "evals", "evaluation-contract.json"), "utf8"));
 
 const description = skill.match(/^description:\s*(.+)$/m)?.[1] ?? "";
 const checks = [
@@ -19,6 +20,7 @@ const checks = [
   ["publishing negative", suite.evals.some((item) => item.stage === "routing" && item.expected_selection === "clarify-or-abstain")],
   ["supplied-input execution", suite.evals.some((item) => item.stage === "execution" && /normalized local file/i.test(item.expected_output ?? ""))],
   ["missing-input execution", suite.evals.some((item) => item.stage === "execution" && /missing input path/i.test(item.expected_output ?? ""))],
+  ["runner contract", contract.contract_version === "2.0.0" && contract.target_binding?.skill_name === manifest.name],
 ];
 
 const failed = checks.filter(([, passed]) => !passed).map(([name]) => name);
