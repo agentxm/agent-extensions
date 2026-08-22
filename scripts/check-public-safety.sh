@@ -140,7 +140,7 @@ expected=(
 
 expected_list="$(printf '%s\n' "${expected[@]}")"
 actual_list="$(
-  find "$validation_root/.axm/extensions/@agentxm" -type f \
+  find "$validation_root/.axm/extensions/@agentxm" -mindepth 3 -maxdepth 3 -type f \
     \( -name skill.json -o -name pack.json -o -name knowledge.json -o -name rule.json \) \
     ! -path '*/skills/axm/skill.json' \
     | sed -E "s#^${validation_root}/.axm/extensions/@agentxm/([^/]+/[^/]+)/.*#\\1#" \
@@ -192,7 +192,7 @@ while IFS= read -r -d '' manifest; do
     (.repository.url == "https://github.com/agentxm/agent-extensions") and
     (.repository.directory | startswith(".axm/extensions/@agentxm/"))
   ' "$manifest" >/dev/null
-done < <(find "$validation_root/.axm/extensions/@agentxm" -type f \
+done < <(find "$validation_root/.axm/extensions/@agentxm" -mindepth 3 -maxdepth 3 -type f \
   \( -name skill.json -o -name pack.json -o -name knowledge.json -o -name rule.json \) \
   ! -path '*/skills/axm/skill.json' -print0)
 
@@ -202,7 +202,7 @@ while IFS= read -r license_id; do
     exit 1
   fi
 done < <(
-  find "$validation_root/.axm/extensions/@agentxm" -type f \
+  find "$validation_root/.axm/extensions/@agentxm" -mindepth 3 -maxdepth 3 -type f \
     \( -name skill.json -o -name pack.json -o -name knowledge.json -o -name rule.json \) \
     ! -path '*/skills/axm/skill.json' \
     -print0 \

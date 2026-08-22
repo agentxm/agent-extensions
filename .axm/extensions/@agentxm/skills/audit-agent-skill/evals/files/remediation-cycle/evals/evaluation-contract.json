@@ -1,0 +1,8 @@
+{
+  "contract_version": "1.0.0",
+  "decision": "Protect the supplied-input workflow, missing-input failure behavior, and publishing boundary during remediation.",
+  "target": "@example/skills/format-release-notes@0.2.0",
+  "stages": ["routing", "execution"],
+  "outcomes": ["pass", "fail", "unknown", "harness-error"],
+  "claim_ceiling": "Synthetic authoring regression source only"
+}

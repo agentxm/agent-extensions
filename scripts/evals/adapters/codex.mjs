@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { spawn, spawnSync } from "node:child_process";
-import { mkdtempSync, mkdirSync, readFileSync, realpathSync, readdirSync, rmSync, writeFileSync, cpSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { cpSync, existsSync, mkdtempSync, mkdirSync, readFileSync, realpathSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { dirname, join, relative, resolve, sep } from "node:path";
 import { tmpdir } from "node:os";
 
 function writeJson(path, value) {
@@ -18,6 +18,43 @@ function taskFiles(root, current = root) {
       for (const [name, content] of taskFiles(root, path)) files.set(name, content);
     } else if (entry.isFile()) {
       files.set(relative(root, path), readFileSync(path));
+    }
+  }
+  return files;
+}
+
+function safeWorkspaceTarget(root, value) {
+  if (typeof value !== "string" || value.length === 0 || value.includes("\\") || value.startsWith("/")) {
+    throw new Error(`Unsafe workspace path: ${value}`);
+  }
+  const segments = value.split("/");
+  if (segments.some((segment) => segment.length === 0 || segment === "." || segment === "..")) {
+    throw new Error(`Unsafe workspace path: ${value}`);
+  }
+  if (new Set([".git", "final.json", "output-schema.json"]).has(segments[0])) {
+    throw new Error(`Reserved workspace path: ${value}`);
+  }
+  const target = resolve(root, value);
+  if (!target.startsWith(`${resolve(root)}${sep}`)) throw new Error(`Workspace path escapes root: ${value}`);
+  return target;
+}
+
+function observedFiles(root, declaredPaths) {
+  const files = taskFiles(root);
+  const realRoot = realpathSync(root);
+  for (const declaredPath of declaredPaths) {
+    const target = safeWorkspaceTarget(root, declaredPath);
+    if (!existsSync(target)) continue;
+    const realTarget = realpathSync(target);
+    const declaredRelative = relative(resolve(root), target);
+    const realRelative = relative(realRoot, realTarget);
+    if (declaredRelative !== realRelative) {
+      throw new Error(`Artifact path resolves through a symlink: ${declaredPath}`);
+    }
+    if (statSync(target).isDirectory()) {
+      for (const [name, content] of taskFiles(root, target)) files.set(name, content);
+    } else {
+      files.set(relative(root, target), readFileSync(target));
     }
   }
   return files;
@@ -152,10 +189,12 @@ try {
       mkdirSync(dirname(target), { recursive: true });
       cpSync(realSource, target, { recursive: true });
     }
-    const inputRoot = join(workspace, "inputs");
-    mkdirSync(inputRoot, { recursive: true });
-    for (const fixture of request.fixtures) writeFileSync(join(inputRoot, fixture.name), fixture.content);
-    beforeTaskFiles = taskFiles(workspace);
+    for (const fixture of request.fixtures) {
+      const target = safeWorkspaceTarget(workspace, fixture.workspace_path);
+      mkdirSync(dirname(target), { recursive: true });
+      writeFileSync(target, fixture.content);
+    }
+    beforeTaskFiles = observedFiles(workspace, request.artifact_paths ?? []);
     schema = {
       type: "object",
       additionalProperties: false,
@@ -168,7 +207,8 @@ try {
     prompt = [
       `Explicitly use the Agent Skill at .axm/extensions/${request.target.owner}/skills/${request.target.name}/src/SKILL.md.`,
       request.prompt,
-      request.fixtures.length ? `Declared inputs are under inputs/: ${request.fixtures.map((item) => item.name).join(", ")}.` : "No input fixture was supplied.",
+      request.fixtures.length ? `Declared synthetic inputs: ${request.fixtures.map((item) => item.workspace_path).join(", ")}.` : "No input fixture was supplied.",
+      request.artifact_paths?.length ? `Retained artifact roots: ${request.artifact_paths.join(", ")}.` : "No additional artifact root was declared.",
       sandboxMode === "workspace-write"
         ? "You may modify only this disposable task workspace within the stated task authority. Return the complete user-facing result in final_response and list every observed side effect."
         : "Do not modify files. Return the complete user-facing result in final_response and list any observed side effects.",
@@ -235,7 +275,7 @@ try {
   } else {
     const output = JSON.parse(readFileSync(finalPath, "utf8"));
     if (mode === "trial" && request.stage === "execution") {
-      output.artifacts = changedArtifacts(beforeTaskFiles, taskFiles(workspace));
+      output.artifacts = changedArtifacts(beforeTaskFiles, observedFiles(workspace, request.artifact_paths ?? []));
       writeJson(join(trialRoot, "artifacts.json"), output.artifacts);
     }
     writeJson(join(trialRoot, mode === "trial" ? "response.json" : "grade.json"), output);

@@ -1,14 +1,14 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "1.1.0",
   "owner": "@agentxm",
   "decision": "Detect routing, execution, authority, report-contract, and regression failures before release or promotion; this suite does not independently approve the skill.",
   "target_binding": {
     "skill_name": "audit-agent-skill",
     "required_result_fields": [
-      "manifest_version",
-      "source_revision",
-      "package_content_identity",
-      "suite_content_identity"
+      "target.manifest_version",
+      "target.source_revision",
+      "target.package_content_identity",
+      "suite.suite_content_identity"
     ]
   },
   "scope": {
@@ -24,11 +24,11 @@
   "unit": "One isolated attempt at one case under one recorded host, model, configuration, and active catalog.",
   "environment": {
     "required_result_fields": [
-      "host",
-      "model",
-      "configuration_identity",
-      "active_catalog",
-      "authority_policy",
+      "environment.host",
+      "environment.model",
+      "environment.configuration_identity",
+      "environment.active_catalog",
+      "environment.authority_policy",
       "started_at",
       "ended_at"
     ],
@@ -76,7 +76,12 @@
     "threshold": "All critical gates pass, no intended routing case misses, no adjacent negative falsely selects the target, and all material execution assertions pass for the claimed scope."
   },
   "provenance": {
-    "required_result_fields": ["case_author", "runner", "reviewer", "grader_identity"],
+    "required_result_fields": [
+      "provenance.case_author",
+      "provenance.runner",
+      "provenance.reviewer",
+      "provenance.grader_identity"
+    ],
     "independence": "Authoring smoke and same-agent verification must be labeled as such and cannot become independent approval."
   },
   "freshness": {

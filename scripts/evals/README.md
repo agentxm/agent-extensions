@@ -35,6 +35,24 @@ Pass repeatable `--support-path` values for additional declared public inputs
 needed by execution cases. Each path is copied from the repository into the
 same location in the disposable workspace.
 
+Execution-case `files` entries may be plain paths under `evals/files/` or
+source/target mappings. Plain paths retain their relative layout under
+`inputs/`. A mapping materializes a synthetic file at one explicit relative
+workspace path:
+
+```json
+{
+  "source": "evals/files/example/skill.json",
+  "target": ".axm/extensions/@example/skills/example/skill.json"
+}
+```
+
+Mapped targets cannot escape the disposable workspace, enter reserved harness
+paths, or overwrite the skill being evaluated. Declare `artifact_paths` on a
+case when changes under an otherwise excluded root such as `.axm/` must be
+retained and graded. Each declared artifact path is subject to the same safety
+checks.
+
 Use `--case` more than once or pass comma-separated case IDs. Other options
 include `--trials`, `--run-id`, `--output-root`, `--baseline`, `--timeout-ms`,
 `--token-budget`, `--cost-budget-usd`, and `--independence`.
@@ -75,8 +93,20 @@ when the task requires composed skills. An execution response contains
 outcome, failure class, per-assertion results, evidence, and detail. A nonzero
 exit or missing output is recorded as `harness-error`.
 
+The runner deterministically derives the final grade outcome from one result
+for every declared assertion: any `fail` yields `fail`, otherwise any `unknown`
+yields `unknown`, and only all-pass assertions yield `pass`. Missing, duplicate,
+invalid, or contradictory grader output remains visible and cannot manufacture
+a passing aggregate.
+
 One same-author run is authoring smoke even when every case passes. Release
 evidence additionally requires a clean Git-bound target, exact identities,
 the contract's repeated trials and cohort, calibrated grading, reviewable raw
 evidence, and independent review. The runner enforces some of these conditions;
 the evaluation contract and decision authority remain controlling.
+
+Result-field contracts use paths into `run.json`, such as
+`target.manifest_version` and `suite.suite_content_identity`. Before writing a
+run, the runner verifies every field declared by the target, environment, and
+provenance sections. Older undotted declarations remain interpreted relative
+to their owning section.

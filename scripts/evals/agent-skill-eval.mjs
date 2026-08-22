@@ -111,6 +111,44 @@ function fileIdentity(path) {
   return `sha256:${createHash("sha256").update(readFileSync(path)).digest("hex")}`;
 }
 
+function isSafeWorkspacePath(path) {
+  if (typeof path !== "string" || path.length === 0 || path.includes("\\") || path.startsWith("/")) {
+    return false;
+  }
+  const segments = path.split("/");
+  if (segments.some((segment) => segment.length === 0 || segment === "." || segment === "..")) return false;
+  return !new Set([".git", "final.json", "output-schema.json"]).has(segments[0]);
+}
+
+function fixtureSpec(fixture) {
+  if (typeof fixture === "string") return { source: fixture, target: null };
+  if (typeof fixture === "object" && fixture !== null) {
+    return { source: fixture.source, target: fixture.target ?? null };
+  }
+  return { source: null, target: null };
+}
+
+function hasPath(value, dottedPath) {
+  let current = value;
+  for (const segment of dottedPath.split(".")) {
+    if (typeof current !== "object" || current === null || !Object.hasOwn(current, segment)) return false;
+    current = current[segment];
+  }
+  return true;
+}
+
+function requiredRunFields(contract) {
+  const normalize = (field, prefix) => typeof field === "string" && field.includes(".") ? field : `${prefix}.${field}`;
+  return [
+    ...(contract.target_binding?.required_result_fields ?? []).map((field) => normalize(field, "target")),
+    ...(contract.environment?.required_result_fields ?? []).map((field) => {
+      if (typeof field === "string" && (field.includes(".") || new Set(["started_at", "ended_at"]).has(field))) return field;
+      return `environment.${field}`;
+    }),
+    ...(contract.provenance?.required_result_fields ?? []).map((field) => normalize(field, "provenance")),
+  ];
+}
+
 function gitOutput(root, args) {
   const result = spawnSync("git", ["-C", root, ...args], { encoding: "utf8" });
   return result.status === 0 ? result.stdout.trim() : null;
@@ -139,6 +177,7 @@ function validateReleaseManifest(path, findings) {
 function validateSuite(packageRoot, findings) {
   const manifestPath = join(packageRoot, "skill.json");
   const evalRoot = join(packageRoot, "evals");
+  const fixtureRoot = join(evalRoot, "files");
   const suitePath = join(evalRoot, "evals.json");
   if (!existsSync(suitePath)) {
     findings.push(`${packageRoot}: workspace-authored Agent Skill is missing evals/evals.json`);
@@ -199,12 +238,38 @@ function validateSuite(packageRoot, findings) {
         findings.push(`${suitePath} case ${item.id}: catalog_neighbors is required`);
       }
     }
+    const fixtureTargets = new Set();
     for (const fixture of item.files ?? []) {
-      const fixturePath = resolve(packageRoot, fixture);
-      if (!fixturePath.startsWith(`${resolve(evalRoot)}${sep}`) || !existsSync(fixturePath)) {
-        findings.push(`${suitePath} case ${item.id}: missing or unsafe fixture ${fixture}`);
-      } else if (!realpathSync(fixturePath).startsWith(`${realpathSync(evalRoot)}${sep}`)) {
-        findings.push(`${suitePath} case ${item.id}: fixture escapes evals through a symlink ${fixture}`);
+      const { source, target } = fixtureSpec(fixture);
+      if (typeof source !== "string") {
+        findings.push(`${suitePath} case ${item.id}: every fixture must be a path or source/target mapping`);
+        continue;
+      }
+      const fixturePath = resolve(packageRoot, source);
+      if (!fixturePath.startsWith(`${resolve(fixtureRoot)}${sep}`) || !existsSync(fixturePath)) {
+        findings.push(`${suitePath} case ${item.id}: missing or unsafe fixture ${source}`);
+      } else if (!realpathSync(fixturePath).startsWith(`${realpathSync(fixtureRoot)}${sep}`)) {
+        findings.push(`${suitePath} case ${item.id}: fixture escapes evals/files through a symlink ${source}`);
+      }
+      if (target !== null) {
+        if (!isSafeWorkspacePath(target)) {
+          findings.push(`${suitePath} case ${item.id}: unsafe fixture target ${target}`);
+        }
+        const activeTarget = `.axm/extensions/${manifest.owner}/skills/${manifest.name}`;
+        if (target === activeTarget || target.startsWith(`${activeTarget}/`)) {
+          findings.push(`${suitePath} case ${item.id}: fixture target may not overwrite the evaluated skill`);
+        }
+        if (fixtureTargets.has(target)) findings.push(`${suitePath} case ${item.id}: duplicate fixture target ${target}`);
+        fixtureTargets.add(target);
+      }
+    }
+    for (const artifactPath of item.artifact_paths ?? []) {
+      if (!isSafeWorkspacePath(artifactPath)) {
+        findings.push(`${suitePath} case ${item.id}: unsafe artifact path ${artifactPath}`);
+      }
+      const activeTarget = `.axm/extensions/${manifest.owner}/skills/${manifest.name}`;
+      if (artifactPath === activeTarget || artifactPath.startsWith(`${activeTarget}/`)) {
+        findings.push(`${suitePath} case ${item.id}: artifact path may not expose the evaluated skill`);
       }
     }
   }
@@ -222,6 +287,13 @@ function validateSuite(packageRoot, findings) {
     }
     if (contract.target_binding?.skill_name !== manifest.name) {
       findings.push(`${contractPath}: target_binding.skill_name must equal ${manifest.name}`);
+    }
+    const resultFields = requiredRunFields(contract);
+    if (resultFields.length === 0 || resultFields.some((field) => typeof field !== "string" || field.length === 0)) {
+      findings.push(`${contractPath}: run result fields must be non-empty paths`);
+    }
+    if (new Set(resultFields).size !== resultFields.length) {
+      findings.push(`${contractPath}: run result fields must be unique`);
     }
     const declaredStages = new Set(contract.scope?.stages ?? []);
     for (const stage of STAGES) {
@@ -347,6 +419,42 @@ function assertionGradesForRouting(item, response) {
   };
 }
 
+function normalizeAssertionGrade(item, grade) {
+  if (grade?.outcome === "harness-error") return grade;
+  const reportedAssertions = Array.isArray(grade?.assertions) ? grade.assertions : [];
+  const assertions = item.assertions.map((assertion) => {
+    const matches = reportedAssertions.filter((entry) => entry?.assertion === assertion);
+    if (matches.length !== 1 || !new Set(["pass", "fail", "unknown"]).has(matches[0]?.result)) {
+      return {
+        assertion,
+        result: "unknown",
+        evidence: matches.length === 0
+          ? "Grader omitted this required assertion"
+          : "Grader returned a duplicate or invalid result for this required assertion",
+      };
+    }
+    return matches[0];
+  });
+  const outcome = assertions.some((entry) => entry.result === "fail")
+    ? "fail"
+    : assertions.some((entry) => entry.result === "unknown")
+      ? "unknown"
+      : "pass";
+  const normalized = {
+    ...grade,
+    outcome,
+    failure_class: outcome === "pass"
+      ? null
+      : grade?.failure_class ?? (outcome === "fail" ? "assertion-failure" : "incomplete-grading"),
+    assertions,
+  };
+  if (grade?.outcome !== outcome) {
+    normalized.grader_reported_outcome = grade?.outcome ?? null;
+    normalized.detail = `${grade?.detail ?? ""} Harness normalized contradictory grader outcome ${grade?.outcome ?? "missing"} to ${outcome}.`.trim();
+  }
+  return normalized;
+}
+
 async function runEvaluation(args) {
   const root = resolve(args.root ?? process.cwd());
   const packageRoot = resolve(root, args.package ?? "");
@@ -430,6 +538,7 @@ async function runEvaluation(args) {
       type: "skill",
       name: manifest.name,
       version: manifest.version,
+      manifest_version: manifest.version,
       content_identity: contentIdentity(packageRoot, targetFiles),
       package_content_identity: contentIdentity(packageRoot, targetFiles),
       source_revision: sourceRevision ?? "not-git-bound",
@@ -471,6 +580,10 @@ async function runEvaluation(args) {
     outcomes: null,
     raw_evidence: [],
   };
+  const missingResultFields = requiredRunFields(contract).filter((field) => !hasPath(run, field));
+  if (missingResultFields.length) {
+    fail(`Run record does not satisfy required result fields: ${missingResultFields.join(", ")}`);
+  }
   writeJson(join(runRoot, "run.json"), run);
 
   const counts = { pass: 0, fail: 0, unknown: 0, "harness-error": 0 };
@@ -479,10 +592,18 @@ async function runEvaluation(args) {
     for (let trialNumber = 1; trialNumber <= trials; trialNumber += 1) {
       const trialRoot = join(runRoot, "trials", String(item.id), String(trialNumber));
       mkdirSync(trialRoot, { recursive: true });
-      const fixtures = (item.files ?? []).map((path) => ({
-        name: basename(path),
-        content: readFileSync(resolve(packageRoot, path), "utf8"),
-      }));
+      const evalRoot = join(packageRoot, "evals");
+      const fixtureRoot = join(evalRoot, "files");
+      const fixtures = (item.files ?? []).map((fixture) => {
+        const { source, target } = fixtureSpec(fixture);
+        const sourcePath = resolve(packageRoot, source);
+        const defaultTarget = join("inputs", relative(fixtureRoot, sourcePath)).split(sep).join("/");
+        return {
+          source,
+          workspace_path: target ?? defaultTarget,
+          content: readFileSync(sourcePath, "utf8"),
+        };
+      });
       const request = {
         schema_version: "1.0.0",
         case_id: item.id,
@@ -497,6 +618,7 @@ async function runEvaluation(args) {
         },
         catalog: item.stage === "routing" ? catalogForCase(root, packageRoot, item) : [],
         fixtures,
+        artifact_paths: item.artifact_paths ?? [],
         environment: run.environment,
         budgets: run.budgets,
       };
@@ -553,6 +675,7 @@ async function runEvaluation(args) {
           } else grade = readJson(gradePath);
         }
       }
+      grade = normalizeAssertionGrade(item, grade);
       if (!OUTCOMES.has(grade.outcome)) grade.outcome = "harness-error";
       writeJson(join(trialRoot, "grade.json"), grade);
       const response = existsSync(responsePath) ? readJson(responsePath) : null;

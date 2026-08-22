@@ -41,6 +41,14 @@ portable Agent Skills format or cross-host portability. Read another platform
 profile under `skills/platforms/` only for a host the target claims or the
 caller names.
 
+When the target is canonical under `.axm/extensions`, carries AXM ownership, or
+is reached through an AXM pack, treat AXM as an extension-management layer
+rather than a host. Read `skills/platforms/axm.md`, the installed `axm` skill,
+and current relevant CLI help. Use `axm lint` and, for pack relationships,
+`axm packs show` as read-only package-state evidence. A clean AXM result proves
+only the checks it performs; it is not overall audit conformity. Do not apply
+sync or another AXM mutation in audit-only mode.
+
 If the active scope root, coupled knowledge sibling, required guidance route,
 or `references/audit-report.md` is unavailable, preserve the target, stop, and
 return `Inconclusive` with the missing dependency and evidence needed to resume.
@@ -84,8 +92,10 @@ not an independent audit or approval.
    references, assets, symlinks, generated metadata, examples, evaluations,
    dependencies, licenses, and projections. Classify evaluation source,
    generated run evidence, aggregate analysis, promoted decision evidence, and
-   governance records separately. Resolve symlinks without traversing unsafe or
-   unrelated locations.
+   governance records separately. For AXM-managed targets, distinguish desired,
+   accepted-resolution, canonical, and projected state and inspect declared pack
+   reachability. Resolve symlinks without traversing unsafe or unrelated
+   locations.
 4. **Assess design and routing.** Check candidate evidence, one-job boundaries,
    trigger language, negative boundaries, workflow contracts, progressive
    disclosure, resource necessity, references, host claims, and agreement
