@@ -11,7 +11,8 @@
     "zed"
   ],
   "minimumReleaseAgeExclude": [
-    "@agentxm/*"
+    "@agentxm/*",
+    "@craigsmitham/*"
   ],
   "instructionFiles": {
     "fileName": "AGENTS.md",
@@ -32,6 +33,6 @@
   "packs": {
     "agent-engineering": "workspace:@agentxm/packs/agent-engineering",
     "docs": "@craigsmitham/packs/docs",
-    "field-notes": "@craigsmitham/packs/field-notes@0.1.0"
+    "field-notes": "@craigsmitham/packs/field-notes"
   }
 }

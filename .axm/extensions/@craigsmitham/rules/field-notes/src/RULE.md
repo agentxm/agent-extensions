@@ -15,15 +15,25 @@ While doing ordinary work within a declared subject, record one note when:
 - you retry, guess, search, or improvise an undocumented workaround; or
 - a `target`-mode subject is blocked from its target condition.
 
-Do not record your own typo, a note already captured this session, or speculation
-without an observed incident.
+Do not record your own typo, the same incident twice in one session, or
+speculation without an observed incident.
+
+### Preserve diagnostic evidence
+
+While working within a declared subject, do not discard safe structured failure
+details before deciding whether an interaction qualifies for capture. Inspect
+the complete result, preserve the process exit status, and keep result output
+separate from diagnostic output. If output must be reduced, retain materially
+useful error, request, response, retry, recovery, and affected-artifact fields.
+Never retain credentials, authorization material, opaque response bodies, or
+other sensitive values. Do not rerun a mutation merely to recover evidence.
 
 ### How to record
 
-On the first qualifying incident, read the
-[capture instructions](.axm/extensions/@craigsmitham/rules/field-notes/src/capture.md)
-and append one note. Recording it is expected behavior, not an admission of
-failure.
+On the first qualifying incident in a session, read the
+[capture instructions](.axm/extensions/@craigsmitham/rules/field-notes/src/capture.md).
+Append one note for each qualifying incident. Recording it is expected behavior,
+not an admission of failure.
 
 ### Stay in the work
 
