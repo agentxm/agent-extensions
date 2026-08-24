@@ -93,6 +93,8 @@ logs, and workflow artifacts as well as tracked files.
 <!-- axm:start v=1 region=knowledge ext=@agentxm/knowledge/discovery -->
 ## Knowledge Bundles
 
+Use `axm knowledge concepts --help` to search, read, and explore these bundles.
+
 ### @agentxm
 
 | Bundle | Description |

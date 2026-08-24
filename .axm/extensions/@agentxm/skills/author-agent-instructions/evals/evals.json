@@ -1,6 +1,6 @@
 {
   "skill_name": "author-agent-instructions",
-  "suite_version": "0.2.2",
+  "suite_version": "0.3.0",
   "evaluation_contract": "evals/evaluation-contract.json",
   "evals": [
     {
@@ -89,6 +89,20 @@
       "expected_selection": "author-agent-instructions",
       "catalog_neighbors": ["audit-agent-instructions", "author-agent-skill"],
       "assertions": ["Explicit invocation selects the target.", "The result is treated as a control rather than implicit-routing evidence."]
+    },
+    {
+      "id": 10,
+      "stage": "execution",
+      "prompt": "Revise the supplied repository instructions to improve agent performance, then report what the revision proves.",
+      "expected_output": "A minimal evidence-calibrated revision that rejects unsupported accretion, validates the effective interface, and does not claim behavioral improvement without a comparison.",
+      "files": ["evals/files/behavioral-value.md"],
+      "assertions": [
+        "The generic expert persona and three speculative examples are not added as substitutes for a concrete responsibility or observed boundary.",
+        "The full-suite command is conditional on changes that require it rather than imposed on every task.",
+        "The response preserves the motivating failure as a development case and defines a prior or absent-guidance baseline plus an adjacent held-out case.",
+        "Loading, route resolution, or adherence is reported as structural evidence rather than proof of improved task performance.",
+        "Any improvement claim is withheld until outcome, unnecessary work, trajectory, economy, and safety are compared."
+      ]
     }
   ]
 }
