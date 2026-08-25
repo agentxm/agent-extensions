@@ -2,7 +2,7 @@
 
 This repository is the canonical public source for extensions owned and
 maintained by AgentXM under the `@agentxm` Registry handle. Author canonical
-packages under `.axm/extensions/@agentxm`; use AXM rather than editing
+packages under the root type directories; use AXM rather than editing
 agent-specific projections.
 
 ## Public-by-construction
@@ -24,7 +24,7 @@ Examples and fixtures must be synthetic.
 - Treat every non-pack extension as independently installed. It must not assume
   another extension is present unless both are direct members of one pack and
   the package declares the required pack relationship.
-- Use canonical `.axm/extensions/@agentxm/<plural-type>/<name>/src/` paths for
+- Use canonical `<plural-type>/<name>/src/` paths for
   intentional same-pack references. Never reference agent projections.
 - Packs may depend only on public, active extensions and may not depend on
   other packs.
@@ -69,11 +69,11 @@ versioned contracts, cases, public-safe synthetic fixtures, graders, and harness
 source under `<extension>/evals/`, and routine generated runs under the ignored
 `.work/evals/<owner>/<type>/<name>/<run-id>/` tree. Before adding or changing
 evaluation material, read
-[How to manage evaluation assets and evidence](.axm/extensions/@agentxm/knowledge/agent-engineering/src/evaluation/managing-evaluation-assets-and-evidence.md);
+[How to manage evaluation assets and evidence](knowledge/agent-engineering/src/evaluation/managing-evaluation-assets-and-evidence.md);
 for Agent Skill behavior, also read
-[How to evaluate an Agent Skill](.axm/extensions/@agentxm/knowledge/agent-engineering/src/evaluation/evaluating-agent-skills.md).
+[How to evaluate an Agent Skill](knowledge/agent-engineering/src/evaluation/evaluating-agent-skills.md).
 After changing Agent Skill evaluation source, run
-`node .axm/extensions/@agentxm/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs validate`.
+`node skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs validate`.
 
 Do not track routine transcripts, traces, outputs, grades, timing, summaries, or
 same-agent authoring-smoke results. Promote a compact immutable manifest under
@@ -99,17 +99,17 @@ Use `axm knowledge concepts --help` to search, read, and explore these bundles.
 
 | Bundle | Description |
 | --- | --- |
-| [agent-engineering](.axm/extensions/@agentxm/knowledge/agent-engineering/src/index.md) | End-to-end design of goal-directed AI agent systems: agent behavior, multi-agent coordination, prompts, context, harness, skills, evaluation, trust, and operations |
+| [agent-engineering](knowledge/agent-engineering/src/index.md) | End-to-end design of goal-directed AI agent systems: agent behavior, multi-agent coordination, prompts, context, harness, skills, evaluation, trust, and operations |
 
 ### @craigsmitham
 
 | Bundle | Description |
 | --- | --- |
-| [docs](.axm/extensions/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for authoring, naming, information architecture, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
-| [field-notes](.axm/extensions/@craigsmitham/knowledge/field-notes/src/index.md) | Operational field-note practice for factual and diagnostic evidence capture, impact-aware triage, evidence-led findings, and verified corrective action |
+| [docs](agent_extensions/agentxm/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for authoring, naming, information architecture, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
+| [field-notes](agent_extensions/agentxm/@craigsmitham/knowledge/field-notes/src/index.md) | Operational field-note practice for factual and diagnostic evidence capture, impact-aware triage, evidence-led findings, and verified corrective action |
 <!-- axm:end v=1 region=knowledge -->
 <!-- axm:start v=1 region=rules ext=@agentxm/rules/instructions -->
-<!-- axm:point v=1 ext=@craigsmitham/rules/field-notes@0.2.1 kind=rule -->
+<!-- axm:point v=1 ext=@craigsmitham/rules/field-notes@0.2.2 kind=rule -->
 
 ## Field notes
 
@@ -143,8 +143,8 @@ other sensitive values. Do not rerun a mutation merely to recover evidence.
 
 ### How to record
 
-On the first qualifying incident in a session, read the
-[capture instructions](.axm/extensions/@craigsmitham/rules/field-notes/src/capture.md).
+On the first qualifying incident in a session, read `capture.md` alongside the
+installed field-notes rule source.
 Append one note for each qualifying incident. Recording it is expected behavior,
 not an admission of failure.
 

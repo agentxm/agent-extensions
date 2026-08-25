@@ -9,7 +9,7 @@ First-party public extensions maintained by
 | --- | --- | --- |
 | `agent-engineering` | Agent, harness, context, prompt, evaluation, instruction-system, and Agent Skill engineering workflows | `axm install @agentxm/packs/agent-engineering` |
 
-Canonical packages live under `.axm/extensions/@agentxm`. Agent-specific skill
+Canonical packages live in their root type directories. Agent-specific skill
 directories are AXM-managed projections and are not authoring locations.
 
 Read [AGENTS.md](AGENTS.md) and the

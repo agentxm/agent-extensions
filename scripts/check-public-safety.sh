@@ -21,7 +21,7 @@ fi
 
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
-trusted_eval_validator="$repo_root/.axm/extensions/@agentxm/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs"
+trusted_eval_validator="$repo_root/skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs"
 
 if ! command -v axm >/dev/null 2>&1; then
   echo "AXM is required. Install the latest release from https://axm.sh." >&2
@@ -71,8 +71,8 @@ assert_sync_converged() {
     select(
       .ok == true and
       (.result.outcome == "previewed" or .result.outcome == "no-op") and
-      .result.errorCount == 0 and
-      .result.blockedCount == 0
+      .result.counts.failed == 0 and
+      .result.counts.blocked == 0
     )
   ' "$output" >/dev/null; then
     cat "$output"
@@ -138,13 +138,17 @@ expected=(
   skills/author-agent-skill
   skills/evaluate-agent-skill
 )
+public_roots=(
+  "$validation_root/knowledge"
+  "$validation_root/packs"
+  "$validation_root/skills"
+)
 
 expected_list="$(printf '%s\n' "${expected[@]}")"
 actual_list="$(
-  find "$validation_root/.axm/extensions/@agentxm" -mindepth 3 -maxdepth 3 -type f \
+  find "${public_roots[@]}" -mindepth 2 -maxdepth 2 -type f \
     \( -name skill.json -o -name pack.json -o -name knowledge.json -o -name rule.json \) \
-    ! -path '*/skills/axm/skill.json' \
-    | sed -E "s#^${validation_root}/.axm/extensions/@agentxm/([^/]+/[^/]+)/.*#\\1#" \
+    | sed -E "s#^${validation_root}/([^/]+/[^/]+)/.*#\\1#" \
     | sort
 )"
 
@@ -161,14 +165,14 @@ fi
 
 if rg -n --hidden \
   '(/Users/|/home/[A-Za-z0-9._-]+|~/(Code|Notes|OneDrive)|agent-extensions-private|personal-os|\.exe\.xyz|craig@)' \
-  "$validation_root/.axm/extensions/@agentxm"; then
+  "${public_roots[@]}"; then
   echo "Found a private or machine-specific identifier in public package content." >&2
   exit 1
 fi
 
 if rg -n --hidden -i \
   '(api[_-]?key|client[_-]?secret|access[_-]?token|private[_-]?key|password)[[:space:]]*[:=][[:space:]]*[^$<{[:space:]]' \
-  "$validation_root/.axm/extensions/@agentxm"; then
+  "${public_roots[@]}"; then
   echo "Found a possible hard-coded secret in public package content." >&2
   exit 1
 fi
@@ -185,17 +189,18 @@ while IFS= read -r -d '' link; do
 done < <(find "$validation_root" -path "$validation_root/.git" -prune -o -type l -print0)
 
 while IFS= read -r -d '' manifest; do
-  jq -e '
+  repository_directory="${manifest#"$validation_root/"}"
+  repository_directory="${repository_directory%/*}"
+  jq -e --arg repository_directory "$repository_directory" '
     (.description | type == "string" and length > 0) and
     (.keywords | type == "array" and length > 0) and
     (.license | type == "string" and length > 0) and
     (.homepage == "https://github.com/agentxm/agent-extensions") and
     (.repository.url == "https://github.com/agentxm/agent-extensions") and
-    (.repository.directory | startswith(".axm/extensions/@agentxm/"))
+    (.repository.directory == $repository_directory)
   ' "$manifest" >/dev/null
-done < <(find "$validation_root/.axm/extensions/@agentxm" -mindepth 3 -maxdepth 3 -type f \
-  \( -name skill.json -o -name pack.json -o -name knowledge.json -o -name rule.json \) \
-  ! -path '*/skills/axm/skill.json' -print0)
+done < <(find "${public_roots[@]}" -mindepth 2 -maxdepth 2 -type f \
+  \( -name skill.json -o -name pack.json -o -name knowledge.json -o -name rule.json \) -print0)
 
 while IFS= read -r license_id; do
   if [[ ! -f "$validation_root/LICENSES/${license_id}.txt" ]]; then
@@ -203,9 +208,8 @@ while IFS= read -r license_id; do
     exit 1
   fi
 done < <(
-  find "$validation_root/.axm/extensions/@agentxm" -mindepth 3 -maxdepth 3 -type f \
+  find "${public_roots[@]}" -mindepth 2 -maxdepth 2 -type f \
     \( -name skill.json -o -name pack.json -o -name knowledge.json -o -name rule.json \) \
-    ! -path '*/skills/axm/skill.json' \
     -print0 \
     | xargs -0 jq -r '.license' \
     | rg -o '[A-Za-z0-9][A-Za-z0-9.-]*' \
@@ -219,9 +223,9 @@ if jq -e --argjson expected_count "${#expected[@]}" '
    [.knowledge | to_entries[] | .value] +
    [.packs | to_entries[] | .value] +
    [(.rules // {}) | to_entries[] | .value]) |
-  map(select(type == "string" and startswith("workspace:@agentxm/"))) |
+  map(select(. == "workspace")) |
   length == $expected_count
-' "$validation_root/.axm/settings.json" >/dev/null; then
+' "$validation_root/axm.json" >/dev/null; then
   :
 else
   echo "A public package is not owned by this workspace." >&2
@@ -231,14 +235,14 @@ fi
 if ! jq -e '
   .owner == "@agentxm" and
   .publish.defaultVisibility == "public"
-' "$validation_root/.axm/settings.json" >/dev/null; then
+' "$validation_root/axm.json" >/dev/null; then
   echo "Public first-party extensions must default to public Registry visibility." >&2
   exit 1
 fi
 
 while IFS= read -r -d '' manifest; do
   axm knowledge lint --path "$(dirname "$manifest")"
-done < <(find "$validation_root/.axm/extensions/@agentxm/knowledge" \
+done < <(find "$validation_root/knowledge" \
   -mindepth 2 -maxdepth 2 -name knowledge.json -print0)
 
 knowledge_cursor=""

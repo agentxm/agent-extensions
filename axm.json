@@ -1,0 +1,38 @@
+{
+  "owner": "@agentxm",
+  "publish": {
+    "defaultVisibility": "public"
+  },
+  "agents": [
+    "claude-code",
+    "codex",
+    "cursor",
+    "github-copilot-cli",
+    "zed"
+  ],
+  "minimumReleaseAgeExclude": [
+    "@agentxm/*",
+    "@craigsmitham/*"
+  ],
+  "instructionFiles": {
+    "fileName": "AGENTS.md",
+    "gitignoreAliases": true
+  },
+  "skills": {
+    "axm": "agentxm:@agentxm/skills/axm",
+    "audit-agent-skill": "workspace",
+    "author-agent-skill": "workspace",
+    "author-agent-instructions": "workspace",
+    "audit-agent-instructions": "workspace",
+    "evaluate-agent-skill": "workspace",
+    "agent-skill-evaluator": "workspace"
+  },
+  "knowledge": {
+    "agent-engineering": "workspace"
+  },
+  "packs": {
+    "agent-engineering": "workspace",
+    "docs": "agentxm:@craigsmitham/packs/docs",
+    "field-notes": "agentxm:@craigsmitham/packs/field-notes"
+  }
+}

@@ -4,3 +4,6 @@
 
 # Generated evaluation runs
 /.work/evals/
+/.axm/
+*.axm-staging/
+*.axm-backup/
