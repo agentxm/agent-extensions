@@ -23,6 +23,8 @@ do not improvise a second authoring method in this skill.
   revision.
 - For remediation, use the revision route and apply only findings confirmed
   against the current target.
+- Read `skills/resources-scripts-and-assets.md` whenever bundled helpers or
+  generated files are in scope.
 - Read `evaluation/evaluating-agent-skills.md` when creating or changing
   behavioral claims, evaluation cases, graders, or harness inputs.
 - Read `evaluation/managing-evaluation-assets-and-evidence.md` whenever the
@@ -97,6 +99,7 @@ unestablished until their independent owners provide that evidence.
    fixtures, graders, and harness inputs in the repository's evaluation-source
    location, outside the runtime payload unless execution genuinely needs them.
 4. Validate package structure through the responsible trusted manager or host,
+   including applicable consumer-worktree protections and release contents,
    and validate evaluation source through the selected trusted validator. If no
    evaluation validator is selected, preserve the source and report mechanical
    evaluation-source validation as unavailable rather than invoking a disabled

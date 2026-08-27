@@ -134,9 +134,11 @@ not an independent audit or approval.
    a required surface; an audit-input limitation is not target-owned.
 3. **Inventory the complete package.** Include manifests, `SKILL.md`, scripts,
    references, assets, symlinks, generated metadata, examples, evaluations,
-   dependencies, licenses, and projections. Classify evaluation source,
-   generated run evidence, aggregate analysis, promoted decision evidence, and
-   governance records separately. For AXM-managed targets, distinguish desired,
+   dependencies, licenses, and projections. Distinguish intended package
+   content, disposable generated files, ignore rules, archive filters, and
+   projected copies. Classify evaluation source, generated run evidence,
+   aggregate analysis, promoted decision evidence, and governance records
+   separately. For AXM-managed targets, distinguish desired,
    accepted-resolution, canonical, and projected state and inspect declared pack
    reachability. Classify every neighboring extension as a declared direct pack
    sibling, another supported relationship, or an incidental active neighbor;

@@ -3,7 +3,7 @@
   "owner": "@agentxm",
   "type": "skill",
   "name": "author-agent-skill",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Creates or revises portable Agent Skills and their versioned evaluation contracts, cases, fixtures, graders, and harness inputs",
   "keywords": [
     "agent-skills",
