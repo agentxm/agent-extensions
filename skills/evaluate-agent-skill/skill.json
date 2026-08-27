@@ -3,7 +3,7 @@
   "owner": "@agentxm",
   "type": "skill",
   "name": "evaluate-agent-skill",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Runs attributable routing and activated-execution evaluations for exact Agent Skill revisions without conflating evidence with audit or approval",
   "keywords": [
     "agent-skills",
