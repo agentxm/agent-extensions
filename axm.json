@@ -28,7 +28,8 @@
     "agent-skill-evaluator": "workspace"
   },
   "knowledge": {
-    "agent-engineering": "workspace"
+    "agent-engineering": "workspace",
+    "desktop-agents": "workspace"
   },
   "packs": {
     "agent-engineering": "workspace",

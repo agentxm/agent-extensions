@@ -130,6 +130,7 @@ fi
 
 expected=(
   knowledge/agent-engineering
+  knowledge/desktop-agents
   packs/agent-engineering
   skills/agent-skill-evaluator
   skills/audit-agent-instructions

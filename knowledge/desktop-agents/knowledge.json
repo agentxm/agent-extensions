@@ -1,0 +1,33 @@
+{
+  "$schema": "https://axm.sh/schemas/knowledge.schema.json",
+  "owner": "@agentxm",
+  "name": "desktop-agents",
+  "version": "0.1.1",
+  "type": "knowledge",
+  "format": {
+    "name": "okf",
+    "version": "0.2"
+  },
+  "bundleRoot": "src",
+  "description": "Practical, plain-language guidance for using desktop AI agents safely and effectively in everyday, professional, educational, and technical work",
+  "keywords": [
+    "desktop-ai-agents",
+    "ai-literacy",
+    "knowledge-work",
+    "productivity",
+    "reusable-workflows",
+    "ai-safety",
+    "curriculum"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentxm/agent-extensions",
+    "directory": "knowledge/desktop-agents"
+  },
+  "homepage": "https://github.com/agentxm/agent-extensions",
+  "license": "CC-BY-4.0",
+  "publish": {
+    "ignore": []
+  },
+  "standalone": true
+}

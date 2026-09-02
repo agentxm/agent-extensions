@@ -97,11 +97,18 @@ Use `axm knowledge concepts --help` to search, read, and explore these bundles.
 
 ### @agentxm
 
+<!-- axm:point v=1 ext=@agentxm/knowledge/agent-engineering kind=knowledge -->
+<!-- axm:point v=1 ext=@agentxm/knowledge/desktop-agents kind=knowledge -->
+
 | Bundle | Description |
 | --- | --- |
 | [agent-engineering](knowledge/agent-engineering/src/index.md) | End-to-end design of goal-directed AI agent systems: agent behavior, multi-agent coordination, prompts, context, harness, skills, evaluation, trust, and operations |
+| [desktop-agents](knowledge/desktop-agents/src/index.md) | Practical, plain-language guidance for using desktop AI agents safely and effectively in everyday, professional, educational, and technical work |
 
 ### @craigsmitham
+
+<!-- axm:point v=1 ext=@craigsmitham/knowledge/docs kind=knowledge -->
+<!-- axm:point v=1 ext=@craigsmitham/knowledge/field-notes kind=knowledge -->
 
 | Bundle | Description |
 | --- | --- |
