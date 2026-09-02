@@ -14,6 +14,9 @@ final decisions. It does not teach an agent to replace professional judgment.
 
 ## Start here
 
+- [Get started with a desktop AI agent](getting-started.md) - Choose a
+  product, set up a safe practice space, and finish one checked result in a
+  single session.
 - [Desktop-agent basics](start-here/) - Understand what these tools are, how
   they differ from chat and projects, and which first task to choose.
 - [Desktop Agent 101](101/) - Set up a safe practice space and complete one

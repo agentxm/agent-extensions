@@ -16,5 +16,9 @@ checked result. No coding or command-line experience is required.
 5. [101 transfer challenge](transfer-challenge.md) - Apply the method to one
    safe task from your own life or work.
 
+If you have not set up a product yet, [Get started with a desktop AI
+agent](../getting-started.md) covers choosing one and completing the same
+practice task in one condensed session.
+
 Use [Safety and human review](../safety/) throughout this path. If you need a
 task idea, choose one from the [scenario library](../scenarios/).

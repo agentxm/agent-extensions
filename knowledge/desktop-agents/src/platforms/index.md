@@ -3,6 +3,8 @@
 Use this section only to get into a working product safely. Return to the 101,
 102, and 201 paths for the lasting method.
 
+- [Choose a desktop AI agent](choosing-a-desktop-agent.md) - Decide which
+  product and form to use, in policy-first order.
 - [Start with your platform](starting-with-your-platform.md) - A product-
   neutral setup and first-access checklist.
 - [Current official guides](current-official-guides.md) - Freshness-dated links

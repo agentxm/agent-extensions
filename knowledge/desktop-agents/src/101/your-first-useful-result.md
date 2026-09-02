@@ -12,7 +12,9 @@ the source files unchanged, and check the result against the originals.
 
 Allow 30 to 45 minutes. Use any desktop agent that can work with files in a
 folder. If you have not chosen one, start with [the platform
-notes](../platforms/).
+notes](../platforms/). For a condensed version of this task that includes
+choosing and setting up a product, see [Get
+started](../getting-started.md).
 
 ## 1. Make a safe practice space
 

@@ -14,3 +14,6 @@ your working environment.
   low-risk task that can produce a visible result.
 - [Practice choosing chat or an agent](practicing-chat-or-agent-choices.md) -
   Classify eight everyday tasks and compare your reasons with a guide.
+
+To set up a product and finish one result in a single session instead, use
+[Get started with a desktop AI agent](../getting-started.md).

@@ -25,8 +25,9 @@ standards, or legal, medical, financial, or pastoral judgment.
 axm install @agentxm/knowledge/desktop-agents
 ```
 
-Open `src/index.md` to choose a learning path, or search the bundle for a task,
-persona, or safety concern.
+Open `src/getting-started.md` to set up an agent and complete one checked
+result, `src/index.md` to choose a learning path, or search the bundle for a
+task, persona, or safety concern.
 
 ## License
 
