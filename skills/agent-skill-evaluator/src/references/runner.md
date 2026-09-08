@@ -5,11 +5,12 @@ isolated trials through declared adapters, resume compatible interrupted runs,
 and derive summaries from preserved evidence. It does not choose an evaluation
 strategy or decide whether evidence justifies release.
 
-The commands require Node.js 24 or later. Run them from the active AXM scope
-root and resolve the evaluator source once:
+The commands require Node.js 24 or later. Resolve the evaluator source once to
+the absolute path of this skill package's `src/` directory — the directory this
+reference was loaded from — then run the commands from the workspace root:
 
 ```sh
-evaluator=skills/agent-skill-evaluator/src
+evaluator=<absolute path to this skill package's src directory>
 ```
 
 ## Validate source
@@ -18,7 +19,7 @@ Validate one package:
 
 ```sh
 node "$evaluator/scripts/agent-skill-eval.mjs" validate \
-  --package skills/example \
+  --package <target-package-path> \
   --json
 ```
 
@@ -35,7 +36,7 @@ does not receive the stronger mechanism-identity or assertion-level gate checks.
 
 ```sh
 node "$evaluator/scripts/agent-skill-eval.mjs" run \
-  --package skills/example \
+  --package <target-package-path> \
   --adapter "$evaluator/adapters/codex.mjs" \
   --host codex-cli \
   --model <exact-model-id> \

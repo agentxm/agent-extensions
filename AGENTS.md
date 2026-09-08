@@ -24,8 +24,8 @@ Examples and fixtures must be synthetic.
 - Treat every non-pack extension as independently installed. It must not assume
   another extension is present unless both are direct members of one pack and
   the package declares the required pack relationship.
-- Use canonical `<plural-type>/<name>/src/` paths for
-  intentional same-pack references. Never reference agent projections.
+- Never reference another extension's files by path. Name a required sibling by
+  its extension identity and resolve it through host or manager discovery.
 - Packs may depend only on public, active extensions and may not depend on
   other packs.
 
@@ -42,9 +42,9 @@ Examples and fixtures must be synthetic.
   manifests, manual projections or copies, implicit dependencies, or lifecycle
   processes that bypass AXM without a clear design or portability reason.
 - Keep portable principles independent of AXM while providing AXM-specific
-  realization where applicable. Within the `agent-engineering` pack, use
-  declared pack relationships and canonical same-pack references for
-  intentional coupling, while keeping standalone extensions self-contained.
+  realization where applicable. Within the `agent-engineering` pack, express
+  intentional coupling through declared pack relationships and sibling
+  extension identities, while keeping standalone extensions self-contained.
 
 ## Authoring and release
 

@@ -7,8 +7,7 @@
   Markdown heading is `## Current status`
 - Acquisition: third-party snapshot supplied for review; publisher and archive
   integrity have not been established
-- Helper:
-  `skills/render-status-summary/src/scripts/render.mjs`
+- Helper: the package's `src/scripts/render.mjs`
 - Execution trust: unresolved
 - Execution authority: static inspection and bounded source edits only
 - Sandbox, network, credentials, and dependency authority: not supplied

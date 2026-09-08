@@ -2,8 +2,8 @@
 
 - Target: `@example/skills/review-release@0.4.0`
 - Canonical package: `skills/review-release/`
-- Runtime source: `skills/review-release/src/SKILL.md`
-- Evaluation source: `skills/review-release/evals/`
+- Runtime source: the package's `src/SKILL.md`
+- Evaluation source: the package's `evals/`
 - Ownership: workspace-authored through AXM; agent-facing copies are projections
 - Confirmed failure: “deploy this release” falsely selects this review-only skill
 

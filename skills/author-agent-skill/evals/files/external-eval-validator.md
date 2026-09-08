@@ -7,8 +7,7 @@
   preserve and check the input `status` field in addition to `title` and
   `detail`
 - Bundled evaluator AXM state: installed, `enabled: false`
-- Retained bundled source:
-  `skills/agent-skill-evaluator/src/`
+- Retained bundled source: the `agent-skill-evaluator` extension
 - Explicit validator: `@example/eval-contract-checker@3.0.0`
 - Validator entrypoint: `tools/eval-contract-checker.mjs`
 - Validator identity:
@@ -21,6 +20,5 @@
 
 The complete current target evaluation source and grader are materialized at
 the canonical paths above. The explicit validator is the only active validation
-mechanism for this task. A retained disabled evaluator sentinel exists at
-`skills/agent-skill-evaluator/src/scripts/agent-skill-eval.mjs`
-and must not execute.
+mechanism for this task. A retained disabled evaluator sentinel remains in the
+`agent-skill-evaluator` extension and must not execute.

@@ -44,10 +44,9 @@ trust.
 2. Resolve the exact target package, evaluation source, requested cases,
    evidence tier, host and grader adapters, environment, authority, budgets,
    baseline, and generated-workspace owner.
-3. Resolve this skill under the active AXM scope at
-   `skills/agent-skill-evaluator/src/`, then run its
-   `scripts/agent-skill-eval.mjs validate --package <path> --json`. Return the
-   complete findings before attempting execution.
+3. Run this skill package's `scripts/agent-skill-eval.mjs validate --package
+   <path> --json` as `references/runner.md` describes. Return the complete
+   findings before attempting execution.
 4. Run preflight through `run`. If it reports `reserved`, name the missing or
    unsupported capability and create no run directory. Do not downgrade the
    requested evidence tier silently.

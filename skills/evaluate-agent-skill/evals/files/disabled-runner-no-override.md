@@ -1,8 +1,8 @@
 # Synthetic disabled default without an override
 
 - Bundled evaluator AXM state: installed, `enabled: false`
-- Retained canonical source:
-  `skills/agent-skill-evaluator/src/`
+- Retained canonical source: the disabled
+  `@agentxm/skills/agent-skill-evaluator` package content
 - Explicit runner binding: none
 - Undeclared executable present: `tools/eval-runner`
 - Requested evidence tier: regression

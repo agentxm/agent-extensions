@@ -31,51 +31,51 @@ evidence is needed, stop at a handoff recommendation to `evaluate-agent-skill`;
 never perform that handoff's execution inside the audit run.
 
 This skill is coupled to direct siblings in the agent-engineering pack. Resolve
-the active AXM scope root, then begin with
-`knowledge/agent-engineering/src/skills/skill-engineering.md`
-and `skills/authoring-agent-skills.md`. Open only the additional concepts needed
-for the declared scope, all relative to
-`knowledge/agent-engineering/src/`:
+the `@agentxm/knowledge/agent-engineering` bundle through installed-knowledge
+discovery such as `axm knowledge concepts`, then begin with its
+`skills/skill-engineering` and `skills/authoring-agent-skills` concepts. Open
+only the additional concepts needed for the declared scope, named by concept id
+within that bundle:
 
-- design conformity: `skills/candidate-selection.md`,
-  `skills/skill-boundaries-and-neighboring-elements.md`,
-  `skills/routing-and-activation.md`, `skills/workflow-contracts.md`,
-  `skills/degrees-of-freedom.md`,
-  `skills/progressive-disclosure-for-skills.md`,
-  `skills/resources-scripts-and-assets.md`,
-  `skills/portability-and-compatibility.md`, and
-  `skills/decision-support-presentations.md` when the target compares
+- design conformity: `skills/candidate-selection`,
+  `skills/skill-boundaries-and-neighboring-elements`,
+  `skills/routing-and-activation`, `skills/workflow-contracts`,
+  `skills/degrees-of-freedom`,
+  `skills/progressive-disclosure-for-skills`,
+  `skills/resources-scripts-and-assets`,
+  `skills/portability-and-compatibility`, and
+  `skills/decision-support-presentations` when the target compares
   alternatives or leaves a consequential choice with a human;
-- behavioral claims: `evaluation/skill-evaluation-model.md`,
-  `evaluation/evaluating-agent-skills.md`,
-  `evaluation/evaluation-runner-engineering.md`,
-  `evaluation/managing-evaluation-assets-and-evidence.md`,
-  `evaluation/skill-routing-evaluations.md`, and
-  `evaluation/skill-execution-evaluations.md` plus the needed general
+- behavioral claims: `evaluation/skill-evaluation-model`,
+  `evaluation/evaluating-agent-skills`,
+  `evaluation/evaluation-runner-engineering`,
+  `evaluation/managing-evaluation-assets-and-evidence`,
+  `evaluation/skill-routing-evaluations`, and
+  `evaluation/skill-execution-evaluations` plus the needed general
   evaluation concepts under `evaluation/`;
-- trust and distribution: `trust/skill-threat-model.md`,
-  `trust/permissions-and-side-effects.md`, and
-  `trust/provenance-and-supply-chain.md`; and
-- change and lifecycle: `skills/maintenance-and-evolution.md` and
-  `operations/governance/versioning-deprecation-and-change-control.md`.
+- trust and distribution: `trust/skill-threat-model`,
+  `trust/permissions-and-side-effects`, and
+  `trust/provenance-and-supply-chain`; and
+- change and lifecycle: `skills/maintenance-and-evolution` and
+  `operations/governance/versioning-deprecation-and-change-control`.
 
-Read `skills/platforms/portable-agent-skills-core.md` when the target claims the
-portable Agent Skills format or cross-host portability. Read another platform
-profile under `skills/platforms/` only for a host the target claims or the
-caller names.
+Read the `skills/platforms/portable-agent-skills-core` concept when the target
+claims the portable Agent Skills format or cross-host portability. Read another
+`skills/platforms/` profile only for a host the target claims or the caller
+names.
 
 When the target is canonical under an AXM workspace or acquired package path, carries AXM ownership, or
 is reached through an AXM pack, treat AXM as an extension-management layer
-rather than a host. Read `skills/platforms/axm.md`, the installed `axm` skill,
-and current relevant CLI help. Use `axm lint` and, for pack relationships,
-`axm packs show` as read-only package-state evidence. A clean AXM result proves
-only the checks it performs; it is not overall audit conformity. Do not apply
-sync or another AXM mutation in audit-only mode.
+rather than a host. Read the `skills/platforms/axm` concept, the installed
+`axm` skill, and current relevant CLI help. Use `axm lint` and, for pack
+relationships, `axm packs show` as read-only package-state evidence. A clean
+AXM result proves only the checks it performs; it is not overall audit
+conformity. Do not apply sync or another AXM mutation in audit-only mode.
 
-If the active scope root, coupled knowledge sibling, required guidance route,
-or `references/audit-report.md` is unavailable, preserve the target, stop, and
-return `Inconclusive` with the missing dependency and evidence needed to resume.
-Apply the same stop when remediation is authorized but the authoring sibling is
+If the coupled knowledge sibling, required guidance route, or
+`references/audit-report.md` is unavailable, preserve the target, stop, and
+return `Inconclusive` with the missing pack dependency and evidence needed to
+resume. Apply the same stop when remediation is authorized but the authoring sibling is
 unavailable. Do not improvise a substitute baseline, report contract, or
 authoring method.
 
@@ -83,9 +83,9 @@ authoring method.
 
 - **Audit** is the default. Inspect and report without changing the target.
 - **Audit and remediate** requires explicit mutation intent such as “fix,”
-  “remediate,” or “apply.” Preserve the pre-change audit, use the direct sibling
-  `skills/author-agent-skill/src/SKILL.md` to revise
-  the target, then audit the new identity.
+  “remediate,” or “apply.” Preserve the pre-change audit, invoke the direct
+  sibling `author-agent-skill` skill by name to revise the target, then audit
+  the new identity.
 - **Verify remediation** binds earlier findings to a supplied revised identity
   and decides closure without making further changes unless remediation is also
   explicitly requested.
@@ -144,9 +144,9 @@ not an independent audit or approval.
    sibling, another supported relationship, or an incidental active neighbor;
    do not promote the last category into a dependency. When versioned Agent
    Skill evaluation source is present,
-   apply the runner-selection contract under the direct
-   `skills/evaluate-agent-skill/src/references/runner-selection.md`
-   sibling. Use an explicitly bound trusted read-only validator when supplied;
+   apply the runner-selection contract owned by the direct sibling
+   `evaluate-agent-skill` skill, reachable only by activating it.
+   Use an explicitly bound trusted read-only validator when supplied;
    otherwise use the bundled `agent-skill-evaluator` validator only when AXM
    reports it enabled. Retained source from a disabled extension is not active
    evaluator infrastructure. If no validator is selected, inspect statically
@@ -175,7 +175,7 @@ not an independent audit or approval.
    it separately even when the aggregate otherwise looks successful.
    When the caller also requests new behavioral trials, recommend handing the
    exact target, suite, and claim tier to the direct sibling
-   `skills/evaluate-agent-skill/src/SKILL.md`, then audit
+   `evaluate-agent-skill` skill, then audit
    the resulting evidence in a separate authorized workflow; audit owns evidence
    assessment, not run execution, and does not execute the handoff itself.
 6. **Trace authority and trust.** Identify reads, writes, deletion, commands,

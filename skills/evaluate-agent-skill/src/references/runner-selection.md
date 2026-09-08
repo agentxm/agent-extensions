@@ -44,10 +44,10 @@ disabled extension. Do not auto-discover another executable.
 
 ## Bundled reference runner
 
-For `pack-default`, read the direct pack sibling at
-`skills/agent-skill-evaluator/src/references/runner.md`
-and use its reference runner. Pass `--selection-source pack-default` when
-starting a run so the evidence records how the mechanism was chosen.
+For `pack-default`, activate the direct pack sibling `agent-skill-evaluator`
+skill and use the reference runner described in its runner reference. Pass
+`--selection-source pack-default` when starting a run so the evidence records
+how the mechanism was chosen.
 
 For a direct, explicitly selected invocation of that runner, use
 `--selection-source explicit`.

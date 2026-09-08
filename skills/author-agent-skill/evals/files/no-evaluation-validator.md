@@ -7,8 +7,7 @@
   preserve and check the input `status` field in addition to `title` and
   `detail`
 - Bundled evaluator AXM state: installed, `enabled: false`
-- Retained bundled source:
-  `skills/agent-skill-evaluator/src/`
+- Retained bundled source: the `agent-skill-evaluator` extension
 - Explicit validator: none
 - Other trusted validator or runner binding: none
 

@@ -5,8 +5,8 @@ Audit target: `@example/skills/author-architecture-records@1.0.0`.
 The target is non-standalone, recommends `@example/packs/architecture`, and is
 a direct member of that pack with `@example/knowledge/architecture`,
 `@example/skills/setup-architecture-records`, and
-`@example/skills/maintain-architecture-records`. Its instructions reference
-only those direct siblings.
+`@example/skills/maintain-architecture-records`. Its instructions name only
+those direct siblings by extension identity.
 
 The observed active catalog also contains
 `@other/skills/author-docs@4.0.0`, installed through

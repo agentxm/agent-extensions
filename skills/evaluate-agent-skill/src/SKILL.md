@@ -11,20 +11,19 @@ turning evaluation into authoring, audit, or approval.
 ## Load the applicable guidance
 
 This skill is coupled to the `agent-engineering` knowledge sibling in the
-`@agentxm/packs/agent-engineering` pack. Resolve the active AXM scope root and
-read these concepts under
-`knowledge/agent-engineering/src/`:
+`@agentxm/packs/agent-engineering` pack. Read these concepts from the
+`@agentxm/knowledge/agent-engineering` bundle with `axm knowledge concepts`:
 
-- `evaluation/evaluating-agent-skills.md`;
-- `evaluation/managing-evaluation-assets-and-evidence.md`;
-- `evaluation/evaluation-contracts.md`;
-- `evaluation/skill-routing-evaluations.md`;
-- `evaluation/skill-execution-evaluations.md`;
-- `evaluation/graders-rubrics-and-metrics.md` when model or human judgment is
+- `evaluation/evaluating-agent-skills`;
+- `evaluation/managing-evaluation-assets-and-evidence`;
+- `evaluation/evaluation-contracts`;
+- `evaluation/skill-routing-evaluations`;
+- `evaluation/skill-execution-evaluations`;
+- `evaluation/graders-rubrics-and-metrics` when model or human judgment is
   used;
-- `evaluation/trials-variance-and-uncertainty.md` for regression or release
+- `evaluation/trials-variance-and-uncertainty` for regression or release
   claims; and
-- `evaluation/baselines-thresholds-aggregation-and-slices.md` when comparing
+- `evaluation/baselines-thresholds-aggregation-and-slices` when comparing
   revisions or configurations.
 
 Read `references/runner-selection.md` and resolve exactly one runner before
@@ -60,9 +59,9 @@ stated authority and budgets.
 
 It does not edit the target, cases, fixtures, graders, expected outputs, or
 harness during a controlled run. Hand source changes to the direct sibling
-`skills/author-agent-skill/src/SKILL.md`. Hand design,
-trust, provenance, licensing, packaging, and evidence-reliability assessment to
-`skills/audit-agent-skill/src/SKILL.md`.
+`author-agent-skill` skill. Hand design, trust, provenance, licensing,
+packaging, and evidence-reliability assessment to the `audit-agent-skill`
+skill.
 
 Evaluation does not install, publish, approve, admit, promote, roll back,
 deprecate, or retire a skill. Do not write to `evals/releases/`; a governance
@@ -89,15 +88,15 @@ it.
    any stage result so an `unknown` cannot appear to come from an executed
    trial.
 2. **Validate the source and harness.** Use the selected runner's declared
-   validation and capability-preflight interface. For `pack-default`, read the
-   evaluator sibling's `references/runner.md`, run its `validate`, and pass
-   `--selection-source pack-default` when starting a run. Resolve every case
-   and fixture, confirm routing and execution are separate, verify outcomes
-   include `pass`, `fail`, `unknown`, and `harness-error`, and establish that
-   intended-independent attempts receive fresh conversation and task-local
-   state. Stop before trials when a required identity, adapter capability, or
-   safe isolation boundary is missing. Distinguish native routing, host
-   simulation, and catalog-classification proxy evidence.
+   validation and capability-preflight interface. For `pack-default`, activate
+   the `agent-skill-evaluator` skill, follow its runner reference, run its
+   `validate`, and pass `--selection-source pack-default` when starting a run.
+   Resolve every case and fixture, confirm routing and execution are separate,
+   verify outcomes include `pass`, `fail`, `unknown`, and `harness-error`, and
+   establish that intended-independent attempts receive fresh conversation and
+   task-local state. Stop before trials when a required identity, adapter
+   capability, or safe isolation boundary is missing. Distinguish native
+   routing, host simulation, and catalog-classification proxy evidence.
 3. **Choose the claim tier before running.** Label a same-author, single, or
    non-isolated exercise `authoring-smoke`. Use `regression` only for a
    controlled suite protecting accepted behavior. Release evidence requires a

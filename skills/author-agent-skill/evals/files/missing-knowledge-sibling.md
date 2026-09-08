@@ -4,9 +4,9 @@
 - Active AXM scope: project
 - Pack: `@agentxm/packs/agent-engineering`
 - Authoring skill: installed and enabled
-- Required knowledge sibling: not installed and unavailable at
-  `knowledge/agent-engineering/src/`
-- Required creation route: `skills/authoring-agent-skills.md`
+- Required knowledge sibling: `@agentxm/knowledge/agent-engineering`, not
+  installed and not resolvable
+- Required creation route: the `authoring-agent-skills` concept
 - Current target package: absent
 - Authority: create the requested package only after required guidance resolves
 

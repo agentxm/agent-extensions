@@ -76,5 +76,5 @@ binding and no enabled default, the workflow reserves preflight and returns
 
 ## License
 
-This package is licensed under the MIT License. See
-[`LICENSES/MIT.txt`](../../../../../LICENSES/MIT.txt).
+This package is licensed under the MIT License. See `LICENSES/MIT.txt` in the
+distributing repository.

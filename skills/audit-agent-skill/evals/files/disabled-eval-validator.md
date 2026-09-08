@@ -3,8 +3,7 @@
 - Audited target: `@example/skills/render-status-summary@0.3.0`
 - Versioned evaluation source: present under the target's `evals/` directory
 - Bundled evaluator AXM state: installed, `enabled: false`
-- Retained bundled source:
-  `skills/agent-skill-evaluator/src/`
+- Retained bundled source: the `agent-skill-evaluator` extension
 - Explicit trusted validator: none
 - Audit mode: read-only
 

@@ -151,7 +151,7 @@
       "files": ["evals/files/missing-baseline.md"],
       "assertions": [
         "The target remains unchanged and no remediation begins.",
-        "The missing scope root, sibling, guidance route, or report contract is named precisely.",
+        "The missing pack dependency, sibling, guidance route, or report contract is named precisely.",
         "The result is Inconclusive rather than a partial audit presented as conformity.",
         "The evidence needed to resume is stated without fetching an arbitrary replacement."
       ]
@@ -356,7 +356,7 @@
       "expected_output": "A bounded audit that recognizes the declared direct same-pack dependency as valid and does not treat unrelated active skills as package relationships.",
       "files": ["evals/files/declared-same-pack-dependency.md"],
       "assertions": [
-        "The non-standalone manifest, recommended pack, direct sibling membership, canonical paths, and supported workflow are recognized as composition authority.",
+        "The non-standalone manifest, recommended pack, direct sibling membership, declared sibling identities, and supported workflow are recognized as composition authority.",
         "The declared same-pack relationship is not reported as a dependency defect.",
         "Unrelated active skills remain incidental catalog context."
       ]

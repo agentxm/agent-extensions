@@ -10,49 +10,49 @@ make the smallest change justified by the request and evidence.
 
 ## Load the applicable guidance
 
-This skill is coupled to the `agent-engineering` knowledge sibling in the
-`@agentxm/packs/agent-engineering` pack. Resolve the active AXM scope root and
-read only the applicable concepts under
-`knowledge/agent-engineering/src/`. If that sibling or
-the required route is unavailable, stop and name the missing pack dependency;
-do not improvise a second authoring method in this skill.
+This skill is coupled to the `@agentxm/knowledge/agent-engineering` bundle in
+the `@agentxm/packs/agent-engineering` pack. Resolve the active AXM scope and
+read only the applicable concepts from that bundle through `axm knowledge
+concepts`, named by concept id within it. If that sibling or the required
+concept is unavailable, stop and name the missing pack dependency; do not
+improvise a second authoring method in this skill.
 
-- For creation, read `skills/authoring-agent-skills.md`.
-- For revision, read `skills/maintenance-and-evolution.md` and
-  `operations/governance/versioning-deprecation-and-change-control.md` for a
-  revision.
+- For creation, read the `skills/authoring-agent-skills` concept.
+- For revision, read the `skills/maintenance-and-evolution` and
+  `operations/governance/versioning-deprecation-and-change-control` concepts for
+  a revision.
 - For remediation, use the revision route and apply only findings confirmed
   against the current target.
-- Read `skills/resources-scripts-and-assets.md` whenever bundled helpers or
-  generated files are in scope.
-- Read `evaluation/evaluating-agent-skills.md` when creating or changing
-  behavioral claims, evaluation cases, graders, or harness inputs.
-- Read `evaluation/managing-evaluation-assets-and-evidence.md` whenever the
-  target package or repository creates, stores, promotes, or migrates
+- Read the `skills/resources-scripts-and-assets` concept whenever bundled
+  helpers or generated files are in scope.
+- Read the `evaluation/evaluating-agent-skills` concept when creating or
+  changing behavioral claims, evaluation cases, graders, or harness inputs.
+- Read the `evaluation/managing-evaluation-assets-and-evidence` concept whenever
+  the target package or repository creates, stores, promotes, or migrates
   evaluation artifacts.
-- Read `trust/skill-threat-model.md`, `trust/permissions-and-side-effects.md`,
-  and `trust/provenance-and-supply-chain.md` before executing target-controlled
-  code, package commands, helpers, or dependencies, or when a revision changes
-  credentials, network access, data flow, external mutation, or authority.
-- When evaluation source changes, apply the runner-selection contract at the
-  direct
-  `skills/evaluate-agent-skill/src/references/runner-selection.md`
-  sibling. Use an explicitly bound trusted validator when supplied; otherwise
-  use the bundled `agent-skill-evaluator` only when AXM reports it enabled. Do
-  not invoke retained source from a disabled extension or auto-discover an
-  executable. Do not add a package-local generic runner; target-specific
-  fixtures, assertions, and deterministic graders remain authored evaluation
-  source.
-- Read `agents/agent-mediated-user-experience.md` when the skill presents a
-  meaningful user-facing sequence through openings, progress, questions,
-  checkpoints, gates, or closeouts; skip it for one-step or non-interactive
-  skills.
-- Read `skills/decision-support-presentations.md` when the workflow compares
-  alternatives, recommends one, or leaves a consequential choice with a human;
-- Read `skills/platforms/axm.md` whenever AXM manages the target package, and
-  use the installed `axm` skill plus current CLI help as the operational
-  authority. AXM is an extension-management layer, not a host claim.
-- Read another profile under `skills/platforms/` only for a host the target
+- Read the `trust/skill-threat-model`, `trust/permissions-and-side-effects`, and
+  `trust/provenance-and-supply-chain` concepts before executing
+  target-controlled code, package commands, helpers, or dependencies, or when a
+  revision changes credentials, network access, data flow, external mutation, or
+  authority.
+- When evaluation source changes, apply the runner-selection contract owned by
+  the `evaluate-agent-skill` skill; activate that skill to reach it. Use an
+  explicitly bound trusted validator when supplied; otherwise use the bundled
+  `agent-skill-evaluator` only when AXM reports it enabled. Do not invoke
+  retained source from a disabled extension or auto-discover an executable. Do
+  not add a package-local generic runner; target-specific fixtures, assertions,
+  and deterministic graders remain authored evaluation source.
+- Read the `agents/agent-mediated-user-experience` concept when the skill
+  presents a meaningful user-facing sequence through openings, progress,
+  questions, checkpoints, gates, or closeouts; skip it for one-step or
+  non-interactive skills.
+- Read the `skills/decision-support-presentations` concept when the workflow
+  compares alternatives, recommends one, or leaves a consequential choice with a
+  human;
+- Read the `skills/platforms/axm` concept whenever AXM manages the target
+  package, and use the installed `axm` skill plus current CLI help as the
+  operational authority. AXM is an extension-management layer, not a host claim.
+- Read another concept under `skills/platforms/` only for a host the target
   explicitly supports.
 - Read the relevant concept under `prompts/` only when a model-facing prompt,
   example, template, or response presentation is part of the target.
@@ -122,9 +122,9 @@ unestablished until their independent owners provide that evidence.
    representative routing or execution exercise through the selected trusted
    mechanism, or name the exact unavailable mechanism and leave the check open.
    When the caller requests a controlled behavioral run beyond authoring smoke,
-   hand the exact target and suite to the direct sibling
-   `skills/evaluate-agent-skill/src/SKILL.md`; authoring
-   owns source changes, while evaluation owns execution and run evidence.
+   hand the exact target and suite to the `evaluate-agent-skill` skill;
+   authoring owns source changes, while evaluation owns execution and run
+   evidence.
 5. Hand off the canonical identity, files changed, evaluation source, generated
    workspace when present, evidence class, checks and exercises, public-contract
    or authority deltas, assumptions, and remaining independent evaluation,
