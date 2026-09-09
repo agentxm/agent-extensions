@@ -19,7 +19,7 @@ description: >-
   for merely using an installed extension.
 license: FSL-1.1-MIT; https://github.com/agentxm/axm/blob/main/LICENSE
 metadata:
-  axm.sh/cli-version: "0.28.1"
+  axm.sh/cli-version: "0.28.12"
   axm.sh/cli-version-range: ">=0.28.0 <0.29.0"
 ---
 
@@ -32,21 +32,14 @@ its execution bounded to the package and lifecycle work it owns.
 
 Apply these gates immediately after loading this skill:
 
-1. If the raw request names traversal (`..`), an absolute or broad root, or a
-   symlink escape, reject that target and answer immediately. Loading this
-   skill is the only permitted read before rejection; rejection is the complete
-   workflow. Do not search for `AGENTS.md`, README files, fixtures, or other
-   repository context; invoke AXM or help; run another tool; or pass the target
-   or any fragment of it to `pwd`, `ls`, `find`, `rg`, `readlink`, `realpath`,
-   `stat`, `axm`, or another command.
-2. If the request contains a literal credential, mentally replace it with “the
+1. If the request contains a literal credential, mentally replace it with “the
    supplied credential” before composing any response or command. Require a
    symbolic environment or secret reference; never repeat the literal.
-3. In a read-only task, treat explicitly supplied AXM resolution, preview,
+2. In a read-only task, treat explicitly supplied AXM resolution, preview,
    result, state, and repository facts as current evidence. Do not rerun,
    replace, or contradict them because the evaluation or planning workspace
    lacks that state. Preserve the supplied failure reason and recovery gate.
-4. “Without modifying files,” “plan,” and equivalent read-only wording do not
+3. “Without modifying files,” “plan,” and equivalent read-only wording do not
    authorize an apply command. Never attempt a mutation merely to demonstrate
    that another prerequisite blocks it.
 
@@ -89,15 +82,18 @@ preflight, lint, inventory, or state commands; hand the work to its owner.
 2. Check the CLI version and run `axm lint --json` when a workspace exists.
    Read `result.axmSkillCompatibility`. If it is incompatible, follow the
    reported recovery plan and `axm help upgrade`; do not invent a recovery or
-   edit release-owned compatibility stamps.
+   edit release-owned compatibility stamps. If the field is absent, the
+   workspace did not declare the official skill and compatibility recovery does
+   not apply.
 3. Resolve project or user scope, the fully qualified extension identity,
    source authority, and canonical path. Use local inventory and workspace
    facts before a network lookup. In project scope, treat `axm.json` as desired
    state, `axm-lock.yaml` as accepted external resolution, authored type roots
    and `agent_extensions/` as canonical package content, and `.axm/` as ignored
-   runtime state. User scope retains `.axm/settings.json`,
-   `.axm/axm-lock.yaml`, and `.axm/extensions/`. Agent-native files remain
-   projections in either scope.
+   runtime state. User scope mirrors this installed-state contract under
+   `~/.axm/workspace/`: `axm.json`, `axm-lock.yaml`, `agent_extensions/`, and
+   an inner `.axm/` runtime directory. Agent-native files remain projections
+   in their native user roots.
    When required local desired, lock, or canonical state is missing or
    inconsistent, stop before any Registry command; network discovery does not
    substitute for unresolved local authority.
@@ -115,11 +111,12 @@ help knowledge` for the current settings shape and precedence.
 Never edit an agent projection when canonical source exists. For a
 project-authored extension, semantic edits belong under the configured
 type-specific authored root, such as `skills/<name>` or `rules/<name>`, through
-the applicable authoring workflow. User-authored content remains under
-`.axm/extensions/<owner>/<type>/<name>`. For an acquired package, preserve its
-accepted publisher identity and treat local drift under
-`agent_extensions/<owner>/<type>/<name>` (or the user-scope canonical root) as
-evidence to resolve, not permission to overwrite.
+the applicable authoring workflow. User scope has no authored roots and does
+not accept user-authored `workspace` sources; the bundled AXM skill is an
+internal static package. For an acquired package, preserve its accepted
+publisher identity and treat local drift under the scope's
+`agent_extensions/<source>/<source-full-name>` root as evidence to resolve,
+not permission to overwrite.
 When a projection is named as the desired permanent source, identify it as
 non-authoritative, resolve the canonical package first, make semantic changes
 there, then verify the projection from AXM state.
@@ -170,10 +167,6 @@ Do not run `whoami`, login, or token commands for public reads or installs
 unless a live result says authentication is required. If the request contains
 a literal credential, never echo it in a response, quote, command, finding, or
 report; refer to it only as “the supplied credential.”
-
-Reject a target containing traversal (`..`), an absolute or broad root, or a
-symlink escape before resolving, statting, searching, listing, or reading it.
-Never search a filesystem root or home directory to locate a rejected target.
 
 An unowned-file collision reported by AXM blocks the affected closure. Preserve
 the artifact and require explicit ownership resolution before apply; do not

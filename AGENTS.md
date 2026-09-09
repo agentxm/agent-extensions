@@ -90,7 +90,7 @@ logs, and workflow artifacts as well as tracked files.
 | --- | --- | --- | --- | --- |
 | axm-cli-interactions | survey | Sessions that directly run `axm` to complete work in this workspace or manually validate AXM behavior; automated test invocations excluded | — | Recurring notes support a specific target condition, or two triage reviews find no pattern |
 
-<!-- axm:start v=1 region=knowledge ext=@agentxm/knowledge/discovery -->
+<!-- axm:start v=1 region=knowledge ext=@agentxm/knowledge/discovery gen=eee2bc1a4a0b802382d45cb874689ae772d634a7282ef47690b23335a55cc4c8 -->
 ## Knowledge Bundles
 
 Use `axm knowledge concepts --help` to search, read, and explore these bundles.
@@ -115,8 +115,8 @@ Use `axm knowledge concepts --help` to search, read, and explore these bundles.
 | [docs](agent_extensions/agentxm/@craigsmitham/knowledge/docs/src/index.md) | Portable documentation craft for authoring, naming, information architecture, auditing, and improving explainers, guides, principles, and evidence-backed patterns |
 | [field-notes](agent_extensions/agentxm/@craigsmitham/knowledge/field-notes/src/index.md) | Operational field-note practice for factual and diagnostic evidence capture, impact-aware triage, evidence-led findings, and verified corrective action |
 <!-- axm:end v=1 region=knowledge -->
-<!-- axm:start v=1 region=rules ext=@agentxm/rules/instructions -->
-<!-- axm:point v=1 ext=@craigsmitham/rules/field-notes@0.2.2 kind=rule -->
+<!-- axm:start v=1 region=rules ext=@agentxm/rules/instructions gen=ec87289ea6ad8b9a6d038b2a6ef32fb60cb98f25a0e647e8ad69b660e76a57cb -->
+<!-- axm:point v=1 ext=@craigsmitham/rules/field-notes@0.2.3 kind=rule -->
 
 ## Field notes
 
