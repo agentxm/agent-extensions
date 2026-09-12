@@ -66,7 +66,10 @@ approval.
    mismatch, unresolved conflict, ineffective entry point, and unproven
    accretion. Require exact evidence and reject proposed cuts that would strand
    useful depth. Do not infer behavioral value or harm from length, loading, or
-   adherence alone.
+   adherence alone. Apply the guide's outcome-first criterion to distinguish
+   unnecessary procedure from mechanisms or ordering that protect required
+   constraints; assess the outcome and retained constraints, not adherence to
+   one preferred sequence.
 7. **Evaluate the interface.** Confirm broad guidance appears where intended,
    narrower guidance appears only for matching work, adjacent work excludes
    irrelevant detail, routes resolve, and documented precedence behaves as

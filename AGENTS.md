@@ -90,7 +90,7 @@ logs, and workflow artifacts as well as tracked files.
 | --- | --- | --- | --- | --- |
 | axm-cli-interactions | survey | Sessions that directly run `axm` to complete work in this workspace or manually validate AXM behavior; automated test invocations excluded | — | Recurring notes support a specific target condition, or two triage reviews find no pattern |
 
-<!-- axm:start v=1 region=knowledge ext=@agentxm/knowledge/discovery gen=eee2bc1a4a0b802382d45cb874689ae772d634a7282ef47690b23335a55cc4c8 -->
+<!-- axm:start v=1 region=knowledge ext=@agentxm/knowledge/discovery gen=b4291cf6d30ba33f54c99f3981b1691eb86176ee74eeec8646c031b245bf50fb -->
 ## Knowledge Bundles
 
 Use `axm knowledge concepts --help` to search, read, and explore these bundles.

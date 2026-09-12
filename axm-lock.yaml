@@ -9,11 +9,11 @@ skills:
     packageFormat: agentxm
     owner: "@agentxm"
     name: axm
-    resolvedVersion: 0.28.12
-    integrity: sha512-BMFv2eIRyCAaD2QzOyvFEzNw778nsYq0p37YJeBHsALyV6PKzSiFHhbcktSb6CoznSyPALvbV2rb3LyS76P33Q==
+    resolvedVersion: 0.29.4
+    integrity: sha512-tI/SLhfpq2NaP2X4Gc8O41HrFXKjURDZHo5SFG+UWMVsY51zYH8O5S/3qDo2FjtckSlUrVr7av0lAZVGgZXmzg==
     sourceName: agentxm
     publisherBindingId: hbnd_01ks5vvdf0efz9m4w5qsv4q5qp
-    treeIntegrity: sha256-tree-v1:3dcf402c6a7c28115138c9ce4c327de402e760327e16de3b1cf99ee5fe3ac52f
+    treeIntegrity: sha256-tree-v1:549acd68bc918605478b1721bba1b5ab9fedf3e0fbc407abe72e562c472df66c
   author-docs:
     type: registry
     sourceType: registry
