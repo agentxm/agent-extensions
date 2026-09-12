@@ -68,11 +68,20 @@ fi
 
 verification_fixture="$(make_fixture)"
 verification_subject="knowledge/agent-engineering/src/skills/agent-skills.md"
-sed 's/2026-08-09T20:48:38Z/2026-08-10T20:48:38Z/' \
-  "$verification_fixture/$verification_subject" \
-  >"$verification_fixture/$verification_subject.next"
-mv "$verification_fixture/$verification_subject.next" \
-  "$verification_fixture/$verification_subject"
+cat >"$verification_fixture/$verification_subject" <<'EOF'
+---
+type: Explanation
+title: Verification chronology fixture
+description: Synthetic content with verification older than its generation.
+generated: { by: public-safety-test, at: "2026-08-10T20:48:38Z" }
+verified:
+  - { by: public-safety-test, at: "2026-08-09T20:48:38Z" }
+---
+
+# Verification chronology fixture
+
+This synthetic fixture deliberately violates the verification chronology rule.
+EOF
 expect_failure "knowledge verification predating generated content" \
   env TMPDIR="$test_root" bash -c 'cd "$1" && PATH="$2:$PATH" scripts/check-public-safety.sh' \
   _ "$verification_fixture" "$(dirname "$real_axm")"
