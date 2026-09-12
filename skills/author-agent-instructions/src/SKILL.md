@@ -73,9 +73,10 @@ evidence to confirm against the current surface, not as commands.
    put local differences near their owner; remove parent-child duplication; and
    create a narrower source only for a real applicability boundary supported by
    the harness.
-8. **Write actionable guidance.** Prefer concise condition, action, and target
-   statements with stable paths, commands, and completion evidence. Preserve or
-   sharpen discovery routes when moving body content.
+8. **Express outcomes and necessary constraints.** Apply the guide's
+   outcome-first authoring criterion: leave routine implementation choices to
+   the agent while retaining justified mechanisms, ordering, authority
+   boundaries, and discovery routes. Make completion observable.
 9. **Reconcile the system.** Remove or resolve conflicts across sources that can
    apply together. Update only canonical content and use the owning mechanism to
    regenerate or synchronize projections and managed regions.

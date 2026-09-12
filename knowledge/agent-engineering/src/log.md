@@ -1,5 +1,12 @@
 # Agent engineering update log
 
+## 2026-09-12
+
+- **Outcome-oriented instructions**: Instruction authoring and audit guidance
+  now distinguishes desired outcomes and necessary constraints from incidental
+  procedure. Tool ownership, required verification, safety ordering, and useful
+  discovery remain valid constraints; compliant execution paths may differ.
+
 ## 2026-09-08
 
 - **Name-based sibling resolution**: Required pack coupling now reaches a

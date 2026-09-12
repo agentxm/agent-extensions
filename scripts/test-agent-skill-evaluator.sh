@@ -10,7 +10,7 @@ jq -e '
   (.recommendedPacks | index("@agentxm/packs/agent-engineering") != null)
 ' skills/agent-skill-evaluator/skill.json >/dev/null
 jq -e '
-  .dependencies["@agentxm/skills/agent-skill-evaluator"] == ">=0.1.0"
+  .dependencies["@agentxm/skills/agent-skill-evaluator"] == ">=0.2.2"
 ' packs/agent-engineering/pack.json >/dev/null
 node "$evaluator_root/scripts/agent-skill-eval.mjs" validate --json
 node "$evaluator_root/scripts/test-runner.mjs"
