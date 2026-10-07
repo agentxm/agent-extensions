@@ -1,119 +1,61 @@
-lockfileVersion: 7
+lockfileVersion: 11
+packages:
+  '["registry","https://registry.agentxm.ai","@craigsmitham","skills","docs"]':
+    source:
+      type: registry
+      url: https://registry.agentxm.ai/
+      owner: "@craigsmitham"
+      extensionType: skills
+      name: docs
+    resolved:
+      version: 0.4.0
+      integrity: sha512-Mzjz6KAjUrAN1BtTXbHIvfkW12Rl08uiNUXYfmSAXwJVD8t1gySrH6njW+Ex5Ip5L4W3Qpo1UlKmQtcbKbOREA==
+      publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
+    treeIntegrity: sha256-tree-v2:8d185d41d9dbe4fa420f20ff35863ae57d7fe9bca8aeaf8cd15901639e254164
+  '["registry","https://registry.agentxm.ai","@craigsmitham","knowledge","docs"]':
+    source:
+      type: registry
+      url: https://registry.agentxm.ai/
+      owner: "@craigsmitham"
+      extensionType: knowledge
+      name: docs
+    resolved:
+      version: 0.13.1
+      integrity: sha512-1Dd0n5uKelfPecw3v2cC3PuJgXDoX1Gg0yaCyldMZFLHSH0f5NVKGrnQUimRFkzO/gmEbC6YCIto098lf1RT8g==
+      publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
+    treeIntegrity: sha256-tree-v2:0f033079da45eb9cd8d9d94a0391aa058c92115d4b70bc1a236655f2435ec9f6
+  '["registry","https://registry.agentxm.ai","@craigsmitham","packs","docs"]':
+    source:
+      type: registry
+      url: https://registry.agentxm.ai/
+      owner: "@craigsmitham"
+      extensionType: packs
+      name: docs
+    resolved:
+      version: 0.7.0
+      integrity: sha512-uCGjlqRo3v3Z7eJyiCscU2AWpbAYzXbPTckAUI7jOlhJquWpm0axtX/q1ClrSXX/Sx0HVvUIInsY4QvNheGoEg==
+      publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
+    treeIntegrity: sha256-tree-v2:b1d8683d68e17d85a7adb8eeed9f62ab2d591310b017a0517fa36dd6d90d291b
 skills:
-  axm:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: skill
-    workspaceName: axm
-    packageFormat: agentxm
-    owner: "@agentxm"
-    name: axm
-    resolvedVersion: 0.29.4
-    integrity: sha512-tI/SLhfpq2NaP2X4Gc8O41HrFXKjURDZHo5SFG+UWMVsY51zYH8O5S/3qDo2FjtckSlUrVr7av0lAZVGgZXmzg==
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0efz9m4w5qsv4q5qp
-    treeIntegrity: sha256-tree-v1:549acd68bc918605478b1721bba1b5ab9fedf3e0fbc407abe72e562c472df66c
-  author-docs:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: skill
-    workspaceName: author-docs
-    packageFormat: agentxm
-    owner: "@craigsmitham"
-    name: author-docs
-    resolvedVersion: 0.4.0
-    integrity: sha512-0o/89obyPCCd11VHvnpyVx8v79UWgo54bN9JotRWM+CXxa0rv5qfSbBLPQ45zmdYuqe9hVSTlRv2XeVD7ribXA==
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
-    treeIntegrity: sha256-tree-v1:607947ddd32c3dab55f30ec4645525213c7b55a2c9f7db2e5c6c375a767d82d6
-  field-notes:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: skill
-    workspaceName: field-notes
-    packageFormat: agentxm
-    owner: "@craigsmitham"
-    name: field-notes
-    resolvedVersion: 0.2.4
-    integrity: sha512-eaotxuQEJ0nrONWVyxR2AteZymAxcO47S/jKsoh76loAx5vfN43um+CshPf5oHOcp6jG/Fjkd0H7PkXCg6uNtw==
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
-    treeIntegrity: sha256-tree-v1:1e53c53848c9a3deeb8598642639bd48c17368829d323416e18857454afdf435
-rules:
-  field-notes:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: rule
-    workspaceName: field-notes
-    packageFormat: agentxm
-    owner: "@craigsmitham"
-    name: field-notes
-    resolvedVersion: 0.2.3
-    integrity: sha512-R2uATECB4rI443eUtiEIEtAvW1Rwl3aFxqiXW8HqRX0zTvQwfvNDIWgonV57mxhIoNORDaw5YuLILtXBHnej3w==
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
-    treeIntegrity: sha256-tree-v1:5191285503bc2ca9d20398a700b77bd2307738c3c49ed08cf8bc6955ecf0b629
+  docs:
+    package: '["registry","https://registry.agentxm.ai","@craigsmitham","skills","docs"]'
+    identity:
+      owner: "@craigsmitham"
+      name: docs
 knowledge:
   docs:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: knowledge
-    workspaceName: docs
-    packageFormat: agentxm
-    owner: "@craigsmitham"
-    name: docs
-    resolvedVersion: 0.13.0
-    integrity: sha512-OlLyDUl1GL03UNn8mWVmybinxVRDEHBYEPIofMKKHvLZitVXslVoIz/8joH/MRpjzLNfjZfEkaqc8Mf3ggdDDw==
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
-    treeIntegrity: sha256-tree-v1:54ba714cd1a5f839b1a993693983658aecaec803604748011fce39f7441f8351
-  field-notes:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: knowledge
-    workspaceName: field-notes
-    packageFormat: agentxm
-    owner: "@craigsmitham"
-    name: field-notes
-    resolvedVersion: 0.2.3
-    integrity: sha512-NfZuGkw92j50onyalwF2GlbvdbTvWGk7E8IcNHWfBVHjB1DFMVAjx1oCvyiVR1NTEVy8n3O36fSrGodjG6/2kw==
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
-    treeIntegrity: sha256-tree-v1:08f8cc06b36e09566ce85ad2ae251654dd5923862e60b75c4a21140d7078102a
+    package: '["registry","https://registry.agentxm.ai","@craigsmitham","knowledge","docs"]'
+    identity:
+      owner: "@craigsmitham"
+      name: docs
 packs:
   docs:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: pack
-    workspaceName: docs
-    packageFormat: agentxm
-    owner: "@craigsmitham"
-    name: docs
-    resolvedVersion: 0.6.0
-    integrity: sha512-BaRxElfQDSN4cD7+1QtXK3uMDn0OR1my4Ek/O+ZGunzvMhkr5xhWG4T3UBQk4aY5mZLFgawVORxez+M7FkT63g==
-    manifestContentIdentity: 389465e2f5591e16cc3179147593c133a04be1ad5ada86419d33d43d8e5a8557
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
-    treeIntegrity: sha256-tree-v1:619b123995a465b287f18875a79fbd6c68507bae260e36b1dfbdb0e5efd30bb3
-  field-notes:
-    type: registry
-    sourceType: registry
-    endpoint: https://registry.agentxm.ai/
-    extensionType: pack
-    workspaceName: field-notes
-    packageFormat: agentxm
-    owner: "@craigsmitham"
-    name: field-notes
-    resolvedVersion: 0.2.1
-    integrity: sha512-Pq53QqjYhO9xjxzhqkTx/GuTuZEWa4ATy1x8Hy3fGJIkMyCm9LrkECT2i9qiYMaJ+wZYL5J4ca7LHENBxiOFqg==
-    manifestContentIdentity: 45a5af73594785f263f7ddfc2e711c0a0bb97de6cf9b6c6fd785e2f51c8d19d9
-    sourceName: agentxm
-    publisherBindingId: hbnd_01ks5vvdf0fx08m9gcaq7y2wv7
-    treeIntegrity: sha256-tree-v1:b81cc4dbe8d49d2aa3d75c1ff6a082fa8566a38ecc88bbbf7c345f8d9129996b
+    package: '["registry","https://registry.agentxm.ai","@craigsmitham","packs","docs"]'
+    identity:
+      owner: "@craigsmitham"
+      name: docs
+    manifestVersion: 0.7.0
+    manifestContentIdentity: ba5f182af16a2190ba3e4c09ca8d94c1eed279b381cd30ac78fd1349a91236ac
+    dependencies:
+      "@craigsmitham/skills/docs": ^0.4.0
+      "@craigsmitham/knowledge/docs": ">=0.11.0"

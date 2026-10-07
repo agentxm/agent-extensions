@@ -87,7 +87,7 @@ expect_failure "knowledge verification predating generated content" \
   _ "$verification_fixture" "$(dirname "$real_axm")"
 
 mismatch_fixture="$(make_fixture)"
-mismatch_manifest="agent_extensions/agentxm/@agentxm/skills/axm/skill.json"
+mismatch_manifest="agent_extensions/registry.agentxm.ai/@agentxm/skills/axm/skill.json"
 jq '.version = "0.26.3"' "$mismatch_fixture/$mismatch_manifest" \
   >"$mismatch_fixture/$mismatch_manifest.next"
 mv "$mismatch_fixture/$mismatch_manifest.next" "$mismatch_fixture/$mismatch_manifest"
