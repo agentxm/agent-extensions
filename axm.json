@@ -19,7 +19,10 @@
     "gitignoreAliases": true
   },
   "skills": {
-    "axm": "agentxm:@agentxm/skills/axm",
+    "axm": {
+      "source": "workspace",
+      "origin": "bundled"
+    },
     "audit-agent-skill": "workspace",
     "author-agent-skill": "workspace",
     "author-agent-instructions": "workspace",
@@ -33,7 +36,6 @@
   },
   "packs": {
     "agent-engineering": "workspace",
-    "docs": "agentxm:@craigsmitham/packs/docs",
-    "field-notes": "agentxm:@craigsmitham/packs/field-notes"
+    "docs": "agentxm:@craigsmitham/packs/docs"
   }
 }
